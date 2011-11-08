@@ -1,4 +1,4 @@
-# Malleable CMS
+# Control CMS
 Clock's CMS application to be used as a base for all node.js CMS projects
 
 ## Installation
