@@ -1,0 +1,71 @@
+fieldset
+	padding-bottom 20px
+	border-bottom 1px solid #CCC
+	margin-bottom 20px
+label
+	width 540px
+	clear both
+	display block
+	margin-bottom 2px
+	padding 6px 20px
+
+	strong
+		display inline-block
+		width 200px
+		font-weight normal
+		vertical-align middle
+		margin-right 20px
+		abbr
+			color $primaryErrorColor
+			margin-left 6px
+			border 0
+
+	input,
+	select,
+	textarea
+		width auto
+		padding 6px
+		margin-bottom 0
+		border 1px solid #ccc
+		border-radius 3px
+		outline 0
+		background-color #FFF
+		vertical-align middle
+		*vertical-align top
+		_vertical-align top
+		&:focus
+			border-color #777777
+
+	input
+		background-color #FFF
+		width 306px
+	select
+		width 320px
+	textarea
+		width 306px
+		height 75px
+		vertical-align top
+		resize vertical
+
+label.checkbox,
+label.radio
+	strong
+		width 500px
+		vertical-align top
+		margin-right 0
+	input
+		width auto
+		position relative
+		vertical-align middle
+		*vertical-align top
+		_vertical-align top
+		top -1px
+		padding 0
+		margin 0 10px 0 0
+		border none
+		background-color transparent
+
+/** Buttons **/
+input.button
+	border none
+	cursor pointer

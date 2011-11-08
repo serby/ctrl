@@ -1,0 +1,17 @@
+include ../../../views/mixins/formFields
+
+#column-primary
+	form(action='', method='post')
+		h1 Admin Login
+		p You must login to access this part of the site
+		fieldset
+			-if (error)
+				errors
+					p.error
+						strong= error
+			mixin textField('Email Address', 'emailAddress', '', '')
+			mixin passwordField('Password', 'password', '', '')
+			label.checkbox.indent
+				input(name='rememberMe', type='checkbox')
+				strong Remember me
+		input.submit(name='Submit', type='submit', value='Login')

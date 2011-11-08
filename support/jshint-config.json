@@ -1,0 +1,17 @@
+{
+	"curly": true,
+	"noempty": true,
+	"newcap": true,
+	"eqeqeq": true,
+	"eqnull": true,
+	"undef": true,
+	"devel": true,
+	"node": true,
+	"browser": true,
+	"evil": false,
+	"latedef": false,
+	"nonew": false,
+	"undef": false,
+	"trailing": false,
+	"immed": false
+}

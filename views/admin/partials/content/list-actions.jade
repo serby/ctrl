@@ -1,0 +1,13 @@
+#controls.panel
+	#search 
+		form(method='get', action=crudUrls.search.url)
+			label
+				strong Filter Results
+				- if (typeof url === 'undefined')
+					input(value='', name='Filter')
+				- else
+					input(value=url.Filter, name='Filter')
+			input.button(type='submit',value='Filter')
+			a.button(href=crudUrls.list.url) Reset
+	ul#actions
+		li: a.button(href=crudUrls.add.url)=crudUrls.add.title

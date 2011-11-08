@@ -1,0 +1,184 @@
+/** General Styles **/
+
+.column-half
+	width 290px
+	margin-right 50px
+	float left
+	display inline
+.layout-feature .column-half
+	width 270px
+	margin-right 20px
+
+.last
+	margin-right 0 !important
+
+.panel
+	padding 14px
+	border 1px solid $borderColor
+	border-radius 4px
+	background-color #FFF
+
+ul.bullet
+	li
+		list-style-type none
+		background url("/images/content/content-sprite.png") -948px -96px no-repeat
+		margin-left 0
+		padding-left 14px
+
+li ul,
+li ol
+	margin-top 18px
+
+/** TITLES **/
+.about h1
+.search h1
+.restaurateurs h1
+.join h1
+.recommend h1
+.faqs h1
+.contact h1
+.terms h1
+.privacy h1
+	display block
+	overflow hidden
+	height 26px
+	text-indent -9999px
+	background url("/images/content/title-sprite.png") 0px -160px no-repeat
+
+.about h1
+	background-position 0px -160px
+.search h1
+	background-position 0px -190px
+.restaurateurs h1
+	background-position 0px -220px
+.join h1
+	background-position 0px -250px
+.recommend h1
+	background-position 0px -280px
+.faqs h1
+	background-position 0px -310px
+.contact h1
+	background-position 0px -340px
+.terms h1
+	background-position 0px -370px
+.privacy h1
+	background-position 0px -400px
+
+/** HOMEPAGE **/
+/** Homepage Introduction **/
+.home #introduction h2
+	width 300px
+	height 93px
+	padding 0
+	margin 5px 0 24px
+	display block
+	overflow hidden
+	text-indent -9999px
+	background url("/images/content/title-sprite.png") 0 0 no-repeat
+
+
+/** Participating Restaurants **/
+#participating-restaurants
+	.heading
+		position relative
+	.page-viewport
+		width 308px
+		float right
+		display inline
+		position relative
+		height 72px
+		overflow hidden
+	h2
+		padding-top 0
+	p
+		width 210px
+		float left
+	ul.participating-logos
+		position absolute
+		top 0
+		left 0
+		width 9999px
+		margin-right -10px
+		li
+			float left
+			list-style none
+			margin-left 5px
+			padding 0
+			img
+				border 1px solid $borderColor
+				padding 1px
+				background-color #FFF
+	ul.pagination
+		position absolute
+		top 5px
+		right 0
+		list-style none
+		li
+			float left
+			list-style none
+			display inline
+			width 12px
+			height 12px
+			margin 0 0 0 5px
+			padding 0
+		span
+			cursor pointer
+			float left
+			display block
+			width 12px
+			height 12px
+			margin-bottom 0
+			overflow hidden
+			text-indent -9999px
+			background url("/images/content/button-sprite.png") -144px -94px no-repeat
+			&:hover
+				background-position -144px -110px
+		.next-brand span
+			background-position -160px -94px
+			&:hover
+				background-position -160px -110px
+		.disabled span
+			background-position -176px -180px
+		.disabled.previous-brand span
+			background-position -144px -180px
+		.disabled.next-brand span
+			background-position -160px -180px
+
+
+/** ABOUT PAGE **/
+/** How it Works - 4 Steps **/
+#how-list
+	float left
+	margin 0 -13px 0 -10px
+	padding 0
+	list-style none
+	li
+		padding 0
+		margin 0
+		margin-right 3px
+		list-style none
+		width 160px
+		float left
+		display inline
+		p
+			text-align center
+			padding 0 25px
+			text-transform uppercase
+			font-family Arial, Helvetica, sans-serif
+			font-size 12px
+			font-weight bold
+			line-height 15px
+.about
+	.terms
+		clear left
+		p
+			font-size 11px
+			line-height 15px
+			margin-bottom 8px
+
+.join
+	.four-pack-matrix
+		margin 10px 0 20px
+	.pack-shot
+		float right
+		margin -50px 14px 0 20px

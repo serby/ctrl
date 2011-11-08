@@ -1,0 +1,103 @@
+/** Hero Area **/
+
+#hero-rotator
+	position relative
+	margin-bottom 30px
+	width 558px
+	height 318px
+	padding 1px
+	border 1px solid $borderColor
+	background-color #FFF
+
+	.hero-rotator-inner
+		position relative
+		width 558px
+		height 318px
+		overflow hidden
+
+	#hero-stack
+		position relative
+		width 558px
+		height 318px
+		overflow hidden
+		margin 0
+		padding 0
+		background-color #CCC
+
+	.hero-slide
+		list-style none
+		margin 0
+		padding 0
+
+	.overlay
+		position absolute
+		width 530px
+		height 60px
+		padding 12px 14px
+		left 0px
+		bottom -44px
+		background #081535
+		background rgba(8,21,53,.7)
+		color #fff
+		h3,
+		p
+			padding-right 110px
+			margin-bottom 0px
+			color #FFF
+			line-height 16px
+			font-style italic
+		h3
+			padding-bottom 12px
+			padding-right 80px
+			a
+				text-decoration none
+				color #fff
+				&:hover
+					text-decoration underline
+		.more
+			position absolute
+			top 16px
+			right 14px
+			width 43px
+			height 12px
+			display block
+			overflow hidden
+			text-indent -9999px
+			background url("/images/content/button-sprite.png") -144px -144px no-repeat
+
+	.jshowoff-slidelinks
+		position absolute
+		bottom -28px
+		right 14px
+		display inline
+		margin 0
+		padding 0
+
+		a
+			float left
+			display inline
+			width 14px
+			height 14px
+			padding 2px 1px
+			overflow hidden
+			text-indent -9999px
+			background url("/images/content/button-sprite.png") -144px -160px no-repeat
+			margin 0 0 0 4px
+			&:hover
+				background-position -162px -160px
+		a.jshowoff-active
+			background-position -180px -160px
+
+/** Offer of the Week Icon **/
+span.offer-week
+	position absolute
+	top -14px
+	right -18px
+	width 118px
+	height 118px
+	display block
+	overflow hidden
+	text-indent -9999px
+	background url("/images/content/offer-sprite.png") -440px 0px no-repeat
+	z-index 2
+	display none

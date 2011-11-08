@@ -1,0 +1,38 @@
+{
+	"name": "Extent",
+	"main": "app.js",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"cluster": ">=0.6.4",
+		"async": ">=0.1.9",
+		"underscore": ">=1.1.6",
+		"connect-mongodb": ">=0.4.0",
+		"jade": ">=0.13.0",
+		"mongodb": ">=0.9.6",
+		"nodemailer": ">=0.2.0",
+		"stylus": ">=0.13.3",
+		"express": ">=2.4.3",
+		"gzippo": ">=0.0.5",
+		"mime": ">=1.2.2",
+		"compress": ">=0.1.9",
+		"formidable": ">=1.0.5",
+		"gm": ">= 0.4.3",
+		"piton-entity": ">=0.0.1",
+		"piton-pipe": ">=0.0.1",
+		"piton-http-utils": ">=0.0.1",
+		"piton-mixin": ">=0.0.1",
+		"piton-simplate": ">=0.0.1",
+		"piton-string-utils": ">=0.0.1",
+		"piton-validity": ">=0.0.1",
+		"markdown": ">= 0.2.1"
+  },
+	"devDependencies": {
+		"expresso": ">= 0.8.0",
+		"coffee-script": ">= 1.1.1",
+		"soda": ">= 0.2.4"
+	},
+	"directories": {
+		"lib": "lib"
+	}
+}

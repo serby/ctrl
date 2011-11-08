@@ -1,0 +1,24 @@
+table
+	width 100%
+	background-color #FFF
+th, td
+	padding 6px 10px
+	border 1px solid #CCC
+	text-align left
+th
+	border 1px solid darken($thColor, 20%)
+	color #333
+	font-size 14px
+	font-weight bold
+	box-shadow inset 0px 1px 2px lighten($thColor, 50%), 0 1px 3px rgba(0, 0, 0, 0.2)
+	text-shadow 0px 1px 1px lighten($thColor, 40%)
+	background-linear-gradient(top, lighten($thColor, 6%), 45%, darken($thColor, 3%), 55%, left top, left bottom)
+.highlight tbody tr
+	transition background-color 0.4s ease
+	&:hover
+		background-color lighten($thColor, 10%)
+		transition background-color 0.2s ease
+
+.date
+.text-link
+	width 150px

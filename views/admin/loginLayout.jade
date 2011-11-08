@@ -1,0 +1,27 @@
+!!! 5
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		//- SITE INFORMATION
+		title= page.title
+		meta(name='description', content=properties.description)
+		meta(name='keywords', content=properties.keyWords)
+		//- CSS
+		link(rel='stylesheet', type='text/css', href='/css/admin/index.css', media='all')
+	body(class=page.section)
+		#page
+			!= partial('partials/structure/header')
+			#main-content
+				!= body
+		!= partial('partials/structure/footer')
+
+		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js')
+		script
+			if (typeof jQuery === 'undefined') {
+				document.write('<script src="/js/jquery-1.6.2.min.js" />');
+			}
+		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js')
+		script
+			if (typeof jQuery.ui === 'undefined') {
+				document.write('<script src="/js/jquery-ui-1.8.14.min.js" />');
+			}

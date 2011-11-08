@@ -1,0 +1,117 @@
+/* Global styles for across the admin section */
+
+.panel
+	padding 14px
+	border 1px solid $borderColor
+	border-radius 4px
+	background-color #FFF
+
+/* Section Controls */
+#controls
+	float left
+	display inline
+	width 912px
+	margin-bottom 30px
+	#search
+		float left
+		label
+			margin 0
+			padding 0 0 14px 0
+			width auto
+			display inline
+			strong
+				display none
+			input
+				width 220px
+				vertical-align baseline
+		.button
+			vertical-align baseline
+			margin 0 0 0 10px
+	#actions,
+	#actions-primary,
+	#actions-secondary
+		float right
+		margin 0
+		padding 0
+		li
+			display inline-block
+			margin 0
+			margin-right 10px
+			padding 0 0 14px 0
+			list-style none
+			line-height 29px
+	#actions-primary
+		float left
+	#actions-secondary
+		li
+			margin-right 0
+			margin-left 10px
+
+#column-secondary
+	#controls
+		width 230px
+		#actions
+			float left
+
+#controls.panel
+	padding-bottom 0
+
+/* Buttons */
+.button,
+input.button
+	padding 6px 10px
+	border-radius 6px
+	font-size 13px
+	font-weight bold
+	text-decoration none
+	cursor pointer
+
+	color $secondaryTextColor
+	text-shadow $redTextShadow
+	border 1px solid darken($buttonColor, 20%)
+	background-color $buttonColor
+	background-linear-gradient(top, lighten($buttonColor, 2), 45%, darken($buttonColor, 1), 55%, -92deg)
+	box-shadow inset 0px 1px 2px lighten($buttonColor, 50%), 0 1px 3px rgba(0, 0, 0, 0.3)
+
+	&:hover
+		background-color lighten($buttonColor, 6)
+		background-linear-gradient(top, lighten($buttonColor, 8), 45%, lighten($buttonColor, 5), 55%, -92deg)
+	&:active
+		background-color darken($buttonColor, 6)
+		background-linear-gradient(top, darken($buttonColor, 3), 45%, darken($buttonColor, 6), 55%, -92deg)
+
+#search,
+#actions-secondary
+	.button
+		color #333
+		text-shadow $lightTextShadow
+		border 1px solid darken($secndaryButtonColor, 20%)
+		background-color $secndaryButtonColor
+		background-linear-gradient(top, lighten($secndaryButtonColor, 2), 45%, darken($secndaryButtonColor, 1), 55%, -92deg)
+		box-shadow inset 0px 1px 2px lighten($secndaryButtonColor, 50%), 0 1px 3px rgba(0, 0, 0, 0.1)
+		&:hover
+			background-color lighten($secndaryButtonColor, 6)
+			background-linear-gradient(top, lighten($secndaryButtonColor, 8), 45%, lighten($secndaryButtonColor, 5), 55%, -92deg)
+		&:active
+			background-color darken($secndaryButtonColor, 6)
+			background-linear-gradient(top, darken($secndaryButtonColor, 3), 45%, darken($secndaryButtonColor, 6), 55%, -92deg)
+
+/* Definition Lists */
+dl
+	vertical-align top
+	padding 0 20px
+	dt
+		display inline-block
+		width 220px
+		margin 5px 0
+	dd
+		display inline-block
+		width 330px
+		margin 5px 0
+
+		vertical-align top
+
+body.login
+	background-position 0px -131px
+	#main-header
+		margin-bottom 50px

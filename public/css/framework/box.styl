@@ -1,0 +1,42 @@
+/* Styles for The Box overlay */
+
+.box-overlay
+	background #000000
+	position fixed
+	top 0px
+	left 0px
+	bottom 0px
+	right 0px
+	opacity 0.5
+	z-index 11
+
+.box-container
+	position absolute
+	top 0px
+	left 0px
+	bottom 0px
+	right 0px
+	z-index 12
+	margin 0
+
+	.box-element
+		position absolute
+		background-color #FFFFFF
+		padding 20px
+		box-shadow 0px 0px 10px #333333
+
+	.box-close-button
+		position absolute
+		top 20px
+		right 20px
+		display block
+		width 10px
+		height 10px
+		overflow hidden
+		text-indent -9999px
+		background url("/images/content/button-sprite.png") -144px -126px no-repeat
+		cursor pointer
+		padding 2px
+		z-index 1103
+		&:hover
+			background-position -162px -126px

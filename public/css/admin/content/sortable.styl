@@ -1,0 +1,36 @@
+ul.ui-sortable
+	padding 0px
+	margin 0px 0px 10px 0px
+
+	li
+		position relative
+		list-style-type none
+		padding 6px 10px 6px 10px
+		border 1px solid #DDDDDD
+		margin 0px 0px 5px 0px
+		background-color #EEEEEE
+
+		text-shadow 0px 1px 0px #FEFEFE
+		background-linear-gradient(top, #FEFEFE, 0%, #EEEEEE, 100%, left top, left bottom)
+		border-radius 3px 3px 3px 3px
+
+		&:hover
+			cursor move
+			background-color #DDDDDD
+			border-color #CCCCCC
+
+			background-linear-gradient(top, #EEEEEE, 0%, #DDDDDD, 100%, left top, left bottom)
+			box-shadow 0px 1px 1px 0px rgba(0,0,0,0.1)
+		a
+			position absolute
+			top 5px
+			right 5px
+			display block
+			width 84px
+			height 21px
+			text-indent -9999px
+			background-image url("/images/admin/sprite.png")
+			background-position -396px -54px
+			&:hover
+				cursor pointer
+				background-position -484px -54px

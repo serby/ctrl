@@ -1,0 +1,35 @@
+include ../../../views/mixins/file
+
+#column-wide
+	h1
+		a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+	#controls.panel
+		ul#actions
+			#actions-primary
+				li: a.button(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit this #{crudDelegate.name}
+				- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
+					li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete this #{crudDelegate.name}
+			#actions-secondary
+				- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.add === 'undefined')
+					li: a.button(href='/admin/#{crudDelegate.urlName}/new') Add a new #{crudDelegate.name}
+				li: a.button(href='/admin/#{crudDelegate.urlName}/') View all #{crudDelegate.plural}
+
+
+#column-primary
+	//-h2 #{crudDelegate.name} Details
+	- each group in viewSchema.groups
+		- if (typeof group.name !== 'undefined')
+			h2=group.name
+		- if (typeof group.description !== 'undefined')
+			p.group-description=group.description
+			dl
+				- each propertyMeta, key in group.properties
+					- if (propertyMeta.view)
+						dt=crudDelegate.entityDelegate.propertyName(key)
+						dd
+							- if (propertyMeta.type === 'file')
+								mixin downloadLink(entity[key], false)
+							- else if (propertyMeta.type === 'checkbox')
+								p=booleanFormatter(entity[key])
+							- else
+								#{propertyMeta.format(entity[key])}

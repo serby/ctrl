@@ -1,0 +1,61 @@
+include ../../../views/mixins/file
+
+#column-wide
+	h1  
+		a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+
+	//- Actions and Filter Controls
+	#controls.panel
+		#search 
+			form(method='get', action='#{crudDelegate.urlName}')
+				label
+					strong Filter Results
+					- if (typeof url === 'undefined')
+						input(value='', name='Filter')
+					- else
+						input(value=url.Filter, name='Filter')
+				input.button(type='submit',value='Filter')
+				a.button(href='') Reset
+		ul#actions
+			- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.add === 'undefined')
+				li: a.button(href='/admin/#{crudDelegate.urlName}/new') Add
+
+	//- List Results
+	!= partial('admin/partials/content/filter-summary')
+	- if (dataSet.length === 0)
+		p
+			| Cannot find any, would you like to 
+			a(href='/admin/#{crudDelegate.urlName}/new') add one?
+	- else
+		table.highlight
+			thead
+				tr
+					- each group in viewSchema.groups
+						- each val, key in group.properties
+							- if (val.list)
+								th=crudDelegate.entityDelegate.propertyName(key)
+			tbody
+				- each entity in dataSet
+					- var entityName = entity[viewSchema['title']]
+					tr
+						- each group in viewSchema.groups
+							- each propertyMeta, key in group.properties
+								- if (propertyMeta.list)
+									- if (viewSchema.title === key)
+										td.title
+											strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
+											ul.row-actions
+												li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
+												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
+													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
+									- else
+										- if (propertyMeta.type === 'checkbox')
+											td=booleanFormatter(entity[key])
+										- else if (propertyMeta.type === 'file')
+											td.thumbnail
+												mixin displayImage(100, 100, entity[key][0], crudDelegate.name + ' - ' + entityName, 'crop')
+										- else if (propertyMeta.type === 'link')
+											td
+												a(href='/#{crudDelegate.urlName}/' + entity[key], target='_blank')=entity[key]
+										- else
+											td=propertyMeta.format(entity[key])

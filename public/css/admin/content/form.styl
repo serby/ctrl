@@ -1,0 +1,237 @@
+form
+	float left
+	width 630px
+	padding 0
+
+	h3
+		padding 0 0 8px 0
+		margin 0 20px 20px 20px
+		background url("/images/content/dotted-seperator.gif") 0 100% repeat-x
+
+	p.group-description
+		margin -10px 20px 20px
+		color #777
+
+	fieldset
+		float left
+		display inline
+		width 628px
+		padding 18px 0 10px
+		margin 0 0 20px
+		position relative
+		background-color #FFF
+		border 1px solid $borderColor
+		border-radius 4px
+		box-shadow 0px 0px 0px 1px #FFF inset
+
+	label,
+	.label
+		float left
+		width 588px
+		display inline
+		padding 4px 20px
+		margin 0 0 8px
+
+		strong
+			font-style italic
+			margin-bottom 2px
+
+	input,
+	textarea
+		width 354px
+	select
+		width 368px
+	input.button
+		width auto
+		margin-bottom 0
+	textarea
+		height 110px
+		&.short
+			height 70px
+
+	#actions
+		text-align center
+
+	label.checkbox
+		strong
+			width 220px
+
+p.label
+	margin-left 20px
+	strong
+		width 200px
+		margin-right 20px
+		font-weight normal
+		display inline-block
+	span
+		font-weight bold
+
+
+
+
+
+
+/* Form Errors */
+label.error
+	background-color $secondaryErrorColor
+	border none
+	&:hover
+		background-color $secondaryErrorColor
+	strong
+		color $globalColor
+	p
+		padding 6px 0px 0px 220px
+		margin-bottom 0px
+		color $globalColor
+	input,
+	select,
+	textarea
+		border 1px solid $primaryErrorColor
+
+/* Form Field Descriptions*/
+form
+	.description
+		margin 4px 0 0 220px
+		color #555
+		font-size 11px
+	.checkbox
+		.description
+				margin-left 0px
+				display inline
+
+
+
+
+/* Login to Admin */
+
+.login
+	#main-content .panel
+		float none
+		width 600px
+		padding 20px 30px 0px 30px
+		margin 40px auto 0
+		border 1px solid $borderColor
+
+		fieldset
+			margin 0px 0px 0px 0px
+
+		label
+			width 570px
+			padding 6px 15px 6px 15px
+
+		.indent
+			width 320px
+			padding-left 235px
+			&:hover
+				background-color transparent
+
+		a
+			float right
+			margin -25px 15px 0px 0px
+
+		.controls
+			padding-top 15px
+			text-align right
+			border-bottom none
+
+			input
+				margin 0px 15px 0px 0px
+
+.error,.warn,.info
+	padding 10px 20px
+	background-color $secondaryErrorColor
+	color $globalColor
+	h4
+		margin-bottom 0
+
+div.error-summary
+	margin-bottom 20px
+	border 1px solid $primaryErrorColor
+	border-radius 4px
+
+.info
+	background-color #65e07e
+	color #000000
+
+/* Offer Checkbox Groups */
+form
+	.checkbox-group
+		strong
+			display block
+			margin-bottom 4px
+		label.checkbox
+			float left
+			clear none
+			padding 0
+			width 84px
+
+/* jQuery UI Datepicker */
+input.ui-datepicker
+	background url("/images/content/icon-sprite.png") right -462px no-repeat
+
+#ui-datepicker-div
+	position absolute
+	top -9999px
+	left -9999px
+	margin-top -1px
+	width 262px
+	background-color #FFF
+	border 1px solid #777
+	border-top 0
+	border-radius 0 0 4px 4px
+	padding 3px 10px 10px
+	table
+		width auto
+		margin 1px
+	th
+		background #EEE
+	th,
+	td
+		padding 0px
+		text-align center
+		width 36px
+		height 28px
+		a
+			display block
+			width 36px
+			height 28px
+			line-height 28px
+			text-decoration none
+			&:hover
+				background-color #CCC
+	.ui-datepicker-current-day
+		a
+			color #fff
+			background-color $primaryBrandColor
+	.ui-datepicker-unselectable
+		color #ccc
+	.ui-datepicker-header
+		position relative
+		margin-bottom 10px
+		padding-top 10px
+		background url("/images/content/dotted-seperator.gif") 0px 0px repeat-x
+	.ui-datepicker-title
+		fontStandfirst()
+	.ui-datepicker-next,
+	.ui-datepicker-prev
+		position absolute
+		top 14px
+		right 0px
+		display block
+		width 12px
+		height 12px
+		margin-left 5px
+		margin-bottom 0
+		overflow hidden
+		text-indent -9999px
+		background url("/images/content/button-sprite.png") -160px -94px no-repeat
+		&:hover
+			background-position -160px -110px
+	.ui-datepicker-prev
+		right 16px
+		background-position -144px -94px
+		&:hover
+			background-position -144px -110px
+	.ui-datepicker-other-month
+		a
+			color #888

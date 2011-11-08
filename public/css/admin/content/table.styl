@@ -1,0 +1,109 @@
+th
+	background-linear-gradient(top, lighten($thColor, 6%), 45%, darken($thColor, 3%), 55%, left top, left bottom)
+	box-shadow inset 0px 1px 2px lighten($thColor, 50%), 0 1px 3px rgba(0, 0, 0, 0.2)
+	text-shadow 0px 1px 1px lighten($thColor, 40%)
+	font-weight normal
+
+.highlight tbody tr
+	border 1px solid red
+	&:hover
+		background-color desaturate(lighten($primaryBrandColor, 92%), 30%)
+
+td
+	vertical-align top
+	padding-top 10px
+	a
+		color $globalColor
+		text-decoration none
+		&:hover
+			text-decoration underline
+	.row-actions,
+	.row-actions-block
+		display inline
+		margin-top 4px
+		margin-left 20px
+		padding 0
+		font-size 12px
+		opacity 0
+		transition opacity 0.2s ease
+		li
+			margin 0 10px 0 0
+			padding 0
+			list-style none
+			display inline
+			a
+				color #555
+	.row-actions-block
+		display block
+		margin-left 0
+
+tr:hover td
+	.row-actions,
+	.row-actions-block
+		opacity 1
+
+
+/* Fading Inline Row Controls */
+td.title
+	strong
+		font-size 14px
+
+
+/* Sortable Table Headers */
+th.sortable
+	padding 0
+	font-weight bold
+	a
+		padding 6px 10px
+		display block
+		background url("/images/content/sortable.png") 100% 40px no-repeat
+		text-decoration none
+		&:hover
+			color $globalColor
+			background-color rgba(0,0,0,.05)
+	&.asc
+		a
+			background-position 100% 13px
+			&:hover
+				background-position 100% -27px
+	&.desc
+		a
+			background-position 100% -67px
+			&:hover
+				background-position 100% -107px
+
+
+/* Remove padding from thumbnails */
+table td.thumbnail
+	padding 0 !important
+	width 100px
+
+/* Summary of files uploaded to a form */
+table.image-summary
+	width 368px
+	margin 0 20px 8px 0px
+	th
+		background-color #EEE
+	th,
+	td
+		padding 4px 10px
+	th.remove
+		width 50px
+	td.checkbox
+		text-align center
+		input
+			margin 10px 0 0 0
+	.file-summary
+		width 170px
+		p
+			font-size 11px
+			line-height 13px
+			font-family Arial, Helvetica, sans-serif
+			margin-bottom 0
+	a.file-preview
+		font-family Arial, Helvetica, sans-serif
+		word-wrap break-word
+	input
+		width auto
+form table.image-summary
+	margin-left 240px

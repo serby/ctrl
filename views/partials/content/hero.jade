@@ -1,0 +1,14 @@
+include ../../../views/mixins/file
+#hero-rotator
+	span.offer-week Offer Of The Week
+	.hero-rotator-inner
+		ul#hero-stack
+			- each promo in promos
+				li.hero-slide
+					mixin displayImage(558, 318, promo.image[0], promo.name, 'crop')
+					.overlay
+						h3: a(href=promo.link)=promo.name
+						p=promo.body
+						a.more(href=promo.link) More
+						- if (promo.offerOfTheWeek)
+							span.offer-of-the-week
