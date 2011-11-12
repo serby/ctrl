@@ -36,7 +36,7 @@ databaseAdaptor.createConnection(function(connection) {
 			main: connection
 	});
 
-	bundleManager.initBundles(app, properties, serviceLocator);
+	bundleManager.initBundles(app, properties);
 
 	// Make the bundle manager avaialbe to views
 	app.configure(function() {
