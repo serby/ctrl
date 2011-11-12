@@ -70,7 +70,7 @@ module.exports.createModel = function(properties, serviceLocator) {
 
 		administratorDetails.roles = ['*'];
 
-		crudDelegate.create(administratorDetails, callback);
+		crudDelegate.create(administratorDetails, {}, callback);
 	}
 
 	crudDelegate.pipes.beforeCreate.add(function(entity, callback) {
