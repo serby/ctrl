@@ -2,9 +2,10 @@ module.exports = {
 	name: 'Admin',
 	description: 'Admin section for the site',
 	bootstrap: function(app, properties, serviceLocator) {
+
 		// Adding this bundle registers the admin acl
 		serviceLocator.register('adminAccessControlList',
-			require('../../lib/secure/accessControlList').createAccessControlList(serviceLocator));
+			require('../../lib/secure/accessControlList').createAccessControlList(serviceLocator.logger));
 
 	},
 	configure: function(app, properties, serviceLocator) {
