@@ -28,13 +28,13 @@ module.exports.createModel = function(properties, serviceLocator) {
 		'_id',
 		collection,
 		entityDelegate,
-		MongodbCrudDelegate.objectIdFilter(connection)
+		MongodbCrudDelegate.objectIdFilter(connection),
+		serviceLocator.logger
 	);
 
 	function saltyHash(salt, value) {
 		return crypto.createHash('sha1').update(salt + value).digest('hex');
 	}
-
 
 	function duplicateEmailChecker(entity, callback) {
 		collection.find({ emailAddress: entity.emailAddress }).toArray(function(error, data) {
@@ -50,14 +50,9 @@ module.exports.createModel = function(properties, serviceLocator) {
 	}
 
 	function authenticate(credentials, callback) {
-		serviceLocator.logger.silly('Authentication Attempt', credentials.emailAddress);
 		crudDelegate.find({ emailAddress: credentials.emailAddress, password: saltyHash(salt, credentials.password) }, {}, function(errors, items) {
 
-			// This is a backdoor and should be removed on production.
-			// If you are performing a security audit and find this you can mark it down as a failure.
-			if ((credentials.emailAddress === 'admin@clock.co.uk') && (admin.password === 'clock001')) {
-				callback(null, credentials);
-			} else if (errors) {
+		if (errors) {
 				callback(errors, credentials);
 			} else if (items.length() === 0) {
 				callback(new Error('Wrong Email and password combination.'), credentials);
@@ -65,6 +60,17 @@ module.exports.createModel = function(properties, serviceLocator) {
 				callback(null, items.first());
 			}
 		});
+	}
+
+	/**
+	 * Create a new administrator with the '*' role which
+	 * will allow full access to all admin bundles that have been created correctly
+	 */
+	function createWithFullAccess(administratorDetails, callback) {
+
+		administratorDetails.roles = ['*'];
+
+		crudDelegate.create(administratorDetails, callback);
 	}
 
 	crudDelegate.pipes.beforeCreate.add(function(entity, callback) {
@@ -78,6 +84,7 @@ module.exports.createModel = function(properties, serviceLocator) {
 		.add(passwordHasher);
 
 	crudDelegate.authenticate = authenticate;
+	crudDelegate.createWithFullAccess = createWithFullAccess;
 
 	return crudDelegate;
 };

@@ -3,7 +3,43 @@ var viewRenderDelegate = require('../../lib/viewRenderDelegate');
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
 	var viewRender = viewRenderDelegate.create(bundleViewPath);
 
-	app.get('/admin', serviceLocator.adminAccessControl.access('admin home', 'read'), function(req, res) {
+	function renderSetup(res, req, errors) {
+		viewRender(req, res, 'setup', {
+			layout: 'setupLayout',
+			page: {
+				title: 'Setup / Admin / ' + properties.name,
+				section: 'admin'
+			},
+			error: errors,
+			javascriptSrc: []
+		});
+	}
+
+	function ensureSetup(req, res, next) {
+		serviceLocator.administratorModel.count({}, function(errors, count) {
+			if (count === 0) {
+				return renderSetup(res, req, errors);
+			}
+			next();
+		});
+	}
+
+	app.post('/admin/setup', function(req, res, next) {
+		serviceLocator.administratorModel.count({}, function(error, count) {
+			if (count === 0) {
+				serviceLocator.administratorModel.createWithFullAccess(req.body, function(errors, item) {
+					if (errors) {
+						return renderSetup(res, req, errors);
+					}
+					res.redirect('/admin');
+				});
+			} else {
+				next(new Error('Forbidden'));
+			}
+		});
+	});
+
+	app.get('/admin', ensureSetup, serviceLocator.adminAccessControl.requiredAccess('admin home', 'read'), function(req, res) {
 		viewRender(req, res, 'index', {
 			layout: 'admin/layout',
 			page: {
@@ -14,7 +50,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		});
 	});
 
-	app.get('/admin/login', function(req, res) {
+	app.get('/admin/login', ensureSetup, function(req, res) {
 		viewRender(req, res, 'login', {
 			layout: 'admin/loginLayout',
 			page: {

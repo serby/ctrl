@@ -13,7 +13,7 @@ module.exports = {
 		// The resource you need access of see the admin bundles
 		serviceLocator.adminAccessControlList.addResource('admin home');
 
-		serviceLocator.adminAccessControlList.grant('admin', 'admin home', 'read');
+		serviceLocator.adminAccessControlList.grant('*', 'admin home', 'read');
 
 		// This controls the authentication and authorisation of the admin
 		serviceLocator.register('adminAccessControl',

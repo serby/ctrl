@@ -17,10 +17,10 @@ module.exports = {
 		serviceLocator.adminAccessControlList.addResource('administrator');
 
 		// This should be controlled in the database
-		serviceLocator.adminAccessControlList.grant('admin', 'administrator', 'read');
-		serviceLocator.adminAccessControlList.grant('admin', 'administrator', 'update');
-		serviceLocator.adminAccessControlList.grant('admin', 'administrator', 'write');
-		serviceLocator.adminAccessControlList.grant('admin', 'administrator', 'delete');
+		serviceLocator.adminAccessControlList.grant('*', 'administrator', 'read');
+		serviceLocator.adminAccessControlList.grant('*', 'administrator', 'update');
+		serviceLocator.adminAccessControlList.grant('*', 'administrator', 'write');
+		serviceLocator.adminAccessControlList.grant('*', 'administrator', 'delete');
 	},
 	finalise: function(app, properties, serviceLocator) {
 		// Create controllers
