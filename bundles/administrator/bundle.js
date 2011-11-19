@@ -6,7 +6,7 @@ module.exports = {
 			url: '/admin/administrator'
 		}
 	],
-	bootstrap: function(app, properties, serviceLocator) {
+	register: function(app, properties, serviceLocator) {
 
 		// Register the bundles models
 		serviceLocator.register('administratorModel',

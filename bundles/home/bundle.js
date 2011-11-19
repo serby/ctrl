@@ -1,6 +1,8 @@
 module.exports = {
 	name: 'Home',
 	description: 'Home',
-	controllerFactories: [require('./controller').createRoutes],
-	publicFolder: 'public'
+	publicFolder: 'public',
+	configure: function(app, properties, serviceLocator) {
+		require('./controller').createRoutes(app, properties, serviceLocator, __dirname + '/views');
+	}
 };
