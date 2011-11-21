@@ -1,5 +1,5 @@
-!!! 5
-html(lang="en")
+x!!! 5
+html(lang='en')
 	head
 		meta(charset='utf-8')
 		meta(name='description', content=properties.description)
@@ -15,6 +15,7 @@ html(lang="en")
 	
 		//- SITE INFORMATION
 		title=page.title
+
 		//- CSS
 		link(rel='stylesheet', type='text/css', href='/css/main/index.css', media='all')
 
@@ -26,16 +27,16 @@ html(lang="en")
 
 	body(class=page.section)
 		#page
-			!= partial('partials/structure/header')
-			!= partial('partials/structure/nav')
-			#main-content(class= page.layoutType ? 'layout-#{page.layoutType}' : 'layout-article')
-				!= body
-		!= partial('partials/structure/footer')
+			include includes/header
+			include includes/nav
+				#main-content(class= page.layoutType ? 'layout-#{page.layoutType}' : 'layout-article')
+					!= body
+			include includes/footer
 
-		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js')
+		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')
 		script
 			if (typeof jQuery === 'undefined') {
-				document.write('<script src="/js/jquery-1.6.2.min.js" />');
+				document.write('<script src="/js/jquery-1.7.min.js" />');
 			}
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js')
 		script
@@ -43,6 +44,3 @@ html(lang="en")
 				document.write('<script src="/js/jquery-ui-1.8.14.min.js" />');
 			}
 		script(src='/js/jquery.placeholder.js')
-
-		- if (typeof javascriptSrc !== 'undefined')
-			!= partial('partials/structure/javascript', javascriptSrc)	
