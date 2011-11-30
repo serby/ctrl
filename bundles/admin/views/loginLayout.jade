@@ -9,11 +9,12 @@ html(lang='en')
 		//- CSS
 		link(rel='stylesheet', type='text/css', href='/css/admin/index.css', media='all')
 	body(class=page.section)
+
 		#page
-			!= partial('partials/structure/header')
+			include includes/structure/header
 			#main-content
 				!= body
-		!= partial('partials/structure/footer')
+		include includes/structure/footer
 
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js')
 		script

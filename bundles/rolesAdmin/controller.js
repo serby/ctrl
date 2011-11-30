@@ -1,6 +1,6 @@
 var
 	formHelper = require('../../lib/utils/formHelper'),
-	generic = require('../../lib/generic'),
+	generic = require('../generic'),
 	viewRenderDelegate = require('../../lib/viewRenderDelegate');
 
 var viewSchema = generic.createViewSchema({
@@ -46,6 +46,5 @@ var viewSchema = generic.createViewSchema({
 });
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
-	var viewRender = viewRenderDelegate.create('admin/generic');
-	generic.createRoutes(app, viewRender, viewSchema, serviceLocator.roleModel, null, serviceLocator);
+	generic.createRoutes(app, generic.createViewRender('../../admin/views/layout'), viewSchema, serviceLocator.roleModel, null, serviceLocator);
 };

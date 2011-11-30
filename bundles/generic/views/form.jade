@@ -7,7 +7,7 @@ include ../../../views/mixins/file
 		|  / Add/Edit #{crudDelegate.name}
 
 #column-primary
-	form(method='post', enctype='multipart/form-data')	
+	form(method='post', enctype='multipart/form-data')
 		//- h2 #{crudDelegate.name} Details
 		- if (Object.keys(errors).length > 0)
 			.error.error-summary

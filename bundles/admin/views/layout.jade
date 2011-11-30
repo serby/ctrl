@@ -24,11 +24,11 @@ html(lang='en')
 			link(rel='stylesheet', type='text/css', href='/css/main/internet-explorer.css', media='all')
 	body(class=page.section)
 		#page
-			include partials/structure/header
-			include partials/structure/nav
+			include includes/structure/header
+			include includes/structure/nav
 			#main-content
 				!= body
-		include partials/structure/footer
+		include includes/structure/footer
 
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')
 		script

@@ -1,5 +1,4 @@
 var
-	formidable = require('formidable'),
 	fs = require('fs'),
 	path = require('path'),
 	async = require('async'),
@@ -9,9 +8,9 @@ var
 module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, dataPath, serviceLocator) {
 
 	/**
-	 * Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
-	 * Iterates through each group and the properties of that group to get the searchField and the type of data
-	 */
+	* Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
+	* Iterates through each group and the properties of that group to get the searchField and the type of data
+	*/
 	var searchFields = {};
 	Object.keys(adminViewSchema.groups).forEach(function(group) {
 		Object.keys(adminViewSchema.groups[group].properties).forEach(function(property) {
@@ -22,8 +21,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	});
 
 	/**
-	 * This ensures errors with properties that are not displayed on the form are showen
-	 */
+	* This ensures errors with properties that are not displayed on the form are showen
+	*/
 	function listUnshownErrors(errors) {
 
 		return Object.keys(errors).filter(function(property) {
@@ -36,71 +35,43 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	}
 
+	function uploadDelegate(req, res, next) {
 
-	function formParser(req, res, next) {
-		var
-			form = new formidable.IncomingForm(),
-			fields = {},
-			files = [],
-			field = [];
+		async.forEach(Object.keys(req.body), function(key, eachCallback) {
 
-		form.parse(req, function(error, fields, files) {});
+			var
+				formValue = req.body[key];
 
-		form.addListener('file', function(name, file) {
-			if (file.size > 0) {
-				file.formName = name;
-				files.push(file);
-			}
-		});
-
-		form.addListener('field', function(name, value) {
-			//Checking for arrays of fields
-			if (name.indexOf('[]') > 0) {
-				field.push(value);
-				fields[name] = field;
-				return;
+			if (formValue.path === undefined) {
+				return eachCallback();
 			}
 
-			fields[name] = value;
-		});
-
-		form.addListener('end', function() {
-			uploadHandler(fields, files, function(error, fields) {
-				req.body = fields;
-				req.files = files;
-				next();
-			});
-		});
-	}
-
-	function uploadHandler(fields, files, callback) {
-		files.forEach(function(file) {
-			fields[file.formName] = [];
-		});
-		async.forEach(files, function(file, eachCallback) {
 			var hash = path.basename(file.path);
 
 			fs.mkdir(dataPath + '/' + hash, '0755', function(error) {
-				var destPath = path.normalize(dataPath + '/' + hash + '/' + file.name);
-				console.info('Copying %s to %s', file.path, destPath);
-				var readFile = fs.createReadStream(file.path);
-				var writeFile = fs.createWriteStream(destPath, { flags: 'w' });
+				serviceLocator.logger.info('Copying %s to %s', file.path, destPath);
+
+				var
+					destPath = path.normalize(dataPath + '/' + hash + '/' + formValue.name),
+					readFile = fs.createReadStream(formValue.path),
+					writeFile = fs.createWriteStream(destPath, { flags: 'w' });
+
 				readFile.pipe(writeFile);
 				readFile.on('end', function() {
-					fields[file.formName].push({
-						size: file.size,
-						type: file.type,
+					req.body[key] = {
+						size: formValue.size,
+						type: formValue.type,
 						path: hash + '/',
-						basename: file.name
-					});
+						basename: formValue.name
+					};
 					eachCallback();
 				});
 			});
-		},function(error) {
+		}, function(error) {
 			if (error) {
-				callback(error);
+				next(error);
 			} else {
-				callback(null, fields);
+				next();
 			}
 		});
 	}
@@ -157,7 +128,6 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
 		crudDelegate.find(mongoQuery, {}, function (errors, dataSet) {
 			viewRender(req, res, 'list', {
-				layout: 'admin/layout',
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
 				dataSet: dataSet.toArray(),
@@ -171,6 +141,9 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
+	// This is the default view schema helpers.
+	// Allows for options to be defined in the view schema as an array or a funciton
+	// and then use in the presentation of the form.
 	function adminViewSchemaHelper(adminViewSchema) {
 		return function(req, res, next) {
 			var fn = [];
@@ -193,9 +166,10 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	}
 
 	app.get('/admin/' + crudDelegate.urlName + '/new',
-	adminViewSchemaHelper(adminViewSchema), serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'create'), function (req, res) {
+		serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'create'),
+		adminViewSchemaHelper(adminViewSchema), function (req, res) {
+
 		viewRender(req, res, 'form', {
-			layout: 'admin/layout',
 			viewSchema: adminViewSchema,
 			crudDelegate: crudDelegate,
 			entity: crudDelegate.entityDelegate.makeDefault(),
@@ -207,11 +181,15 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.post('/admin/' + crudDelegate.urlName + '/new', serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'write'). formParser, adminViewSchema.formPostHelper, adminViewSchemaHelper(adminViewSchema), function (req, res) {
+	app.post('/admin/' + crudDelegate.urlName + '/new',
+		serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'create'),
+		adminViewSchema.formPostHelper,
+		uploadDelegate,
+		adminViewSchemaHelper(adminViewSchema), function (req, res) {
+
 		crudDelegate.create(req.body, {}, function (errors, newEntity) {
 			if (errors) {
 				viewRender(req, res, 'form', {
-					layout: 'admin/layout',
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
 					entity: newEntity,
@@ -231,7 +209,6 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	app.get('/admin/' + crudDelegate.urlName + '/:id', serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'read'), function (req, res) {
 		crudDelegate.read(req.params.id, function (errors, entity) {
 			viewRender(req, res, 'view', {
-				layout: 'admin/layout',
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
 				entity: entity,
@@ -247,7 +224,6 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		crudDelegate.read(req.params.id, function (errors, entity) {
 
 			viewRender(req, res, 'form', {
-				layout: 'admin/layout',
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
 				entity: entity,
@@ -261,11 +237,11 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', formParser, adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'write'), function (req, res) {
+	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', uploadDelegate, adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'update'), function (req, res) {
 		crudDelegate.update(req.params.id, req.body, {}, function (errors, entity) {
 			if (errors) {
 				viewRender(req, res, 'form', {
-					layout: 'admin/layout',
+					layout: 'layout',
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
 					entity: entity,

@@ -21,7 +21,7 @@ include ../../../views/mixins/file
 				li: a.button(href='/admin/#{crudDelegate.urlName}/new') Add
 
 	//- List Results
-	!= partial('admin/partials/content/filter-summary')
+	include includes/filter-summary
 	- if (dataSet.length === 0)
 		p
 			| Cannot find any, would you like to 
