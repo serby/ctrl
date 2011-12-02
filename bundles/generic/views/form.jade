@@ -35,5 +35,7 @@ include ../../../views/mixins/file
 							mixin fileFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
 						- if (propertyMeta.type === 'hidden')
 							input(type='hidden', name=key, value=entity[key])
+						- if (propertyMeta.type === 'password')
+							mixin passwordFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
 		#actions
 			input.button(type='submit',value='Submit')
