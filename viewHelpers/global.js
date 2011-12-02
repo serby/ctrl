@@ -17,19 +17,15 @@ module.exports.createHelpers = function(properties, app) {
 				}
 			})
 			.helpers({
-				dateAndTime: function(date) {
-					var
-						d = new Date(date),
-						mins = d.getMinutes();
-
-					// getMinutes doesnt affix leading zeroes
-					if (String(mins).length === 1) {
-						mins = '0' + mins;
-					}
-
-					return d.toDateString() + ' ' + d.getHours() + ':' + mins;
+				dateTime: function(date) {
+					return (new Date(date)).format('d mmm yyyy @ H:m:s');
 				},
 				date: function(date) {
+					var d = new Date(date);
+					return d.toDateString();
+				},
+				time: function(date) {
+					//TODO: This should be time only
 					var d = new Date(date);
 					return d.toDateString();
 				},
