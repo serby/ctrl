@@ -27,6 +27,8 @@ include ../../../views/mixins/file
 							mixin textFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
 						- if (propertyMeta.type === 'dropdown')
 							mixin dropdownForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.options, propertyMeta.info)
+						- if (propertyMeta.type === 'multiselect')
+							mixin checkBoxGroupForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.options, propertyMeta.info)
 						- if (propertyMeta.type === 'textbox')
 							mixin textboxFieldForObject('', name, key, entity, propertyMeta.required, errors, propertyMeta.info)
 						- if (propertyMeta.type === 'checkbox')
