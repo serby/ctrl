@@ -244,7 +244,6 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		crudDelegate.update(req.params.id, req.body, {}, function (errors, entity) {
 			if (errors) {
 				viewRender(req, res, 'form', {
-					layout: 'layout',
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
 					entity: entity,
