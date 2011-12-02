@@ -29,6 +29,8 @@ include ../../../views/mixins/file
 						dd
 							- if (propertyMeta.type === 'file')
 								mixin downloadLink(entity[key], false)
+							- if (propertyMeta.type === 'dateTime')
+								p=dateTime(propertyMeta.format(entity[key]))
 							- else if (propertyMeta.type === 'checkbox')
 								p=booleanFormatter(entity[key])
 							- else
