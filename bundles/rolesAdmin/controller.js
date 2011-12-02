@@ -27,12 +27,7 @@ var viewSchema = generic.createViewSchema({
 			created: {
 				list: true,
 				view: true,
-				form: false,
-				format: function(value) {
-					if (value) {
-						return (new Date(value)).format('dS mmm, yyyy');
-					}
-				}
+				type: 'dateTime'
 			}
 		}
 	}],
