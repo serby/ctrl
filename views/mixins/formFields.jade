@@ -59,11 +59,11 @@ mixin textField(label, name, value, required, error, maxLength, information, pla
 mixin textFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
 	mixin textField(label, name, dataObject[name], required, errors[name], maxLength, information, placeholder)
 
-mixin passwordField(label, name, value, required, error, maxLength, information, placeholder)
-	mixin inputField('password', 'textbox', label, name, value, required, error, maxLength, information, placeholder)
+mixin passwordField(label, name, required, error, maxLength, information, placeholder)
+	mixin inputField('password', 'textbox', label, name, '', required, error, maxLength, information, placeholder)
 
 mixin passwordFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
-	mixin passwordField(label, name, dataObject[name], errors[name], maxLength, information, placeholder)
+	mixin passwordField(label, name, required, errors[name], maxLength, information, placeholder)
 
 mixin textboxField(classname, label, name, value, required, error, maxLength, information)
 	label(class=error && 'error')
