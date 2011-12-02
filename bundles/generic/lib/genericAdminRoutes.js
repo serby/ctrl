@@ -23,14 +23,14 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	/**
 	* This ensures errors with properties that are not displayed on the form are showen
 	*/
-	function listUnshownErrors(errors) {
+	function listUnshownErrors(errors, formType) {
 
 		return Object.keys(errors).filter(function(property) {
-			adminViewSchema.groups.forEach(function(group) {
-				if ((group.properties[property] === undefined) || (!group.properties[property].form)) {
+			for (var i = 0; i < adminViewSchema.groups.length; i++) {
+				if ((adminViewSchema.groups[i].properties[property] === undefined) || (!adminViewSchema.groups[i].properties[property][formType])) {
 					return true;
 				}
-			});
+			}
 			return false;
 		});
 	}
@@ -177,6 +177,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 				title: crudDelegate.name,
 				section: crudDelegate.urlName
 			},
+			formType: 'createForm',
 			errors: {}
 		});
 	});
@@ -197,8 +198,9 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 						title: crudDelegate.name,
 						section: crudDelegate.urlName
 					},
+					formType: 'createForm',
 					errors: errors,
-					unshownErrors: listUnshownErrors(errors)
+					unshownErrors: listUnshownErrors(errors, 'createForm')
 				});
 			} else {
 				res.redirect('/admin/' + crudDelegate.urlName + '/' + newEntity._id);
@@ -231,6 +233,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 					title: crudDelegate.name,
 					section: crudDelegate.urlName
 				},
+				formType: 'updateForm',
 				errors: {},
 				unshownErrors: []
 			});
@@ -249,8 +252,9 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 						title: crudDelegate.name,
 						section: crudDelegate.urlName
 					},
+					formType: 'updateForm',
 					errors: errors,
-					unshownErrors: listUnshownErrors(errors)
+					unshownErrors: listUnshownErrors(errors, 'updateForm')
 				});
 			} else {
 				res.redirect('/admin/' + crudDelegate.urlName + '/' + entity._id);

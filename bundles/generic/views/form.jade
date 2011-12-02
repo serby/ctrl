@@ -21,7 +21,7 @@ include ../../../views/mixins/file
 				- if (typeof group.description !== 'undefined')
 					p.group-description=group.description
 				- each propertyMeta, key in group.properties
-					- if (propertyMeta.form)
+					- if (propertyMeta[formType])
 						- var name = crudDelegate.entityDelegate.propertyName(key)
 						- if ([undefined, 'url'].indexOf(propertyMeta.type) !== -1 || propertyMeta.type === 'link')
 							mixin textFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)

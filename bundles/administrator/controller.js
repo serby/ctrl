@@ -11,7 +11,9 @@ var viewSchema = generic.createViewSchema({
 			emailAddress: {
 				list: true,
 				view: true,
-				form: true
+				createForm: true,
+				updateForm: true,
+				required: true
 			},
 			_id: {
 				form: true,
@@ -20,34 +22,38 @@ var viewSchema = generic.createViewSchema({
 			firstName: {
 				list: true,
 				view: true,
-				form: true,
-				searchField: 'text'
+				createForm: true,
+				updateForm: true,
+				searchField: 'text',
+				required: true
 			},
 			lastName: {
 				list: true,
 				view: true,
-				form: true,
-				searchField: 'text'
+				createForm: true,
+				updateForm: true,
+				searchField: 'text',
+				required: true
 			},
 			password: {
 				list: false,
+				createForm: true,
+				updateForm: false,
 				view: true,
-				form: true
+				type: 'password',
+				required: true
 			},
 			roles: {
 				list: false,
 				view: true,
-				form: true
+				createForm: true,
+				updateForm: true
 			},
 			created: {
 				list: true,
 				view: true,
-				form: false,
-				format: function(value) {
-					if (value) {
-						return (new Date(value)).format('dS mmm, yyyy');
-					}
-				}
+				createForm: false,
+				type: 'dateTime'
 			}
 		}
 	}],
@@ -63,5 +69,15 @@ var viewSchema = generic.createViewSchema({
 });
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
-	generic.createRoutes(app, generic.createViewRender('../../admin/views/layout'), viewSchema, serviceLocator.administratorModel, null, serviceLocator);
+	generic.createRoutes(
+		app,
+		generic.createViewRender('../../admin/views/layout'),
+		viewSchema,
+		serviceLocator.administratorModel,
+		null,
+		serviceLocator,
+		{
+			updateTag: 'update'
+		}
+	);
 };

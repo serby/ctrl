@@ -11,7 +11,8 @@ var viewSchema = generic.createViewSchema({
 			name: {
 				list: true,
 				view: true,
-				form: true
+				createForm: true,
+				updateForm: true
 			},
 			_id: {
 				form: true,
@@ -20,7 +21,8 @@ var viewSchema = generic.createViewSchema({
 			grants: {
 				list: true,
 				view: true,
-				form: true
+				createForm: true,
+				updateForm: true
 			},
 			created: {
 				list: true,
