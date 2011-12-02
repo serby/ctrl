@@ -11,7 +11,7 @@ include ../../../views/mixins/file
 		//- h2 #{crudDelegate.name} Details
 		- if (Object.keys(errors).length > 0)
 			.error.error-summary
-				h4 Please check your responses and try again
+				h4 Please check the form and try again
 				- each error in unshownErrors
 					p= errors[error]
 		- each group in viewSchema.groups
