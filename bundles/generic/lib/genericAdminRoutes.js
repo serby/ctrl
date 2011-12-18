@@ -175,7 +175,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			entity: crudDelegate.entityDelegate.makeDefault(),
 			page: {
 				title: crudDelegate.name,
-				section: crudDelegate.urlName
+				section: crudDelegate.urlName,
+				action: 'create'
 			},
 			formType: 'createForm',
 			errors: {}
@@ -196,7 +197,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 					entity: newEntity,
 					page: {
 						title: crudDelegate.name,
-						section: crudDelegate.urlName
+						section: crudDelegate.urlName,
+						action: 'create'
 					},
 					formType: 'createForm',
 					errors: errors,
@@ -216,7 +218,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 				entity: entity,
 				page: {
 					title: crudDelegate.name,
-					section: crudDelegate.urlName
+					section: crudDelegate.urlName,
+					action: 'read'
 				}
 			});
 		});
@@ -231,7 +234,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 				entity: entity,
 				page: {
 					title: crudDelegate.name,
-					section: crudDelegate.urlName
+					section: crudDelegate.urlName,
+					action: 'update'
 				},
 				formType: 'updateForm',
 				errors: {},
@@ -249,7 +253,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 					entity: entity,
 					page: {
 						title: crudDelegate.name,
-						section: crudDelegate.urlName
+						section: crudDelegate.urlName,
+						action: 'update'
 					},
 					formType: 'updateForm',
 					errors: errors,
