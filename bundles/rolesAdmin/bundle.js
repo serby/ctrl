@@ -3,7 +3,8 @@ module.exports = {
 	description: 'Manage the user who administer the site',
 	adminNav: [{
 			label: 'Roles',
-			url: '/admin/role'
+			url: '/admin/role',
+			section: 'role'
 		}
 	],
 	register: function(app, properties, serviceLocator) {
