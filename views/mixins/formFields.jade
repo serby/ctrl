@@ -7,12 +7,13 @@ mixin fieldFooter(information, error)
 		p.error-description #{error}
 
 mixin booleanField(type, classname, label, name, checked, required, error, information)
-	label(class=(error !== undefined ? 'error ' : '') + classname)
-		span #{label}
-			- if (required)
-				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-		input(name='#{name}', type='#{type}', value='on', checked=(checked ? 'checked' : null))
-		mixin fieldFooter(information, error)
+	.form-row
+		label(class=(error !== undefined ? 'error ' : '') + classname)
+			span #{label}
+				- if (required)
+					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
+			input(name='#{name}', type='#{type}', value='on', checked=(checked ? 'checked' : null))
+			mixin fieldFooter(information, error)
 
 mixin checkboxField(label, name, checked, required, error, information)
 	mixin booleanField('checkbox', 'checkbox', label, name, checked, required, error, information)
@@ -21,34 +22,37 @@ mixin checkboxFieldForObject(label, name, dataObject, required, error, informati
 	mixin booleanField('checkbox', 'checkbox', label, name, dataObject[name] === true, required, error[name], information)
 
 mixin checkBoxGroup(label, name, dataObject, list)
-	div.label.checkbox-group
-		span #{label}
-		-each option in list
-			label.checkbox
-				input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject && dataObject.indexOf(option) !== -1))
-				span=option
+	.form-row
+		div.label.checkbox-group
+			span #{label}
+			-each option in list
+				label.checkbox
+					input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject && dataObject.indexOf(option) !== -1))
+					span=option
 
 mixin radioField(label, name, checked, error)
 	mixin booleanField('radio', 'radio', label, name, checked, required, error, information)
 
 mixin inputField(type, classname, label, name, value, required, error, maxLength, information, placeholder)
-	label(class=error && 'error')
-		span #{label}
-			- if (required)
-				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-		input(class=classname, name='#{name}', type='#{type}', value='#{value || ''}', placeholder=placeholder, maxlength=maxLength)
-		mixin fieldFooter(information, error)
+	.form-row
+		label(class=error && 'error')
+			span #{label}
+				- if (required)
+					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
+			input(class=classname, name='#{name}', type='#{type}', value='#{value || ''}', placeholder=placeholder, maxlength=maxLength)
+			mixin fieldFooter(information, error)
 
 mixin fileField(classname, label, name, value, required, error, information)
-	label(class=error && 'error')
-		span #{label}
-			- if (required)
-				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-		input(class=classname, name='#{name}', type='file', multiple='multiple')
-		mixin fieldFooter(information, error)
-	mixin downloadLink(value, true)
-	- if (value)
-		input(type='hidden', name='current-#{name}', value=typeof value === 'object' ? JSON.stringify(value) : value)
+	.form-row
+		label(class=error && 'error')
+			span #{label}
+				- if (required)
+					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
+			input(class=classname, name='#{name}', type='file', multiple='multiple')
+			mixin fieldFooter(information, error)
+		mixin downloadLink(value, true)
+		- if (value)
+			input(type='hidden', name='current-#{name}', value=typeof value === 'object' ? JSON.stringify(value) : value)
 
 mixin fileFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
 	mixin fileField('file', label, name, dataObject[name], required, errors[name], information)
@@ -66,32 +70,34 @@ mixin passwordFieldForObject(label, name, dataObject, required, errors, maxLengt
 	mixin passwordField(label, name, required, errors[name], maxLength, information, placeholder)
 
 mixin textboxField(classname, label, name, value, required, error, maxLength, information)
-	label(class=error && 'error')
-		span #{label}
-			- if (required)
-				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-		textarea(class=classname, name='#{name}')=value
-		mixin fieldFooter(information, error)
+	.form-row
+		label(class=error && 'error')
+			span #{label}
+				- if (required)
+					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
+			textarea(class=classname, name='#{name}')=value
+			mixin fieldFooter(information, error)
 
 mixin textboxFieldForObject(classname, label, name, dataObject, required, error, maxLength, information)
 	mixin textboxField(classname, label, name, dataObject[name], required, errors[name], maxLength, information)
 
 //- Don't use this directly. Use dropdown or listbox
 mixin selectField(classname, label, name, value, required, error, list, information, multiple)
-	label(class=error && 'error')
-		span #{label}
-			- if (required)
-				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-		- if (Array.isArray(list))
-			select(class=classname,name='#{name}', multiple=(multiple ? 'multiple' : null ))
-				- each option in list
-					option(selected=(option == value) ? 'selected' : null)=option
-		- else
-			select(class=classname,name='#{name}')
-				- each value, text in list
-					option(value=value)=text
+	.form-row
+		label(class=error && 'error')
+			span #{label}
+				- if (required)
+					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
+			- if (Array.isArray(list))
+				select(class=classname,name='#{name}', multiple=(multiple ? 'multiple' : null ))
+					- each option in list
+						option(selected=(option == value) ? 'selected' : null)=option
+			- else
+				select(class=classname,name='#{name}')
+					- each value, text in list
+						option(value=value)=text
 
-		mixin fieldFooter(information, error)
+			mixin fieldFooter(information, error)
 
 mixin listboxField(classname, label, name, value, required, error, list, information)
 	mixin selectField(classname, label, name, value, required, error, list, information, true)

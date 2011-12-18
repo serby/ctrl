@@ -11,8 +11,9 @@ include ../../../views/mixins/formFields
 						strong= error
 			mixin textField('Email Address', 'emailAddress', '', '')
 			mixin passwordField('Password', 'password', '', '')
-			label.checkbox
-				input(name='rememberMe', type='checkbox')
-				span Remember me
+			.form-row
+				label.checkbox
+					input(name='rememberMe', type='checkbox')
+					span Remember me
 		fieldset#actions
 			input.button.primary(name='Submit', type='submit', value='Login')
