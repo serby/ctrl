@@ -1,4 +1,4 @@
-x!!! 5
+!!! 5
 html(lang='en')
 	head
 		meta(charset='utf-8')
@@ -29,8 +29,8 @@ html(lang='en')
 		#page
 			include includes/header
 			include includes/nav
-				#main-content(class= page.layoutType ? 'layout-#{page.layoutType}' : 'layout-article')
-					!= body
+			#main-content(class= page.layoutType ? 'layout-#{page.layoutType}' : 'layout-article')
+				!= body
 			include includes/footer
 
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')
