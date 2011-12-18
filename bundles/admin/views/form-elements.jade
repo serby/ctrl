@@ -1,0 +1,154 @@
+include ../../../views/mixins/formFields
+include ../../../views/mixins/file
+
+h1 Form Elements
+
+nav.breadcrumb
+	ul
+		li.nav-home: a(href='/admin') Home
+		li Form Elements
+
+p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
+
+form(method='post', enctype='multipart/form-data')
+	fieldset
+		h3 Standard Elements
+		p.group-description Styles for standard browser form inputs.
+
+		.form-row
+			label
+				span Text Input
+					abbr(title='This field is required')*
+				input(type='text',placeholder='Placeholder Text')
+			.description
+				p A description of what is required.
+		.form-row
+			label
+				span Textarea
+				textarea Default text
+			.description
+				p A more detailed description of what is required
+				ul
+					li Detailed instruction 1
+					li Detailed instruction 2
+		.form-row
+			label
+				span Default Select
+				select
+					option(value='') Choose An Option
+					option(value='') Option 1
+					option(value='') Option 2
+					option(value='') Option 3
+					option(value='') Option 4
+					option(value='') Option 5
+					option(value='') Option 6
+					option(value='') Option 7
+					option(value='') Option 8
+					option(value='') Option 9
+					option(value='') Option 10
+
+		.form-row
+			label.checkbox
+				span Single Checkbox
+				input(type='checkbox')
+			
+		.form-row
+			label.checkbox
+				input(type='checkbox')
+				span Single Checkbox Alternate
+
+		.form-row.field-group
+			.label
+				span Multiple Checkboxes
+			ul
+				li
+					label
+						input(type='checkbox',checked)
+						span Option 1
+				li
+					label
+						input(type='checkbox')
+						span Option 2
+				li
+					label
+						input(type='checkbox')
+						span Option 3
+				li
+					label
+						input(type='checkbox')
+						span Option 4
+
+		.form-row.field-group
+			.label
+				span Radio Buttons
+			ul
+				li
+					label
+						input(type='radio',name='radio',checked)
+						span Option 1
+				li
+					label
+						input(type='radio',name='radio')
+						span Option 2
+				li
+					label
+						input(type='radio',name='radio')
+						span Option 3
+				li
+					label
+						input(type='radio',name='radio')
+						span Option 4
+
+	fieldset
+		h3 Chosen Select Elements
+		p.group-description These inputs use the 
+			a(href='http://harvesthq.github.com/chosen') Chosen
+			|  JavaScript plugin. They do not currently have responsive width but 
+			a(href='https://github.com/harvesthq/chosen/pull/407') a fix
+			|  has been pushed to GitHub.
+
+		.form-row
+			label
+				span Chosen Select
+				select.chzn-select(data-placeholder="Choose An Option")
+					option(value='')
+					option(value='') Option 1
+					option(value='') Option 2
+					option(value='') Option 3
+					option(value='') Option 4
+					option(value='') Option 5
+					option(value='') Option 6
+					option(value='') Option 7
+					option(value='') Option 8
+					option(value='') Option 9
+					option(value='') Option 10
+
+		.form-row
+			label
+				span Chosen Multiple Select
+				select.chzn-select(multiple)
+					option(value='') Option 1
+					option(value='') Option 2
+					option(value='') Option 3
+					option(value='') Option 4
+					option(value='') Option 5
+					option(value='') Option 6
+					option(value='') Option 7
+					option(value='') Option 8
+					option(value='') Option 9
+					option(value='') Option 10
+
+	fieldset
+		h3 jQuery UI Elements
+		p These inputs make use of 
+			a(href='http://jqueryui.com/') jQuery UI
+			| .
+
+		.form-row
+			label
+				span Date Input
+				input(class='datepicker',type='text')
+
+	fieldset.actions
+		input.button.primary(type='submit',value='Submit')
+		input.button(type='reset',value='Clear')

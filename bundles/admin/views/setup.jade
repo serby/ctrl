@@ -1,17 +1,16 @@
 include ../../../views/mixins/formFields
 
-#column-primary
-	form(action='/admin/setup', method='post')
-		h1 Admin Setup
-		h2 There is currently no administrator account.
-		p Create a default administrator by entering details below.
-		fieldset
-			-if (error)
-				errors
-					p.error
-						strong= error
-			mixin textField('Email Address', 'emailAddress', '', '')
-			mixin textField('First Name', 'firstName', '', '')
-			mixin textField('Last Name', 'lastName', '', '')
-			mixin passwordField('Password', 'password', '', '')
-		input.submit(name='Submit', type='submit', value='Create now')
+form(action='/admin/setup', method='post')
+	h1 Admin Setup
+	h2 There is currently no administrator account.
+	p Create a default administrator by entering details below.
+	fieldset
+		-if (error)
+			errors
+				p.error
+					strong= error
+		mixin textField('Email Address', 'emailAddress', '', '')
+		mixin textField('First Name', 'firstName', '', '')
+		mixin textField('Last Name', 'lastName', '', '')
+		mixin passwordField('Password', 'password', '', '')
+	input.submit(name='Submit', type='submit', value='Create now')

@@ -51,5 +51,5 @@ form(method='post', enctype='multipart/form-data')
 						input(type='hidden', name=key, value=entity[key])
 					- if (propertyMeta.type === 'password')
 						mixin passwordFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
-	fieldset#actions
+	fieldset.actions
 		input.button.primary(type='submit',value='Submit')

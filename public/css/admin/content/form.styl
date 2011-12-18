@@ -28,11 +28,6 @@ label,
 			margin-left 4px
 			border 0
 
-.label
-	display inline-block
-	margin-right 20px
-	width 200px
-
 input,
 select
 textarea
@@ -72,10 +67,6 @@ textarea
 .field-group .label > span
 	padding-top 1px
 
-.field-group label > span
-	width 443px /* TODO - Bad! shouldn't be hard coded */
-	margin-right 0
-
 .checkbox,
 .radio,
 .field-group
@@ -86,9 +77,31 @@ textarea
 		border 0
 		margin-right 6px
 
+/* Allow source code order dictate styles for single checkboxes with labels left/right */
+.checkbox,
+.radio
+	span
+		width 70%
+		margin-left -20px
+		padding-left 20px
+		padding-right 0
+	span:first-child
+		width 30%
+		margin-left 0
+		padding-left 0
+		padding-right 20px
+	input:first-child
+		margin-left 30%
+
 .field-group
 	.label
 		vertical-align top
+		display inline-block
+		width 30%
+		span
+			width 100%
+			margin-right 0
+
 	ul
 		display inline-block
 		width 70%
@@ -106,52 +119,8 @@ fieldset.actions
 	input
 		margin-left 20px
 
-/** Buttons - TODO -refactor somewhere else **/
-input.button
-	position relative
-	display inline-block
-	width auto
-	padding 5px 16px
-	font-weight bold
-	background-color $buttonColor
-	border 1px solid darken($buttonColor, 14)
-	outline 0 /* Be sure to set a focus style if using this */
-	cursor pointer
-	box-shadow none
-	if dark($buttonColor)
-		color #FFFFFF /* TODO - move to variable */
-	else
-		color #999999 /* TODO - move to variable */
-
-	if $baseBorderRadius != 0
-		border-radius $baseBorderRadius
-	if $baseTransitionDuration != 0
-		transition border $baseTransitionDuration $baseTransitionEasing, background-color $baseTransitionDuration $baseTransitionEasing
-
-	&:hover
-		background-color lighten($buttonColor, 3)
-	&:active,
-	&:focus
-		top 1px
-		background-color darken($buttonColor, 3)
-
-input.button.primary
-	text-shadow 0px 1px 1px darken($primaryColor, 6)
-	background-color $primaryColor
-	border 1px solid darken($primaryColor, 6)
-	box-shadow 0px 0px 0px 1px lighten($primaryColor, 5) inset
-	if dark($primaryColor)
-		color #FFFFFF /* TODO - move to variable */
-	else
-		color #333333 /* TODO - move to variable */
-	&:hover
-		background-color lighten($primaryColor, 3)
-	&:active,
-	&:focus
-		background-color darken($primaryColor, 3)
-
 /** Field Descriptions **/
-.form-field
+.form-row
 	.description
 		margin-left 30%
 		font-size 11px
@@ -171,7 +140,7 @@ input.button.primary
 /** Datepicker **/
 input.datepicker
 	position relative
-	/*background url("/images/faramework/datepicker-sprite.png") 0 0 no-repeat*/
+	/*background url("/images/admin/content/datepicker-sprite.png") 0 0 no-repeat*/
 
 #ui-datepicker-div
 	position absolute
@@ -190,7 +159,7 @@ input.datepicker
 		left 10px
 		width 25px
 		height 12px
-		background url("/images/framework/datepicker-sprite.png") 0px -61px no-repeat
+		background url("/images/admin/content/datepicker-sprite.png") 0px -61px no-repeat
 
 	.ui-datepicker-title
 		padding-bottom 6px
@@ -211,7 +180,7 @@ input.datepicker
 		margin-bottom 0
 		overflow hidden
 		text-indent -9999px
-		background url("/images/content/button-sprite.png") -160px -94px no-repeat $primaryColor
+		background url("/images/admin/content/button-sprite.png") -160px -94px no-repeat $primaryColor
 		&:hover
 			background-position -160px -110px
 	.ui-datepicker-prev
@@ -263,7 +232,7 @@ input.datepicker
 	.ui-datepicker-current-day
 		a,
 		span
-			background url("/images/framework/datepicker-sprite.png") 0 0 no-repeat $primaryColor
+			background url("/images/admin/content/datepicker-sprite.png") 0 0 no-repeat $primaryColor
 			&:hover
 				background-image none
 	.ui-datepicker-other-month

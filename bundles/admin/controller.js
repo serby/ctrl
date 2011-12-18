@@ -88,4 +88,17 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 			}
 		});
 	});
+
+	app.get('/admin/form-elements',
+		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+			viewRender(req, res, 'form-elements', {
+				page: {
+					title: 'Form Elements / Admin / ' + properties.name,
+					section: 'login'
+				},
+				error: '',
+				javascriptSrc: []
+			});
+	});
+
 };
