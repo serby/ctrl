@@ -2,7 +2,7 @@
 	form(method='get', action='#{crudDelegate.urlName}')
 		label
 			strong Filter Results
-			- if (typeof url.Filter === 'undefined')
+			- if (typeof url.Filter === 'undefined' || url.Filter === '')
 				input(value='', name='Filter', placeholder="Filter Results")
 			- else
 				input(value=url.Filter, name='Filter', placeholder="Filter Results")
