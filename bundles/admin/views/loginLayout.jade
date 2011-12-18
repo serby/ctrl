@@ -1,25 +1,39 @@
 !!! 5
+//if lt IE 7
+	<html class="ie6" lang="en">
+//if IE 7
+	<html class="ie7" lang="en">
+//if IE 8
+	<html class="ie8" lang="en">
+//if IE 9
+	<html class="ie9" lang="en">
+//[if gt IE 8]><!
 html(lang='en')
+	//<![endif]
 	head
 		meta(charset='utf-8')
-		//- SITE INFORMATION
-		title= page.title
 		meta(name='description', content=properties.description)
-		meta(name='keywords', content=properties.keyWords)
+		meta(name='keywords', content=properties.keywords)
+		//- SITE INFORMATION
+		title=page.title + ' - ' + properties.name
 		//- CSS
 		link(rel='stylesheet', type='text/css', href='/css/admin/index.css', media='all')
+		//if IE
+			link(rel='stylesheet', type='text/css', href='/css/main/internet-explorer.css', media='all')
 	body(class=page.section)
 
 		#page
-			include includes/structure/header
+			#main-header(role='banner')
+				h1.site-logo
+					a(href='/') #{properties.name}
 			#main-content
 				!= body
-		include includes/structure/footer
+			include includes/structure/footer
 
-		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js')
+		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')
 		script
 			if (typeof jQuery === 'undefined') {
-				document.write('<script src="/js/jquery-1.6.2.min.js" />');
+				document.write('<script src="/js/jquery-1.7.min.js" />');
 			}
 		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js')
 		script
