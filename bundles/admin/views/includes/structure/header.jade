@@ -1,10 +1,8 @@
 #main-header(role='banner')
-	.container
-		.site-logo
-			a(href='/') Control
+	h1.site-logo
+		a(href='/') #{properties.name}
 
-		//- if (typeof session.authenticated !== 'undefined')
-		ul#user-nav
-			li.first: a(href='/admin/') Admin Home
-			li: a(href='/') View Site
-			li.last: a(href='/admin/logout',title='') Logout
+	//- if (typeof session.authenticated !== 'undefined')
+	include user-nav
+
+	include nav

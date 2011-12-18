@@ -1,11 +1,16 @@
 #main-nav
-	.container
-		ul#admin-nav
-			li.nav-home: a(href='/admin') Admin Home
-			//- TODO: Can these li have a general class that give them their look
-			//- Then an extra class if you want to override - Serby
-			//- --- Yes. I've removed the specific class, no general class needed.
-			//- --- I would like a selected class though to highlight the current page - Jack
-			-each navItem in bundleManager.get('adminNav')
-				li
-					a(href=navItem.url)= navItem.label
+	ul#admin-nav
+
+		li(class= page.section =='admin' ? 'nav-active' : ''): a(href='/admin') Admin Home
+
+		//- TODO: Can these li have a general class that give them their look
+		//- Then an extra class if you want to override - Serby
+		//- --- Yes. I've removed the specific class, no general class needed.
+		//- --- I would like a selected class though to highlight the current page - Jack
+		
+		-each navItem in bundleManager.get('adminNav')
+			li(class= page.section == navItem.section ? 'nav-active' : '')
+				a(href=navItem.url)= navItem.label
+				ul.sub-nav
+					li: a(href=navItem.url) View #{navItem.label}
+					li: a(href=navItem.url + '/new') Add #{navItem.label}
