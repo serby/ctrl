@@ -1,7 +1,9 @@
-#controls.panel
+nav#controls
 	ul#actions-primary
-		li: a.button(href=crudUrls.edit.url)=crudUrls.edit.title
-		li: a.button.delete(href=crudUrls.delete.url)=crudUrls.delete.title
-	ul#actions-secondary
-		li: a.button(href=crudUrls.add.url)=crudUrls.add.title
-		li: a.button(href=crudUrls.list.url)=crudUrls.list.title
+		li: a.button.primary(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
+		- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
+			li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete
+		//-#actions-secondary
+		//-	- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.add === 'undefined')
+		//-		li: a.button(href='/admin/#{crudDelegate.urlName}/new') Add a new #{crudDelegate.name}
+		//-	li: a.button(href='/admin/#{crudDelegate.urlName}/') View all #{crudDelegate.plural}
