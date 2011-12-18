@@ -2,14 +2,12 @@
  * Forms
  */
 
-form
-	width $baseFormWidth
-
 fieldset
 	margin-bottom $baseLineHeight
 
-.form-field
+.form-row
 	margin-bottom 18px
+	width 100%
 
 label,
 .label
@@ -19,8 +17,9 @@ label,
 
 	& > span
 		display inline-block
-		margin-right 20px
-		width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin */
+		padding-right 20px
+		box-sizing border-box
+		width 30%
 		vertical-align top
 		padding-top 6px /* TODO padding must match input padding and border height to line up span corrctly */
 
@@ -32,15 +31,16 @@ label,
 .label
 	display inline-block
 	margin-right 20px
-	width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin */
+	width 200px
 
 input,
 select
 textarea
 	display inline-block
-	width ($baseFormWidth * 0.7) - 12 /* ( 70% of form width ) - horizontal margin, padding and border */
+	width 70%
 	vertical-align top
 	padding 5px
+	box-sizing border-box
 	color $inputFontColor
 	border 1px solid $baseBorderColor
 	background-color $inputBackground
@@ -58,7 +58,7 @@ textarea
 
 select
 	height 30px
-	width ($baseFormWidth * 0.7) /* 70% of form width (margin, padding and border not needed in this calculation) */
+	width 70%
 
 textarea
 	height 100px
@@ -91,7 +91,7 @@ textarea
 		vertical-align top
 	ul
 		display inline-block
-		width ($baseFormWidth * 0.7)
+		width 70%
 		list-style none
 		margin 0
 		padding 0
@@ -102,7 +102,6 @@ textarea
 
 fieldset.actions
 	display block
-	width $baseFormWidth
 	text-align right
 	input
 		margin-left 20px
@@ -154,7 +153,7 @@ input.button.primary
 /** Field Descriptions **/
 .form-field
 	.description
-		margin-left ($baseFormWidth * 0.3)
+		margin-left 30%
 		font-size 11px
 		color #999
 		if $baseTransitionDuration != 0

@@ -13,7 +13,9 @@ body
 	background-repeat repeat
 
 #page
-	width 940px
+	//width 940px
+	max-width 1200px
+	min-width 810px
 	margin 0 auto
 	height 100%
 
@@ -112,6 +114,14 @@ body
 
 #main-nav
 	clear left
+	position relative
+	z-index 1
+	background-image url("/images/admin/structure/bg-sidebar.gif")
+	background-position 0px 0px
+	background-repeat repeat-y
+	background-color #4d5359
+
+
 	ul
 		margin 0
 		padding 0
@@ -165,8 +175,9 @@ body
 
 #main-content
 	position relative
-	width 700px
+	width auto
 	margin-left 240px
+	margin-right 40px
 
 #main-footer
 	position absolute
