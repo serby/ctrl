@@ -17,10 +17,10 @@ label,
 	color $labelFontColor
 	margin-bottom 2px
 
-	strong
+	& > span
 		display inline-block
 		margin-right 20px
-		width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin - fieldset padding */
+		width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin */
 		vertical-align top
 		padding-top 6px /* TODO padding must match input padding and border height to line up span corrctly */
 
@@ -32,7 +32,7 @@ label,
 .label
 	display inline-block
 	margin-right 20px
-	width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin - fieldset-padding*/
+	width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin */
 
 input,
 select
@@ -107,6 +107,49 @@ fieldset.actions
 	input
 		margin-left 20px
 
+/** Buttons - TODO -refactor somewhere else **/
+input.button
+	position relative
+	display inline-block
+	width auto
+	padding 5px 16px
+	font-weight bold
+	background-color $buttonColor
+	border 1px solid darken($buttonColor, 14)
+	outline 0 /* Be sure to set a focus style if using this */
+	cursor pointer
+	box-shadow none
+	if dark($buttonColor)
+		color #FFFFFF /* TODO - move to variable */
+	else
+		color #999999 /* TODO - move to variable */
+
+	if $baseBorderRadius != 0
+		border-radius $baseBorderRadius
+	if $baseTransitionDuration != 0
+		transition border $baseTransitionDuration $baseTransitionEasing, background-color $baseTransitionDuration $baseTransitionEasing
+
+	&:hover
+		background-color lighten($buttonColor, 3)
+	&:active,
+	&:focus
+		top 1px
+		background-color darken($buttonColor, 3)
+
+input.button.primary
+	text-shadow 0px 1px 1px darken($primaryColor, 6)
+	background-color $primaryColor
+	border 1px solid darken($primaryColor, 6)
+	box-shadow 0px 0px 0px 1px lighten($primaryColor, 5) inset
+	if dark($primaryColor)
+		color #FFFFFF /* TODO - move to variable */
+	else
+		color #333333 /* TODO - move to variable */
+	&:hover
+		background-color lighten($primaryColor, 3)
+	&:active,
+	&:focus
+		background-color darken($primaryColor, 3)
 
 /** Field Descriptions **/
 .form-field

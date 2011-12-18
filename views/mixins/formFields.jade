@@ -8,7 +8,7 @@ mixin fieldFooter(information, error)
 
 mixin booleanField(type, classname, label, name, checked, required, error, information)
 	label(class=(error !== undefined ? 'error ' : '') + classname)
-		strong #{label}
+		span #{label}
 			- if (required)
 				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
 		input(name='#{name}', type='#{type}', value='on', checked=(checked ? 'checked' : null))
@@ -22,7 +22,7 @@ mixin checkboxFieldForObject(label, name, dataObject, required, error, informati
 
 mixin checkBoxGroup(label, name, dataObject, list)
 	div.label.checkbox-group
-		strong #{label}
+		span #{label}
 		-each option in list
 			label.checkbox
 				input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject && dataObject.indexOf(option) !== -1))
@@ -33,7 +33,7 @@ mixin radioField(label, name, checked, error)
 
 mixin inputField(type, classname, label, name, value, required, error, maxLength, information, placeholder)
 	label(class=error && 'error')
-		strong #{label}
+		span #{label}
 			- if (required)
 				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
 		input(class=classname, name='#{name}', type='#{type}', value='#{value || ''}', placeholder=placeholder, maxlength=maxLength)
@@ -41,7 +41,7 @@ mixin inputField(type, classname, label, name, value, required, error, maxLength
 
 mixin fileField(classname, label, name, value, required, error, information)
 	label(class=error && 'error')
-		strong #{label}
+		span #{label}
 			- if (required)
 				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
 		input(class=classname, name='#{name}', type='file', multiple='multiple')
@@ -67,7 +67,7 @@ mixin passwordFieldForObject(label, name, dataObject, required, errors, maxLengt
 
 mixin textboxField(classname, label, name, value, required, error, maxLength, information)
 	label(class=error && 'error')
-		strong #{label}
+		span #{label}
 			- if (required)
 				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
 		textarea(class=classname, name='#{name}')=value
@@ -79,7 +79,7 @@ mixin textboxFieldForObject(classname, label, name, dataObject, required, error,
 //- Don't use this directly. Use dropdown or listbox
 mixin selectField(classname, label, name, value, required, error, list, information, multiple)
 	label(class=error && 'error')
-		strong #{label}
+		span #{label}
 			- if (required)
 				abbr(title='#{ (required == true ? 'This field is required' : required) }') *
 		- if (Array.isArray(list))
