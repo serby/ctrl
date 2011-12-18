@@ -100,27 +100,45 @@ body
 		ul
 			display none
 			position absolute
-			width 160px
+			width 158px
 			right -1px
 			top 42px
 			text-indent 0
-			background-color #555
+			border 1px solid #383b3e
+			border-top 0
+			border-radius 0 0 3px 3px
+			box-shadow 0 1px 0 rgba(255,255,255,0.05)
+			background-image url("/images/admin/structure/bg-sidebar.gif")
+			background-position 0px 0px
+			background-repeat repeat-y
+			background-color #4d5359
+			box-shadow 0px 2px 4px rgba(0,0,0,.4)
+
+		li
+			border-top 1px solid #383b3e
+			background-color rgba(0,0,0,.15)
+			a
+				display block
+				padding 5px
+				font-size 12px
+				font-weight normal
+				color #fff
+				text-decoration none
+				&:hover
+					font-weight bold
+					background-color rgba(0,0,0,.05)
 
 		&:hover
 			background-color rgba(255,255,255,0.05)
-
 			ul
 				display block
 
 #main-nav
 	clear left
-	position relative
-	z-index 1
 	background-image url("/images/admin/structure/bg-sidebar.gif")
 	background-position 0px 0px
 	background-repeat repeat-y
 	background-color #4d5359
-
 
 	ul
 		margin 0
@@ -180,7 +198,7 @@ body
 	margin-right 40px
 
 #main-footer
-	position absolute
+	position fixed
 	bottom 0
 	left 0
 	width 200px
