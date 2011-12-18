@@ -1,222 +1,167 @@
+/*
+ * Forms
+ */
+
 form
-	float left
-	width 630px
-	padding 0
+	width $baseFormWidth
 
-	h3
-		padding 0 0 8px 0
-		margin 0 20px 20px 20px
-		background url("/images/content/dotted-seperator.gif") 0 100% repeat-x
+fieldset
+	margin-bottom $baseLineHeight
 
-	p.group-description
-		margin -10px 20px 20px
-		color #777
+.form-field
+	margin-bottom 18px
 
-	fieldset
-		float left
-		display inline
-		width 628px
-		padding 18px 0 10px
-		margin 0 0 20px
-		position relative
-		background-color #FFF
-		border 1px solid $borderColor
-		border-radius 4px
-		box-shadow 0px 0px 0px 1px #FFF inset
+label,
+.label
+	display block
+	color $labelFontColor
+	margin-bottom 2px
 
-	label,
-	.label
-		float left
-		width 588px
-		display inline
-		padding 4px 20px
-		margin 0 0 8px
-
-		strong
-			font-style italic
-			margin-bottom 2px
-
-	input,
-	textarea
-		width 354px
-	select
-		width 368px
-	input.button
-		width auto
-		margin-bottom 0
-	textarea
-		height 110px
-		&.short
-			height 70px
-
-	#actions
-		text-align center
-
-	label.checkbox
-		strong
-			width 220px
-
-p.label
-	margin-left 20px
 	strong
-		width 200px
-		margin-right 20px
-		font-weight normal
 		display inline-block
-	span
-		font-weight bold
+		margin-right 20px
+		width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin - fieldset padding */
+		vertical-align top
+		padding-top 6px /* TODO padding must match input padding and border height to line up span corrctly */
 
+		abbr /* Indicates required files */
+			color $errorColor
+			margin-left 4px
+			border 0
 
+.label
+	display inline-block
+	margin-right 20px
+	width ($baseFormWidth * 0.3) - @margin-right - 40 /* ( 30% of form width ) - horizontal margin - fieldset-padding*/
 
-
-
-
-/* Form Errors */
-label.error
-	background-color $secondaryErrorColor
-	border none
+input,
+select
+textarea
+	display inline-block
+	width ($baseFormWidth * 0.7) - 12 /* ( 70% of form width ) - horizontal margin, padding and border */
+	vertical-align top
+	padding 5px
+	color $inputFontColor
+	border 1px solid $baseBorderColor
+	background-color $inputBackground
+	outline 0 /* Be sure to set a focus style if using this */
+	if $baseBorderRadius != 0
+		border-radius $baseBorderRadius
+	if $baseTransitionDuration != 0
+		transition border $baseTransitionDuration $baseTransitionEasing, box-shadow $baseTransitionDuration $baseTransitionEasing
 	&:hover
-		background-color $secondaryErrorColor
-	strong
-		color $globalColor
-	p
-		padding 6px 0px 0px 220px
-		margin-bottom 0px
-		color $globalColor
-	input,
-	select,
-	textarea
-		border 1px solid $primaryErrorColor
+		border-color darken($baseBorderColor, 10)
+	&:active,
+	&:focus
+		border-color $primaryColor
+		box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
 
-/* Form Field Descriptions*/
-form
+select
+	height 30px
+	width ($baseFormWidth * 0.7) /* 70% of form width (margin, padding and border not needed in this calculation) */
+
+textarea
+	height 100px
+	vertical-align top
+	resize vertical
+	overflow auto /* Hides scrollber in IE when not needed*/
+
+.checkbox > span,
+.radio > span,
+.field-group label > span,
+.field-group .label > span
+	padding-top 1px
+
+.field-group label > span
+	width 443px /* TODO - Bad! shouldn't be hard coded */
+	margin-right 0
+
+.checkbox,
+.radio,
+.field-group
+	input
+		width auto
+		vertical-align middle
+		background none
+		border 0
+		margin-right 6px
+
+.field-group
+	.label
+		vertical-align top
+	ul
+		display inline-block
+		width ($baseFormWidth * 0.7)
+		list-style none
+		margin 0
+		padding 0
+	li
+		list-style none
+		margin 0
+		padding 0
+
+fieldset.actions
+	display block
+	width $baseFormWidth
+	text-align right
+	input
+		margin-left 20px
+
+
+/** Field Descriptions **/
+.form-field
 	.description
-		margin 4px 0 0 220px
-		color #555
+		margin-left ($baseFormWidth * 0.3)
 		font-size 11px
-	.checkbox
-		.description
-				margin-left 0px
-				display inline
+		color #999
+		if $baseTransitionDuration != 0
+			transition color $baseTransitionDuration $baseTransitionEasing
+		p,ul,li
+			margin-bottom 0
+	&:hover .description
+		color #555
 
 
+/*
+ * Advanced Controls
+ */
 
-
-/* Login to Admin */
-
-.login
-	#main-content .panel
-		float none
-		width 600px
-		padding 20px 30px 0px 30px
-		margin 40px auto 0
-		border 1px solid $borderColor
-
-		fieldset
-			margin 0px 0px 0px 0px
-
-		label
-			width 570px
-			padding 6px 15px 6px 15px
-
-		.indent
-			width 320px
-			padding-left 235px
-			&:hover
-				background-color transparent
-
-		a
-			float right
-			margin -25px 15px 0px 0px
-
-		.controls
-			padding-top 15px
-			text-align right
-			border-bottom none
-
-			input
-				margin 0px 15px 0px 0px
-
-.error,.warn,.info
-	padding 10px 20px
-	background-color $secondaryErrorColor
-	color $globalColor
-	h4
-		margin-bottom 0
-
-div.error-summary
-	margin-bottom 20px
-	border 1px solid $primaryErrorColor
-	border-radius 4px
-
-.info
-	background-color #65e07e
-	color #000000
-
-/* Offer Checkbox Groups */
-form
-	.checkbox-group
-		strong
-			display block
-			margin-bottom 4px
-		label.checkbox
-			float left
-			clear none
-			padding 0
-			width 84px
-
-/* jQuery UI Datepicker */
-input.ui-datepicker
-	background url("/images/content/icon-sprite.png") right -462px no-repeat
+/** Datepicker **/
+input.datepicker
+	position relative
+	/*background url("/images/faramework/datepicker-sprite.png") 0 0 no-repeat*/
 
 #ui-datepicker-div
 	position absolute
-	top -9999px
 	left -9999px
-	margin-top -1px
-	width 262px
 	background-color #FFF
-	border 1px solid #777
-	border-top 0
-	border-radius 0 0 4px 4px
-	padding 3px 10px 10px
-	table
-		width auto
-		margin 1px
-	th
-		background #EEE
-	th,
-	td
-		padding 0px
-		text-align center
-		width 36px
-		height 28px
-		a
-			display block
-			width 36px
-			height 28px
-			line-height 28px
-			text-decoration none
-			&:hover
-				background-color #CCC
-	.ui-datepicker-current-day
-		a
-			color #fff
-			background-color $primaryBrandColor
-	.ui-datepicker-unselectable
-		color #ccc
-	.ui-datepicker-header
-		position relative
-		margin-bottom 10px
-		padding-top 10px
-		background url("/images/content/dotted-seperator.gif") 0px 0px repeat-x
+	padding 10px
+	margin-top 10px
+	border 1px solid darken($baseBorderColor, 10)
+	if $baseBorderRadius != 0
+		border-radius $baseBorderRadius
+	box-shadow 0px 2px 8px -4px rgba(0,0,0,.5)
+	&::before
+		content ""
+		position absolute
+		top -12px
+		left 10px
+		width 25px
+		height 12px
+		background url("/images/framework/datepicker-sprite.png") 0px -61px no-repeat
+
 	.ui-datepicker-title
-		fontStandfirst()
+		padding-bottom 6px
+		border-bottom 1px solid $baseBorderColor
+		margin-bottom 5px
+		font-weight bold
+		color #333333 /* TODO - Set with variable? */
+
 	.ui-datepicker-next,
 	.ui-datepicker-prev
 		position absolute
 		top 14px
-		right 0px
+		right 10px
 		display block
 		width 12px
 		height 12px
@@ -224,14 +169,68 @@ input.ui-datepicker
 		margin-bottom 0
 		overflow hidden
 		text-indent -9999px
-		background url("/images/content/button-sprite.png") -160px -94px no-repeat
+		background url("/images/content/button-sprite.png") -160px -94px no-repeat $primaryColor
 		&:hover
 			background-position -160px -110px
 	.ui-datepicker-prev
-		right 16px
+		right 24px
 		background-position -144px -94px
 		&:hover
 			background-position -144px -110px
-	.ui-datepicker-other-month
+
+	table
+		width auto
+		margin-bottom 0
+		margin-right 1px /* Rectifies border collapse causing a padding mismatch */
+	th,
+	td
+		padding 0
+	th
+		font-size 10px
+		text-transform uppercase
+		border none
+	td
+		border 1px solid $baseBorderColor
+		text-align center
+		a,
+		span
+			display block
+			width 30px
+			height 30px
+			line-height 30px
+			text-decoration none
+			font-weight bold
+			color #333333 /* TODO - convert to variable */
 		a
-			color #888
+			&:hover,
+			&:active,
+			&:focus
+				background-color $primaryColor
+				if dark($primaryColor)
+					color #FFFFFF
+				else
+					color #555555
+		span
+			cursor default
+
+	.ui-datepicker-today
+		a
+			font-weight bold
+			background-color #F7F7F7
+			box-shadow 0px 1px 4px rgba(0,0,0,.2) inset
+	.ui-datepicker-current-day
+		a,
+		span
+			background url("/images/framework/datepicker-sprite.png") 0 0 no-repeat $primaryColor
+			&:hover
+				background-image none
+	.ui-datepicker-other-month
+		a,
+		span
+			color #555555
+			font-weight normal
+	.ui-datepicker-unselectable
+		a,
+		span
+			color #CCCCCC
+			font-weight normal

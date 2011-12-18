@@ -1,69 +1,199 @@
 /*
- * Styles elements which are common to all pages
+ * Styles which are common to all pages
  */
 
-/*
- * Primary Navigation
- */
-
-#main-header
-	background-image none
-
-#admin-nav
-	li
-		a
-			width auto
-			text-indent 0px
-			padding 0 18px
-			font-family Arial, Helvetica, sans-serif
-			font-weight bold
-			text-decoration none
-			font-size 15px
-			background url("/images/admin/structure/nav-sprite.gif") 0px 0px repeat-x
-			&:hover
-				background-position 0px -54px
-			&:active
-				background-position 0px -108px
-	.home #admin-nav li.nav-home a,
-	.promos #admin-nav li.nav-promos a,
-	.administrators #admin-nav li.nav-administrators a
-		background-position 0px -108px
-
-#user-nav
-	position absolute
-	top 0px
-	right 20px
-	li
-		display inline
-		list-style none
-		padding 0
-		margin 0
-		border-right 1px solid #aaa
-		&.last
-			border-right none
-	a
-		display inline-block
-		padding 4px 18px
-		color #FFFFFF
-		text-decoration none
-		text-shadow $redTextShadow
-		&:hover
-			text-decoration underline
-
-
-/*
- * Admin Sticky Footer
- * Self contained, delete this section to remove functionality
- * Also remove #page from layout.jade
- */
 html, body
 	height 100%
+
+body
+	position relative
+	background-color #F7F7F7
+	background-image url("/images/admin/structure/bg-page.gif")
+	background-position 0px 0px
+	background-repeat repeat
+
 #page
-	min-height 100%
-	height auto !important
+	width 940px
+	margin 0 auto
 	height 100%
-	margin 0 auto -51px
-#main-footer
-	height 18px
+
+#main-header
+	position fixed
+	top 0
+	left 0
+	width 200px
+	height 100%
+	background-image url("/images/admin/structure/bg-sidebar.gif")
+	background-position 0px 0px
+	background-repeat repeat-y
+	background-color #4d5359
+
+	h1
+		margin 18px 20px
+		background-color rgba(0,0,0,.15)
+		border-radius 3px
+		box-shadow 0 1px 0 rgba(255,255,255,0.05)
+		border 1px solid #383b3e
+		a
+			display block
+			margin 5px
+			text-align center
+			text-decoration none
+
+			/* Temp */
+			font-family "Nevis"
+			letter-spacing -1px
+			font-size 36px
+			line-height 40px
+			font-weight bold
+			padding 5px 0 2px
+			text-shadow 0px 1px 1px rgba(0,0,0,.3)
+			&::first-letter
+				margin-right -2px
+
+#user-nav
+	float left
+	width 158px
+	background-color rgba(0,0,0,.15)
+	border 1px solid #383b3e
+	margin 0 20px 18px
+	border-radius 3px
+	box-shadow 0 1px 0 rgba(255,255,255,0.05)
+
+	.summary
+		float left
+		width 124px
+		height 34px
+		padding 4px
+		img
+			float left
+			margin-right 6px
+			border-radius 3px
+		p
+			font-size 12px
+			line-height 15px
+			font-weight bold
+			color #c7c7c7
+			text-shadow 0 1px 1px rgba(0,0,0,.25)
+			margin-top 1px
+			margin-bottom 0
+		a.logout
+			font-size 11px
+			line-height 14px
+			color #bbb
+			text-decoration none
+			&:hover
+				text-decoration underline
+
+	nav.sub-nav
+		position relative
+		float right
+		width 25px
+		height 42px
+		text-indent -9999px
+		outline 0
+		border-left 1px solid #383b3e
+		background-color rgba(255,255,255,0.03)
+
+		ul
+			display none
+			position absolute
+			width 160px
+			right -1px
+			top 42px
+			text-indent 0
+			background-color #555
+
+		&:hover
+			background-color rgba(255,255,255,0.05)
+
+			ul
+				display block
+
+#main-nav
+	clear left
+	ul
+		margin 0
+		padding 0
+		list-style none
+		border-bottom 1px solid #4d5359
+		border-top 1px solid #3b3f45
+	li
+		margin 0
+		padding 0
+		list-style none
+		border-top 1px solid #4d5359
+		border-bottom 1px solid #3b3f45
+	a
+		display block
+		vertical-align bottom
+		padding 14px 20px
+		line-height 18px
+		height 18px
+		text-decoration none
+		color #c7c7c7
+		font-size 14px
+		text-shadow 0 1px 1px rgba(0,0,0,.25)
+	a:hover
+	.nav-active a
+		color #FFF
+		padding-left 16px
+		border-left 4px solid $primaryColor
+		background-color rgba($primaryColor,.05)
+	.nav-active a
+		font-weight bold
+
+	.sub-nav
+		display none
+		border-bottom 0
+		border-top 0
+		background-color rgba(0,0,0,.15)
+		li
+			border 0
+			border-top 1px solid #3b3f45
+		a
+			padding 5px 20px
+			border-left 0
+			font-size 12px
+			font-weight normal
+			&:hover
+				padding-left 16px
+				border-left 4px solid $primaryColor
+
+	.nav-active .sub-nav
+		display block
+
 #main-content
-	padding-bottom 151px !important
+	position relative
+	width 700px
+	margin-left 240px
+
+#main-footer
+	position absolute
+	bottom 0
+	left 0
+	width 200px
+	text-align center
+
+	p,a
+		color #bbb
+		font-size 11px
+		line-height 14px
+
+	p
+		padding 0 20px
+
+	a
+		&:hover
+			color #fff
+
+	a.logo-clock
+		display block
+		width 160px
+		height 71px
+		text-indent -9999px
+		overflow hidden
+		margin-bottom 6px
+		background-image url("/images/admin/content/logo-clock.png")
+		background-position 0px 0px
+		background-repeat no-repeat
