@@ -1,41 +1,53 @@
 include ../../../views/mixins/formFields
 include ../../../views/mixins/file
 
-#column-wide
-	h1  
-		a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
-		|  / Add/Edit #{crudDelegate.name}
 
-#column-primary
-	form(method='post', enctype='multipart/form-data')
-		//- h2 #{crudDelegate.name} Details
-		- if (Object.keys(errors).length > 0)
-			.error.error-summary
-				h4 Please check the form and try again
-				- each error in unshownErrors
-					p= errors[error]
-		- each group in viewSchema.groups
-			fieldset
-				- if (typeof group.name !== 'undefined')
-					h3=group.name
-				- if (typeof group.description !== 'undefined')
-					p.group-description=group.description
-				- each propertyMeta, key in group.properties
-					- if (propertyMeta[formType])
-						- var name = crudDelegate.entityDelegate.propertyName(key)
-						- if ([undefined, 'url'].indexOf(propertyMeta.type) !== -1 || propertyMeta.type === 'link')
-							mixin textFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
-						- if (propertyMeta.type === 'dropdown')
-							mixin dropdownForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.options, propertyMeta.info)
-						- if (propertyMeta.type === 'textbox')
-							mixin textboxFieldForObject('', name, key, entity, propertyMeta.required, errors, propertyMeta.info)
-						- if (propertyMeta.type === 'checkbox')
-							mixin checkboxFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
-						- if (propertyMeta.type === 'file')
-							mixin fileFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
-						- if (propertyMeta.type === 'hidden')
-							input(type='hidden', name=key, value=entity[key])
-						- if (propertyMeta.type === 'password')
-							mixin passwordFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
-		#actions
-			input.button(type='submit',value='Submit')
+h1
+	-if (page.action == 'create')
+		| New #{crudDelegate.name}
+	-else
+		| Edit #{crudDelegate.name}
+
+nav.breadcrumb
+	ul
+		li.nav-home: a(href='/admin') Home
+		li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+		li
+			-if (page.action == 'create')
+				| New #{crudDelegate.name}
+			-else
+				| Edit #{crudDelegate.name}
+
+p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
+
+form(method='post', enctype='multipart/form-data')
+	- if (Object.keys(errors).length > 0)
+		.error.error-summary
+			h4 Please check the form and try again
+			- each error in unshownErrors
+				p= errors[error]
+	- each group in viewSchema.groups
+		fieldset
+			- if (typeof group.name !== 'undefined')
+				h3=group.name
+			- if (typeof group.description !== 'undefined')
+				p.group-description=group.description
+			- each propertyMeta, key in group.properties
+				- if (propertyMeta[formType])
+					- var name = crudDelegate.entityDelegate.propertyName(key)
+					- if ([undefined, 'url'].indexOf(propertyMeta.type) !== -1 || propertyMeta.type === 'link')
+						mixin textFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
+					- if (propertyMeta.type === 'dropdown')
+						mixin dropdownForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.options, propertyMeta.info)
+					- if (propertyMeta.type === 'textbox')
+						mixin textboxFieldForObject('', name, key, entity, propertyMeta.required, errors, propertyMeta.info)
+					- if (propertyMeta.type === 'checkbox')
+						mixin checkboxFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
+					- if (propertyMeta.type === 'file')
+						mixin fileFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
+					- if (propertyMeta.type === 'hidden')
+						input(type='hidden', name=key, value=entity[key])
+					- if (propertyMeta.type === 'password')
+						mixin passwordFieldForObject(name, key, entity, propertyMeta.required, errors, propertyMeta.info)
+	fieldset#actions
+		input.button.primary(type='submit',value='Submit')

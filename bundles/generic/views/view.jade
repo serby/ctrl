@@ -1,25 +1,22 @@
 include ../../../views/mixins/file
 
-#column-wide
-	h1
-		a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
-	#controls.panel
-		ul#actions
-			#actions-primary
-				li: a.button(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit this #{crudDelegate.name}
-				- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
-					li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete this #{crudDelegate.name}
-			#actions-secondary
-				- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.add === 'undefined')
-					li: a.button(href='/admin/#{crudDelegate.urlName}/new') Add a new #{crudDelegate.name}
-				li: a.button(href='/admin/#{crudDelegate.urlName}/') View all #{crudDelegate.plural}
+h1 View #{crudDelegate.name}
 
+nav.breadcrumb
+	ul
+		li.nav-home: a(href='/admin') Home
+		li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+		li View #{crudDelegate.name}
 
-#column-primary
-	//-h2 #{crudDelegate.name} Details
-	- each group in viewSchema.groups
+p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
+
+include includes/view-actions
+
+//-h2 #{crudDelegate.name} Details
+- each group in viewSchema.groups
+	.group
 		- if (typeof group.name !== 'undefined')
-			h2=group.name
+			h3=group.name
 		- if (typeof group.description !== 'undefined')
 			p.group-description=group.description
 			dl
