@@ -81,7 +81,8 @@ nav.breadcrumb
 			color #919191
 
 fieldset,
-.group
+[class^="panel"]
+	position relative
 	background-color #FFF
 	padding 18px 20px 2px
 	margin-bottom $baseLineHeight
@@ -113,7 +114,7 @@ fieldset#actions
 	margin-bottom $baseLineHeight
 	box-shadow none
 
-#controls
+.page-actions
 	position absolute
 	top 44px
 	right 0
@@ -121,3 +122,96 @@ fieldset#actions
 	li
 		float left
 		margin-left 10px
+
+.filter-form
+	position absolute
+	top 7px
+	right 20px
+	form
+		width auto
+
+	label
+		position relative
+		display inline
+		strong
+			display none
+		input
+			width 150px
+			height 18px
+			padding 3px 10px
+			padding-left 10px
+			border-right 0
+			border-radius 30px 0 0 30px
+
+			&:hover
+				border-color darken($baseBorderColor, 10)
+			&:active,
+			&:focus
+				border-color darken($baseBorderColor, 10)
+				box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
+
+		a.reset
+			position absolute
+			display block
+			top 6px
+			right 5px
+			width 12px
+			height 12px
+			text-indent -9999px
+			overflow hidden
+			background-image url("/images/admin/content/ui-sprite.png")
+			background-position -70px -2px
+			background-repeat no-repeat
+			&:hover
+				background-position -100px -2px
+
+	input.button
+		height 26px
+		width 28px
+		text-indent -9999px
+		font-size 0px
+		line-height 0px
+		background-image url("/images/admin/content/ui-sprite.png")
+		background-position -120px 4px
+		background-repeat no-repeat
+		border-radius 0 30px 30px 0
+		&:active
+			top 0
+			border-color darken($baseBorderColor, 10)
+			box-shadow none
+
+/** TEMP table control styles **/
+td
+	vertical-align top
+	padding-top 10px
+	a
+		color $globalColor
+		text-decoration none
+		&:hover
+			text-decoration underline
+	.row-actions,
+	.row-actions-block
+		display inline
+		margin-top 4px
+		margin-left 20px
+		padding 0
+		font-size 12px
+		opacity 0
+		transition opacity 0.2s ease
+		li
+			margin 0 10px 0 0
+			padding 0
+			list-style none
+			display inline
+			a
+	.row-actions-block
+		display block
+		margin-left 0
+tr:hover td
+	.row-actions,
+	.row-actions-block
+		opacity 1
+/* Fading Inline Row Controls */
+td.title
+	strong
+		font-size 14px

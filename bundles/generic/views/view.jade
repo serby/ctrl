@@ -14,7 +14,7 @@ include includes/view-actions
 
 //-h2 #{crudDelegate.name} Details
 - each group in viewSchema.groups
-	.group
+	.panel-group
 		- if (typeof group.name !== 'undefined')
 			h3=group.name
 		- if (typeof group.description !== 'undefined')

@@ -1,0 +1,5 @@
+nav.page-actions.view-actions
+	ul.actions
+		li: a.button.primary(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}') View
+		- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
+			li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete

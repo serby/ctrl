@@ -1,13 +1,5 @@
-#controls.panel
-	#search 
-		form(method='get', action=crudUrls.search.url)
-			label
-				strong Filter Results
-				- if (typeof url === 'undefined')
-					input(value='', name='Filter')
-				- else
-					input(value=url.Filter, name='Filter')
-			input.button(type='submit',value='Filter')
-			a.button(href=crudUrls.list.url) Reset
-	ul#actions
-		li: a.button(href=crudUrls.add.url)=crudUrls.add.title
+//- Actions and Filter Controls
+nav.page-actions.list-actions
+	ul.actions
+		- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.add === 'undefined')
+			li: a.button.primary(href='/admin/#{crudDelegate.urlName}/new') Add
