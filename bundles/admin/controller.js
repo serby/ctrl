@@ -89,12 +89,28 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		});
 	});
 
+	/** Temporary Pages **/
+
 	app.get('/admin/form-elements',
 		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
-			viewRender(req, res, 'form-elements', {
+			viewRender(req, res, 'ui/form-elements', {
+				layout: '../layout',
 				page: {
 					title: 'Form Elements / Admin / ' + properties.name,
-					section: 'login'
+					section: 'form-elements'
+				},
+				error: '',
+				javascriptSrc: []
+			});
+	});
+
+	app.get('/admin/grid',
+		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+			viewRender(req, res, 'ui/grid', {
+				layout: '../layout',
+				page: {
+					title: 'Grid / Admin / ' + properties.name,
+					section: 'grid'
 				},
 				error: '',
 				javascriptSrc: []
