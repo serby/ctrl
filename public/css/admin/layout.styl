@@ -56,11 +56,11 @@ body
 #user-nav
 	float left
 	width 158px
-	background-color rgba(0,0,0,.15)
 	border 1px solid #383b3e
 	margin 0 20px 18px
 	border-radius 3px
 	box-shadow 0 1px 0 rgba(255,255,255,0.05)
+	background-color rgba(0,0,0,.15)
 
 	.summary
 		float left
@@ -95,7 +95,9 @@ body
 		text-indent -9999px
 		outline 0
 		border-left 1px solid #383b3e
-		background-color rgba(255,255,255,0.03)
+		/*background-color rgba(255,255,255,0.03)*/
+		/* TODO - convert mixin to be able to use multiple colour stops */
+		background-image -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 40%, rgba(255,255,255,0) 100%)
 
 		ul
 			display none
@@ -126,10 +128,10 @@ body
 				text-decoration none
 				&:hover
 					font-weight bold
-					background-color rgba(0,0,0,.05)
+					background-color rgba($primaryColor,.05)
 
 		&:hover
-			background-color rgba(255,255,255,0.05)
+			background-color rgba(255,255,255,0.03)
 			ul
 				display block
 

@@ -4,14 +4,6 @@ html(lang='en')
 		meta(charset='utf-8')
 		meta(name='description', content=properties.description)
 		meta(name='keywords', content=properties.keyWords)
-		
-		meta(property='og:title', content='')
-		meta(property='og:type', content='')
-		meta(property='og:description', content='')
-		meta(property='og:site_name', content='')
-		meta(property='og:url', content=properties.siteUrl)
-		meta(property='og:admins', content='')
-		meta(property='og:image', content='')
 	
 		//- SITE INFORMATION
 		title=page.title
@@ -29,7 +21,7 @@ html(lang='en')
 		#page
 			include includes/header
 			include includes/nav
-			#main-content(class= page.layoutType ? 'layout-#{page.layoutType}' : 'layout-article')
+			#main-content
 				!= body
 			include includes/footer
 
@@ -43,4 +35,3 @@ html(lang='en')
 			if (typeof jQuery.ui === 'undefined') {
 				document.write('<script src="/js/jquery-ui-1.8.14.min.js" />');
 			}
-		script(src='/js/jquery.placeholder.js')

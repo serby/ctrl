@@ -1,9 +1,3 @@
-#main-header(role='banner')
-	.container
-		//- Main Logo should use <h1> on homepage only. Use <div> everywhere else
-		- if (page.isHomepage)
-			h1.site-logo
-				a(href='/')=properties.title
-		- else
-			.site-logo
-				a(href='/')=properties.title
+#main-header
+	h1.site-logo
+		a(href='/') Site Title
