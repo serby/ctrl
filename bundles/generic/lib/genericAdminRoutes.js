@@ -6,18 +6,18 @@ var
 	util = require('util'),
 	url = require('url');
 
-module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, dataPath, serviceLocator, options) {
+module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, serviceLocator, customOptions) {
 
-	var defaultOptions = {
+	var options = {
 		createValidationSet: '',
 		updateValidationSet: '',
 		createTag: undefined,
-		updateTag: undefined
+		updateTag: undefined,
+		requiredAccess: crudDelegate.urlName
 	};
 
-	//_.extend(defaultOptions, options);
-	options = defaultOptions;
-
+	_.extend(options, customOptions);
+	//options = defaultOptions;
 	/**
 	* Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
 	* Iterates through each group and the properties of that group to get the searchField and the type of data
@@ -129,7 +129,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	}
 
 	app.get('/admin/' + crudDelegate.urlName,
-		serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'read'), function (req, res) {
+		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'read'), function (req, res) {
 
 		var
 			urlObj = url.parse(req.url, true).query,
@@ -177,7 +177,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	}
 
 	app.get('/admin/' + crudDelegate.urlName + '/new',
-		serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'create'),
+		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
 		adminViewSchemaHelper(adminViewSchema), function (req, res) {
 
 		viewRender(req, res, 'form', {
@@ -194,7 +194,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	});
 
 	app.post('/admin/' + crudDelegate.urlName + '/new',
-		serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'create'),
+		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
 		adminViewSchema.formPostHelper,
 		uploadDelegate,
 		adminViewSchemaHelper(adminViewSchema), function (req, res) {
@@ -219,7 +219,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.get('/admin/' + crudDelegate.urlName + '/:id', serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'read'), function (req, res) {
+	app.get('/admin/' + crudDelegate.urlName + '/:id', serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'read'), function (req, res) {
 		crudDelegate.read(req.params.id, function (errors, entity) {
 			viewRender(req, res, 'view', {
 				viewSchema: adminViewSchema,
@@ -233,7 +233,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.get('/admin/' + crudDelegate.urlName + '/:id/edit', adminViewSchemaHelper(adminViewSchema), serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'update'), function (req, res) {
+	app.get('/admin/' + crudDelegate.urlName + '/:id/edit', adminViewSchemaHelper(adminViewSchema), serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res) {
 		crudDelegate.read(req.params.id, function (errors, entity) {
 
 			viewRender(req, res, 'form', {
@@ -252,7 +252,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	});
 
 	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', uploadDelegate,
-		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'update'), function (req, res) {
+		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res) {
 
 		crudDelegate.update(req.params.id, req.body, { tag: options.updateTag, validationSet: options.updateValidationSet }, function (errors, entity) {
 			if (errors) {
@@ -274,12 +274,12 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.get('/admin/' + crudDelegate.urlName + '/:id/delete', serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'delete'), function(req, res, next) {
+	app.get('/admin/' + crudDelegate.urlName + '/:id/delete', serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'delete'), function(req, res, next) {
 		crudDelegate['delete'](req.params.id, function(error) {
 			if (error !== null) {
 				res.send(404);
 			} else {
-				res.redirect('/admin/' + crudDelegate.urlName);
+				res.redirect('/admin/' + options.requiredAccess);
 			}
 		});
 	});

@@ -45,5 +45,14 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 			next();
 		}
 	});
-	generic.createRoutes(app, generic.createViewRender('../../admin/views/layout'), viewSchema, serviceLocator.roleModel, null, serviceLocator);
+	generic.createRoutes(
+		app,
+		generic.createViewRender('../../admin/views/layout'),
+		viewSchema,
+		serviceLocator.roleModel,
+		serviceLocator,
+		{
+			requiredAccess: 'Role'
+		}
+	);
 };

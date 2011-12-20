@@ -82,10 +82,10 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		generic.createViewRender('../../admin/views/layout'),
 		viewSchema,
 		serviceLocator.administratorModel,
-		null,
 		serviceLocator,
 		{
-			updateTag: 'update'
+			updateTag: 'update',
+			requiredAccess: 'Administrator'
 		}
 	);
 };

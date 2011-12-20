@@ -40,7 +40,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 	});
 
 	app.get('/admin', ensureSetup,
-		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+		serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', '/admin/login'), function(req, res) {
 
 		viewRender(req, res, 'index', {
 			layout: 'layout',
