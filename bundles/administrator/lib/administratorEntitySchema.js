@@ -8,17 +8,20 @@ module.exports = {
 	emailAddress: {
 		validators: {
 			all: [validation.required, validation.email]
-		}
+		},
+		tag: ['update']
 	},
 	firstName: {
 		validators: {
 			all: [validation.required]
-		}
+		},
+		tag: ['update']
 	},
 	lastName: {
 		validators: {
 			all: [validation.required]
-		}
+		},
+		tag: ['update']
 	},
 	password: {
 		validators: {

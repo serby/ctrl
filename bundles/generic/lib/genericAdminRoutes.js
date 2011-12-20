@@ -1,11 +1,22 @@
 var
+	_ = require('underscore'),
 	fs = require('fs'),
 	path = require('path'),
 	async = require('async'),
 	util = require('util'),
 	url = require('url');
 
-module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, dataPath, serviceLocator) {
+module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, dataPath, serviceLocator, options) {
+
+	var defaultOptions = {
+		createValidationSet: '',
+		updateValidationSet: '',
+		createTag: undefined,
+		updateTag: undefined
+	};
+
+	//_.extend(defaultOptions, options);
+	options = defaultOptions;
 
 	/**
 	* Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
@@ -188,7 +199,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		uploadDelegate,
 		adminViewSchemaHelper(adminViewSchema), function (req, res) {
 
-		crudDelegate.create(req.body, {}, function (errors, newEntity) {
+		crudDelegate.create(req.body, { validationSet: options.createValidationSet }, function (errors, newEntity) {
 			if (errors) {
 				viewRender(req, res, 'form', {
 					viewSchema: adminViewSchema,
@@ -240,8 +251,10 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', uploadDelegate, adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'update'), function (req, res) {
-		crudDelegate.update(req.params.id, req.body, {}, function (errors, entity) {
+	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', uploadDelegate,
+		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(crudDelegate.urlName, 'update'), function (req, res) {
+
+		crudDelegate.update(req.params.id, req.body, { tag: options.updateTag, validationSet: options.updateValidationSet }, function (errors, entity) {
 			if (errors) {
 				viewRender(req, res, 'form', {
 					viewSchema: adminViewSchema,
