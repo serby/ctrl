@@ -117,4 +117,17 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 			});
 	});
 
+	app.get('/admin/misc-ui',
+		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+			viewRender(req, res, 'ui/misc-ui', {
+				layout: '../layout',
+				page: {
+					title: 'Miscellaneous UI Elements / Admin / ' + properties.name,
+					section: 'misc-ui'
+				},
+				error: '',
+				javascriptSrc: []
+			});
+	});
+
 };
