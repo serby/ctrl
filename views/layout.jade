@@ -9,7 +9,7 @@ html(lang='en')
 		title=page.title
 
 		//- CSS
-		link(rel='stylesheet', type='text/css', href='/css/main/index.css', media='all')
+		link(rel='stylesheet', type='text/css', href='/css/main/v#{properties.version}/index.css', media='all')
 
 		//- MOBILE
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -19,7 +19,7 @@ html(lang='en')
 
 	body(class=page.section)
 
-		- if (typeof session.adminJustLoggedIn !== 'undefined')
+		- if (typeof session.admin !== 'undefined')
 			include includes/admin-bar
 
 		#page

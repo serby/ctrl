@@ -62,6 +62,13 @@ module.exports.createModel = function(properties, serviceLocator) {
 		});
 	}
 
+	function dontSetBlankPassword(entity, callback) {
+		if (entity.password === '') {
+			delete entity.password;
+		}
+		callback(null, entity);
+	}
+
 	/**
 	 * Create a new administrator with the '*' role which
 	 * will allow full access to all admin bundles that have been created correctly
@@ -81,7 +88,8 @@ module.exports.createModel = function(properties, serviceLocator) {
 
 	crudDelegate.pipes.beforeUpdate
 		.add(duplicateEmailChecker)
-		.add(passwordHasher);
+		.add(passwordHasher)
+		.add(dontSetBlankPassword);
 
 	crudDelegate.authenticate = authenticate;
 	crudDelegate.createWithFullAccess = createWithFullAccess;

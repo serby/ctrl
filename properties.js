@@ -3,6 +3,7 @@ var
 	basePort = 3020;
 
 var properties = {
+	version: '1.2',
 	name: 'Control',
 	tagline: 'Control CMS by Paul Serby',
 	description: 'This is the inital config',

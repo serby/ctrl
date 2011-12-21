@@ -11,9 +11,9 @@ module.exports = {
 	configure: function(app, properties, serviceLocator) {
 
 		// The resource you need access of see the admin bundles
-		serviceLocator.adminAccessControlList.addResource('admin');
+		serviceLocator.adminAccessControlList.addResource('Admin');
 
-		serviceLocator.adminAccessControlList.grant('*', 'admin', 'read');
+		serviceLocator.adminAccessControlList.grant('*', 'Admin', 'read');
 
 		// This controls the authentication and authorisation of the admin
 		serviceLocator.register('adminAccessControl',

@@ -17,9 +17,7 @@ html(lang='en')
 		//- SITE INFORMATION
 		title=page.title + ' - ' + properties.name
 		//- CSS
-		link(rel='stylesheet', type='text/css', href='/css/admin/index.css', media='all')
-		//if IE
-			link(rel='stylesheet', type='text/css', href='/css/main/internet-explorer.css', media='all')
+		link(rel='stylesheet', type='text/css', href='/css/admin/v#{properties.version}/index.css', media='all')
 	body(class=page.section)
 
 		#page

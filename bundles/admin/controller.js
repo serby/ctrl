@@ -40,7 +40,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 	});
 
 	app.get('/admin', ensureSetup,
-		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+		serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', '/admin/login'), function(req, res) {
 
 		viewRender(req, res, 'index', {
 			layout: 'layout',
@@ -92,7 +92,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 	/** Temporary Pages **/
 
 	app.get('/admin/form-elements',
-		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+		function(req, res) {
 			viewRender(req, res, 'ui/form-elements', {
 				layout: '../layout',
 				page: {
@@ -105,7 +105,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 	});
 
 	app.get('/admin/grid',
-		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+		function(req, res) {
 			viewRender(req, res, 'ui/grid', {
 				layout: '../layout',
 				page: {
@@ -118,7 +118,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 	});
 
 	app.get('/admin/misc-ui',
-		serviceLocator.adminAccessControl.requiredAccess('admin', 'read', '/admin/login'), function(req, res) {
+		function(req, res) {
 			viewRender(req, res, 'ui/misc-ui', {
 				layout: '../layout',
 				page: {

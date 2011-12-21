@@ -21,14 +21,17 @@ mixin checkboxField(label, name, checked, required, error, information)
 mixin checkboxFieldForObject(label, name, dataObject, required, error, information)
 	mixin booleanField('checkbox', 'checkbox', label, name, dataObject[name] === true, required, error[name], information)
 
-mixin checkBoxGroup(label, name, dataObject, list)
-	.form-row
-		div.label.checkbox-group
+mixin checkBoxGroupForObject(label, name, dataObject, required, errors, list, information)
+	.form-row.field-group
+		div.label(class=errors[name] && 'error')
 			span #{label}
+		ul
 			-each option in list
-				label.checkbox
-					input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject && dataObject.indexOf(option) !== -1))
-					span=option
+				li
+					label
+						input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option) !== -1))
+						span=option
+			mixin fieldFooter(information, errors[name])
 
 mixin radioField(label, name, checked, error)
 	mixin booleanField('radio', 'radio', label, name, checked, required, error, information)
@@ -105,5 +108,5 @@ mixin listboxField(classname, label, name, value, required, error, list, informa
 mixin dropdownField(classname, label, name, value, required, error, list, information)
 	mixin selectField(classname, label, name, value, required, error, list, information, false)
 
-mixin dropdownForObject(label, name, dataObject, required, errors, list)
-	mixin dropdownField('dropdown', label, name, dataObject[name], required, errors[name], list)
+mixin dropdownForObject(label, name, dataObject, required, errors, list, information)
+	mixin dropdownField('dropdown', label, name, dataObject[name], required, errors[name], list, information)
