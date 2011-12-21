@@ -24,6 +24,14 @@
 	else
 		color #333333
 
+	h4
+		color inherit
+		font-size 16px
+		line-height 18px
+		font-weight bold
+		margin-bottom 10px
+
+
 	&.success
 		background-color $successColor
 		border 1px solid darken($successColor, 14)
@@ -59,7 +67,7 @@
 
 	p
 		margin 0
-	.close
+	.button-close
 		position absolute
 		right 14px
 		top 14px
@@ -68,7 +76,7 @@
 		height 11px
 		text-indent -9999px
 		overflow hidden
-		background url("/images/framework/notification-sprite.png") 0px 0px no-repeat
+		background url("/images/admin/content/notification-sprite.png") 0px 0px no-repeat
 		&:hover
 			background-position 0px -11px
 		&:active

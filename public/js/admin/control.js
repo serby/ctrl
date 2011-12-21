@@ -16,4 +16,11 @@ $(document).ready(function() {
 		disable_search_threshold: 10
 	});
 
+	/** Notification Bars **/
+	$('.notification.close').append('<a class="button-close" href="#" />');
+	$('.notification .button-close').click(function(e){
+		$(this).parent('.notification').fadeTo(300, 0).slideUp(300);
+		e.preventDefault();
+	});
+
 });
