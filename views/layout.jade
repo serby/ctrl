@@ -18,6 +18,10 @@ html(lang='en')
 			document.getElementsByTagName('html')[0].setAttribute('class', 'js');
 
 	body(class=page.section)
+
+		- if (typeof session.adminJustLoggedIn !== 'undefined')
+			include includes/admin-bar
+
 		#page
 			include includes/header
 			include includes/nav
