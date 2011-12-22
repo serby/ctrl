@@ -9,8 +9,10 @@ form(action='/admin/setup', method='post')
 			errors
 				p.error
 					strong= error
+
 		mixin textField('Email Address', 'emailAddress', '', '')
 		mixin textField('First Name', 'firstName', '', '')
 		mixin textField('Last Name', 'lastName', '', '')
 		mixin passwordField('Password', 'password', '', '')
-	input.submit(name='Submit', type='submit', value='Create now')
+	fieldset.actions
+		input.button.primary(name='Submit', type='submit', value='Create now')
