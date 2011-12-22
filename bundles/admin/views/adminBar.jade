@@ -1,0 +1,16 @@
+//- Check they are an admin
+#admin-bar
+	.admin-bar-inner
+		ul.nav-user
+			li Hi, Username
+			li.nav-logout: a(href='#') Logout
+
+		ul.nav-actions
+			li: a(href='/admin') Admin Home
+			li: a(href='#') Edit This Page
+			li.nav-actions
+				a(href='#',title="") Actions
+				ul.sub-nav
+					li: a(href='#') Action 1
+					li: a(href='#') Action 2
+					li: a(href='#') Action 3

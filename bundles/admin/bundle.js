@@ -1,6 +1,9 @@
 module.exports = {
 	name: 'Admin',
 	description: 'Admin section for the site',
+	bodyStart: [
+		__dirname + '/views/adminBar.jade'
+	],
 	register: function(app, properties, serviceLocator) {
 
 		// Adding this bundle registers the admin acl
