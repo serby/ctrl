@@ -5,7 +5,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
 	function renderSetup(res, req, errors) {
 		viewRender(req, res, 'setup', {
-			layout: 'setupLayout',
+			layout: 'loginLayout',
 			page: {
 				title: 'Setup / Admin / ' + properties.name,
 				section: 'admin'
@@ -87,47 +87,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 				});
 			}
 		});
-	});
-
-	/** Temporary Pages **/
-
-	app.get('/admin/form-elements',
-		function(req, res) {
-			viewRender(req, res, 'ui/form-elements', {
-				layout: '../layout',
-				page: {
-					title: 'Form Elements / Admin / ' + properties.name,
-					section: 'form-elements'
-				},
-				error: '',
-				javascriptSrc: []
-			});
-	});
-
-	app.get('/admin/grid',
-		function(req, res) {
-			viewRender(req, res, 'ui/grid', {
-				layout: '../layout',
-				page: {
-					title: 'Grid / Admin / ' + properties.name,
-					section: 'grid'
-				},
-				error: '',
-				javascriptSrc: []
-			});
-	});
-
-	app.get('/admin/misc-ui',
-		function(req, res) {
-			viewRender(req, res, 'ui/misc-ui', {
-				layout: '../layout',
-				page: {
-					title: 'Miscellaneous UI Elements / Admin / ' + properties.name,
-					section: 'misc-ui'
-				},
-				error: '',
-				javascriptSrc: []
-			});
 	});
 
 };
