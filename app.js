@@ -42,11 +42,13 @@ databaseAdaptor.createConnection(function(connection) {
 
 	// Make the bundle manager avaialbe to views
 	app.configure(function() {
-		app
-			.dynamicHelpers({
-				bundleManager: function(req, res) {
-					return bundleManager;
-				}
+		app.dynamicHelpers({
+			bundleManager: function(req, res) {
+				return bundleManager;
+			},
+			serviceLocator: function(req, res) {
+				return serviceLocator;
+			}
 		});
 	});
 
