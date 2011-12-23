@@ -17,9 +17,9 @@ html(lang='en')
 			document.getElementsByTagName('html')[0].setAttribute('class', 'js');
 
 	body(class=page.section)
-		
-		-each preHeader in bundleManager.get('bodyStart')
-			!=partial(preHeader)
+
+		each bodyStart in includes.bodyStart
+			!=partial(bodyStart)
 
 		#page
 			block header

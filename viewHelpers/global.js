@@ -14,6 +14,14 @@ module.exports.createHelpers = function(properties, app) {
 				},
 				properties: function() {
 					return properties;
+				},
+				includes: function(req, res) {
+					if (!res.bodyStart) {
+						res.bodyStart = [];
+					}
+					return {
+						bodyStart: res.bodyStart
+					};
 				}
 			})
 			.helpers({
