@@ -1,3 +1,10 @@
+mixin subItems(items)
+	if items
+		each navSubItem in items
+			ul.sub-nav
+				li: a(href=navSubItem.url)= navSubItem.label
+				mixin subItems(navSubItem.items)
+
 #main-nav
 	ul#admin-nav
 
@@ -12,8 +19,5 @@
 		each navItem in adminNav
 			li(class= page.section == navItem.section ? 'nav-active' : '')
 				a(href=navItem.url)= navItem.label
+				mixin subItems(navItem.items)
 
-				if navItem.items
-					each navSubItem in navItem.items
-						ul.sub-nav
-							li: a(href=navSubItem.url)= navSubItem.label

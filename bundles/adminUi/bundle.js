@@ -19,7 +19,14 @@ module.exports = {
 			{
 				label: 'Misc UI',
 				url: '/admin/ui/misc-ui',
-				section: 'admin-ui'
+				section: 'admin-ui',
+				items: [
+					{
+						label: 'Thrid level menu items',
+						url: '/admin/ui/misc-ui',
+						section: 'admin-ui'
+					}
+				]
 			}
 		]
 	}],
