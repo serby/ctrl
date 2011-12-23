@@ -30,7 +30,7 @@ task 'setup', 'Create required directories', (options) ->
 
 task 'delintAll', 'Runs jshint on all js code', (options) ->
 
-	paths = 'lib controllers test'
+	paths = 'lib bundles test'
 	if options.file
 		paths = options.file
 
