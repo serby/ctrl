@@ -4,7 +4,24 @@ module.exports = {
 	adminNav: [{
 		label: 'Admin UI',
 		url: '/admin/ui',
-		section: 'admin-ui'
+		section: 'admin-ui',
+		items: [
+			{
+				label: 'Grid',
+				url: '/admin/ui/grid',
+				section: 'admin-ui'
+			},
+			{
+				label: 'Form Elements',
+				url: '/admin/ui/form-elements',
+				section: 'admin-ui'
+			},
+			{
+				label: 'Misc UI',
+				url: '/admin/ui/misc-ui',
+				section: 'admin-ui'
+			}
+		]
 	}],
 	register: function(app, properties, serviceLocator) {
 

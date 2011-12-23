@@ -10,7 +10,21 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 				layout: '../../admin/views/layout',
 				page: {
 					title: 'Form Elements / Admin / ' + properties.name,
-					section: 'form-elements'
+					section: 'admin-ui'
+				},
+				error: '',
+				javascriptSrc: []
+			});
+	});
+
+	app.get('/admin/ui',
+		serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+		function(req, res) {
+			viewRender(req, res, 'grid', {
+				layout: '../../admin/views/layout',
+				page: {
+					title: 'Grid / Admin / ' + properties.name,
+					section: 'admin-ui'
 				},
 				error: '',
 				javascriptSrc: []
@@ -24,7 +38,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 				layout: '../../admin/views/layout',
 				page: {
 					title: 'Grid / Admin / ' + properties.name,
-					section: 'grid'
+					section: 'admin-ui'
 				},
 				error: '',
 				javascriptSrc: []
@@ -38,7 +52,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 				layout: '../../admin/views/layout',
 				page: {
 					title: 'Miscellaneous UI Elements / Admin / ' + properties.name,
-					section: 'misc-ui'
+					section: 'admin-ui'
 				},
 				error: '',
 				javascriptSrc: []

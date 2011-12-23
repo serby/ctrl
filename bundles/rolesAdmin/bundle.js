@@ -2,11 +2,16 @@ module.exports = {
 	name: 'Roles',
 	description: 'Manage the user who administer the site',
 	adminNav: [{
-			label: 'Roles',
-			url: '/admin/role',
-			section: 'role'
-		}
-	],
+		label: 'Roles',
+		url: '/admin/role',
+		section: 'role',
+		items: [
+			{
+				label: 'Add Role',
+				url: '/admin/role/new'
+			}
+		]
+	}],
 	register: function(app, properties, serviceLocator) {
 
 		// Register the bundles models

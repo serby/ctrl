@@ -4,7 +4,13 @@ module.exports = {
 	adminNav: [{
 			label: 'Administrators',
 			url: '/admin/administrator',
-			section: 'administrator'
+			section: 'administrator',
+			items: [
+				{
+					label: 'Add Administrator',
+					url: '/admin/administrator/new'
+				}
+			]
 		}
 	],
 	register: function(app, properties, serviceLocator) {

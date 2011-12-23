@@ -8,9 +8,12 @@
 		//- --- Yes. I've removed the specific class, no general class needed.
 		//- --- I would like a selected class though to highlight the current page - Jack
 		
-		-each navItem in bundleManager.get('adminNav')
+		- var adminNav = bundleManager.get('adminNav') 
+		each navItem in adminNav
 			li(class= page.section == navItem.section ? 'nav-active' : '')
 				a(href=navItem.url)= navItem.label
-				ul.sub-nav
-					li: a(href=navItem.url) View #{navItem.label}
-					li: a(href=navItem.url + '/new') Add #{navItem.label}
+
+				if navItem.items
+					each navSubItem in navItem.items
+						ul.sub-nav
+							li: a(href=navSubItem.url)= navSubItem.label
