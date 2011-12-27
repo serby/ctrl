@@ -3,6 +3,7 @@ h1 Miscellaneous UI Elements
 nav.breadcrumb
 	ul
 		li.nav-home: a(href='/admin') Home
+		li: a(href='/admin/ui') Admin UI
 		li Miscellaneous UI Elements
 
 h2 Tooltips
@@ -12,3 +13,39 @@ p Nullam in dui mauris. Vivamus
 	|  hendrerit arcu sed erat. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. 
 	span.right(data-tooltip="Text Tooltip - Positioned Right") Suspendisse
 	|  dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac.
+
+h2 Notifications
+
+p Colours are defined as Stylus variables. An optional CSS class of 'close' allows the notification to be dismissed.
+
+.notification.close
+	p Default Message with close button
+.notification.success.close
+	p Success Message with close button
+.notification.notice.close
+	p Notice Message with close button
+.notification.warning
+	p Warning Message
+.notification.error
+	p Error Message
+
+h2 Overlays
+
+p Overlays use the 
+	a(href='http://fancyapps.com/fancybox/') Fancybox
+	|  jQuery plugin.
+
+.grid-4
+	.row
+		.col-1
+			a.fancybox(href='http://dummyimage.com/1000x700/777.jpg', data-fancybox-group='example')
+				img(src='http://dummyimage.com/120x70/777', alt='')
+		.col-1
+			a.fancybox(href='http://dummyimage.com/1000x700/999.jpg', data-fancybox-group='example')
+				img(src='http://dummyimage.com/120x70/999', alt='')
+		.col-1
+			a.fancybox(href='http://dummyimage.com/1000x700/bbb.jpg', data-fancybox-group='example')
+				img(src='http://dummyimage.com/120x70/bbb', alt='')
+		.col-1
+			a.fancybox(href='http://dummyimage.com/1000x700/ddd.jpg', data-fancybox-group='example')
+				img(src='http://dummyimage.com/120x70/ddd', alt='')
