@@ -16,6 +16,13 @@ $(document).ready(function() {
 		disable_search_threshold: 10
 	});
 
+	/** Fancybox **/
+	$(".fancybox").fancybox({
+		padding: 0,
+		prevEffect: 'fade',
+		nextEffect: 'fade'
+	});
+
 	/** Notification Bars **/
 	$('.notification.close').append('<a class="button-close" href="#" />');
 	$('.notification .button-close').click(function(e){

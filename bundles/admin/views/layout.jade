@@ -20,9 +20,7 @@ html(lang='en')
 			
 		block styles
 			link(rel='stylesheet', type='text/css', href='/css/admin/v#{properties.version}/index.css', media='all')
-			link(rel='stylesheet', type='text/css', href='/js/fancybox/jquery.fancybox-1.3.4.css', media='all')
-			//if IE
-				link(rel='stylesheet', type='text/css', href='/css/main/v#{properties.version}/internet-explorer.css', media='all')
+			link(rel='stylesheet', type='text/css', href='/js/fancybox/jquery.fancybox.css', media='all')
 
 	body(class=page.section)
 		#page
@@ -49,5 +47,5 @@ html(lang='en')
 				}
 
 			script(src='/js/chosen/v#{properties.version}/chosen.jquery.js')
-			script(src='/js/fancybox/jquery.fancybox-1.3.4.pack.js')
+			script(src='/js/fancybox/jquery.fancybox.pack.js')
 			script(src='/js/admin/control.js')
