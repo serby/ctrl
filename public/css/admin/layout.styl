@@ -13,7 +13,6 @@ body
 	background-repeat repeat
 
 #page
-	//width 940px
 	max-width 1200px
 	min-width 810px
 	margin 0 auto
@@ -25,52 +24,37 @@ body
 	left 0
 	width 200px
 	height 100%
-	background-image url("/images/admin/structure/bg-sidebar.gif")
-	background-position 0px 0px
-	background-repeat repeat-y
-	background-color #4d5359
+	background-linear-gradient(top, #3b3f42, 80%, #25292d, 100%)
+	background-color #3b3f42
 
 	h1
 		margin 18px 20px
-		background-color rgba(0,0,0,.15)
-		border-radius 3px
-		box-shadow 0 1px 0 rgba(255,255,255,0.05)
-		border 1px solid #383b3e
+		span
+			display block
+			border-bottom 0
 		a
 			display block
-			margin 5px
-			text-align center
 			text-decoration none
+			display inline-block
+			width 164px
+			height 84px
+			text-indent -9999px
+			overflow hidden
+			margin 0 -2px
+			background-image url("/images/admin/content/logo-control.png")
+			background-position 0px 0px
+			background-repeat no-repeat
 
-			/* Temp */
-			font-family Arial, Helvetica, sans-serif
-			letter-spacing -1px
-			font-size 36px
-			line-height 40px
-			font-weight bold
-			padding 5px 0 2px
-			text-shadow 0px 1px 1px rgba(0,0,0,.3)
-			&::first-letter
-				margin-right -2px
 
 #user-nav
 	float left
-	width 158px
-	border 1px solid #383b3e
+	width 160px
 	margin 0 20px 18px
-	border-radius 3px
-	box-shadow 0 1px 0 rgba(255,255,255,0.05)
-	background-color rgba(0,0,0,.15)
 
-	.summary
+	.details
 		float left
 		width 124px
 		height 34px
-		padding 4px
-		img
-			float left
-			margin-right 6px
-			border-radius 3px
 		p
 			font-size 12px
 			line-height 15px
@@ -90,29 +74,28 @@ body
 	nav.sub-nav
 		position relative
 		float right
-		width 25px
-		height 42px
+		width 24px
+		height 34px
 		text-indent -9999px
 		outline 0
-		border-left 1px solid #383b3e
-		/*background-color rgba(255,255,255,0.03)*/
-		/* TODO - convert mixin to be able to use multiple colour stops */
-		background-image -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 40%, rgba(255,255,255,0) 100%)
+		border-radius 3px
+		border 1px solid transparent
+		background-image url("/images/admin/content/icon-settings.png")
+		background-position 50% 50%
+		background-repeat no-repeat
+		cursor pointer
 
 		ul
 			display none
 			position absolute
 			width 158px
 			right -1px
-			top 42px
+			top 34px
 			text-indent 0
 			border 1px solid #383b3e
 			border-top 0
 			border-radius 0 0 3px 3px
 			box-shadow 0 1px 0 rgba(255,255,255,0.05)
-			background-image url("/images/admin/structure/bg-sidebar.gif")
-			background-position 0px 0px
-			background-repeat repeat-y
 			background-color #4d5359
 			box-shadow 0px 2px 4px rgba(0,0,0,.4)
 
@@ -131,29 +114,27 @@ body
 					background-color rgba($primaryColor,.05)
 
 		&:hover
+			background-color rgba(0,0,0,.15)
 			background-color rgba(255,255,255,0.03)
+			border 1px solid #383b3e
 			ul
 				display block
 
 #main-nav
 	clear left
-	background-image url("/images/admin/structure/bg-sidebar.gif")
-	background-position 0px 0px
-	background-repeat repeat-y
-	background-color #4d5359
 
 	ul
 		margin 0
 		padding 0
 		list-style none
-		border-bottom 1px solid #4d5359
-		border-top 1px solid #3b3f45
+		border-bottom 1px solid #474b4e
+		border-top 1px solid #2f3336
 	li
 		margin 0
 		padding 0
 		list-style none
-		border-top 1px solid #4d5359
-		border-bottom 1px solid #3b3f45
+		border-top 1px solid #474b4e
+		border-bottom 1px solid #2f3336
 	a
 		display block
 		vertical-align bottom
@@ -225,13 +206,13 @@ body
 		&:hover
 			color #fff
 
-	a.logo-clock
-		display block
-		width 160px
-		height 71px
+	a.logo-control
+		display inline-block
+		width 125px
+		height 32px
 		text-indent -9999px
 		overflow hidden
-		margin-bottom 6px
-		background-image url("/images/admin/content/logo-clock.png")
+		margin 0 auto 8px
+		background-image url("/images/admin/content/footer-logo-control.png")
 		background-position 0px 0px
 		background-repeat no-repeat
