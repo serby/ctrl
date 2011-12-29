@@ -1,0 +1,12 @@
+nav.breadcrumb
+	ul
+		li.nav-home: a(href='/admin') Home
+		- var adminNav = bundleManager.get('adminNav')
+		each navItem in adminNav
+			if (page.section == navItem.section)
+				li: a(href=navItem.url) #{navItem.label}
+		
+		//- Need deeper navigation control to make this dynamic
+		//- Currently unable to match sub-pages
+
+		li Tables

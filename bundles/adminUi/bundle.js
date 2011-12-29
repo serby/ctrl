@@ -7,26 +7,46 @@ module.exports = {
 		section: 'admin-ui',
 		items: [
 			{
-				label: 'Grid',
-				url: '/admin/ui/grid',
+				label: 'Form Elements',
+				url: '#form-elements',
 				section: 'admin-ui'
 			},
 			{
-				label: 'Form Elements',
-				url: '/admin/ui/form-elements',
+				label: 'Tables',
+				url: '#tables',
 				section: 'admin-ui'
 			},
 			{
 				label: 'Misc UI',
-				url: '/admin/ui/misc-ui',
+				url: '#misc-ui',
 				section: 'admin-ui',
 				items: [
 					{
-						label: 'Thrid level menu items',
-						url: '/admin/ui/misc-ui',
+						label: 'Tooltips',
+						url: '#tooltips',
+						section: 'admin-ui'
+					},
+					{
+						label: 'Notifications',
+						url: '#notifications',
+						section: 'admin-ui'
+					},
+					{
+						label: 'Buttons',
+						url: '#buttons',
+						section: 'admin-ui'
+					},
+					{
+						label: 'Overlays',
+						url: '#overlays',
 						section: 'admin-ui'
 					}
 				]
+			},
+			{
+				label: 'Grid',
+				url: '#grid',
+				section: 'admin-ui'
 			}
 		]
 	}],

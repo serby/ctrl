@@ -92,7 +92,7 @@ fieldset,
 
 	h3
 		position relative
-		margin -20px -20px 18px
+		margin -18px -20px 18px
 		padding 3px 20px
 		font-size 13px
 		font-weight bold
@@ -218,6 +218,11 @@ td.title
 	border-bottom 1px dotted $primaryColor
 	position relative
 	cursor pointer
+
+	font-size 12px
+	font-weight normal
+	line-height 18px
+	z-index 999
 	&::before,
 	&::after
 		position absolute
@@ -270,3 +275,45 @@ td.title
 /* Temporary style */
 .form-elements form
 	margin-bottom 200px
+
+/**/
+.admin-ui
+	#main-content
+		section
+			float left
+			width 100%
+			clear left
+			padding-top 10px
+			margin-top 8px
+			h1
+				border-bottom: 2px solid #bbb;
+				padding-bottom: 5px;
+				margin-bottom: 30px;
+				font-weight: normal;
+			.breadcrumb
+				display none
+
+/**/
+
+section:target
+	margin-left -18px
+	margin-right -18px
+	padding-left 17px
+	padding-right 17px
+	border 1px solid transparent
+	border-radius 5px
+	-webkit-animation-name target-highlight
+	-webkit-animation-duration 2.5s
+	-webkit-animation-iteration-count
+	-webkit-animation-timing-function ease-in-out
+
+@-webkit-keyframes target-highlight
+	0%
+		background-color rgba($primaryColor, 0)
+		border-color rgba($primaryColor, 0)
+	20%
+		background-color rgba($primaryColor, 0.2)
+		border-color rgba($primaryColor, 0.4)
+	100%
+		background-color rgba($primaryColor, 0)
+		border-color rgba($primaryColor, 0)
