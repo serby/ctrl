@@ -17,7 +17,10 @@ html(lang='en')
 			meta(name='keywords', content=properties.keywords)
 			//- SITE INFORMATION
 			title=page.title + ' - ' + properties.name
-			
+
+		script
+			document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+
 		block styles
 			link(rel='stylesheet', type='text/css', href='/css/admin/v#{properties.version}/index.css', media='all')
 			link(rel='stylesheet', type='text/css', href='/js/fancybox/jquery.fancybox.css', media='all')
