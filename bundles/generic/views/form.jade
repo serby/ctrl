@@ -24,7 +24,7 @@ p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed a
 
 form(method='post', enctype='multipart/form-data')
 	- if (Object.keys(errors).length > 0)
-		.notification.error-summary.error.close
+		.notification.error
 			h4 Please check the form and try again
 			- each error in unshownErrors
 				p= errors[error]
