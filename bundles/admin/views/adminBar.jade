@@ -2,14 +2,14 @@
 #admin-bar
 	.admin-bar-inner
 		ul.nav-user
-			li Hi, Username
-			li.nav-logout: a(href='#') Logout
+			li Hi, #{session.admin.firstName}
+			li.nav-logout: a(href='/admin/logout') Logout
 
 		ul.nav-actions
 			li: a(href='/admin') Admin Home
 			li: a(href='#') Edit This Page
 			li.nav-actions
-				a(href='#',title="") Actions
+				a(href='#') Actions
 				ul.sub-nav
 					li: a(href='#') Action 1
 					li: a(href='#') Action 2
