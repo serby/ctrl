@@ -30,6 +30,13 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
+	/** Third Level Collapsable Navigation **/
+	$('.sub-nav .sub-nav').hide().siblings('a').addClass('nav-expandable');
+	$('a.nav-expandable').click( function(e){
+		$(this).toggleClass('nav-expanded').siblings('.sub-nav').slideToggle(400);
+		e.preventDefault();
+	});
+
 	/** Scroll to Anchors **/
 	/** http://css-tricks.com/snippets/jquery/smooth-scrolling/ **/
 	function filterPath(string) {
