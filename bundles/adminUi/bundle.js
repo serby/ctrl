@@ -17,21 +17,36 @@ module.exports = {
 				section: 'admin-ui'
 			},
 			{
-				label: 'Grid',
-				url: '#grid',
-				section: 'admin-ui'
-			},
-			{
 				label: 'Misc UI',
 				url: '#misc-ui',
 				section: 'admin-ui',
 				items: [
 					{
-						label: 'Third level menu items',
-						url: '/admin/ui',
+						label: 'Tooltips',
+						url: '#tooltips',
+						section: 'admin-ui'
+					},
+					{
+						label: 'Notifications',
+						url: '#notifications',
+						section: 'admin-ui'
+					},
+					{
+						label: 'Buttons',
+						url: '#buttons',
+						section: 'admin-ui'
+					},
+					{
+						label: 'Overlays',
+						url: '#overlays',
 						section: 'admin-ui'
 					}
 				]
+			},
+			{
+				label: 'Grid',
+				url: '#grid',
+				section: 'admin-ui'
 			}
 		]
 	}],

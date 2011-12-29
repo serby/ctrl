@@ -283,7 +283,8 @@ td.title
 			float left
 			width 100%
 			clear left
-			padding-top 18px
+			padding-top 10px
+			margin-top 8px
 			h1
 				border-bottom: 2px solid #bbb;
 				padding-bottom: 5px;
@@ -291,3 +292,28 @@ td.title
 				font-weight: normal;
 			.breadcrumb
 				display none
+
+/**/
+
+section:target
+	margin-left -18px
+	margin-right -18px
+	padding-left 17px
+	padding-right 17px
+	border 1px solid transparent
+	border-radius 5px
+	-webkit-animation-name target-highlight
+	-webkit-animation-duration 2.5s
+	-webkit-animation-iteration-count
+	-webkit-animation-timing-function ease-in-out
+
+@-webkit-keyframes target-highlight
+	0%
+		background-color rgba($primaryColor, 0)
+		border-color rgba($primaryColor, 0)
+	20%
+		background-color rgba($primaryColor, 0.2)
+		border-color rgba($primaryColor, 0.4)
+	100%
+		background-color rgba($primaryColor, 0)
+		border-color rgba($primaryColor, 0)
