@@ -1,7 +1,7 @@
 mixin subItems(items)
 	if items
-		each navSubItem in items
-			ul.sub-nav
+		ul.sub-nav
+			each navSubItem in items
 				li
 					a(href=navSubItem.url)= navSubItem.label
 					mixin subItems(navSubItem.items)
@@ -11,7 +11,7 @@ mixin subItems(items)
 
 		li(class= page.section =='admin' ? 'nav-active' : ''): a(href='/admin') Admin Home
 		
-		- var adminNav = bundleManager.get('adminNav') 
+		- var adminNav = bundleManager.get('adminNav')
 		each navItem in adminNav
 			li(class= page.section == navItem.section ? 'nav-active' : '')
 				a(href=navItem.url)= navItem.label
