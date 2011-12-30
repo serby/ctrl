@@ -137,6 +137,57 @@ fieldset.actions
  * Advanced Controls
  */
 
+/** Autocomplete **/
+
+.ui-autocomplete
+	position absolute
+	cursor default
+
+.ui-menu
+	float left
+	display block
+	list-style none
+
+	margin 0 3px 3px 0
+	max-height 190px
+	padding 3px
+	position relative
+	overflow-x hidden
+	overflow-y auto
+
+	border 1px solid $baseBorderColor
+	background-color $inputBackground
+	if $baseBorderRadius != 0
+		border-radius 0 0 $baseBorderRadius $baseBorderRadius
+	if $baseTransitionDuration != 0
+		transition border $baseTransitionDuration $baseTransitionEasing, box-shadow $baseTransitionDuration $baseTransitionEasing
+
+	.ui-menu-item
+		clear left
+		float left
+		list-style none
+		width 100%
+		margin 0
+
+		a
+			border 1px solid transparent
+			display block
+			padding 3px 7px 4px
+			color $inputFontColor
+			text-decoration none
+
+			&:hover
+			&.ui-state-hover
+				text-shadow 0px 1px 1px darken($primaryColor, 6)
+				background-color $primaryColor
+				border 1px solid darken($primaryColor, 6)
+				box-shadow 0px 0px 0px 1px lighten($primaryColor, 5) inset
+				if dark($primaryColor)
+					color #FFFFFF /* TODO - move to variable */
+				else
+					color #333333 /* TODO - move to variable */
+
+
 /** Datepicker **/
 input.datepicker
 	position relative
