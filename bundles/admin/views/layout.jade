@@ -23,7 +23,7 @@ html(lang='en')
 
 		block styles
 			link(rel='stylesheet', type='text/css', href='/css/admin/v#{properties.version}/index.css', media='all')
-			link(rel='stylesheet', type='text/css', href='/js/fancybox/jquery.fancybox.css', media='all')
+			link(rel='stylesheet', type='text/css', href='/js/fancybox/v#{properties.version}/jquery.fancybox.css', media='all')
 
 	body(class=page.section)
 		#page
@@ -38,17 +38,17 @@ html(lang='en')
 				include includes/structure/footer
 
 		block script
-			script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js')
+			script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
 			script
 				if (typeof jQuery === 'undefined') {
-					document.write('<script src="/js/jquery-1.7.min.js" />');
+					document.write('<script src="/js/jquery-1.7.1.min.js" />');
 				}
-			script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js')
+			script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
 			script
 				if (typeof jQuery.ui === 'undefined') {
-					document.write('<script src="/js/jquery-ui-1.8.14.min.js" />');
+					document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
 				}
 
 			script(src='/js/chosen/v#{properties.version}/chosen.jquery.js')
-			script(src='/js/fancybox/jquery.fancybox.pack.js')
-			script(src='/js/admin/control.js')
+			script(src='/js/fancybox/v#{properties.version}/jquery.fancybox.pack.js')
+			script(src='/js/admin/v#{properties.version}/control.js')

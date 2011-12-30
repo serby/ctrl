@@ -25,9 +25,19 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 					view: true,
 					createForm: true,
 					updateForm: true,
-					type: 'multiselect',
+					type: 'groupedMultiselect',
 					createOptions: function(callback) {
-						callback(Object.keys(serviceLocator.adminAccessControlList.acl));
+						var options = [];
+						Object.keys(serviceLocator.adminAccessControlList.acl).forEach(function(value) {
+							var aclItem = serviceLocator.adminAccessControlList.acl[value];
+							var option = {
+								label: value,
+								description: aclItem.description,
+								items: Object.keys(aclItem.actions)
+							};
+							options.push(option);
+						});
+						callback(options);
 					}
 				},
 				created: {

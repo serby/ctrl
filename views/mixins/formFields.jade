@@ -33,6 +33,24 @@ mixin checkBoxGroupForObject(label, name, dataObject, required, errors, list, in
 						span=option
 			mixin fieldFooter(information, errors[name])
 
+mixin groupedCheckBoxGroupForObject(label, name, dataObject, required, errors, groups, information)
+	fieldset
+		h3=label
+		div(class=errors[name] && 'error')
+		-each options in groups
+			.form-row.field-group
+				div.label
+					span #{options.label}
+					-if (options.description !== undefined)
+						strong= options.description
+				ul
+					-each option in options.items
+						li
+							label
+								input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option) !== -1))
+								span=option
+					mixin fieldFooter(information, errors[name])
+
 mixin radioField(label, name, checked, error)
 	mixin booleanField('radio', 'radio', label, name, checked, required, error, information)
 
