@@ -235,11 +235,16 @@ body
 		transform rotate(-90deg)
 
 #main-content
-	float left
 	position relative
 	width auto
 	margin-left 240px
 	margin-right 40px
+	&:after
+		content "."
+		display block
+		height 0
+		clear both
+		visibility hidden
 
 #main-footer
 	position fixed
@@ -270,3 +275,9 @@ body
 		background-image url("/images/admin/content/v" + $version +"/footer-logo-control.png")
 		background-position 0px 0px
 		background-repeat no-repeat
+
+
+/** Login Page **/
+.login
+	#main-content
+		margin 0 200px
