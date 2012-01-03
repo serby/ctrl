@@ -3,7 +3,7 @@
  */
 
 html, body
-	height 100%
+	// height 100%
 
 body
 	position relative
@@ -16,9 +16,8 @@ body
 	max-width 1200px
 	min-width 810px
 	margin 0 auto
-	height 100%
 
-#main-header
+#sidebar-bg
 	position fixed
 	top 0
 	left 0
@@ -26,6 +25,15 @@ body
 	height 100%
 	background-linear-gradient(top, #3b3f42, 80%, #25292d, 100%)
 	background-color #3b3f42
+	z-index 0
+
+#main-header
+	position absolute
+	width 200px
+	top 0
+	left 0
+	background-color #3b3f42
+	z-index 1
 
 	&::after
 		top 0
@@ -56,11 +64,15 @@ body
 			background-position 0px 0px
 			background-repeat no-repeat
 
+	.js &
+		position fixed
 
 #user-nav
 	float left
 	width 160px
 	margin 0 20px 18px
+	position relative
+	z-index 1
 
 	.details
 		float left
@@ -96,7 +108,6 @@ body
 		background-position 50% 50%
 		background-repeat no-repeat
 		cursor pointer
-		transition all 0.2s ease
 
 		ul
 			display none
@@ -252,6 +263,7 @@ body
 	left 0
 	width 200px
 	text-align center
+	padding 10px 0
 
 	p,a
 		color #bbb
@@ -271,7 +283,7 @@ body
 		height 32px
 		text-indent -9999px
 		overflow hidden
-		margin 0 auto 8px
+		margin 0 auto
 		background-image url("/images/admin/content/v" + $version +"/footer-logo-control.png")
 		background-position 0px 0px
 		background-repeat no-repeat
