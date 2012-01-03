@@ -16,6 +16,11 @@ $(document).ready(function() {
 		disable_search_threshold: 10
 	});
 
+	var availableTags = ["ActionScript","AppleScript","Asp","BASIC","C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran","Groovy","Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme"];
+	$( ".autocomplete" ).autocomplete({
+		source: availableTags
+	});
+
 	/** Fancybox **/
 	$(".fancybox").fancybox({
 		padding: 0,
@@ -30,10 +35,26 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
+	/* Check nav height */
+	function staticNav() {
+		var sidenavHeight = $("#main-header").outerHeight() + $("#main-footer").outerHeight();
+		var winHeight = $(window).height();
+		$("#main-header").css('position', 'fixed');
+		if (sidenavHeight > winHeight) {
+			$("#main-header").css('position', 'absolute');
+		}
+	}
+
+	staticNav();
+
+	$(window).resize(function () {
+		staticNav();
+	});
+
 	/** Third Level Collapsable Navigation **/
 	$('.sub-nav .sub-nav').hide().siblings('a').addClass('nav-expandable');
 	$('a.nav-expandable').click( function(e){
-		$(this).toggleClass('nav-expanded').siblings('.sub-nav').slideToggle(400);
+		$(this).toggleClass('nav-expanded').siblings('.sub-nav').slideToggle(400, function(){staticNav();});
 		e.preventDefault();
 	});
 
@@ -81,6 +102,5 @@ $(document).ready(function() {
 		}
 		return [];
 	}
-
 
 });

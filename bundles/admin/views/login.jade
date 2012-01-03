@@ -1,7 +1,7 @@
 include ../../../views/mixins/formFields
 
-form(action='', method='post')
-	h1 Admin Login
+h1 Admin Login
+form(method='post', enctype='multipart/form-data')
 	p You must login to access this part of the site
 	fieldset
 		-if (error)
@@ -15,4 +15,4 @@ form(action='', method='post')
 				input(name='rememberMe', type='checkbox')
 				span Remember me
 	fieldset.actions
-		input.button.primary(name='Submit', type='submit', value='Login')
+		input.button.primary(type='submit', value='Login')
