@@ -12,14 +12,14 @@ p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed a
 include includes/list-actions
 
 .panel-list
-	h3 All Administrators
+	h3 All #{crudDelegate.plural}
 
 	include includes/filter-form
 	include includes/filter-summary
 
 	- if (dataSet.length === 0)
 		p
-			| Cannot find any, would you like to 
+			| Cannot find any, would you like to
 			a(href='/admin/#{crudDelegate.urlName}/new') add one?
 
 	- else
