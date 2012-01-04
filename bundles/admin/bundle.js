@@ -26,9 +26,6 @@ module.exports = {
 		serviceLocator.adminAccessControlList.addResource('Admin');
 		serviceLocator.adminAccessControlList.addResource('Admin Bar');
 
-		serviceLocator.adminAccessControlList.grant('*', 'Admin', 'read');
-		serviceLocator.adminAccessControlList.grant('*', 'Admin Bar', 'read');
-
 		// This controls the authentication and authorisation of the admin
 		serviceLocator.register('adminAccessControl',
 			require('../../lib/secure/accessControl').createAccessControl(
