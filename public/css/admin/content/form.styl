@@ -132,6 +132,26 @@ fieldset.actions
 	&:hover .description
 		color #555
 
+/** Form Errors **/
+label.error
+	input
+		border 1px solid darken($errorColor, 14)
+		border-radius $baseBorderRadius $baseBorderRadius 0 0
+		&:active,
+		&:focus
+			box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($errorColor, 0.8)
+	.error-description
+		margin-left 30%
+		padding 2px 5px
+		background-color $errorColor
+		border 1px solid darken($errorColor, 14)
+		border-top 0
+		text-shadow 0px 1px 1px darken($errorColor, 14)
+		border-radius 0 0 $baseBorderRadius $baseBorderRadius
+		if dark(darken($errorColor, 7))
+			color #FFFFFF
+		else
+			color #333333
 
 /*
  * Advanced Controls
