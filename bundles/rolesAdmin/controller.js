@@ -32,6 +32,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 							var aclItem = serviceLocator.adminAccessControlList.acl[value];
 							var option = {
 								label: value,
+								value: value,
 								description: aclItem.description,
 								items: Object.keys(aclItem.actions)
 							};
@@ -48,10 +49,11 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 			}
 		}],
 		formPostHelper: function(req, res, next) {
-			var proc = formHelper.processors;
-			formHelper.process(req, {
-				visible: proc.boolean
+			var newGrants = {};
+			Object.keys(req.body.grants).forEach(function(grant) {
+				newGrants[grant] = Array.isArray(req.body.grants[grant]) ? req.body.grants[grant] : [req.body.grants[grant]];
 			});
+			req.body.grants = newGrants;
 			next();
 		}
 	});
