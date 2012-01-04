@@ -47,7 +47,7 @@ mixin groupedCheckBoxGroupForObject(label, name, dataObject, required, errors, g
 					-each option in options.items
 						li
 							label
-								input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option) !== -1))
+								input(name='#{name}[#{options.value}]', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name][options.value] && (dataObject[name][options.value].indexOf(option) !== -1)))
 								span=option
 					mixin fieldFooter(information, errors[name])
 
