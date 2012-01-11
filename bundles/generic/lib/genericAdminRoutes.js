@@ -147,7 +147,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 					name: crudDelegate.name,
 					section: crudDelegate.urlName
 				},
-				url: urlObj
+				url: urlObj,
+				searchProperties: searchProperties
 			});
 		});
 	});
