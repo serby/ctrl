@@ -111,7 +111,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 						}
 						break;
 					case 'text':
-						regExpSearchTerm = new RegExp(filter, '/i');
+						regExpSearchTerm = new RegExp(filter, 'i');
 						queryItem[type] = regExpSearchTerm;
 						queryFields.push(queryItem);
 						break;
