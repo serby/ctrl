@@ -26,7 +26,7 @@ module.exports.createHelpers = function(properties, app) {
 			})
 			.helpers({
 				dateTime: function(date) {
-					return (new Date(date)).format('d mmm yyyy @ H:m:s');
+					return (new Date(date)).format('d mmm yyyy @ H:MM:ss');
 				},
 				date: function(date) {
 					var d = new Date(date);
