@@ -20,13 +20,13 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	//options = defaultOptions;
 	/**
 	* Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
-	* Iterates through each group and the properties of that group to get the searchField and the type of data
+	* Iterates through each group and the properties of that group to get the searchType if present
 	*/
-	var searchFields = {};
+	var searchProperties = {};
 	Object.keys(adminViewSchema.groups).forEach(function(group) {
 		Object.keys(adminViewSchema.groups[group].properties).forEach(function(property) {
-			if (adminViewSchema.groups[group].properties[property].searchField) {
-				searchFields[property] = adminViewSchema.groups[group].properties[property].searchField;
+			if (adminViewSchema.groups[group].properties[property].searchType) {
+				searchProperties[property] = adminViewSchema.groups[group].properties[property].searchType;
 			}
 		});
 	});
@@ -95,24 +95,24 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			filter = urlObj.Filter,
 			regExpSearchTerm;
 
-		if (Object.keys(searchFields).length === 0) {
+		if (Object.keys(searchProperties).length === 0) {
 			console.error('No search fields set up for ' + crudDelegate.name);
 			return query;
 		}
 
 		if (filter) {
-			Object.keys(searchFields).forEach(function(field) {
+			Object.keys(searchProperties).forEach(function(type) {
 				queryItem = {};
-				switch (searchFields[field]) {
+				switch (searchProperties[type]) {
 					case 'number':
 						if(!isNaN(+filter)) {
-							queryItem[field] = +filter;
+							queryItem[type] = +filter;
 							queryFields.push(queryItem);
 						}
 						break;
 					case 'text':
-						regExpSearchTerm = new RegExp (filter, '/i');
-						queryItem[field] = regExpSearchTerm;
+						regExpSearchTerm = new RegExp(filter, '/i');
+						queryItem[type] = regExpSearchTerm;
 						queryFields.push(queryItem);
 						break;
 				}
