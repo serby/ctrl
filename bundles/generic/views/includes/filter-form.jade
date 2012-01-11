@@ -1,10 +1,11 @@
 .filter-form
-	form(method='get', action='#{crudDelegate.urlName}')
-		label
-			strong Filter Results
-			- if (typeof url.Filter === 'undefined' || url.Filter === '')
-				input(value='', name='Filter', placeholder="Filter Results")
-			- else
-				input(value=url.Filter, name='Filter', placeholder="Filter Results")
-				a.reset(href='?Reset') Reset
-		input.button(type='submit',value='Filter')
+	- if (Object.keys(searchProperties).length > 0)
+		form(method='get', action='#{crudDelegate.urlName}')
+			label
+				strong Filter Results
+				- if (typeof url.Filter === 'undefined' || url.Filter === '')
+					input(value='', name='Filter', placeholder="Filter Results")
+				- else
+					input(value=url.Filter, name='Filter', placeholder="Filter Results")
+					a.reset(href='?Reset') Reset
+			input.button(type='submit',value='Filter')
