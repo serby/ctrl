@@ -33,5 +33,43 @@ module.exports.createModel = function(properties, serviceLocator) {
 		callback(null, entityDelegate.makeDefault(entity));
 	});
 
+	function createRootRole(callback) {
+		crudDelegate.create({ name: 'root', grants: {'*': ['*']} }, callback);
+	}
+
+	function ensureRootRoleExisits(callback) {
+		crudDelegate.find({ name: 'root'}, function(error, role) {
+			if (error) {
+				return callback(error);
+			}
+			if (role.length() === 0) {
+				createRootRole(callback);
+			} else {
+				callback();
+			}
+		});
+	}
+
+	function loadAcl(acl, callback) {
+
+		function addRoleToAcl(role) {
+			Object.keys(role.grants).forEach(function(resource) {
+				role.grants[resource].forEach(function(action) {
+					serviceLocator.logger.silly('Adding grant \'' + role.name + '\\' +  resource  + '\\' + action + '\' to ACL');
+					acl.grant(role.name, resource, action);
+				});
+			});
+		}
+
+		crudDelegate.find({}, function(error, roles) {
+
+			roles.forEach(addRoleToAcl);
+		});
+	}
+
+	// Public methods
+	crudDelegate.ensureRootRoleExisits = ensureRootRoleExisits;
+	crudDelegate.loadAcl = loadAcl;
+
 	return crudDelegate;
 };

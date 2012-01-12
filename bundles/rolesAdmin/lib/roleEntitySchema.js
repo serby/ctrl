@@ -13,8 +13,7 @@ module.exports = {
 	grants: {
 		validators: {
 			all: [validation.required]
-		},
-		type: 'array'
+		}
 	},
 	created: {
 		defaultValue: function() { return new Date(); }

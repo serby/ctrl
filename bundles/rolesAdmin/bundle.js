@@ -21,15 +21,34 @@ module.exports = {
 	configure: function(app, properties, serviceLocator) {
 		// The resource you need access of see the admin bundles
 		serviceLocator.adminAccessControlList.addResource('Role');
-
-		// This should be controlled in the database
-		serviceLocator.adminAccessControlList.grant('*', 'Role', 'create');
-		serviceLocator.adminAccessControlList.grant('*', 'Role', 'read');
-		serviceLocator.adminAccessControlList.grant('*', 'Role', 'update');
-		serviceLocator.adminAccessControlList.grant('*', 'Role', 'write');
-		serviceLocator.adminAccessControlList.grant('*', 'Role', 'delete');
 	},
 	finalise: function(app, properties, serviceLocator) {
+
+		function reloadAcl() {
+			serviceLocator.logger.info('Reloading admin ACL');
+			serviceLocator.adminAccessControlList.clearGrants();
+			serviceLocator.roleModel.loadAcl(serviceLocator.adminAccessControlList);
+		}
+
+		reloadAcl();
+
+		serviceLocator.roleModel.on('onCreate', reloadAcl);
+		serviceLocator.roleModel.on('onUpdate', reloadAcl);
+
+		// The main admin account needs this role to have ultimate power.
+		serviceLocator.roleModel.ensureRootRoleExisits(function(error, role) {
+
+			if (error) {
+				return serviceLocator.logger.warn('Unable to create root role', error);
+			}
+			if (role) {
+				serviceLocator.logger.info('Role \'root\' created. ' +
+					'This role has ultimate access to all resources and actions.');
+			} else {
+				serviceLocator.logger.info('Role \'root\' exists as expected');
+			}
+		});
+
 		// Create controllers
 		require('./controller').createRoutes(app, properties, serviceLocator, __dirname + '/views');
 	}

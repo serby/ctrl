@@ -23,11 +23,6 @@ module.exports = {
 		// The resource you need access of see the admin bundles
 		serviceLocator.adminAccessControlList.addResource('Administrator');
 
-		// This should be controlled in the database
-		serviceLocator.adminAccessControlList.grant('*', 'Administrator', 'create');
-		serviceLocator.adminAccessControlList.grant('*', 'Administrator', 'read');
-		serviceLocator.adminAccessControlList.grant('*', 'Administrator', 'update');
-		serviceLocator.adminAccessControlList.grant('*', 'Administrator', 'delete');
 	},
 	finalise: function(app, properties, serviceLocator) {
 		// Create controllers

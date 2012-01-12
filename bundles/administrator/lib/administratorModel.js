@@ -75,7 +75,7 @@ module.exports.createModel = function(properties, serviceLocator) {
 	 */
 	function createWithFullAccess(administratorDetails, callback) {
 
-		administratorDetails.roles = ['*'];
+		administratorDetails.roles = ['root'];
 
 		crudDelegate.create(administratorDetails, {}, callback);
 	}

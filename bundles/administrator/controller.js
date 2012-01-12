@@ -27,7 +27,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 					view: true,
 					createForm: true,
 					updateForm: true,
-					searchField: 'text',
+					searchType: 'text',
 					required: true
 				},
 				lastName: {
@@ -35,7 +35,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 					view: true,
 					createForm: true,
 					updateForm: true,
-					searchField: 'text',
+					searchType: 'text',
 					required: true
 				},
 				password: {
