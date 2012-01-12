@@ -213,68 +213,6 @@ td.title
 	strong
 		font-size 14px
 
-/** Tooltips **/
-[data-tooltip]
-	border-bottom 1px dotted $primaryColor
-	position relative
-	cursor pointer
-
-	font-size 12px
-	font-weight normal
-	line-height 18px
-	z-index 999
-	&::before,
-	&::after
-		position absolute
-		display block
-		left -9999px
-		opacity 0
-		if $baseTransitionDuration != 0
-			transition opacity $baseTransitionDuration $baseTransitionEasing
-	&::before
-		content attr(data-tooltip)
-		top -28px
-		background #000
-		color #fff
-		padding 3px 8px
-		white-space nowrap
-		box-shadow 0px 1px 3px rgba(0,0,0,.5)
-		if $baseBorderRadius != 0
-			border-radius $baseBorderRadius
-	&::after
-		content ""
-		top -4px
-		width 0
-		height 0
-		border-style solid
-		border-width 4px
-		border-color #000 transparent transparent transparent
-	&:hover
-		&::before
-			left -8px
-			opacity 1
-		&::after
-			opacity 1
-			left 0
-
-[data-tooltip].right
-	&::before
-		top 50%
-		margin-top -11px /* TODO - half line-height + padding top*/
-		margin-left 6px
-	&::after
-		top 50%
-		margin-left -2px
-		margin-top -2px
-		border-color transparent #000 transparent transparent
-	&:hover
-		&::before
-		&::after
-			left 100%
-
-/* Temporary style */
-.form-elements form
-	margin-bottom 200px
 
 /**/
 .admin-ui
