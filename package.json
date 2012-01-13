@@ -3,7 +3,7 @@
 	"main": "app.js",
 	"version": "0.0.1",
 	"private": true,
-	"engine": ">= 0.6.0",
+	"engine": "~0.6.0",
 	"dependencies": {
 		"async": ">=0.1.15",
 		"connect-mongodb": ">=1.1.1",
@@ -15,10 +15,10 @@
 		"mime": ">=1.2.4",
 		"mongodb": ">=0.9.7",
 		"nodemailer": ">=0.2.3",
-		"piton-entity": ">=0.1.0 < 0.2.0",
-		"piton-pipe": ">=0.0.1 < 0.1.0",
-		"piton-string-utils": ">= 0.0.1 < 0.1.0",
-		"piton-validity": ">=0.1.0 < 0.2.0",
+		"piton-entity": "~0.1",
+		"piton-pipe": "~0.0",
+		"piton-string-utils": "~0.0",
+		"piton-validity": "~0.1",
 		"stylus": ">=0.13.3",
 		"underscore": ">=1.2.2",
 		"winston": ">=0.5.6",
@@ -26,6 +26,7 @@
 	},
 	"devDependencies": {
 		"mocha": ">= 0.0.8",
+		"should": ">= 0.0.8",
 		"coffee-script": ">= 1.1.1",
 		"soda": ">= 0.2.4"
 	},
