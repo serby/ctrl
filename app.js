@@ -2,7 +2,7 @@ var
 	properties = require('./properties').getProperties(),
 	serviceLocator = require('./lib/utils/serviceLocator').createServiceLocator(),
 	nodemailer = require('nodemailer'),
-	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties),
+	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
 	Controllers = require('./lib/bundled/controllers'),
 	DomainModels = require('./lib/bundled/domainModels'),

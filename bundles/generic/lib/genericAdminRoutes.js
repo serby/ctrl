@@ -96,7 +96,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			regExpSearchTerm;
 
 		if (Object.keys(searchProperties).length === 0) {
-			console.error('No search fields set up for ' + crudDelegate.name);
+			serviceLocator.logger.warn('No search fields set up for ' + crudDelegate.name);
 			return query;
 		}
 
@@ -122,7 +122,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		}
 
 		if (Object.keys(query).length > 0) {
-			console.info(crudDelegate.name, 'search query: ', query);
+			serviceLocator.logger.info(crudDelegate.name, 'search query: ', query);
 		}
 
 		return query;
