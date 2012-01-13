@@ -38,7 +38,7 @@ module.exports.createModel = function(properties, serviceLocator) {
 
 	function duplicateEmailChecker(entity, callback) {
 		collection.find({ emailAddress: entity.emailAddress }).toArray(function(error, data) {
-			callback(data.length === 0 || data[0]._id.toString() === entity._id ? null : { emailAddress: 'Already in use' }, entity);
+			callback(data.length === 0 || data[0]._id.toString() === entity._id ? null : MongodbCrudDelegate.validationError({ emailAddress: 'Already in use' }), entity);
 		});
 	}
 
