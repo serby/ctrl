@@ -1,6 +1,6 @@
 var
 	properties = require('./properties').getProperties(),
-	serviceLocator = require('./lib/utils/serviceLocator').createServiceLocator(),
+	serviceLocator = require('service-locator').createServiceLocator(),
 	nodemailer = require('nodemailer'),
 	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
