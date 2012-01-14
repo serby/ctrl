@@ -4,8 +4,6 @@ var
 	nodemailer = require('nodemailer'),
 	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
-	Controllers = require('./lib/bundled/controllers'),
-	DomainModels = require('./lib/bundled/domainModels'),
 	bundleManager = require('./lib/bundled/bundleManager').createBundleManager(serviceLocator),
 	app,
 	globalViewHelpers = require('./viewHelpers/global');
