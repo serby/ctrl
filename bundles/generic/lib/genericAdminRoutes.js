@@ -129,16 +129,38 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		return query;
 	}
 
+	function buildOptions(urlObj) {
+		var 
+			options = {},
+			sortProperty = urlObj.Sort,
+			direction = urlObj.Direction;
+
+		if (sortProperty && direction) {
+			options.sort = {};
+			switch (direction) {
+				case 'asc':
+					options.sort[sortProperty] = 1;
+					break;
+				case 'desc':
+					options.sort[sortProperty] = -1;
+					break;
+			}
+		}
+		return options;
+	}
+
 	app.get('/admin/' + crudDelegate.urlName,
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'read'), function (req, res) {
 
 		var
 			urlObj = url.parse(req.url, true).query,
-			mongoQuery = {};
+			mongoQuery = {},
+			options = {};
 
 		mongoQuery = buildSearchQuery(urlObj);
+		options = buildOptions(urlObj);
 
-		crudDelegate.find(mongoQuery, {}, function (errors, dataSet) {
+		crudDelegate.find(mongoQuery, options, function (errors, dataSet) {
 			viewRender(req, res, 'list', {
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
