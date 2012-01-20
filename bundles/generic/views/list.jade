@@ -51,7 +51,8 @@ include includes/list-actions
 										td.title
 											strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
 											ul.row-actions
-												li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
+												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.edit === 'undefined')
+													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
 												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
 													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
 									- else
