@@ -1,11 +1,9 @@
 var
 	properties = require('./properties').getProperties(),
-	serviceLocator = require('./lib/utils/serviceLocator').createServiceLocator(),
+	serviceLocator = require('service-locator').createServiceLocator(),
 	nodemailer = require('nodemailer'),
-	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties),
+	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
-	Controllers = require('./lib/bundled/controllers'),
-	DomainModels = require('./lib/bundled/domainModels'),
 	bundleManager = require('./lib/bundled/bundleManager').createBundleManager(serviceLocator),
 	app,
 	globalViewHelpers = require('./viewHelpers/global');

@@ -1,7 +1,8 @@
 var
 	markdown = require('markdown').markdown,
-	dateTime = require('../lib/utils/date.format'),
 	condensedWeekdayList = require('../lib/utils/condenseWeekdayList');
+
+	require('date-utils');
 
 module.exports.createHelpers = function(properties, app) {
 
@@ -26,7 +27,7 @@ module.exports.createHelpers = function(properties, app) {
 			})
 			.helpers({
 				dateTime: function(date) {
-					return (new Date(date)).format('d mmm yyyy @ H:MM:ss');
+					return (new Date(date)).toFormat('D MMM YYYY @ HH:MI:SS');
 				},
 				date: function(date) {
 					var d = new Date(date);

@@ -4,7 +4,8 @@ var
 	path = require('path'),
 	async = require('async'),
 	util = require('util'),
-	url = require('url');
+	url = require('url'),
+	httpErrors = require('../../../lib/httpErrorHandler');
 
 module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, serviceLocator, customOptions) {
 
@@ -96,7 +97,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			regExpSearchTerm;
 
 		if (Object.keys(searchProperties).length === 0) {
-			console.error('No search fields set up for ' + crudDelegate.name);
+			serviceLocator.logger.warn('No search fields set up for ' + crudDelegate.name);
 			return query;
 		}
 
@@ -122,7 +123,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		}
 
 		if (Object.keys(query).length > 0) {
-			console.info(crudDelegate.name, 'search query: ', query);
+			serviceLocator.logger.info(crudDelegate.name, 'search query: ', query);
 		}
 
 		return query;
@@ -177,6 +178,17 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		};
 	}
 
+	function isValidationError(error) {
+		if (error === null) {
+			return false;
+		}
+		return error.name === 'ValidationError' ? true : false;
+	}
+
+	function render500(next) {
+		return next('Error saving/updating to database');
+	}
+
 	app.get('/admin/' + crudDelegate.urlName + '/new',
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
 		adminViewSchemaHelper(adminViewSchema), function (req, res) {
@@ -199,10 +211,10 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
 		adminViewSchema.formPostHelper,
 		uploadDelegate,
-		adminViewSchemaHelper(adminViewSchema), function (req, res) {
+		adminViewSchemaHelper(adminViewSchema), function (req, res, next) {
 
 		crudDelegate.create(req.body, { validationSet: options.createValidationSet }, function (errors, newEntity) {
-			if (errors) {
+			if (isValidationError(errors)) {
 				viewRender(req, res, 'form', {
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
@@ -213,9 +225,11 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 						action: 'create'
 					},
 					formType: 'createForm',
-					errors: errors,
+					errors: errors.errors,
 					unshownErrors: listUnshownErrors(errors, 'createForm')
 				});
+			} else if (errors) {
+				render500(next);
 			} else {
 				res.redirect('/admin/' + crudDelegate.urlName + '/' + newEntity._id);
 			}
@@ -257,10 +271,10 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	});
 
 	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', uploadDelegate,
-		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res) {
+		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res, next) {
 
 		crudDelegate.update(req.params.id, req.body, { tag: options.updateTag, validationSet: options.updateValidationSet }, function (errors, entity) {
-			if (errors) {
+			if (isValidationError(errors)) {
 				viewRender(req, res, 'form', {
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
@@ -271,9 +285,11 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 						action: 'update'
 					},
 					formType: 'updateForm',
-					errors: errors,
+					errors: errors.errors,
 					unshownErrors: listUnshownErrors(errors, 'updateForm')
 				});
+			} else if (errors) {
+				render500(next);
 			} else {
 				res.redirect('/admin/' + crudDelegate.urlName + '/' + entity._id);
 			}
