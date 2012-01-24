@@ -11,7 +11,8 @@ var
 // Register the global services needed by your entire application
 serviceLocator
 	.register('mailer', nodemailer.send_mail)
-	.register('logger', require('./lib/logger').createLogger(properties));
+	.register('logger', require('./lib/logger').createLogger(properties))
+	.register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath));
 
 bundleManager.addBundles(__dirname + '/bundles/', [
 		'home',

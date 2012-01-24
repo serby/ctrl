@@ -50,10 +50,14 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		}],
 		formPostHelper: function(req, res, next) {
 			var newGrants = {};
-			Object.keys(req.body.grants).forEach(function(grant) {
-				newGrants[grant] = Array.isArray(req.body.grants[grant]) ? req.body.grants[grant] : [req.body.grants[grant]];
-			});
-			req.body.grants = newGrants;
+
+			if (typeof req.body.grants !== 'undefined' && Object.keys(req.body.grants).length !== 0) {
+				Object.keys(req.body.grants).forEach(function(grant) {
+					newGrants[grant] = Array.isArray(req.body.grants[grant]) ? req.body.grants[grant] : [req.body.grants[grant]];
+				});
+				req.body.grants = newGrants;
+			}
+
 			next();
 		}
 	});
