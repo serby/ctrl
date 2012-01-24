@@ -20,7 +20,8 @@ bundleManager.addBundles(__dirname + '/bundles/', [
 		'admin',
 		'rolesAdmin',
 		'generic',
-		'adminUi'
+		'adminUi',
+		'image'
 		// 'promo',
 		// 'promoAdmin',
 		// 'editableContent',

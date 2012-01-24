@@ -1,8 +1,37 @@
 var
 	fs = require('fs'),
-	gm = require('gm');
+	gm = require('gm'),
+	path = require('path');
 
-module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
+module.exports.createRoutes = function(app, properties, serviceLocator) {
+
+	function createCacheForImage(hash, filename, cacheFilename, process, callback) {
+
+		fs.stat(cacheFilename, function(error, stat) {
+			if (!error && stat.isFile()) {
+				callback(null, cacheFilename);
+			} else {
+				serviceLocator.logger.info('Creating thumbnail cache: %s', cacheFilename);
+				var dataFilename = path.join(properties.dataPath, hash, filename);
+
+				fs.mkdir(path.join(properties.cachePath, hash), '0755', function(error) {
+					if (error && error.code !== 'EEXIST') {
+						return callback(error, null);
+					}
+					process(dataFilename, cacheFilename, function(error) {
+						return callback(error, cacheFilename);
+					});
+				});
+			}
+		});
+	}
+
+	function sendFile(res, filePath) {
+		// How long to keep in cache
+		var clientMaxAge = 604800000;
+		res.setHeader('Expires', new Date(Date.now() + clientMaxAge).toUTCString());
+		fs.createReadStream(filePath).pipe(res);
+	}
 
 	app.get('/image/:process/:path/:size/:filename', function(req, res, next) {
 		var
@@ -41,7 +70,8 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		if (processes[req.params.process] === undefined) {
 			return next(new Error('No such image process \'%s\' chose from %s', req.params.process, Object.keys(processes).join(',')));
 		}
-		var cacheFilename = properties.cachePath + req.params.path + '/' + req.params.size + '-' + req.params.process + '-' + req.params.filename;
+
+		var cacheFilename = path.join(properties.cachePath, req.params.path, req.params.size + '-' + req.params.process + '-' + req.params.filename);
 
 		createCacheForImage(req.params.path, req.params.filename, cacheFilename, processes[req.params.process], function(error, cacheFilename) {
 			if (error) {
@@ -51,32 +81,4 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		});
 	});
 
-	function createCacheForImage(path, filename, cacheFilename, process, callback) {
-
-		fs.stat(cacheFilename, function(error, stat) {
-			if (!error && stat.isFile()) {
-				callback(null, cacheFilename);
-			} else {
-				serviceLocator.logger.info('Creating thumbnail cache: %s', cacheFilename);
-				var
-					dataFilename = properties.dataPath + path + '/' + filename;
-
-				fs.mkdir(properties.cachePath + path, '0755', function(error) {
-					if (error && error.code !== 'EEXIST') {
-						return next(error);
-					}
-					process(dataFilename, cacheFilename, function(error) {
-						return callback(error, cacheFilename);
-					});
-				});
-			}
-		});
-	}
-
-	function sendFile(res, filePath) {
-		// How long to keep in cache
-		var clientMaxAge = 604800000;
-		res.setHeader('Expires', new Date(Date.now() + clientMaxAge).toUTCString());
-		fs.createReadStream(filePath).pipe(res);
-	}
 };
