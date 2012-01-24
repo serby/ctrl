@@ -47,47 +47,6 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	}
 
-	function uploadDelegate(req, res, next) {
-
-		async.forEach(Object.keys(req.body), function(key, eachCallback) {
-
-			var
-				formValue = req.body[key];
-
-			if (formValue.path === undefined) {
-				return eachCallback();
-			}
-
-			var hash = path.basename(file.path);
-
-			fs.mkdir(dataPath + '/' + hash, '0755', function(error) {
-				serviceLocator.logger.info('Copying %s to %s', file.path, destPath);
-
-				var
-					destPath = path.normalize(dataPath + '/' + hash + '/' + formValue.name),
-					readFile = fs.createReadStream(formValue.path),
-					writeFile = fs.createWriteStream(destPath, { flags: 'w' });
-
-				readFile.pipe(writeFile);
-				readFile.on('end', function() {
-					req.body[key] = {
-						size: formValue.size,
-						type: formValue.type,
-						path: hash + '/',
-						basename: formValue.name
-					};
-					eachCallback();
-				});
-			});
-		}, function(error) {
-			if (error) {
-				next(error);
-			} else {
-				next();
-			}
-		});
-	}
-
 	function buildSearchQuery(urlObj) {
 		var
 			query = {},
@@ -209,8 +168,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
 	app.post('/admin/' + crudDelegate.urlName + '/new',
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
+		serviceLocator.uploadDelegate,
 		adminViewSchema.formPostHelper,
-		uploadDelegate,
 		adminViewSchemaHelper(adminViewSchema), function (req, res, next) {
 
 		crudDelegate.create(req.body, { validationSet: options.createValidationSet }, function (errors, newEntity) {
@@ -270,9 +229,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', uploadDelegate,
+	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', serviceLocator.uploadDelegate,
 		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res, next) {
-
 		crudDelegate.update(req.params.id, req.body, { tag: options.updateTag, validationSet: options.updateValidationSet }, function (errors, entity) {
 			if (isValidationError(errors)) {
 				viewRender(req, res, 'form', {

@@ -24,7 +24,8 @@
 		"service-locator": "~0.0",
 		"underscore": ">=1.2.2",
 		"winston": ">=0.5.6",
-		"versionator": ">=0.0.1"
+		"versionator": ">=0.0.1",
+		"fileupload": "~0.0.1"
 	},
 	"devDependencies": {
 		"mocha": ">= 0.0.8",
