@@ -168,7 +168,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
 	app.post('/admin/' + crudDelegate.urlName + '/new',
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
-		serviceLocator.fileupload,
+		serviceLocator.uploadDelegate,
 		adminViewSchema.formPostHelper,
 		adminViewSchemaHelper(adminViewSchema), function (req, res, next) {
 
@@ -229,7 +229,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	});
 
-	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', serviceLocator.fileupload,
+	app.post('/admin/' + crudDelegate.urlName + '/:id/edit', serviceLocator.uploadDelegate,
 		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res, next) {
 		crudDelegate.update(req.params.id, req.body, { tag: options.updateTag, validationSet: options.updateValidationSet }, function (errors, entity) {
 			if (isValidationError(errors)) {

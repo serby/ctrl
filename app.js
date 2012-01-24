@@ -12,7 +12,7 @@ var
 serviceLocator
 	.register('mailer', nodemailer.send_mail)
 	.register('logger', require('./lib/logger').createLogger(properties))
-	.register('fileupload', require('fileupload').createFileUpload(properties.dataPath));
+	.register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath));
 
 bundleManager.addBundles(__dirname + '/bundles/', [
 		'home',
