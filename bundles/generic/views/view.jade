@@ -26,7 +26,7 @@ include includes/view-actions
 						dd
 							- if (propertyMeta.type === 'file')
 								mixin downloadLink(entity[key], false)
-							- if (propertyMeta.type === 'dateTime')
+							- else if (propertyMeta.type === 'dateTime')
 								p=dateTime(propertyMeta.format(entity[key]))
 							- else if (propertyMeta.type === 'checkbox')
 								p=booleanFormatter(entity[key])
