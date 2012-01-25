@@ -54,7 +54,7 @@ include includes/list-actions
 										- else if (propertyMeta.type === 'link')
 											td
 												a(href='/#{crudDelegate.urlName}/' + entity[key], target='_blank')=entity[key]
-										- if (propertyMeta.type === 'dateTime')
+										- else if (propertyMeta.type === 'dateTime')
 											td=dateTime(propertyMeta.format(entity[key]))
 										- else
 											td=propertyMeta.format(entity[key])
