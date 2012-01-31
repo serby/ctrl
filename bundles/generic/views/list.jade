@@ -19,17 +19,27 @@ include includes/list-actions
 
 	- if (dataSet.length === 0)
 		p
-			| Cannot find any, would you like to 
+			| Cannot find any, would you like to
 			a(href='/admin/#{crudDelegate.urlName}/new') add one?
 
 	- else
-		table.highlight
+		table.highlight.sortable
 			thead
 				tr
 					- each group in viewSchema.groups
 						- each val, key in group.properties
 							- if (val.list)
-								th=crudDelegate.entityDelegate.propertyName(key)
+								- var property = crudDelegate.entityDelegate.propertyName(key)
+								- var directionClass = ''
+								- var direction = 'asc'
+								- if (typeof url.Sort !== 'undefined' && typeof url.Direction !== 'undefined' && url.Sort === key)
+									- if (url.Direction === 'asc')
+										- directionClass = 'sort-asc'
+										- direction = 'desc'
+									- else if (url.Direction === 'desc')
+										- directionClass = 'sort-desc'
+								th(class=directionClass)
+									a(href='?Sort=' + key + '&Direction=' + direction)=property
 			tbody
 				- each entity in dataSet
 					- var entityName = entity[viewSchema['title']]
@@ -41,7 +51,8 @@ include includes/list-actions
 										td.title
 											strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
 											ul.row-actions
-												li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
+												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.edit === 'undefined')
+													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
 												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
 													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
 									- else
@@ -52,8 +63,8 @@ include includes/list-actions
 												mixin displayImage(100, 100, entity[key][0], crudDelegate.name + ' - ' + entityName, 'crop')
 										- else if (propertyMeta.type === 'link')
 											td
-												a(href='/#{crudDelegate.urlName}/' + entity[key], target='_blank')=entity[key]
-										- if (propertyMeta.type === 'dateTime')
+												a(href=entity[key], target='_blank')=entity[key]
+										- else if (propertyMeta.type === 'dateTime')
 											td=dateTime(propertyMeta.format(entity[key]))
 										- else
 											td=propertyMeta.format(entity[key])
