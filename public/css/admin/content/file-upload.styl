@@ -6,7 +6,7 @@
 		padding 0
 		display block
 		overflow hidden
-		background url("/images/admin/v" + version() + "/sprite.png") 0px -54px no-repeat
+		background url(versionPath("/images/admin/sprite.png")) 0px -54px no-repeat
 		&:hover
 			background-position -110px -54px
 
@@ -77,12 +77,12 @@ table.files
 				height 21px
 				text-indent -9999px
 				width 82px
-				background url("/images/content/v" + version() +"/button-sprite.png") -208px -111px no-repeat
+				background url(versionPath("/images/content/button-sprite.png")) -208px -111px no-repeat
 				border none
 				&:hover
 					background-position -208px -135px
 			button.cancel
 				width 84px
-				background url("/images/admin/v" + version() +"/sprite.png") -220px -54px no-repeat
+				background url(versionPath("/images/admin/sprite.png")) -220px -54px no-repeat
 				&:hover
 					background-position -308px -54px

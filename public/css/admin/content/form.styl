@@ -211,7 +211,7 @@ label.error
 /** Datepicker **/
 input.datepicker
 	position relative
-	/*background url("/images/admin/content/v" + version() +"/datepicker-sprite.png") 0 0 no-repeat*/
+	/*background url(versionPath("/images/admin/content/datepicker-sprite.png")) 0 0 no-repeat*/
 	background-position 99% 5px
 	background-repeat no-repeat
 	background-size 18px 18px
@@ -235,7 +235,7 @@ input.datepicker
 		left 10px
 		width 25px
 		height 12px
-		background url("/images/admin/content/v" + version() +"/datepicker-sprite.png") 0px -61px no-repeat
+		background url(versionPath("/images/admin/content/datepicker-sprite.png")) 0px -61px no-repeat
 
 	.ui-datepicker-title
 		padding-bottom 6px
@@ -256,7 +256,7 @@ input.datepicker
 		margin-bottom 0
 		overflow hidden
 		text-indent -9999px
-		background url("/images/admin/content/v" + version() +"/button-sprite.png") -160px -94px no-repeat $primaryColor
+		background url(versionPath("/images/admin/content/button-sprite.png")) -160px -94px no-repeat $primaryColor
 		&:hover
 			background-position -160px -110px
 	.ui-datepicker-prev
@@ -309,7 +309,7 @@ input.datepicker
 	.ui-datepicker-current-day
 		a,
 		span
-			background url("/images/admin/content/v" + version() +"/datepicker-sprite.png") 0 0 no-repeat $primaryColor
+			background url(versionPath("/images/admin/content/datepicker-sprite.png")) 0 0 no-repeat $primaryColor
 			&:hover
 				background-image none
 	.ui-datepicker-other-month
