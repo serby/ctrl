@@ -31,15 +31,13 @@ include includes/list-actions
 							- if (val.list)
 								- var property = crudDelegate.entityDelegate.propertyName(key)
 								- var directionClass = ''
-								- var direction = 'asc'
-								- if (typeof url.Sort !== 'undefined' && typeof url.Direction !== 'undefined' && url.Sort === key)
+								- if (url.Sort === key)
 									- if (url.Direction === 'asc')
 										- directionClass = 'sort-asc'
-										- direction = 'desc'
 									- else if (url.Direction === 'desc')
 										- directionClass = 'sort-desc'
 								th(class=directionClass)
-									a(href='?Sort=' + key + '&Direction=' + direction)=property
+									a(href=querystring.getSort(url, key))=property
 			tbody
 				- each entity in dataSet
 					- var entityName = entity[viewSchema['title']]
@@ -69,3 +67,5 @@ include includes/list-actions
 											td=dateTime(propertyMeta.format(entity[key]))
 										- else
 											td=propertyMeta.format(entity[key])
+
+include includes/pagination
