@@ -19,7 +19,7 @@ include includes/list-actions
 
 	- if (dataSet.length === 0)
 		p
-			| Cannot find any, would you like to
+			| Cannot find any, would you like to 
 			a(href='/admin/#{crudDelegate.urlName}/new') add one?
 
 	- else
@@ -60,6 +60,7 @@ include includes/list-actions
 											td=booleanFormatter(entity[key])
 										- else if (propertyMeta.type === 'file')
 											td.thumbnail
+											- if (entity[key])
 												mixin displayImage(100, 100, entity[key][0], crudDelegate.name + ' - ' + entityName, 'crop')
 										- else if (propertyMeta.type === 'link')
 											td
