@@ -1,0 +1,51 @@
+/*
+ * Pagination styles Styles
+ */
+
+#pagination
+	text-align center
+	a,
+	span
+		text-decoration none
+		padding 0px 5px 1px
+		margin 0px 3px
+	span
+		color #aaaaaa
+	// Using ISO numeric codes to add arrows.
+	// http://www.evotech.net/blog/2007/04/named-html-entities-in-numeric-order/
+	.first::before
+		content "\00ab\00a0"
+	.prev::before
+		content "\2039\00a0"
+	.next::after
+		content "\00a0\203A"
+	.last::after
+		content "\00a0\00bb"
+	.current-page
+		position relative
+		display inline-block
+		width auto
+		font-weight bold
+		background-color $primaryColor
+		border 1px solid darken($primaryColor, 6)
+		text-decoration none
+		outline 0 /* Be sure to set a focus style if using this */
+		cursor pointer
+		box-shadow 0px 0px 0px 1px lighten($primaryColor, 5) inset
+		text-shadow 0px 1px 1px darken($primaryColor, 6)
+		if dark($primaryColor)
+			color #FFFFFF /* TODO - move to variable */
+		else
+			color #333333 /* TODO - move to variable */
+
+		if $baseBorderRadius != 0
+			border-radius $baseBorderRadius
+		if $baseTransitionDuration != 0
+			transition border $baseTransitionDuration $baseTransitionEasing, background-color $baseTransitionDuration $baseTransitionEasing
+
+		&:hover
+			color #fff
+			background-color lighten($primaryColor, 3)
+		&:active,
+		&:focus
+			background-color darken($primaryColor, 3)
