@@ -207,7 +207,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			if (error !== null) {
 				res.send(404);
 			} else {
-				res.redirect('/admin/' + options.requiredAccess);
+				res.redirect('/admin/' + crudDelegate.urlName);
 			}
 		});
 	});
