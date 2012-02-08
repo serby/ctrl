@@ -115,8 +115,8 @@ mixin selectField(classname, label, name, value, required, error, list, informat
 						option(selected=(option == value) ? 'selected' : null)=option
 			- else
 				select(class=classname,name='#{name}')
-					- each value, text in list
-						option(value=value)=text
+					- each option, text in list
+						option(selected=(option == value) ? 'selected' : null, value=option)=text
 
 			mixin fieldFooter(information, error)
 
