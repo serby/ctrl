@@ -19,7 +19,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 					required: true
 				},
 				_id: {
-					form: true,
+					updateForm: true,
 					type: 'hidden'
 				},
 				firstName: {
@@ -85,6 +85,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 		serviceLocator,
 		{
 			updateTag: 'update',
+			updateValidationSet: 'update',
 			requiredAccess: 'Administrator'
 		}
 	);
