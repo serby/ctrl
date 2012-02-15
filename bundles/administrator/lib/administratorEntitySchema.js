@@ -4,6 +4,7 @@ var
 
 module.exports = {
 	_id: {
+		tag: ['update']
 	},
 	emailAddress: {
 		validators: {
