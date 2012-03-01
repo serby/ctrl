@@ -20,7 +20,7 @@
 		"piton-pipe": "~0.0",
 		"piton-string-utils": "~0.0",
 		"piton-validity": "~0.1",
-		"stylus": ">=0.13.3",
+		"stylus": "=0.22",
 		"service-locator": "~0.0",
 		"underscore": ">=1.2.2",
 		"winston": ">=0.5.6",
