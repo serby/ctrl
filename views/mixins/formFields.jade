@@ -26,11 +26,17 @@ mixin checkBoxGroupForObject(label, name, dataObject, required, errors, list, in
 		div.label(class=errors[name] && 'error')
 			span #{label}
 		ul
-			-each option in list
-				li
-					label
-						input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option) !== -1))
-						span=option
+			li
+				label
+					-if (Array.isArray(list))
+						-each option in list
+							input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option) !== -1))
+							span=option
+					-else	
+						-each option, key in list
+							input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option.toString()) !== -1))
+							span=key
+			
 			mixin fieldFooter(information, errors[name])
 
 mixin groupedCheckBoxGroupForObject(label, name, dataObject, required, errors, groups, information)
