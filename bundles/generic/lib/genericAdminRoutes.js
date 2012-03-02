@@ -23,7 +23,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	_.extend(options, customOptions);
 
 	/**
-	* This ensures errors with properties that are not displayed on the form are showen
+	* This ensures errors with properties that are not displayed on the form are shown
 	*/
 	function listUnshownErrors(errors, formType) {
 
