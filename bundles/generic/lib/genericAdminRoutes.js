@@ -22,6 +22,14 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
 	_.extend(options, customOptions);
 
+	var views =  {
+		form: __dirname + '/../views/form',
+		list: __dirname + '/../views/list',
+		view: __dirname + '/../views/view'
+	};
+
+	_.extend(views, customOptions.views);
+
 	/**
 	* This ensures errors with properties that are not displayed on the form are shown
 	*/
@@ -46,7 +54,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'read'), function (req, res) {
 
 		crudDelegate.find(req.query, _.extend(req.options, req.searchOptions), function (errors, dataSet) {
-			viewRender(req, res, 'list', {
+			viewRender(req, res, views.list, {
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
 				dataSet: dataSet.toArray(),
@@ -100,7 +108,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
 		adminViewSchemaHelper(adminViewSchema), function (req, res) {
 
-		viewRender(req, res, 'form', {
+		viewRender(req, res, views.form, {
 			viewSchema: adminViewSchema,
 			crudDelegate: crudDelegate,
 			entity: crudDelegate.entityDelegate.makeDefault(),
@@ -122,7 +130,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
 		crudDelegate.create(req.body, { validationSet: options.createValidationSet }, function (errors, newEntity) {
 			if (isValidationError(errors)) {
-				viewRender(req, res, 'form', {
+				viewRender(req, res, views.form, {
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
 					entity: newEntity,
@@ -145,7 +153,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
 	app.get('/admin/' + crudDelegate.urlName + '/:id', serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'read'), function (req, res) {
 		crudDelegate.read(req.params.id, function (errors, entity) {
-			viewRender(req, res, 'view', {
+			viewRender(req, res, views.view, {
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
 				entity: entity,
@@ -161,7 +169,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	app.get('/admin/' + crudDelegate.urlName + '/:id/edit', adminViewSchemaHelper(adminViewSchema), serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res) {
 		crudDelegate.read(req.params.id, function (errors, entity) {
 
-			viewRender(req, res, 'form', {
+			viewRender(req, res, views.form, {
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
 				entity: entity,
@@ -181,7 +189,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		adminViewSchema.formPostHelper, serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'), function (req, res, next) {
 		crudDelegate.update(req.params.id, req.body, { tag: options.updateTag, validationSet: options.updateValidationSet }, function (errors, entity) {
 			if (isValidationError(errors)) {
-				viewRender(req, res, 'form', {
+				viewRender(req, res, views.form, {
 					viewSchema: adminViewSchema,
 					crudDelegate: crudDelegate,
 					entity: entity,
