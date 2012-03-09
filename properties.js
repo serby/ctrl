@@ -27,21 +27,27 @@ var properties = {
 var environmentProperties = {
 	development: {},
 	testing: {
+		siteUrl: 'http://localhost:' + (basePort + 2),
+		port: basePort + 2,
 		hosts: [
 			{
 				host: 'localhost',
 				sshPort: 22
 			}
 		],
-		port: basePort + 1,
 		database: {
-			host: '127.0.0.1',
-			port: 27017,
+			replSet: {
+				name: 'Control',
+				servers: [
+					{ host: 'localhost', port: 28000 },
+					{ host: 'localhost', port: 28001 }
+				]
+			},
 			name: 'Control-Testing'
 		}
 	},
 	production: {
-		siteUrl: 'cast',
+		siteUrl: 'http://localhost:' + (basePort + 2),
 		port: basePort + 3,
 		email: 'paul.serby@clock.co.uk',
 		hosts: [

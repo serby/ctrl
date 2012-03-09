@@ -30,8 +30,8 @@ html(lang='en')
 			document.createElement('hgroup');
 
 		block styles
-			link(rel='stylesheet', type='text/css', href='/css/admin/v#{properties.version}/index.css', media='all')
-			link(rel='stylesheet', type='text/css', href='/js/fancybox/v#{properties.version}/jquery.fancybox.css', media='all')
+			link(rel='stylesheet', type='text/css', href=versionPath('/css/admin/index.css'), media='all')
+			link(rel='stylesheet', type='text/css', href=versionPath('/js/fancybox/jquery.fancybox.css'), media='all')
 
 	body(class=page.section)
 		#container
@@ -57,6 +57,6 @@ html(lang='en')
 					document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
 				}
 
-			script(src='/js/chosen/v#{properties.version}/chosen.jquery.js')
-			script(src='/js/fancybox/v#{properties.version}/jquery.fancybox.pack.js')
-			script(src='/js/admin/v#{properties.version}/control.js')
+			script(src=versionPath('/js/chosen/chosen.jquery.js'))
+			script(src=versionPath('/js/fancybox/jquery.fancybox.pack.js'))
+			script(src=versionPath('/js/admin/control.js'))

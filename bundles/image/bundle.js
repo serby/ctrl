@@ -1,5 +1,7 @@
 module.exports = {
 	name: 'Image',
 	description: 'Create a route for manipulating images by cropping and resizing them',
-	controllerFactories: [require('./controller').createRoutes]
+	finalise: function(app, properties, serviceLocator) {
+		require('./lib/controller').createRoutes(app, properties, serviceLocator);
+	}
 };

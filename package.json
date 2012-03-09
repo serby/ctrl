@@ -1,6 +1,6 @@
 {
 	"name": "control",
-	"main": "app.js",
+	"main": "server.js",
 	"version": "0.0.1",
 	"private": true,
 	"engine": "~0.6.0",
@@ -20,11 +20,11 @@
 		"piton-pipe": "~0.0",
 		"piton-string-utils": "~0.0",
 		"piton-validity": "~0.1",
-		"stylus": ">=0.13.3",
+		"stylus": "=0.22",
 		"service-locator": "~0.0",
 		"underscore": ">=1.2.2",
 		"winston": ">=0.5.6",
-		"versionator": ">=0.0.1",
+		"versionator": "~0.1",
 		"fileupload": "~0.0.1"
 	},
 	"devDependencies": {

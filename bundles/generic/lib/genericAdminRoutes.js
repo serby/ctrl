@@ -5,7 +5,10 @@ var
 	async = require('async'),
 	util = require('util'),
 	url = require('url'),
-	httpErrors = require('../../../lib/httpErrorHandler');
+	httpErrors = require('../../../lib/httpErrorHandler'),
+	SearchQueryBuilder = require('../../../lib/utils/buildSearchQuery'),
+	buildSortOptions = require('../../../lib/utils/buildSortOptions'),
+	Pagination = require('../../../lib/utils/pagination');
 
 module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, serviceLocator, customOptions) {
 
@@ -18,26 +21,13 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	};
 
 	_.extend(options, customOptions);
-	//options = defaultOptions;
-	/**
-	* Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
-	* Iterates through each group and the properties of that group to get the searchType if present
-	*/
-	var searchProperties = {};
-	Object.keys(adminViewSchema.groups).forEach(function(group) {
-		Object.keys(adminViewSchema.groups[group].properties).forEach(function(property) {
-			if (adminViewSchema.groups[group].properties[property].searchType) {
-				searchProperties[property] = adminViewSchema.groups[group].properties[property].searchType;
-			}
-		});
-	});
 
 	/**
-	* This ensures errors with properties that are not displayed on the form are showen
+	* This ensures errors with properties that are not displayed on the form are shown
 	*/
 	function listUnshownErrors(errors, formType) {
 
-		return Object.keys(errors).filter(function(property) {
+		return Object.keys(errors.errors).filter(function(property) {
 			for (var i = 0; i < adminViewSchema.groups.length; i++) {
 				if ((adminViewSchema.groups[i].properties[property] === undefined) || (!adminViewSchema.groups[i].properties[property][formType])) {
 					return true;
@@ -47,57 +37,15 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 		});
 	}
 
-	function buildSearchQuery(urlObj) {
-		var
-			query = {},
-			queryItem = {},
-			queryFields = [],
-			filter = urlObj.Filter,
-			regExpSearchTerm;
+	var
+		searchProperties = SearchQueryBuilder.createSearchProperties(adminViewSchema.groups),
+		buildSearchQuery = SearchQueryBuilder.createSearchQueryBuilder(searchProperties, serviceLocator.logger, crudDelegate.name),
+		paginate = Pagination.createPagination(crudDelegate.count, 10);
 
-		if (Object.keys(searchProperties).length === 0) {
-			serviceLocator.logger.warn('No search fields set up for ' + crudDelegate.name);
-			return query;
-		}
-
-		if (filter) {
-			Object.keys(searchProperties).forEach(function(type) {
-				queryItem = {};
-				switch (searchProperties[type]) {
-					case 'number':
-						if(!isNaN(+filter)) {
-							queryItem[type] = +filter;
-							queryFields.push(queryItem);
-						}
-						break;
-					case 'text':
-						regExpSearchTerm = new RegExp(filter, 'i');
-						queryItem[type] = regExpSearchTerm;
-						queryFields.push(queryItem);
-						break;
-				}
-			});
-
-			query = { $or: queryFields };
-		}
-
-		if (Object.keys(query).length > 0) {
-			serviceLocator.logger.info(crudDelegate.name, 'search query: ', query);
-		}
-
-		return query;
-	}
-
-	app.get('/admin/' + crudDelegate.urlName,
+	app.get('/admin/' + crudDelegate.urlName, buildSearchQuery, buildSortOptions, paginate,
 		serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'read'), function (req, res) {
 
-		var
-			urlObj = url.parse(req.url, true).query,
-			mongoQuery = {};
-
-		mongoQuery = buildSearchQuery(urlObj);
-
-		crudDelegate.find(mongoQuery, {}, function (errors, dataSet) {
+		crudDelegate.find(req.query, _.extend(req.options, req.searchOptions), function (errors, dataSet) {
 			viewRender(req, res, 'list', {
 				viewSchema: adminViewSchema,
 				crudDelegate: crudDelegate,
@@ -107,7 +55,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 					name: crudDelegate.name,
 					section: crudDelegate.urlName
 				},
-				url: urlObj,
+				url: url.parse(req.url, true).query,
 				searchProperties: searchProperties
 			});
 		});
@@ -259,7 +207,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			if (error !== null) {
 				res.send(404);
 			} else {
-				res.redirect('/admin/' + options.requiredAccess);
+				res.redirect('/admin/' + crudDelegate.urlName);
 			}
 		});
 	});
