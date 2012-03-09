@@ -109,7 +109,7 @@ mixin textboxFieldForObject(classname, label, name, dataObject, required, error,
 	mixin textboxField(classname, label, name, dataObject[name], required, errors[name], maxLength, information)
 
 //- Don't use this directly. Use dropdown or listbox
-mixin selectField(classname, label, name, value, required, error, list, information, multiple)
+mixin selectField(classname, label, name, currentValue, required, error, list, information, multiple)
 	.form-row
 		label(class=error && 'error')
 			span #{label}
@@ -118,11 +118,11 @@ mixin selectField(classname, label, name, value, required, error, list, informat
 			- if (Array.isArray(list))
 				select(class=classname,name='#{name}', multiple=(multiple ? 'multiple' : null ))
 					- each option in list
-						option(selected=(option == value) ? 'selected' : null)=option
+						option(selected=(option == currentValue) ? 'selected' : null)=option
 			- else
 				select(class=classname,name='#{name}')
 					- each value, text in list
-						option(value=value)=text
+						option(value=value, selected=(value == currentValue) ? 'selected' : null)=text
 
 			mixin fieldFooter(information, error)
 
