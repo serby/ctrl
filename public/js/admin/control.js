@@ -22,7 +22,7 @@ $(document).ready(function() {
 	});
 
 	/** Fancybox **/
-	$(".fancybox").fancybox({
+	$(".fancybox, [rel='fancybox-group']").fancybox({
 		padding: 0,
 		prevEffect: 'fade',
 		nextEffect: 'fade'
