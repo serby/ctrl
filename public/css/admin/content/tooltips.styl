@@ -8,15 +8,15 @@
 	font-weight normal
 	line-height 18px
 	z-index 999
-	&::before,
-	&::after
+	&:before,
+	&:after
 		position absolute
 		display block
 		left -9999px
 		opacity 0
 		if $baseTransitionDuration != 0
 			transition opacity $baseTransitionDuration $baseTransitionEasing
-	&::before
+	&:before
 		content attr(data-tooltip)
 		top -30px
 		background #111
@@ -28,7 +28,7 @@
 		box-shadow 0px 1px 3px rgba(0,0,0,.5)
 		if $baseBorderRadius != 0
 			border-radius $baseBorderRadius
-	&::after
+	&:after
 		content ""
 		top -4px
 		width 0
@@ -37,42 +37,42 @@
 		border-width 4px
 		border-color #000 transparent transparent transparent
 	&:hover
-		&::before
+		&:before
 			left -8px
 			opacity 1
-		&::after
+		&:after
 			opacity 1
 			left 0
 
 [data-tooltip].left
-	&::before
+	&:before
 		top 50%
 		margin-top -13px /* TODO - half line-height + padding top*/
 		margin-right 6px
-	&::after
+	&:after
 		top 50%
 		margin-right -2px
 		margin-top -4px
 		border-color transparent transparent transparent #000
 	&:hover
-		&::before
-		&::after
+		&:before
+		&:after
 			right 100%
 			left auto
 
 [data-tooltip].right
-	&::before
+	&:before
 		top 50%
 		margin-top -13px /* TODO - half line-height + padding top*/
 		margin-left 6px
-	&::after
+	&:after
 		top 50%
 		margin-left -2px
 		margin-top -4px
 		border-color transparent #000 transparent transparent
 	&:hover
-		&::before
-		&::after
+		&:before
+		&:after
 			left 100%
 
 /** Site specific tooltips **/

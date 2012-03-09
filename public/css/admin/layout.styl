@@ -35,7 +35,7 @@ body
 	background-color #3b3f42
 	z-index 1
 
-	&::before
+	&:before
 		top 100%
 		left 0
 		position absolute
@@ -47,7 +47,7 @@ body
 		background-linear-gradient(top, rgba(59, 63, 66, 1), 0%, rgba(59, 63, 66, 0), 100%)
 		background-color transparent
 
-	&::after
+	&:after
 		top 0
 		right 0
 		position absolute
@@ -138,7 +138,7 @@ body
 				width 160px
 				height 4px
 				top -4px
-			&::after
+			&:after
 				position absolute
 				display block
 				content ""
@@ -245,7 +245,7 @@ body
 		.js &
 			display none
 
-	.js & .nav-expandable::after
+	.js & .nav-expandable:after
 		position absolute
 		content ""
 		display block
@@ -258,7 +258,7 @@ body
 		background-position 0 0
 		background-repeat no-repeat
 		transition all 0.4s ease
-	.js & .nav-expandable.nav-expanded::after
+	.js & .nav-expandable.nav-expanded:after
 		transform rotate(-90deg)
 
 #main-content
