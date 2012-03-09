@@ -1,6 +1,6 @@
 {
 	"name": "control",
-	"main": "app.js",
+	"main": "server.js",
 	"version": "0.0.1",
 	"private": true,
 	"engine": "~0.6.0",
