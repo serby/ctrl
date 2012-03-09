@@ -3,6 +3,7 @@ var
 	serviceLocator = require('service-locator').createServiceLocator(),
 	nodemailer = require('nodemailer'),
 	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
+	sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
 	bundleManager = require('./lib/bundled/bundleManager').createBundleManager(serviceLocator),
 	app,
@@ -22,14 +23,9 @@ bundleManager.addBundles(__dirname + '/bundles/', [
 		'generic',
 		'adminUi',
 		'image'
-		// 'promo',
-		// 'promoAdmin',
-		// 'editableContent',
-		// 'editableContentAdmin',
-		// 'recommendation'
 ]);
 
-module.exports = app = Application.createApplication(properties, serviceLocator, bundleManager, databaseAdaptor);
+module.exports = app = Application.createApplication(properties, serviceLocator, bundleManager, sessionDatabaseAdaptor);
 
 databaseAdaptor.createConnection(function(connection) {
 
@@ -40,7 +36,7 @@ databaseAdaptor.createConnection(function(connection) {
 
 	bundleManager.initBundles(app, properties);
 
-	// Make the bundle manager avaialbe to views
+	// Make the bundle manager available to views
 	app.configure(function() {
 		app.dynamicHelpers({
 			bundleManager: function(req, res) {

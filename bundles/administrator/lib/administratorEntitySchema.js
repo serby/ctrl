@@ -4,6 +4,7 @@ var
 
 module.exports = {
 	_id: {
+		tag: ['update']
 	},
 	emailAddress: {
 		validators: {
@@ -29,7 +30,8 @@ module.exports = {
 		}
 	},
 	roles: {
-		type: 'array'
+		type: 'array',
+		tag: ['update']
 	},
 	created: {
 		defaultValue: function() { return new Date(); }

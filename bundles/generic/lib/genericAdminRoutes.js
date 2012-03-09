@@ -23,11 +23,11 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 	_.extend(options, customOptions);
 
 	/**
-	* This ensures errors with properties that are not displayed on the form are showen
+	* This ensures errors with properties that are not displayed on the form are shown
 	*/
 	function listUnshownErrors(errors, formType) {
 
-		return Object.keys(errors).filter(function(property) {
+		return Object.keys(errors.errors).filter(function(property) {
 			for (var i = 0; i < adminViewSchema.groups.length; i++) {
 				if ((adminViewSchema.groups[i].properties[property] === undefined) || (!adminViewSchema.groups[i].properties[property][formType])) {
 					return true;
@@ -207,7 +207,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 			if (error !== null) {
 				res.send(404);
 			} else {
-				res.redirect('/admin/' + options.requiredAccess);
+				res.redirect('/admin/' + crudDelegate.urlName);
 			}
 		});
 	});
