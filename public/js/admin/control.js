@@ -73,7 +73,7 @@ $(document).ready(function() {
 		var thisPath = filterPath(this.pathname) || locationPath;
 		if (  locationPath === thisPath && (location.hostname === this.hostname || !this.hostname)  && this.hash.replace(/#/,'') ) {
 			var $target = $(this.hash), target = this.hash;
-			if (target) {
+			if (target && $target.offset()) {
 				var targetOffset = $target.offset().top;
 				$(this).click(function(event) {
 					event.preventDefault();
