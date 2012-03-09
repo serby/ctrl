@@ -20,6 +20,14 @@ html(lang='en')
 
 		script
 			document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+			//- TODO - Temporary HTML5 IE* fix
+			document.createElement('header');
+			document.createElement('nav');
+			document.createElement('section');
+			document.createElement('article');
+			document.createElement('aside');
+			document.createElement('footer');
+			document.createElement('hgroup');
 
 		block styles
 			link(rel='stylesheet', type='text/css', href=versionPath('/css/admin/index.css'), media='all')
