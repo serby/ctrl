@@ -49,7 +49,7 @@ databaseAdaptor.createConnection(function(connection) {
 	});
 
 	// Add helpers
-	globalViewHelpers.createHelpers(properties, app);
+	globalViewHelpers.createHelpers(serviceLocator, properties, app);
 
 	app.start();
 });

@@ -1,12 +1,12 @@
 !!! 5
 //if lt IE 7
-	<html class="ie6" lang="en">
+	<html class='ie6' lang='en'>
 //if IE 7
-	<html class="ie7" lang="en">
+	<html class='ie7' lang='en'>
 //if IE 8
-	<html class="ie8" lang="en">
+	<html class='ie8' lang='en'>
 //if IE 9
-	<html class="ie9" lang="en">
+	<html class='ie9' lang='en'>
 //[if gt IE 8]><!
 html(lang='en')
 	//<![endif]
@@ -60,3 +60,6 @@ html(lang='en')
 			script(src=versionPath('/js/chosen/chosen.jquery.js'))
 			script(src=versionPath('/js/fancybox/jquery.fancybox.pack.js'))
 			script(src=versionPath('/js/admin/control.js'))
+
+			- if(typeof javascriptSrc !== 'undefined')
+				!= partial('includes/structure/javascript', javascriptSrc)

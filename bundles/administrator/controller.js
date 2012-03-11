@@ -67,12 +67,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 			}
 		}],
 		formPostHelper: function(req, res, next) {
-			var proc = formHelper.processors;
-
-			formHelper.process(req, {
-				visible: proc.boolean,
-				roles: proc.checkBoxGroup
-			});
 
 			next();
 		}
