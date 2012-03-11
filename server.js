@@ -5,27 +5,31 @@ var
 	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
-	bundleManager = require('./lib/bundled/bundleManager').createBundleManager(serviceLocator),
+	bundled = require('bundled')(serviceLocator),
 	app,
 	globalViewHelpers = require('./viewHelpers/global');
 
 // Register the global services needed by your entire application
 serviceLocator
+	.register('properties', properties)
 	.register('mailer', nodemailer.send_mail)
 	.register('logger', require('./lib/logger').createLogger(properties))
-	.register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath));
+	.register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath))
+	.register('bundled', bundled);
 
-bundleManager.addBundles(__dirname + '/bundles/', [
-		'home',
-		'administrator',
-		'admin',
-		'rolesAdmin',
-		'generic',
-		'adminUi',
-		'image'
+bundled.addBundles(__dirname + '/bundles/', [
+	'home',
+	'administrator',
+	'admin',
+	'rolesAdmin',
+	'generic',
+	'adminUi',
+	'image'
 ]);
 
-module.exports = app = Application.createApplication(properties, serviceLocator, bundleManager, sessionDatabaseAdaptor);
+module.exports = app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
+
+serviceLocator.register('app', app);
 
 databaseAdaptor.createConnection(function(connection) {
 
@@ -34,13 +38,13 @@ databaseAdaptor.createConnection(function(connection) {
 			main: connection
 	});
 
-	bundleManager.initBundles(app, properties);
+	bundled.initialize();
 
 	// Make the bundle manager available to views
 	app.configure(function() {
 		app.dynamicHelpers({
-			bundleManager: function(req, res) {
-				return bundleManager;
+			bundled: function(req, res) {
+				return bundled;
 			},
 			serviceLocator: function(req, res) {
 				return serviceLocator;

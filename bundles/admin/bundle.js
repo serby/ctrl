@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'Admin',
+	version: '0.0.1',
 	description: 'Admin section for the site',
 	middleware: [
 		function(serviceLocator) {
@@ -13,27 +14,31 @@ module.exports = {
 			};
 		}
 	],
-	register: function(app, properties, serviceLocator) {
+	initialize: [
+		function(serviceLocator, done) {
 
-		// Adding this bundle registers the admin acl
-		serviceLocator.register('adminAccessControlList',
-			require('../../lib/secure/accessControlList').createAccessControlList(serviceLocator.logger));
+			// Adding this bundle registers the admin acl
+			serviceLocator.register('adminAccessControlList',
+				require('../../lib/secure/accessControlList').createAccessControlList(serviceLocator.logger));
+			done();
+		},
+		function(serviceLocator, done) {
 
-	},
-	configure: function(app, properties, serviceLocator) {
+			// The resource you need access of see the admin bundles
+			serviceLocator.adminAccessControlList.addResource('Admin');
+			serviceLocator.adminAccessControlList.addResource('Admin Bar');
 
-		// The resource you need access of see the admin bundles
-		serviceLocator.adminAccessControlList.addResource('Admin');
-		serviceLocator.adminAccessControlList.addResource('Admin Bar');
-
-		// This controls the authentication and authorisation of the admin
-		serviceLocator.register('adminAccessControl',
-			require('../../lib/secure/accessControl').createAccessControl(
-				serviceLocator.administratorModel, serviceLocator.adminAccessControlList,
-				{}, 'admin', serviceLocator.logger));
-	},
-	finalise: function(app, properties, serviceLocator) {
-		// Create controller
-		require('./controller').createRoutes(app, properties, serviceLocator, __dirname + '/views');
-	}
+			// This controls the authentication and authorisation of the admin
+			serviceLocator.register('adminAccessControl',
+				require('../../lib/secure/accessControl').createAccessControl(
+					serviceLocator.administratorModel, serviceLocator.adminAccessControlList,
+					{}, 'admin', serviceLocator.logger));
+			done();
+		},
+		function(serviceLocator, done) {
+			// Create controller
+			require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
+			done();
+		}
+	]
 };

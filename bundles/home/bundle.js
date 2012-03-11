@@ -1,8 +1,9 @@
 module.exports = {
 	name: 'Home',
 	description: 'Home',
+  version: '0.0.1',
 	publicRoute: '/home',
-	configure: function(app, properties, serviceLocator) {
-		require('./controller').createRoutes(app, properties, serviceLocator, __dirname + '/views');
+	initialize: function(serviceLocator) {
+		require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
 	}
 };

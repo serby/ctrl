@@ -11,7 +11,7 @@ mixin subItems(items)
 
 		li(class= page.section =='admin' ? 'nav-active' : ''): a(href='/admin') Admin Home
 		
-		- var adminNav = bundleManager.get('adminNav')
+		- var adminNav = bundled.get('adminNav')
 		each navItem in adminNav
 			li(class= page.section == navItem.section ? 'nav-active' : '')
 				a(href=navItem.url)= navItem.label
