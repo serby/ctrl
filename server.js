@@ -5,7 +5,7 @@ var
 	databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
 	Application = require('./lib/expressApplication'),
-	bundled = require('bundled')(serviceLocator),
+	bundled,
 	app,
 	globalViewHelpers = require('./viewHelpers/global');
 
@@ -15,7 +15,7 @@ serviceLocator
 	.register('mailer', nodemailer.send_mail)
 	.register('logger', require('./lib/logger').createLogger(properties))
 	.register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath))
-	.register('bundled', bundled);
+	.register('bundled', bundled = require('bundled')(serviceLocator, { logger: serviceLocator.logger }));
 
 bundled.addBundles(__dirname + '/bundles/', [
 	'home',
