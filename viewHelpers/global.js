@@ -28,13 +28,13 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
 			})
 			.helpers({
 				dateTime: function(date) {
-					return (new Date(date)).toFormat('D MMM YYYY @ HH:MI ') + 'GMT';
+					return (new Date(date)).toFormat('D MMM YYYY @ HH24:MI ') + 'GMT';
 				},
 				date: function(date) {
 					return (new Date(date)).toFormat('DDDD, D MMMM YYYY');
 				},
 				longDateTime: function(date) {
-					return (new Date(date)).toFormat('DDDD, D MMMM YYYY @ HH:MI ') + 'GMT';
+					return (new Date(date)).toFormat('DDDD, D MMMM YYYY @ HH24:MI ') + 'GMT';
 				},
 				time: function(date) {
 					//TODO: This should be time only
