@@ -15,7 +15,9 @@ serviceLocator
   .register('mailer', nodemailer.send_mail)
   .register('logger', require('./lib/logger').createLogger(properties))
   .register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath))
-  .register('bundled', bundled = require('bundled')(serviceLocator, { logger: serviceLocator.logger }));
+  .register('bundled', bundled = require('bundled')(serviceLocator, { logger: serviceLocator.logger }))
+  .register('widgetManager', require('./lib/widget-manager/widget-manager').createWidgetManager({ logger: serviceLocator.logger }))
+  .register('viewHelpers', {});
 
 serviceLocator.logger.info('Starting \'' + properties.name + '\'');
 
@@ -26,7 +28,9 @@ bundled.addBundles(__dirname + '/bundles/', [
   'rolesAdmin',
   'generic',
   'adminUi',
-  'image'
+  'image',
+  'section',
+  'article',
 ]);
 
 module.exports = app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
