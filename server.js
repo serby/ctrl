@@ -17,6 +17,8 @@ serviceLocator
   .register('uploadDelegate', require('fileupload').createFileUpload(properties.dataPath))
   .register('bundled', bundled = require('bundled')(serviceLocator, { logger: serviceLocator.logger }));
 
+serviceLocator.logger.info('Starting \'' + properties.name + '\'');
+
 bundled.addBundles(__dirname + '/bundles/', [
   'home',
   'administrator',
