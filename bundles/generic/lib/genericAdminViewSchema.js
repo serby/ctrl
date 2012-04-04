@@ -8,9 +8,18 @@ module.exports.createViewSchema = function(schema) {
 		});
 	});
 	// Ensure that this schema has a valid title property to display.
-	//TODO: This should look for the first property that is visible in all views.
 	if ((schema.title === undefined) || (schema.groups[0].properties[schema.title] === undefined)) {
-		schema.title = Object.keys(schema.groups[0].properties)[0];
+		Object.keys(schema.groups[0].properties).forEach(function (key) {
+			if (schema.title === undefined) {
+				var property = schema.groups[0].properties[key];
+				if (property.type !== 'hidden' && property.type !== 'password' && property.view === true) {
+					schema.title = key;
+				}
+			}
+		});
+		if (schema.title === undefined) {
+			throw new Error(schema.groups[0].name + " view schema has no properties which can be used as the object title");
+		}
 	}
 	return schema;
 };
