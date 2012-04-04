@@ -1,0 +1,16 @@
+include includes/articleDetails
+h2.big
+	a.lettering(href = '/' + section.slug) #{section.name}
+section#blog-list.two-column
+	- if ((typeof articles == 'undefined') || articles.length === 0)
+		h2 Currently no blog posts
+	- else
+		- each article in articles
+			.article
+				mixin articleDetails(article, { h2: true, length: 300, summary: true })
+
+				.list-comments
+					p
+						a(href='#{article.path}#disqus_thread')
+
+include sidebar.jade

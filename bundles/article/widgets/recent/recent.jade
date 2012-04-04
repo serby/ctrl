@@ -1,0 +1,7 @@
+- if ((typeof recentPosts !== 'undefined') && recentPosts.length > 0)
+  h3 Recent posts
+  ol
+    - each post in recentPosts
+      li 
+        a(href='#{post.path}')=post.title
+  a(href='/blog',class='button arrow') View all posts
