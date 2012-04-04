@@ -8,16 +8,10 @@ public/css/admin/*.css
 /data
 /cache
 
-# Eclipse
-/.project
-/.settings
-/.buildpath
+/public/js/compact
 
 # Windows
 Thumbs.db
-
-# Ignore this in Clock Harness projects because it is created by the build system.
-/Config/vhost.conf
 
 # Vim
 .*.sw[a-z]
