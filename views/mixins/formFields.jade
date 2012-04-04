@@ -130,7 +130,7 @@ mixin selectField(inputParams, params)
 			- if (Array.isArray(params.list))
 				select(class=params.classname,name='#{inputParams.name}', multiple=(params.multiple ? 'multiple' : null ))
 					- each option in params.list
-						option(selected=(option == value) ? 'selected' : null)=option
+						option(selected=(option == inputParams.value) ? 'selected' : null)=option
 			- else
 				select(class=params.classname,name='#{inputParams.name}')
 					- each option, text in params.list
