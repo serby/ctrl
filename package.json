@@ -7,6 +7,7 @@
 	"dependencies": {
 		"async": "~0.1",
 		"bundled": "~0.0",
+		"compact": "0.0.3",
 		"connect-mongodb": "~1.1",
 		"date-utils": "~1.2",
 		"express": "~2.5",

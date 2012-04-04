@@ -1,0 +1,21 @@
+//- article is the article object
+//- Possible options:
+//- h2 - whether to display the title with a h2
+//- summary - whether to display the summary of the article
+mixin articleDetails(article, options)
+	- if (options && options.h2)
+		h2
+			a(href='#{article.path}')=article.title
+	- else
+		h1
+			a(href='#{article.path}')=article.title
+
+	.meta
+		p Posted on 
+			em=longDateTime(article.created)
+			|  in
+			a(href='/#{article.section}')=article.section
+			|  by
+			em=article.author
+	- if (options && options.summary)
+		p=articleSummary(article, options.length)

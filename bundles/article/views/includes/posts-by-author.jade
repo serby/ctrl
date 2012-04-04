@@ -1,0 +1,6 @@
+- if (typeof authorPosts !== 'undefined' && authorPosts.length > 0)
+	.widget.posts-by-author
+		h3 Posts By Author
+		ul
+			- each post in authorPosts
+				li: a(href=post.url)=post.title

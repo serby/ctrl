@@ -46,3 +46,5 @@ html(lang='en')
 				if (typeof jQuery.ui === 'undefined') {
 					document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
 				}
+			- if (typeof compactJsHtml !== 'undefined')
+					!=compactJsHtml()
