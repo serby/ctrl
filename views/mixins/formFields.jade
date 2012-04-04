@@ -128,11 +128,11 @@ mixin selectField(inputParams, params)
 				- if (params.required)
 					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
 			- if (Array.isArray(params.list))
-				select(class=classname,name='#{inputParams.name}', multiple=(params.multiple ? 'multiple' : null ))
+				select(class=params.classname,name='#{inputParams.name}', multiple=(params.multiple ? 'multiple' : null ))
 					- each option in params.list
 						option(selected=(option == value) ? 'selected' : null)=option
 			- else
-				select(class=classname,name='#{inputParams.name}')
+				select(class=params.classname,name='#{inputParams.name}')
 					- each option, text in params.list
 						option(selected=(option == inputParams.value) ? 'selected' : null, value=option)=text
 
