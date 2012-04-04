@@ -12,7 +12,7 @@ module.exports.createViewSchema = function(schema) {
 		Object.keys(schema.groups[0].properties).forEach(function (key) {
 			if (schema.title === undefined) {
 				var property = schema.groups[0].properties[key];
-				if (property.type !== 'hidden' && property.view === true) {
+				if (property.type !== 'hidden' && property.type !== 'password' && property.view === true) {
 					schema.title = key;
 				}
 			}
