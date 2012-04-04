@@ -6,131 +6,147 @@ mixin fieldFooter(information, error)
 	- if (error)
 		p.error-description #{error}
 
-mixin booleanField(type, classname, label, name, checked, required, error, information)
-	.form-row
-		label(class=(error !== undefined ? 'error ' : '') + classname)
-			span #{label}
-				- if (required)
-					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-			input(name='#{name}', type='#{type}', value='on', checked=(checked ? 'checked' : null))
-			mixin fieldFooter(information, error)
+mixin booleanField(inputParams, params)
+	.form-row(class=params.formRowClass || '')
+		label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
+			span #{params.label}
+				- if (params.required)
+					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+			input(name=inputParams.name, type=inputParams.type, value='on', checked=(inputParams.checked ? 'checked' : null))
+			mixin fieldFooter(params.information, params.error)
 
-mixin checkboxField(label, name, checked, required, error, information)
-	mixin booleanField('checkbox', 'checkbox', label, name, checked, required, error, information)
+mixin radioField(inputParams, params)
+	- inputParams.type = inputParams.class = 'radio';
+	mixin booleanField(inputParams, params)
 
-mixin checkboxFieldForObject(label, name, dataObject, required, error, information)
-	mixin booleanField('checkbox', 'checkbox', label, name, dataObject[name] === true, required, error[name], information)
+mixin checkboxField(inputParams, params)
+	- inputParams.type = inputParams.class = 'checkbox';
+	mixin booleanField(inputParams, params)
 
-mixin checkBoxGroupForObject(label, name, dataObject, required, errors, list, information)
-	.form-row.field-group
-		div.label(class=errors[name] && 'error')
-			span #{label}
+mixin checkboxFieldForObject(inputParams, params)
+	- params.error = params.errors[inputParams.name];
+	- inputParams.value = params.data[inputParams.name] === true;
+	mixin checkboxField(inputParams, params)
+
+mixin checkBoxGroupForObject(inputParams, params)
+	.form-row.field-group(class=params.formRowClass || '')
+		div.label(class=params.errors[inputParams.name] && 'error')
+			span #{params.label}
 		ul
-			li
-				label
-					-if (Array.isArray(list))
-						-each option in list
-							input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option) !== -1))
-							span=option
-					-else	
-						-each option, key in list
-							input(name='#{name}', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name].indexOf(option.toString()) !== -1))
-							span=key
-			
-			mixin fieldFooter(information, errors[name])
+			- each option in params.list
+				li
+					label
+						input(name=inputParams.name, type='checkbox', value=option, checked=(params.data[inputParams.name] && params.data[inputParams.name].indexOf(option) !== -1))
+						span=option
+			mixin fieldFooter(params.information, params.errors[inputParams.name])
 
-mixin groupedCheckBoxGroupForObject(label, name, dataObject, required, errors, groups, information)
+mixin groupedCheckBoxGroupForObject(inputParams, params)
 	fieldset
-		h3=label
-		div(class=errors[name] && 'error')
-		-each options in groups
+		h3=params.label
+		div(class=params.errors[inputParams.name] && 'error')
+		- each options in params.groups
 			.form-row.field-group
 				div.label
 					span #{options.label}
 					-if (options.description !== undefined)
-						strong= options.description
+						strong=options.description
 				ul
 					-each option in options.items
 						li
 							label
-								input(name='#{name}[#{options.value}]', type='checkbox', value='#{option}', checked=(dataObject[name] && dataObject[name][options.value] && (dataObject[name][options.value].indexOf(option) !== -1)))
+								input(name='#{inputParams.name}[#{options.value}]', type='checkbox', value='#{option}', checked=(params.data[inputParams.name] && params.data[inputParams.name][options.value] && (params.data[inputParams.name][options.value].indexOf(option) !== -1)))
 								span=option
-					mixin fieldFooter(information, errors[name])
+					mixin fieldFooter(params.information, params.errors[inputParams.name])
 
-mixin radioField(label, name, checked, error)
-	mixin booleanField('radio', 'radio', label, name, checked, required, error, information)
 
-mixin inputField(type, classname, label, name, value, required, error, maxLength, information, placeholder)
-	.form-row
-		label(class=error && 'error')
-			span #{label}
-				- if (required)
-					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-			input(class=classname, name='#{name}', type='#{type}', value='#{value || ''}', placeholder=placeholder, maxlength=maxLength)
-			mixin fieldFooter(information, error)
+mixin inputField(inputParams, params)
+	.form-row(class=params.formRowClass || '')
+		label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
+			span #{params.label}
+				- if (params.required)
+					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+			input(class=inputParams.class, name='#{inputParams.name}', type='#{inputParams.type}', value='#{inputParams.value || ''}', placeholder=inputParams.placeholder, maxlength=inputParams.maxLength)
+			mixin fieldFooter(params.information, params.error)
 
-mixin fileField(classname, label, name, value, required, error, information)
-	.form-row
-		label(class=error && 'error')
-			span #{label}
-				- if (required)
-					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-			input(class=classname, name='#{name}', type='file', multiple='multiple')
-			mixin fieldFooter(information, error)
-		mixin downloadLink(value, true)
-		- if (value)
-			input(type='hidden', name='current-#{name}', value=typeof value === 'object' ? JSON.stringify(value) : value)
+mixin fileField(inputParams, params)
+	.form-row(class=params.formRowClass || '')
+		label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
+			span #{params.label}
+				- if (params.required)
+					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+			input(class=inputParams.class, name='#{inputParams.name}', type='file', multiple=params.multiple ? 'multiple' : '', value='#{inputParams.value || ''}', placeholder=inputParams.placeholder)
 
-mixin fileFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
-	mixin fileField('file', label, name, dataObject[name], required, errors[name], information)
+			mixin fieldFooter(params.information, params.error)
+		mixin downloadLink(inputParams.value, true)
+		- if (inputParams.value)
+			input(type='hidden', name='current-#{inputParams.name}', value=typeof inputParams.value === 'object' ? JSON.stringify(inputParams.value) : inputParams.value)
 
-mixin textField(label, name, value, required, error, maxLength, information, placeholder)
-	mixin inputField('text', 'textbox', label, name, value, required, error, maxLength, information, placeholder)
+mixin fileFieldForObject(inputParams, params)
+	- params.error = params.errors[inputParams.name];
+	- inputParams.value = params.data[inputParams.name];
+	mixin fileField(inputParams, params)
 
-mixin textFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
-	mixin textField(label, name, dataObject[name], required, errors[name], maxLength, information, placeholder)
+//mixin textField(label, name, value, required, error, maxLength, information, placeholder)
+mixin textField(inputParams, params)
+	- inputParams.type = 'text'
+	mixin inputField(inputParams, params)
 
-mixin passwordField(label, name, required, error, maxLength, information, placeholder)
-	mixin inputField('password', 'textbox', label, name, '', required, error, maxLength, information, placeholder)
+mixin textFieldForObject(inputParams, params)
+	- params.error = params.errors[inputParams.name];
+	- inputParams.value = params.data[inputParams.name];
+	mixin textField(inputParams, params)
 
-mixin passwordFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
-	mixin passwordField(label, name, required, errors[name], maxLength, information, placeholder)
+//mixin passwordField(label, name, required, error, maxLength, information, placeholder)
+mixin passwordField(inputParams, params)
+	- inputParams.type = 'password'
+	mixin inputField(inputParams, params)
 
-mixin textboxField(classname, label, name, value, required, error, maxLength, information)
-	.form-row
-		label(class=error && 'error')
-			span #{label}
-				- if (required)
-					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-			textarea(class=classname, name='#{name}')=value
-			mixin fieldFooter(information, error)
+//mixin passwordFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
+mixin passwordFieldForObject(inputParams, params)
+	- params.error = params.errors[inputParams.name]
+	mixin passwordField(inputParams, params)
 
-mixin textboxFieldForObject(classname, label, name, dataObject, required, error, maxLength, information)
-	mixin textboxField(classname, label, name, dataObject[name], required, errors[name], maxLength, information)
+mixin textboxField(inputParams, params)
+	.form-row(class=params.formRowClass || '')
+		label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
+			span #{params.label}
+				- if (params.required)
+					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+			textarea(class=inputParams.class, name=inputParams.name)=inputParams.value
+			mixin fieldFooter(params.information, params.error)
+
+mixin textboxFieldForObject(inputParams, params)
+	- params.error = params.errors[inputParams.name];
+	- inputParams.value = params.data[inputParams.name];
+	mixin textboxField(inputParams, params)
 
 //- Don't use this directly. Use dropdown or listbox
-mixin selectField(classname, label, name, currentValue, required, error, list, information, multiple)
-	.form-row
-		label(class=error && 'error')
-			span #{label}
-				- if (required)
-					abbr(title='#{ (required == true ? 'This field is required' : required) }') *
-			- if (Array.isArray(list))
-				select(class=classname,name='#{name}', multiple=(multiple ? 'multiple' : null ))
-					- each option in list
-						option(selected=(option == currentValue) ? 'selected' : null)=option
+mixin selectField(inputParams, params)
+	.form-row(class=params.formRowClass || '')
+		label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
+			span #{params.label}
+				- if (params.required)
+					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+			- if (Array.isArray(params.list))
+				select(class=classname,name='#{inputParams.name}', multiple=(params.multiple ? 'multiple' : null ))
+					- each option in params.list
+						option(selected=(option == value) ? 'selected' : null)=option
 			- else
-				select(class=classname,name='#{name}')
-					- each value, text in list
-						option(value=value, selected=(value == currentValue) ? 'selected' : null)=text
+				select(class=classname,name='#{inputParams.name}')
+					- each option, text in params.list
+						option(selected=(option == inputParams.value) ? 'selected' : null, value=option)=text
 
-			mixin fieldFooter(information, error)
+			mixin fieldFooter(params.information, params.error)
 
-mixin listboxField(classname, label, name, value, required, error, list, information)
-	mixin selectField(classname, label, name, value, required, error, list, information, true)
+mixin listboxField(inputParams, params)
+	- params.multiple = true;
+	mixin selectField(inputParams, params)
 
-mixin dropdownField(classname, label, name, value, required, error, list, information)
-	mixin selectField(classname, label, name, value, required, error, list, information, false)
+mixin dropdownField(inputParams, params)
+	- params.multiple = false;
+	mixin selectField(inputParams, params)
 
-mixin dropdownForObject(label, name, dataObject, required, errors, list, information)
-	mixin dropdownField('dropdown', label, name, dataObject[name], required, errors[name], list, information)
+mixin dropdownForObject(inputParams, params)
+	- params.error = params.errors[inputParams.name];
+	- inputParams.value = params.data[inputParams.name];
+	mixin dropdownField(inputParams, params)

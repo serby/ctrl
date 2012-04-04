@@ -4,6 +4,10 @@ public/css/main/*.css
 public/css/admin/*.css
 /.monitor
 
+/log
+/data
+/cache
+
 # Eclipse
 /.project
 /.settings

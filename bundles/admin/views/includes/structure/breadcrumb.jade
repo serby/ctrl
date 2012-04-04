@@ -1,7 +1,7 @@
 nav.breadcrumb
 	ul
 		li.nav-home: a(href='/admin') Home
-		- var adminNav = bundleManager.get('adminNav')
+		- var adminNav = bundled.get('adminNav')
 		each navItem in adminNav
 			if (page.section == navItem.section)
 				li: a(href=navItem.url) #{navItem.label}

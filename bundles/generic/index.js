@@ -6,7 +6,7 @@ module.exports = {
 		return function(req, res, view, properties) {
 			// Used the defined layout if not explictly set
 			properties.layout = properties.layout || layout;
-			res.render(__dirname + '/views/' + view, properties);
+			res.render(view, properties);
 		};
 	}
 };

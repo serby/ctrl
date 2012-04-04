@@ -5,7 +5,7 @@ var
 
 	require('date-utils');
 
-module.exports.createHelpers = function(properties, app) {
+module.exports.createHelpers = function(serviceLocator, properties, app) {
 
 	app.configure(function() {
 		app
@@ -28,11 +28,13 @@ module.exports.createHelpers = function(properties, app) {
 			})
 			.helpers({
 				dateTime: function(date) {
-					return (new Date(date)).toFormat('D MMM YYYY @ HH:MI:SS');
+					return (new Date(date)).toFormat('D MMM YYYY @ HH:MI ') + 'GMT';
 				},
 				date: function(date) {
-					var d = new Date(date);
-					return d.toDateString();
+					return (new Date(date)).toFormat('DDDD, D MMMM YYYY');
+				},
+				longDateTime: function(date) {
+					return (new Date(date)).toFormat('DDDD, D MMMM YYYY @ HH:MI ') + 'GMT';
 				},
 				time: function(date) {
 					//TODO: This should be time only
@@ -79,6 +81,6 @@ module.exports.createHelpers = function(properties, app) {
 				},
 				condensedWeekdayList: condensedWeekdayList,
 				querystring: paginationHelpers
-			});
+			}).helpers(serviceLocator.viewHelpers);
 	});
 };

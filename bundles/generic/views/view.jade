@@ -8,8 +8,6 @@ nav.breadcrumb
 		li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
 		li View #{crudDelegate.name}
 
-p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
-
 include includes/view-actions
 
 //-h2 #{crudDelegate.name} Details
@@ -30,5 +28,8 @@ include includes/view-actions
 								p=dateTime(propertyMeta.format(entity[key]))
 							- else if (propertyMeta.type === 'checkbox')
 								p=booleanFormatter(entity[key])
+							- else if (propertyMeta.type === 'link')
+								p
+									a(href=entity[key], target='_blank')=entity[key]
 							- else
 								#{propertyMeta.format(entity[key])}
