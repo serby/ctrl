@@ -8,7 +8,7 @@ mixin fieldFooter(information, error)
 
 mixin booleanField(inputParams, params)
 	.form-row(class=params.formRowClass || '')
-		label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
+		label(class=(params.error !== undefined ? 'error ' : '') + inputParams.class)
 			span #{params.label}
 				- if (params.required)
 					abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
