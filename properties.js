@@ -64,8 +64,13 @@ var environmentProperties = {
 	}
 };
 
+function getEnv() {
+	return process.env.NODE_ENV || 'development';
+}
+
 exports.getProperties = function(environment) {
-	environment = environment || process.env.NODE_ENV || 'development';
+	environment = environment || getEnv();
+	properties.env = environment;
 
 	if (environmentProperties[environment] === undefined) {
 		throw new RangeError('No properties for environment \'' + environment + '\'');
