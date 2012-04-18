@@ -47,7 +47,7 @@ var environmentProperties = {
 		}
 	},
 	production: {
-		siteUrl: 'http://localhost:' + (basePort + 2),
+		siteUrl: 'http://localhost:' + (basePort + 3),
 		port: basePort + 3,
 		email: 'paul.serby@clock.co.uk',
 		hosts: [
