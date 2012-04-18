@@ -5,9 +5,9 @@ var cluster = require('cluster')
   , nodemailer = require('nodemailer');
 
 serviceLocator
-    .register('properties', properties)
-    .register('mailer', nodemailer.send_mail)
-    .register('logger', require('./lib/logger').createLogger(properties));
+  .register('properties', properties)
+  .register('mailer', nodemailer.send_mail)
+  .register('logger', require('./lib/logger').createLogger(properties));
 
 if ((properties.env !== 'development') && (cluster.isMaster)) {
 
