@@ -29,7 +29,6 @@ if ((properties.env !== 'development') && (cluster.isMaster)) {
       serviceLocator.logger.error('Not forking new process because ' + worker.signalCode + ' was given');
     }
 
-
   });
 
 } else {
