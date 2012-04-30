@@ -1,6 +1,6 @@
 {
 	"name": "Control",
-	"main": "server.js",
+	"main": "app.js",
 	"version": "0.0.1",
 	"private": true,
 	"engine": "~0.6",
@@ -27,7 +27,8 @@
 		"underscore": "~1.2",
 		"winston": "~0.5",
 		"versionator": "~0.1",
-		"fileupload": "~0.0.1"
+		"fileupload": "~0.0.1",
+		"trunky": "0.1.0"
 	},
 	"devDependencies": {
 		"mocha": "*",
