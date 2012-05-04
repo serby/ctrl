@@ -96,6 +96,16 @@ mixin textFieldForObject(inputParams, params)
   - inputParams.value = params.data[inputParams.name];
   mixin textField(inputParams, params)
 
+mixin datepickerField(inputParams, params)
+  - inputParams.type = 'text'
+  - inputParams.class = 'datepicker'
+  mixin inputField(inputParams, params)
+
+mixin datepickerFieldForObject(inputParams, params)
+  - params.error = params.errors[inputParams.name];
+  - inputParams.value = params.data[inputParams.name];
+  mixin datepickerField(inputParams, params)
+
 //mixin passwordField(label, name, required, error, maxLength, information, placeholder)
 mixin passwordField(inputParams, params)
   - inputParams.type = 'password'
