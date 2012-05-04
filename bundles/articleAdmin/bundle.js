@@ -6,10 +6,18 @@ module.exports = {
       label: 'Article',
       url: '/admin/article',
       section: 'article',
+      permission: {
+        resource: 'Article',
+        action: 'read'
+      },
       items: [
         {
           label: 'Add Article',
-          url: '/admin/article/new'
+          url: '/admin/article/new',
+          permission: {
+            resource: 'Article',
+            action: 'create'
+          }
         }
       ]
     }
