@@ -6,10 +6,18 @@ module.exports = {
 			label: 'Administrators',
 			url: '/admin/administrator',
 			section: 'administrator',
+			permission: {
+				resource: 'Administrator',
+				action: 'read'
+			},
 			items: [
 				{
 					label: 'Add Administrator',
-					url: '/admin/administrator/new'
+					url: '/admin/administrator/new',
+					permission: {
+						resource: 'Administrator',
+						action: 'create'
+					}
 				}
 			]
 		}

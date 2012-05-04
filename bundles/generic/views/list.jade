@@ -17,8 +17,10 @@ include includes/list-actions
 
 	- if (dataSet.length === 0)
 		p
-			| Cannot find any, would you like to 
-			a(href='/admin/#{crudDelegate.urlName}/new') add one?
+			| No records found.
+		- if (adminIsAllowed(crudDelegate.name, 'create')) 
+			p Would you like to 
+				a(href='/admin/#{crudDelegate.urlName}/new') add one?
 
 	- else
 		table.highlight.sortable
@@ -47,9 +49,9 @@ include includes/list-actions
 										td.title
 											strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
 											ul.row-actions
-												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.edit === 'undefined')
+												- if (adminIsAllowed(crudDelegate.name, 'update')) 
 													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
-												- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.delete === 'undefined')
+												- if (adminIsAllowed(crudDelegate.name, 'delete')) 
 													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
 									- else
 										- if (propertyMeta.type === 'checkbox')
