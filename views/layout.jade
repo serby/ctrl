@@ -1,50 +1,50 @@
 !!! 5
 html(lang='en')
-	head
-		block head
-			meta(charset='utf-8')
-			meta(name='description', content=properties.description)
-			meta(name='keywords', content=properties.keyWords)
-		
-			//- SITE INFORMATION
-			title=page.title
+  head
+    block head
+      meta(charset='utf-8')
+      meta(name='description', content=properties.description)
+      meta(name='keywords', content=properties.keyWords)
+    
+      //- SITE INFORMATION
+      title=page.title
 
-		block styles
-			//- CSS
-			link(rel='stylesheet', type='text/css', href=versionPath('/css/main/index.css'), media='all')
+    block styles
+      //- CSS
+      link(rel='stylesheet', type='text/css', href=versionPath('/css/main/index.css'), media='all')
 
-		script
-			document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+    script
+      document.getElementsByTagName('html')[0].setAttribute('class', 'js');
 
-	body(class=page.section)
+  body(class=page.section)
 
-		each bodyStart in includes.bodyStart
-			!=partial(bodyStart)
+    each bodyStart in includes.bodyStart
+      !=partial(bodyStart)
 
-		#container
-			block header
-				include includes/header
+    #container
+      block header
+        include includes/header
 
-			block nav
-				include includes/nav
-			
-			block content
-				#main-content
-					!= body
+      block nav
+        include includes/nav
+      
+      block content
+        #main-content
+          != body
 
-			block footer
-				include includes/footer
+      block footer
+        include includes/footer
 
-		block script
-			script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-			script
-				if (typeof jQuery === 'undefined') {
-					document.write('<script src="/js/jquery-1.7.1.min.js" />');
-				}
-			script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
-			script
-				if (typeof jQuery.ui === 'undefined') {
-					document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
-				}
-			- if (typeof compactJsHtml !== 'undefined')
-					!=compactJsHtml()
+    block script
+      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+      script
+        if (typeof jQuery === 'undefined') {
+          document.write('<script src="/js/jquery-1.7.1.min.js" />');
+        }
+      script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
+      script
+        if (typeof jQuery.ui === 'undefined') {
+          document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
+        }
+      - if (typeof compactJsHtml !== 'undefined')
+          !=compactJsHtml()

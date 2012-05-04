@@ -10,7 +10,7 @@ module.exports.createServer = function(properties, serviceLocator) {
         srcPath: __dirname + '/public/',
         destPath: __dirname + '/public/js/compact/',
         webPath: '/js/compact/',
-        debug: false
+        debug: true
       });
 
   // Register the global services needed by your entire application
