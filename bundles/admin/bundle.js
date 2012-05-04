@@ -48,6 +48,18 @@ module.exports = {
       // Create controller
       require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
       done();
+    },
+    function(serviceLocator, done) {
+      serviceLocator.app.configure(function() {
+        serviceLocator.app.dynamicHelpers({
+          adminIsAllowed: function(req, res) {
+            return function (resource, action) {
+              return serviceLocator.adminAccessControl.isAllowed(req, res, resource, action);
+            };
+          }
+        });
+      });
+      done();
     }
   ]
 };

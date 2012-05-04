@@ -6,10 +6,18 @@ module.exports = {
 		label: 'Roles',
 		url: '/admin/role',
 		section: 'role',
+		permission: {
+			resource: 'Role',
+			action: 'read'
+		},
 		items: [
 			{
 				label: 'Add Role',
-				url: '/admin/role/new'
+				url: '/admin/role/new',
+				permission: {
+					resource: 'Role',
+					action: 'create'
+				}
 			}
 		]
 	}],
