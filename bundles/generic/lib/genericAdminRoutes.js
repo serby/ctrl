@@ -206,7 +206,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.get(
     '/admin/' + model.urlName + '/:id',
-    compactMiddleware('form'),
+    compactMiddleware('view'),
     accessCheck('read'), function (req, res) {
       model.read(
         req.params.id,
