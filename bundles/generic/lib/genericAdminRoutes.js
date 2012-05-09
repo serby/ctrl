@@ -38,7 +38,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     if (options.scripts[view]) {
       return serviceLocator.compact.js(
         ['admin-common'],
-        [options.scripts[view]]
+        options.scripts[view]
       );
     } else {
       return serviceLocator.compact.js(['admin-common']);
