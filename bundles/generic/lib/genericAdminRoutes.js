@@ -11,12 +11,38 @@ var _ = require('underscore')
 
 module.exports.createRoutes = function (app, render, schema, model, serviceLocator, options) {
 
+  var defaults = {
+    createValidationSet: '',
+    updateValidationSet: '',
+    createTag: undefined,
+    updateTag: undefined,
+    requiredAccess: model.urlName,
+    scripts: {}
+  };
+
+  options = _.extend(defaults, options);
+
+  var views =  {
+    form: __dirname + '/../views/form',
+    list: __dirname + '/../views/list',
+    view: __dirname + '/../views/view'
+  };
+
+  _.extend(views, options.views);
+
   /*
    * Adds the common JavaScript
    * required for admin section
    */
-  function compactMiddleware() {
-    return serviceLocator.compact.js(['admin-common']);
+  function compactMiddleware(view) {
+    if (options.scripts[view]) {
+      return serviceLocator.compact.js(
+        ['admin-common'],
+        [options.scripts[view]]
+      );
+    } else {
+      return serviceLocator.compact.js(['admin-common']);
+    }
   }
 
   /*
@@ -29,24 +55,6 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
       action
     );
   }
-
-  var defaults = {
-    createValidationSet: '',
-    updateValidationSet: '',
-    createTag: undefined,
-    updateTag: undefined,
-    requiredAccess: model.urlName
-  };
-
-  options = _.extend(defaults, options);
-
-  var views =  {
-    form: __dirname + '/../views/form',
-    list: __dirname + '/../views/list',
-    view: __dirname + '/../views/view'
-  };
-
-  _.extend(views, options.views);
 
   /**
   * This ensures errors with properties that are not displayed on the form are shown
@@ -73,7 +81,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.get(
     '/admin/' + model.urlName,
-    compactMiddleware(),
+    compactMiddleware('view'),
     buildSearchQuery,
     buildSortOptions,
     paginate,
@@ -138,7 +146,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.get(
     '/admin/' + model.urlName + '/new',
-    compactMiddleware(),
+    compactMiddleware('form'),
     accessCheck('create'),
     schemaHelper(schema),
     function (req, res) {
@@ -161,7 +169,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.post(
     '/admin/' + model.urlName + '/new',
-    compactMiddleware(),
+    compactMiddleware('form'),
     accessCheck('create'),
     serviceLocator.uploadDelegate,
     schema.formPostHelper,
@@ -198,7 +206,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.get(
     '/admin/' + model.urlName + '/:id',
-    compactMiddleware(),
+    compactMiddleware('form'),
     accessCheck('read'), function (req, res) {
       model.read(
         req.params.id,
@@ -218,7 +226,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.get(
     '/admin/' + model.urlName + '/:id/edit',
-    compactMiddleware(),
+    compactMiddleware('form'),
     schemaHelper(schema),
     accessCheck('update'),
     function (req, res) {
@@ -244,7 +252,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.post(
     '/admin/' + model.urlName + '/:id/edit',
-    compactMiddleware(),
+    compactMiddleware('form'),
     serviceLocator.uploadDelegate,
     schema.formPostHelper,
     accessCheck('update'),
@@ -283,7 +291,6 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
 
   app.get(
     '/admin/' + model.urlName + '/:id/delete',
-    compactMiddleware(),
     accessCheck('delete'),
     function(req, res, next) {
       model['delete'](req.params.id, function(error) {
