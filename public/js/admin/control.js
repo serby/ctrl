@@ -13,7 +13,9 @@ $(document).ready(function() {
         .removeClass('above')
         .removeClass('below');
       setTimeout(function () {
-        if ($(picker.dpDiv).position().top < $(input).position().top) {
+        var dppos = $(picker.dpDiv).offset().top
+          , inputpos = $(input).offset().top;
+        if (dppos < inputpos) {
           picker.dpDiv.addClass('above');
         } else {
           picker.dpDiv.addClass('below');
