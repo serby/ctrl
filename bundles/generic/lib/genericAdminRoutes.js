@@ -89,7 +89,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     function (req, res) {
 
       model.find(
-        req.query,
+        req.dbQuery,
         _.extend(req.options, req.searchOptions),
         function (errors, dataSet) {
           render(req, res, views.list, {
