@@ -29,7 +29,8 @@
     "trunky": "0.1.0",
     "underscore": "~1.2",
     "winston": "~0.5",
-    "versionator": "~0.1"
+    "versionator": "~0.1",
+    "express-validator": "~0.2.1"
   },
   "devDependencies": {
     "mocha": "*",
