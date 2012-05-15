@@ -6,10 +6,18 @@ module.exports = {
 			label: 'Section',
 			url: '/admin/section',
 			section: 'section',
+			permission: {
+				resource: 'Section',
+				action: 'read'
+			},
 			items: [
 				{
 					label: 'Add Section',
-					url: '/admin/section/new'
+					url: '/admin/section/new',
+					permission: {
+						resource: 'Section',
+						action: 'read'
+					}
 				}
 			]
 		}
