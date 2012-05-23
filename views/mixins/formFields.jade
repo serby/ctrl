@@ -25,7 +25,7 @@ mixin checkboxField(inputParams, params)
 
 mixin checkboxFieldForObject(inputParams, params)
   - params.error = params.errors[inputParams.name];
-  - inputParams.value = params.data[inputParams.name] === true;
+  - inputParams.checked = params.data[inputParams.name] === true;
   mixin checkboxField(inputParams, params)
 
 mixin checkBoxGroupForObject(inputParams, params)
