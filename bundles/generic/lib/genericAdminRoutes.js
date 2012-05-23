@@ -89,7 +89,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     function (req, res) {
 
       model.find(
-        req.query,
+        req.searchQuery,
         _.extend(req.options, req.searchOptions),
         function (errors, dataSet) {
           render(req, res, views.list, {
@@ -297,7 +297,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
         if (error !== null) {
           res.send(404);
         } else {
-          res.redirect('/admin/' + model.urlName);
+          res.redirect(req.headers.referer);
         }
       });
     }
