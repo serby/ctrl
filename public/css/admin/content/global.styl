@@ -49,6 +49,18 @@ button,
 		&:focus
 			background-color darken($primaryColor, 3)
 
+	&.danger
+		text-shadow 0px 1px 1px darken($errorColor, 6)
+		background-color $errorColor
+		border 1px solid darken($errorColor, 6)
+		box-shadow 0px 0px 0px 1px lighten($errorColor, 5) inset
+		color #FFFFFF
+		&:hover
+			background-color lighten($errorColor, 3)
+		&:active,
+		&:focus
+			background-color darken($errorColor, 3)
+
 
 
 

@@ -117,4 +117,42 @@ $(document).ready(function() {
     return [];
   }
 
+  function confirm(message, fn, danger, verb) {
+
+    var dialog = $('<div/>').addClass('dialog-confirm');
+    var overlay = $('<div/>').addClass('dialog-overlay');
+    dialog.append($('<p/>').text(message));
+
+    function remove() {
+      overlay.remove();
+      dialog.remove();
+    }
+
+    var controls = $('<div/>').addClass('controls');
+
+    controls.append(
+      $('<button/>').text(verb || 'Confirm')
+        .addClass(danger ? 'danger' : 'primary')
+        .bind('click', function (e) {
+          e.preventDefault();
+          remove();
+          fn();
+        })
+    );
+
+    controls.append(
+      $('<button/>').text('Cancel')
+        .bind('click', function (e) {
+          e.preventDefault();
+          remove();
+        })
+    );
+
+    dialog.append(controls);
+    $('body').append(overlay, dialog);
+
+  }
+
+  window.confirmDialog = confirm;
+
 });
