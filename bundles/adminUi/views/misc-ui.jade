@@ -46,6 +46,25 @@ section#buttons
 		|  
 		input.button.primary(type='submit',value='Form Submit')
 
+section#dialogs
+	h2 Dialogs
+	p
+		button.primary(
+			onclick='window.confirmDialog("Are you sure that’s what you want to do?", function () { alert("You confirmed"); })'
+		) Action!
+	h3 Usage:
+	pre: code
+			| window.confirmDialog(msg, fn, danger, verb)
+	dl
+		dt `msg` (String)
+		dd The message to display
+		dt `fn` (Function)
+		dd The function to execute if the user presses the confirm button
+		dt `danger` (Boolean, optional)
+		dd If `true`, the button uses the `$errorColour` (which is probably red). The default is `false`, in which case it uses `$primaryColour`
+		dt `verb` (String, optional)
+		dd The text to display in the confirm button. Default is `Confirm`
+
 section#overlays
 	h2 Overlays
 	p Overlays use the 
