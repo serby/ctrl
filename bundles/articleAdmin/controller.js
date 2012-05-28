@@ -19,7 +19,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 				},
 				section: {
 					list: true,
-					view: true
+					view: false
 				},
 				slug: {
 					list: true,

@@ -1,5 +1,5 @@
 //- Actions and Filter Controls
 nav.page-actions.list-actions
 	ul.actions
-		- if (typeof viewSchema.removeControls === 'undefined' || typeof viewSchema.removeControls.add === 'undefined')
+		- if (adminIsAllowed(crudDelegate.name, 'create'))
 			li: a.button.primary(href='/admin/#{crudDelegate.urlName}/new') Add

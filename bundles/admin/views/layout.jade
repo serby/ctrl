@@ -1,65 +1,61 @@
 !!! 5
 //if lt IE 7
-	<html class='ie6' lang='en'>
+  <html class='ie6' lang='en'>
 //if IE 7
-	<html class='ie7' lang='en'>
+  <html class='ie7' lang='en'>
 //if IE 8
-	<html class='ie8' lang='en'>
+  <html class='ie8' lang='en'>
 //if IE 9
-	<html class='ie9' lang='en'>
+  <html class='ie9' lang='en'>
 //[if gt IE 8]><!
 html(lang='en')
-	//<![endif]
-	head
-		block head
-			meta(charset='utf-8')
-			meta(name='description', content=properties.description)
-			meta(name='keywords', content=properties.keywords)
-			title=page.title + ' - ' + properties.name
-			link(rel='shortcut icon', type='image/x-icon', href='/images/admin/structure/favicon.ico')
+  //<![endif]
+  head
+    block head
+      meta(charset='utf-8')
+      meta(name='description', content=properties.description)
+      meta(name='keywords', content=properties.keywords)
+      title=page.title + ' - ' + properties.name
+      link(rel='shortcut icon', type='image/x-icon', href='/images/admin/structure/favicon.ico')
 
-		script
-			document.getElementsByTagName('html')[0].setAttribute('class', 'js');
-			//- TODO - Temporary HTML5 IE* fix
-			document.createElement('header');
-			document.createElement('nav');
-			document.createElement('section');
-			document.createElement('article');
-			document.createElement('aside');
-			document.createElement('footer');
-			document.createElement('hgroup');
+    script
+      document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+      //- TODO - Temporary HTML5 IE* fix
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('section');
+      document.createElement('article');
+      document.createElement('aside');
+      document.createElement('footer');
+      document.createElement('hgroup');
 
-		block styles
-			link(rel='stylesheet', type='text/css', href=versionPath('/css/admin/index.css'), media='all')
-			link(rel='stylesheet', type='text/css', href=versionPath('/js/fancybox/jquery.fancybox.css'), media='all')
+    block styles
+      link(rel='stylesheet', type='text/css', href=versionPath('/css/admin/index.css'), media='all')
+      link(rel='stylesheet', type='text/css', href=versionPath('/js/fancybox/jquery.fancybox.css'), media='all')
 
-	body(class=page.section)
-		#container
-			block header
-				include includes/structure/header
+  body(class=page.section)
+    #container
+      block header
+        include includes/structure/header
 
-			block content
-				#main-content
-					!= body
+      block content
+        #main-content
+          != body
 
-			block footer
-				include includes/structure/footer
+      block footer
+        include includes/structure/footer
 
-		block script
-			script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-			script
-				if (typeof jQuery === 'undefined') {
-					document.write('<script src="/js/jquery-1.7.1.min.js" />');
-				}
-			script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
-			script
-				if (typeof jQuery.ui === 'undefined') {
-					document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
-				}
+    block script
+      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+      script
+        if (typeof jQuery === 'undefined') {
+          document.write('<script src="/js/jquery-1.7.1.min.js" />');
+        }
+      script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
+      script
+        if (typeof jQuery.ui === 'undefined') {
+          document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
+        }
 
-			script(src=versionPath('/js/chosen/chosen.jquery.js'))
-			script(src=versionPath('/js/fancybox/jquery.fancybox.pack.js'))
-			script(src=versionPath('/js/admin/control.js'))
-
-			- if(typeof javascriptSrc !== 'undefined')
-				!= partial('includes/structure/javascript', javascriptSrc)
+      - if (typeof compactJsHtml !== 'undefined')
+        !=compactJsHtml()
