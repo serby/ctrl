@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "Control",
   "main": "app.js",
   "version": "0.0.1",
@@ -36,5 +37,17 @@
     "mocha": "*",
     "should": "*",
     "coffee-script": "*"
+  },
+  "devDependencies": {
+    "request": "~2.9",
+    "mocha": ">= 0.0.8",
+    "should": ">= 0.0.8",
+    "coffee-script": ">= 1.1.1",
+    "soda": ">= 0.2.4",
+    "xml2js": "~0.1"
+  },
+  "directories": {
+    "lib": "lib"
   }
+
 }
