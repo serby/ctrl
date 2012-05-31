@@ -297,7 +297,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
         if (error !== null) {
           res.send(404);
         } else {
-          res.redirect(req.headers.referer);
+          res.redirect('/admin/' + model.urlName);
         }
       });
     }
