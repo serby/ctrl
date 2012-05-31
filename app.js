@@ -1,8 +1,9 @@
-var cluster = require('cluster')
-  , cpus = require('os').cpus()
-  , serviceLocator = require('service-locator').createServiceLocator()
-  , properties = require('./properties').getProperties()
-  , nodemailer = require('nodemailer');
+var
+  cluster = require('cluster'),
+  cpus = require('os').cpus(),
+  serviceLocator = require('service-locator').createServiceLocator(),
+  properties = require('./properties').getProperties(),
+  nodemailer = require('nodemailer');
 
 serviceLocator
   .register('properties', properties)

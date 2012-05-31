@@ -1,18 +1,18 @@
 module.exports.createServer = function(properties, serviceLocator) {
 
-  var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
-    , sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
-    , Application = require('./lib/expressApplication')
-    , bundled
-    , app
-    , globalViewHelpers = require('./viewHelpers/global')
-    , versionator = require('versionator').createBasic('v' + properties.version)
-    , compact = require('compact').createCompact({
-        srcPath: __dirname + '/public/',
-        destPath: __dirname + '/public/js/compact/',
-        webPath: versionator.versionPath('/js/compact/'),
-        debug: properties.debug
-      });
+  var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
+    sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
+    Application = require('./lib/expressApplication'),
+    bundled,
+    app,
+    globalViewHelpers = require('./viewHelpers/global'),
+    versionator = require('versionator').createBasic('v' + properties.version),
+    compact = require('compact').createCompact({
+      srcPath: __dirname + '/public/',
+      destPath: __dirname + '/public/js/compact/',
+      webPath: versionator.versionPath('/js/compact/'),
+      debug: properties.debug
+    });
 
   // Register the global services needed by your entire application
   serviceLocator
@@ -36,9 +36,8 @@ module.exports.createServer = function(properties, serviceLocator) {
     'image',
     'section',
     'articleAdmin',
-    'article'
-  ]);
-
+    'article']
+  );
 
   app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
 
