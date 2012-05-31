@@ -21,7 +21,8 @@ var properties = {
     port: 27017,
     name: 'Control-Development'
   },
-  defaultSearchResultSize: 30
+  defaultSearchResultSize: 30,
+  debug: true
 };
 
 var environmentProperties = {

@@ -6,11 +6,12 @@ module.exports.createServer = function(properties, serviceLocator) {
     , bundled
     , app
     , globalViewHelpers = require('./viewHelpers/global')
+    , versionator = require('versionator').createBasic('v' + properties.version)
     , compact = require('compact').createCompact({
         srcPath: __dirname + '/public/',
         destPath: __dirname + '/public/js/compact/',
-        webPath: '/js/compact/',
-        debug: true
+        webPath: versionator.versionPath('/js/compact/'),
+        debug: properties.debug
       });
 
   // Register the global services needed by your entire application
@@ -19,7 +20,9 @@ module.exports.createServer = function(properties, serviceLocator) {
     .register('bundled', bundled = require('bundled')(serviceLocator, { logger: serviceLocator.logger }))
     .register('widgetManager', require('./lib/widget-manager/widget-manager').createWidgetManager({ logger: serviceLocator.logger }))
     .register('viewHelpers', {})
-    .register('compact', compact);
+    .register('compact', compact)
+    .register('versionator', versionator)
+    ;
 
   serviceLocator.logger.info('Starting \'' + properties.name + '\'');
 
