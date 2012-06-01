@@ -6,7 +6,13 @@ More information can be found in the [wiki](https://github.com/serby/control/wik
 
 ## Installation
 
+Create the control app:
+
      git clone git://github.com/serby/control.git
+     
+Install dependencies:
+     
+     npm install
 
 ## Usage
 
@@ -14,7 +20,7 @@ More information can be found in the [wiki](https://github.com/serby/control/wik
 
      node app
 
-The goto [http://localhost:3021/admin](http://localhost:3021/admin) in a browser and follow the instructions.
+Then goto [http://localhost:3021/admin](http://localhost:3021/admin) in a browser and follow the instructions.
 
 ## Credits
 
