@@ -1,13 +1,13 @@
 module.exports.createServer = function(properties, serviceLocator) {
 
-  var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
-    sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator),
-    Application = require('./lib/expressApplication'),
-    bundled,
-    app,
-    globalViewHelpers = require('./viewHelpers/global'),
-    versionator = require('versionator').createBasic('v' + properties.version),
-    compact = require('compact').createCompact({
+  var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
+    , sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
+    , Application = require('./lib/expressApplication')
+    , bundled
+    , app
+    , globalViewHelpers = require('./viewHelpers/global')
+    , versionator = require('versionator').createBasic('v' + properties.version)
+    , compact = require('compact').createCompact({
       srcPath: __dirname + '/public/',
       destPath: __dirname + '/public/js/compact/',
       webPath: versionator.versionPath('/js/compact/'),
@@ -26,17 +26,18 @@ module.exports.createServer = function(properties, serviceLocator) {
 
   serviceLocator.logger.info('Starting \'' + properties.name + '\'');
 
-  bundled.addBundles(__dirname + '/bundles/', [
-    'home',
-    'administrator',
-    'admin',
-    'rolesAdmin',
-    'generic',
-    'adminUi',
-    'image',
-    'section',
-    'articleAdmin',
-    'article']
+  bundled.addBundles(__dirname + '/bundles/',
+    [ 'home'
+    , 'administrator'
+    , 'admin'
+    , 'rolesAdmin'
+    , 'generic'
+    , 'adminUi'
+    , 'image'
+    , 'section'
+    , 'articleAdmin'
+    , 'article'
+    ]
   );
 
   app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
