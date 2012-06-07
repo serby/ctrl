@@ -1,27 +1,27 @@
 - if (typeof pagination !== 'undefined')
 #pagination
-	- if (pagination.collectionLength === 1)
-		p There is a total of 
-			strong #{pagination.collectionLength}
-			|  item.
+  - if (pagination.collectionLength === 1)
+    p There is a total of 
+      strong #{pagination.collectionLength}
+      |  item.
 
-	- else
-		p There are a total of 
-			strong #{pagination.collectionLength}
-			|  items.
+  - else
+    p There are a total of 
+      strong #{pagination.collectionLength}
+      |  items.
 
-	- if (pagination.collectionLength > pagination.pageLength)
-		- if (+pagination.page === 1)
-			span.first First
-			span.prev Prev
-		- else
-			a.first(href=querystring.getFirst(url), title='Go to the first page of results') First
-			a.prev(href=querystring.getPrevious(url), title='Go to the previous page of results') Prev
-		- for (var i = pagination.start; i <= pagination.end; i++)
-			a(class=( i === +pagination.page ? 'current-page' : null ), href=querystring.getPage(url, i), title='Go to page ' + i + ' of the results')=i
-		- if (+pagination.page === (i - 1))
-			span.next Next
-			span.last Last
-		- else
-			a.next(href=querystring.getNext(url), title='Go to the next page of results') Next
-			a.last(href=querystring.getLast(url, pagination.lastPage), title='Go to the last page of results') Last
+  - if (pagination.collectionLength > pagination.pageLength)
+    - if (+pagination.page === 1)
+      span.first First
+      span.prev Prev
+    - else
+      a.first(href=querystring.getFirst(url), title='Go to the first page of results') First
+      a.prev(href=querystring.getPrevious(url), title='Go to the previous page of results') Prev
+    - for (var i = pagination.start; i <= pagination.end; i++)
+      a(class=( i === +pagination.page ? 'current-page' : null ), href=querystring.getPage(url, i), title='Go to page ' + i + ' of the results')=i
+    - if (+pagination.page === (i - 1))
+      span.next Next
+      span.last Last
+    - else
+      a.next(href=querystring.getNext(url), title='Go to the next page of results') Next
+      a.last(href=querystring.getLast(url, pagination.lastPage), title='Go to the last page of results') Last

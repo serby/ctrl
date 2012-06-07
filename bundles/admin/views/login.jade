@@ -2,17 +2,17 @@ include ../../../views/mixins/formFields
 
 h1 Admin Login
 form(method='post')
-	p You must login to access this part of the site
-	fieldset
-		-if (error)
-			errors
-				p.error
-					strong= error
-		mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
-		mixin passwordField({ name :'password' }, { label: 'Password' })
-		.form-row
-			label.checkbox
-				input(name='rememberMe', type='checkbox')
-				span Remember me
-	fieldset.actions
-		input.button.primary(type='submit', value='Login')
+  p You must login to access this part of the site
+  fieldset
+    -if (error)
+      errors
+        p.error
+          strong= error
+    mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
+    mixin passwordField({ name :'password' }, { label: 'Password' })
+    .form-row
+      label.checkbox
+        input(name='rememberMe', type='checkbox')
+        span Remember me
+  fieldset.actions
+    input.button.primary(type='submit', value='Login')

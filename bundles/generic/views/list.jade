@@ -3,69 +3,69 @@ include ../../../views/mixins/file
 h1 #{crudDelegate.plural}
 
 nav.breadcrumb
-	ul
-		li.nav-home: a(href='/admin') Home
-		li #{crudDelegate.plural}
+  ul
+    li.nav-home: a(href='/admin') Home
+    li #{crudDelegate.plural}
 
 include includes/list-actions
 
 .panel-list
-	h3 All #{crudDelegate.plural}
+  h3 All #{crudDelegate.plural}
 
-	include includes/filter-form
-	include includes/filter-summary
+  include includes/filter-form
+  include includes/filter-summary
 
-	- if (dataSet.length === 0)
-		p
-			| No records found.
-		- if (adminIsAllowed(crudDelegate.name, 'create')) 
-			p Would you like to 
-				a(href='/admin/#{crudDelegate.urlName}/new') add one?
+  - if (dataSet.length === 0)
+    p
+      | No records found.
+    - if (adminIsAllowed(crudDelegate.name, 'create')) 
+      p Would you like to 
+        a(href='/admin/#{crudDelegate.urlName}/new') add one?
 
-	- else
-		table.highlight.sortable
-			thead
-				tr
-					- each group in viewSchema.groups
-						- each val, key in group.properties
-							- if (val.list)
-								- var property = crudDelegate.entityDelegate.propertyName(key)
-								- var directionClass = ''
-								- if (url.Sort === key)
-									- if (url.Direction === 'asc')
-										- directionClass = 'sort-asc'
-									- else if (url.Direction === 'desc')
-										- directionClass = 'sort-desc'
-								th(class=directionClass)
-									a(href=querystring.getSort(url, key))=property
-			tbody
-				- each entity in dataSet
-					- var entityName = entity[viewSchema['title']]
-					tr
-						- each group in viewSchema.groups
-							- each propertyMeta, key in group.properties
-								- if (propertyMeta.list)
-									- if (viewSchema.title === key)
-										td.title
-											strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
-											ul.row-actions
-												- if (adminIsAllowed(crudDelegate.name, 'update')) 
-													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
-												- if (adminIsAllowed(crudDelegate.name, 'delete')) 
-													li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
-									- else
-										- if (propertyMeta.type === 'checkbox')
-											td=booleanFormatter(entity[key])
-										- else if (propertyMeta.type === 'file')
-											td.thumbnail
-												- if (entity[key])
-													mixin displayImage(100, 100, entity[key][0], crudDelegate.name + ' - ' + entityName, 'crop')
-										- else if (propertyMeta.type === 'link')
-											td
-												a(href=entity[key], target='_blank')=entity[key]
-										- else if (propertyMeta.type === 'dateTime')
-											td=dateTime(propertyMeta.format(entity[key]))
-										- else
-											td=propertyMeta.format(entity[key])
+  - else
+    table.highlight.sortable
+      thead
+        tr
+          - each group in viewSchema.groups
+            - each val, key in group.properties
+              - if (val.list)
+                - var property = crudDelegate.entityDelegate.propertyName(key)
+                - var directionClass = ''
+                - if (url.Sort === key)
+                  - if (url.Direction === 'asc')
+                    - directionClass = 'sort-asc'
+                  - else if (url.Direction === 'desc')
+                    - directionClass = 'sort-desc'
+                th(class=directionClass)
+                  a(href=querystring.getSort(url, key))=property
+      tbody
+        - each entity in dataSet
+          - var entityName = entity[viewSchema['title']]
+          tr
+            - each group in viewSchema.groups
+              - each propertyMeta, key in group.properties
+                - if (propertyMeta.list)
+                  - if (viewSchema.title === key)
+                    td.title
+                      strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
+                      ul.row-actions
+                        - if (adminIsAllowed(crudDelegate.name, 'update')) 
+                          li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
+                        - if (adminIsAllowed(crudDelegate.name, 'delete')) 
+                          li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
+                  - else
+                    - if (propertyMeta.type === 'checkbox')
+                      td=booleanFormatter(entity[key])
+                    - else if (propertyMeta.type === 'file')
+                      td.thumbnail
+                        - if (entity[key])
+                          mixin displayImage(100, 100, entity[key][0], crudDelegate.name + ' - ' + entityName, 'crop')
+                    - else if (propertyMeta.type === 'link')
+                      td
+                        a(href=entity[key], target='_blank')=entity[key]
+                    - else if (propertyMeta.type === 'dateTime')
+                      td=dateTime(propertyMeta.format(entity[key]))
+                    - else
+                      td=propertyMeta.format(entity[key])
 
 include includes/pagination

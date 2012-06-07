@@ -1,5 +1,5 @@
 nav.page-actions.view-actions
-	ul.actions
-		li: a.button.primary(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}') View
-		- if (adminIsAllowed(crudDelegate.name, 'delete')) 
-			li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete
+  ul.actions
+    li: a.button.primary(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}') View
+    - if (adminIsAllowed(crudDelegate.name, 'delete')) 
+      li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete

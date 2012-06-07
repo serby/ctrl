@@ -10,49 +10,49 @@
  * @author Paul Serby <paul.serby@clock.co.uk>
  */
 (function ($) {
-	$.fn.placeholder = function (text) {
+  $.fn.placeholder = function (text) {
 
-	return this.each(function () {
+  return this.each(function () {
 
-			var
-				context = $(this),
-				placeholderText,
-				nativePlaceholderSupport = ('placeholder' in document.createElement('input'));
+      var
+        context = $(this),
+        placeholderText,
+        nativePlaceholderSupport = ('placeholder' in document.createElement('input'));
 
-			function onBlur(event) {
-				checkIfEmpty($(event.target));
-			}
+      function onBlur(event) {
+        checkIfEmpty($(event.target));
+      }
 
-			function checkIfEmpty(control) {
-				if (control.val() === '') {
-					control.val(placeholderText);
-					control.addClass('ui-placeholder');
-				}
-			}
+      function checkIfEmpty(control) {
+        if (control.val() === '') {
+          control.val(placeholderText);
+          control.addClass('ui-placeholder');
+        }
+      }
 
-			function onFocus(event) {
-				$(this).removeClass('ui-placeholder');
-				if (context.val() === placeholderText) {
-					context.val('');
-				}
-			}
+      function onFocus(event) {
+        $(this).removeClass('ui-placeholder');
+        if (context.val() === placeholderText) {
+          context.val('');
+        }
+      }
 
-			if (text === undefined) {
-				placeholderText = $(this).attr('placeholder');
-			} else {
-				placeholderText = text;
-			}
+      if (text === undefined) {
+        placeholderText = $(this).attr('placeholder');
+      } else {
+        placeholderText = text;
+      }
 
-			if (!nativePlaceholderSupport) {
-				checkIfEmpty(context.blur(onBlur).focus(onFocus).addClass('ui-placeholder'));
-				context.parents('form').submit(function(event) {
-					if (context.val() === placeholderText) {
-						context.val('');
-					}
-				});
-			} else {
-				context.attr('placeholder', text);
-			}
-		});
-	};
+      if (!nativePlaceholderSupport) {
+        checkIfEmpty(context.blur(onBlur).focus(onFocus).addClass('ui-placeholder'));
+        context.parents('form').submit(function(event) {
+          if (context.val() === placeholderText) {
+            context.val('');
+          }
+        });
+      } else {
+        context.attr('placeholder', text);
+      }
+    });
+  };
 })(jQuery);

@@ -1,6 +1,6 @@
 - if (typeof authorPosts !== 'undefined' && authorPosts.length > 0)
-	.widget.posts-by-author
-		h3 More by #{author}
-		ol
-			- each post in authorPosts
-				li: a(href=post.path)=post.title
+  .widget.posts-by-author
+    h3 More by #{author}
+    ol
+      - each post in authorPosts
+        li: a(href=post.path)=post.title
