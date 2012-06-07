@@ -6,7 +6,7 @@ var properties = {
   version: '0.0.1',
   name: 'Control',
   tagline: 'Control CMS by Paul Serby',
-  description: 'This is the inital config',
+  description: 'This is the initial config',
   keywords: 'Control',
   pageTitle: 'Control CMS',
   port: basePort + 1,
