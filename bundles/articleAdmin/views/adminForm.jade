@@ -2,58 +2,71 @@ include ../../../views/mixins/formFields
 include ../../../views/mixins/file
 
 h1
-  -if (page.action == 'create')
-    | New #{crudDelegate.name}
-  -else
-    | Edit #{crudDelegate.name}
+	-if (page.action == 'create')
+		| New #{crudDelegate.name}
+	-else
+		| Edit #{crudDelegate.name}
 
 nav.breadcrumb
-  ul
-    li.nav-home: a(href='/admin') Home
-    li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
-    li
-      -if (page.action == 'create')
-        | New #{crudDelegate.name}
-      -else
-        | Edit #{crudDelegate.name}
+	ul
+		li.nav-home: a(href='/admin') Home
+		li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+		li
+			-if (page.action == 'create')
+				| New #{crudDelegate.name}
+			-else
+				| Edit #{crudDelegate.name}
 
 p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
 
 -if (page.action == 'update')
-  include ../../generic/views/includes/form-actions
+	include ../../generic/views/includes/form-actions
 
 form(method='post', enctype='multipart/form-data')
-  - if (Object.keys(errors).length > 0)
-    .notification.error
-      h4 Please check the form and try again
+	- if (Object.keys(errors).length > 0)
+		.notification.error
+			h4 Please check the form and try again
 
-  fieldset
-    h3 Article Details
-    p These are the details for an Article
-        mixin textFieldForObject({ name: 'title' }, { label: 'Title', data: entity, required: true, errors: errors})
-        mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
-        mixin textFieldForObject({ name: 'slug' }, {label: 'Slug', data: entity, required: true, errors: errors, information: 'This will be part of the url. Leave blank to auto-generate'})
-        mixin textFieldForObject({ name: 'summary' }, { label: 'Summary', data: entity, required: true, errors: errors, information: 'If you leave this blank a first part of the main content will be used.' })
-        mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
-        mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, required: true, errors: errors})
-        mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, required: true, errors: errors})
+	fieldset
+		h3 Article Details
+		p These are the details for an Article
+			#form-row
+				label
+				mixin textFieldForObject('Title', 'title', entity, true, errors)
+			#form-row
+				label
+				mixin dropdownForObject('Section', 'section', entity, true, errors, sectionsDropdown)
+			#form-row
+				label
+				mixin textFieldForObject('Slug', 'slug', entity, true, errors, null, 'This will be part of the url. Leave blank to auto-generate')
+			#form-row
+				label
+				mixin textboxFieldForObject('', 'Summary', 'summary', entity, false, errors, null, 'If you leave this blank a first part of the main content will be used.')
+			#form-row
+				label
+				mixin dropdownForObject('Author', 'author', (entity['author'] === null ? currentAdmin : entity), true, errors, adminsDropdown)
+			#form-row
+				label
+				mixin checkboxFieldForObject('Live', 'live', entity, true, errors)
+			#form-row
+				label
+				mixin textFieldForObject('Published Date', 'publishedDate', entity, true, errors, null, 'This is used to order the articles')
 
-  fieldset
-    h3 Article Content
-    p This is the content for an Article
-      #form-row
-        label
-        mixin dropdownForObject({ name: 'type' }, { label: 'Type', data: entity, required: true, errors: errors, list: typesDropdown })
+	fieldset
+		h3 Article Content
+		p This is the content for an Article
+			#form-row
+				label
+				mixin dropdownField('type dropdown', 'Type', 'type', entity['type'], true, errors['type'], typesDropdown)
+			#form-row
+				mixin textboxFieldForObject('rich-editor biggest', '', 'body', entity, false, errors)
 
-      #form-row
-        mixin textboxFieldForObject({ name: 'body', class: 'markItUp' }, { label: '', data: entity, required: false, errors: errors })
+	fieldset
+		h3 Article Images
+		#form-row
+		label
+		mixin fileFieldForObject('Images', 'images', entity, false, errors)
 
-  fieldset
-    h3 Article Images
-    #form-row
-    label
-    mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
-
-  fieldset.actions
-    a.button(href='/admin/#{crudDelegate.urlName}') Cancel
-    input.button.primary(type='submit',value='Submit')
+	fieldset.actions
+		a.button(href='/admin/#{crudDelegate.urlName}') Cancel
+		input.button.primary(type='submit',value='Submit')
