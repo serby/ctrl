@@ -7,7 +7,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   function renderSetup(res, req, errors) {
     viewRender(req, res, 'setup', {
-      layout: 'loginLayout',
       page: {
         title: 'Setup / Admin / ' + properties.name,
         section: 'admin'
@@ -45,7 +44,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', properties.siteUrl + '/admin/login'), function(req, res) {
 
     viewRender(req, res, 'index', {
-      layout: 'layout',
       page: {
         title: 'Admin / ' + properties.name,
         section: 'admin'
@@ -56,7 +54,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   app.get('/admin/login', compact.js(['admin-common']));
   app.get('/admin/login', ensureSetup, function(req, res) {
     viewRender(req, res, 'login', {
-      layout: 'loginLayout',
       page: {
         title: 'Login / Admin / ' + properties.name,
         section: 'login'
@@ -78,7 +75,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
       } else if (error instanceof Error) {
 
         viewRender(req, res, 'login', {
-          layout: 'loginLayout',
           page: {
             title: 'Login / Admin / ' + properties.name,
             section: 'login'

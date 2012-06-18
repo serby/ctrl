@@ -59,7 +59,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 			}
 		}, function(error, results) {
 			if ((results.section.length === 0) || (results.article.length === 0)) {
-				return next(new serviceLocator.httpErrorHandler.NotFound());
+				return next();
 			}
 			res.article = results.article;
 			res.section = results.section;

@@ -32,16 +32,14 @@ html(lang='en')
     block styles
       link(rel='stylesheet', type='text/css', href=versionPath('/css/admin/index.css'), media='all')
       link(rel='stylesheet', type='text/css', href=versionPath('/js/fancybox/jquery.fancybox.css'), media='all')
-      link(rel='stylesheet', type='text/css', href='/js/redactor/css/redactor.css', media='all')
 
   body(class=page.section)
     #container
       block header
         include includes/structure/header
 
-      block content
-        #main-content
-          != body
+      #main-content
+        block content
 
       block footer
         include includes/structure/footer
