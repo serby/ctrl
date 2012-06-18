@@ -13,7 +13,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
 	serviceLocator.compact.
 		addNamespace('blog', __dirname + '/public/')
-		.addJs('/js/comment.js')
+		.addJs('/js/comments.js')
 		.addJs('/js/social.js');
 
 	function getPageContent(req, res, next) {

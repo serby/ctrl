@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "Control",
   "main": "app.js",
   "version": "0.0.1",
@@ -26,6 +25,7 @@
     "piton-pipe": "~0.0",
     "piton-string-utils": "~0.0",
     "piton-validity": "~0.1",
+    "rss": "0.0.3",
     "service-locator": "~0.0",
     "stylus": "~0.22",
     "trunky": "~0.1",
@@ -49,5 +49,4 @@
   "directories": {
     "lib": "lib"
   }
-
 }
