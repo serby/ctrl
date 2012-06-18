@@ -76,7 +76,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     compact.js(['admin-common'], ['article-admin', 'markdown-editor']));
   app.post('/admin/' + crudDelegate.urlName + '/new',
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
-    serviceLocator.uploadDelegate,
+    serviceLocator.uploadDelegate.middleware,
     adminViewSchema.formPostHelper,
     getDropdownOptions,
     function (req, res, next) {
@@ -133,7 +133,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
   app.post('/admin/' + crudDelegate.urlName + '/:id/edit',
     compact.js(['admin-common'], ['article-admin', 'markdown-editor']));
   app.post('/admin/' + crudDelegate.urlName + '/:id/edit',
-    serviceLocator.uploadDelegate,
+    serviceLocator.uploadDelegate.middleware,
     adminViewSchema.formPostHelper,
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'),
     getDropdownOptions,

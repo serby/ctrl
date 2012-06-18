@@ -12,7 +12,7 @@
     "date-utils": "~1.2",
     "express": "~2.5",
     "express-validator": "~0.2",
-    "fileupload": "~0.0",
+    "fileupload": "~0.1",
     "gm": "~0.5",
     "gzippo": "~0.1",
     "jade": "~0.25",

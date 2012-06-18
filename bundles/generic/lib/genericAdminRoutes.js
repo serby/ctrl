@@ -171,7 +171,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     '/admin/' + model.urlName + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
-    serviceLocator.uploadDelegate,
+    serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     schemaHelper(schema), function (req, res, next) {
 
@@ -253,7 +253,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
   app.post(
     '/admin/' + model.urlName + '/:id/edit',
     compactMiddleware('form'),
-    serviceLocator.uploadDelegate,
+    serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     accessCheck('update'),
     function (req, res, next) {

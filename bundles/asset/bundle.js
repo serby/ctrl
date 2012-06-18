@@ -4,31 +4,19 @@ module.exports = {
   description: 'Upload and manage assets',
   adminNav: [{
     label: 'Assets',
-    url: '/admin/assets',
-    section: 'assets',
-    items: [
-      {
-        label: 'Form Elements',
-        url: '#form-elements',
-        section: 'admin-ui'
-      },
-      {
-        label: 'Tables',
-        url: '#tables',
-        section: 'admin-ui'
-      },
-      {
-        label: 'Misc UI',
-        url: '#misc-ui',
-        section: 'admin-ui'
-      }
-    ]
+    url: '/admin/asset',
+    section: 'asset'
   }],
   initialize: [
     function(serviceLocator) {
+      serviceLocator.register('assetModel',
+        require('./lib/assetModel').createModel(serviceLocator.properties,
+          serviceLocator));
+    },
+    function(serviceLocator) {
 
       // The resource you need access of see the admin bundles
-      serviceLocator.adminAccessControlList.addResource('Asssets');
+      serviceLocator.adminAccessControlList.addResource('Asset');
 
     },
     function(serviceLocator) {
