@@ -40,7 +40,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
 
   app.get(
-    '/admin/asset',
+    '/admin/asset/api/list',
     function (req, res) {
       serviceLocator.assetModel.list(function (err, results) {
         if (!err) {
@@ -54,7 +54,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
 
   app.post(
-    '/admin/asset/new',
+    '/admin/asset/api/new',
     serviceLocator.uploadDelegate.middleware,
     function (req, res) {
       req.body.files.forEach(function (file) {
@@ -69,7 +69,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.delete('/admin/asset/:id', function (req, res) {
+  app.delete('/admin/asset/api/:id', function (req, res) {
 
     var id = req.params.id;
     serviceLocator.assetModel.delete(id, function (err) {
