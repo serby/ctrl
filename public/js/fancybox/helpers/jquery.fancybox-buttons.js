@@ -21,11 +21,11 @@
 
   //Add helper object
   F.helpers.buttons = {
-    tpl: '<div id="fancybox-buttons"><ul><li><a class="btnPrev" title="Previous" href="javascript:;"></a></li><li><a class="btnPlay" title="Start slideshow" href="javascript:;"></a></li><li><a class="btnNext" title="Next" href="javascript:;"></a></li><li><a class="btnToggle" title="Toggle size" href="javascript:;"></a></li><li><a class="btnClose" title="Close" href="javascript:jQuery.fancybox.close();"></a></li></ul></div>',
-    list: null,
-    buttons: {},
+    tpl: '<div id="fancybox-buttons"><ul><li><a class="btnPrev" title="Previous" href="javascript:;"></a></li><li><a class="btnPlay" title="Start slideshow" href="javascript:;"></a></li><li><a class="btnNext" title="Next" href="javascript:;"></a></li><li><a class="btnToggle" title="Toggle size" href="javascript:;"></a></li><li><a class="btnClose" title="Close" href="javascript:jQuery.fancybox.close();"></a></li></ul></div>'
+    , list: null
+    , buttons: {}
 
-    update: function () {
+    , update: function () {
       var toggle = this.buttons.toggle.removeClass('btnDisabled btnToggleOn');
 
       //Size toggle button
@@ -35,9 +35,9 @@
       } else if (!F.current.canExpand) {
         toggle.addClass('btnDisabled');
       }
-    },
+    }
 
-    beforeLoad: function (opts) {
+    , beforeLoad: function (opts) {
       //Remove self if gallery do not have at least two items
       if (F.group.length < 2) {
         F.coming.helpers.buttons = false;
@@ -48,21 +48,21 @@
 
       //Increase top margin to give space for buttons
       F.coming.margin[ opts.position === 'bottom' ? 2 : 0 ] += 30;
-    },
+    }
 
-    onPlayStart: function () {
+    , onPlayStart: function () {
       if (this.list) {
         this.buttons.play.attr('title', 'Pause slideshow').addClass('btnPlayOn');
       }
-    },
+    }
 
-    onPlayEnd: function () {
+    , onPlayEnd: function () {
       if (this.list) {
         this.buttons.play.attr('title', 'Start slideshow').removeClass('btnPlayOn');
       }
-    },
+    }
 
-    afterShow: function (opts) {
+    , afterShow: function (opts) {
       var buttons;
 
       if (!this.list) {

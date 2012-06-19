@@ -13,9 +13,9 @@ mixin articleDetails(article, options)
   .meta
     p Posted on 
       em=longDateTime(article.created)
-      |  in
+      |  in 
       a(href='/#{article.section}')=article.section
-      |  by
+      |  by 
       em=article.author
   - if (options && options.summary)
     p=articleSummary(article, options.length)
