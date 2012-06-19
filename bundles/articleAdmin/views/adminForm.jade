@@ -44,6 +44,7 @@ block content
           mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
           mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, required: true, errors: errors})
           mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, required: true, errors: errors})
+          mixin datepickerFieldForObject({ name: 'publishedDate' }, { label: 'Published Date', data: entity, required: true, errors: errors, information: 'This is used to order the articles' })
 
     fieldset
       h3 Article Content
