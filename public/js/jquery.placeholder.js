@@ -14,10 +14,9 @@
 
   return this.each(function () {
 
-      var
-        context = $(this),
-        placeholderText,
-        nativePlaceholderSupport = ('placeholder' in document.createElement('input'));
+      var context = $(this)
+        , placeholderText
+        , nativePlaceholderSupport = ('placeholder' in document.createElement('input'));
 
       function onBlur(event) {
         checkIfEmpty($(event.target));
