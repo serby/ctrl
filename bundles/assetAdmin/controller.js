@@ -5,10 +5,22 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
   var viewRender = viewRenderDelegate.create(viewPath)
     , compact = serviceLocator.compact;
 
-  app.get('/admin/asset', function (req, res) {
-    viewRender(req, res, 'assetAdmin', {
-    });
-  });
+  compact.addNamespace('admin-asset', __dirname + '/public')
+    .addJs('js/deps/fileuploader.js')
+    .addJs('js/app.js');
+
+  app.get(
+    '/admin/asset',
+    compact.js([['admin-common'], ['admin-asset']]),
+    function (req, res) {
+      viewRender(req, res, 'assetAdmin', {
+        page: {
+          title: 'Asset Manager',
+          section: 'asset'
+        }
+      });
+    }
+  );
 
 }
 

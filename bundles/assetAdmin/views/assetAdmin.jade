@@ -1,1 +1,17 @@
-h1 hello
+extend ../../admin/views/layout
+
+block content
+
+  h1 Asset Manager
+
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li Asset Manager
+
+  .panel-group
+
+    h3 Upload asset
+
+    #file-uploader
+      button.primary Upload a file

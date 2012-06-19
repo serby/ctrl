@@ -3,7 +3,7 @@ module.exports = {
   version: '0.0.1',
   description: 'Upload and manage assets (admin frontend)',
   adminNav: [{
-    label: 'Assets',
+    label: 'Asset',
     url: '/admin/asset',
     section: 'asset'
   }],
