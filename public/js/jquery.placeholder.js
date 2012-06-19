@@ -16,7 +16,8 @@
 
       var context = $(this)
         , placeholderText
-        , nativePlaceholderSupport = ('placeholder' in document.createElement('input'));
+        , nativePlaceholderSupport = ('placeholder' in document.createElement('input'))
+        ;
 
       function onBlur(event) {
         checkIfEmpty($(event.target));

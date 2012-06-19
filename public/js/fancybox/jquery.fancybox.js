@@ -16,7 +16,8 @@
       F.open.apply( this, arguments );
     }
     , didResize = false
-    , resizeTimer = null;
+    , resizeTimer = null
+    ;
 
   $.extend(F, {
     // The current version of fancyBox
@@ -53,11 +54,11 @@
       , modal: false
       , loop: true
       , ajax: {}
-      , keys: {
-          next: [13, 32, 34, 39, 40] // enter, space, page down, right arrow, down arrow
+      , keys: 
+        { next: [13, 32, 34, 39, 40] // enter, space, page down, right arrow, down arrow
         , prev: [8, 33, 37, 38] // backspace, page up, left arrow, up arrow
         , close: [27] // escape key
-      }
+        }
 
       // Override some properties
       , index: 0
@@ -67,8 +68,8 @@
       , title: null
 
       // HTML templates
-      , tpl: {
-          wrap: '<div class="fancybox-wrap"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div>'
+      , tpl: 
+        { wrap: '<div class="fancybox-wrap"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div>'
         , image: '<img class="fancybox-image" src="{href}" alt="" />'
         , iframe: '<iframe class="fancybox-iframe" name="fancybox-frame{rnd}" frameborder="0" hspace="0" ' + ($.browser.msie ? 'allowtransparency="true""' : '') + ' scrolling="{scrolling}" src="{href}"></iframe>'
         , swf: '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"><param name="wmode" value="transparent" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="{href}" /><embed src="{href}" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="100%" height="100%" wmode="transparent"></embed></object>'
@@ -76,7 +77,7 @@
         , closeBtn: '<div title="Close" class="fancybox-item fancybox-close"></div>'
         , next: '<a title="Next" class="fancybox-item fancybox-next"><span></span></a>'
         , prev: '<a title="Previous" class="fancybox-item fancybox-prev"><span></span></a>'
-      }
+        }
 
       // Properties for each animation type
       // Opening fancyBox
@@ -106,13 +107,13 @@
       , prevMethod: 'changeOut'
 
       // Enabled helpers
-      , helpers: {
-          overlay: {
-            speedIn: 0
+      , helpers: 
+        { overlay: 
+          { speedIn: 0
           , speedOut: 300
           , opacity: 0.8
-          , css: {
-              cursor: 'pointer'
+          , css: 
+          { cursor: 'pointer'
           }
           , closeClick: true
         }
@@ -142,10 +143,10 @@
     , outer: null
     , inner: null
 
-    , player: {
-        timer: null
+    , player: 
+      { timer: null
       , isActive: false
-    }
+      }
 
     // Loaders
     , ajaxLoad: null

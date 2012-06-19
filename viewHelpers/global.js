@@ -1,6 +1,7 @@
 var markdown = require('markdown').markdown
   , condensedWeekdayList = require('../lib/utils/condenseWeekdayList')
-  , paginationHelpers = require('../lib/utils/pagination').helpers;
+  , paginationHelpers = require('../lib/utils/pagination').helpers
+  ;
 
   require('date-utils');
 

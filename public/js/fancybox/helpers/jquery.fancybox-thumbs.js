@@ -57,10 +57,11 @@
       $.each(F.group, function (i) {
         $("<img />").load(function () 
           { var width = this.width
-            , height = this.height
-            , widthRatio
-            , heightRatio
-            , parent;
+              , height = this.height
+              , widthRatio
+              , heightRatio
+              , parent
+              ;
 
           if (!that.list || !width || !height) {
             return;
@@ -149,6 +150,6 @@
       this.list = null;
       this.width = 0;
     }
-  }
+  };
 
 }(jQuery));
