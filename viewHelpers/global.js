@@ -1,6 +1,7 @@
 var markdown = require('markdown').markdown
   , condensedWeekdayList = require('../lib/utils/condenseWeekdayList')
-  , paginationHelpers = require('../lib/utils/pagination').helpers;
+  , paginationHelpers = require('../lib/utils/pagination').helpers
+  ;
 
   require('date-utils');
 
@@ -12,11 +13,11 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
       .dynamicHelpers({
         session: function(req, res) {
           return req.session;
-        },
-        properties: function() {
+        }
+        , properties: function() {
           return properties;
-        },
-        includes: function(req, res) {
+        }
+        , includes: function(req, res) {
           if (!res.bodyStart) {
             res.bodyStart = [];
           }
@@ -28,28 +29,28 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
       .helpers({
         dateTime: function(date) {
           return (new Date(date)).toFormat('D MMM YYYY @ HH24:MI ') + 'GMT';
-        },
-        date: function(date) {
+        }
+        , date: function(date) {
           return (new Date(date)).toFormat('DDDD, D MMMM YYYY');
         },
         longDateTime: function(date) {
           return (new Date(date)).toFormat('DDDD, D MMMM YYYY @ HH24:MI ') + 'GMT';
-        },
-        time: function(date) {
+        }
+        , time: function(date) {
           //TODO: This should be time only
           var d = new Date(date);
           return d.toDateString();
-        },
-        getQuantitive: function(singular, plural, count) {
+        }
+        , getQuantitive: function(singular, plural, count) {
           return count === 1 ? count + ' ' + singular : count + ' ' + plural;
-        },
-        booleanFormatter: function(bool) {
+        }
+        , booleanFormatter: function(bool) {
           return (bool) ? "Yes" : "No";
-        },
-        markdown: function(text) {
+        }
+        , markdown: function(text) {
           return markdown.toHTML(text);
-        },
-        addressList: function(addressArray) {
+        }
+        , addressList: function(addressArray) {
           var formattedAddress = [];
           addressArray.forEach(function(address) {
             if (address) {
@@ -58,14 +59,13 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
             }
           });
           return formattedAddress;
-        },
-        numberTruncator: function(number, decimalPoints) {
+        }
+        , numberTruncator: function(number, decimalPoints) {
           return number.toFixed(decimalPoints);
-        },
-        telephoneNumberFormatter: function(number) {
-          var
-            formattedNumber,
-            matches;
+        }
+        , telephoneNumberFormatter: function(number) {
+          var formattedNumber
+            , matches;
 
           // Removing spaces
           formattedNumber = number.replace(/\s/g, '');
@@ -77,9 +77,9 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
           }
 
           return formattedNumber;
-        },
-        condensedWeekdayList: condensedWeekdayList,
-        querystring: paginationHelpers
+        }
+        , condensedWeekdayList: condensedWeekdayList
+        , querystring: paginationHelpers
       }).helpers(serviceLocator.viewHelpers);
   });
 };
