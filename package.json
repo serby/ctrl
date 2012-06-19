@@ -25,6 +25,7 @@
     "piton-pipe": "~0.0",
     "piton-string-utils": "~0.0",
     "piton-validity": "~0.1",
+    "rss": "0.0.3",
     "service-locator": "~0.0",
     "stylus": "~0.22",
     "trunky": "~0.1",
@@ -36,5 +37,16 @@
     "mocha": "*",
     "should": "*",
     "coffee-script": "*"
+  },
+  "devDependencies": {
+    "request": "~2.9",
+    "mocha": ">= 0.0.8",
+    "should": ">= 0.0.8",
+    "coffee-script": ">= 1.1.1",
+    "soda": ">= 0.2.4",
+    "xml2js": "~0.1"
+  },
+  "directories": {
+    "lib": "lib"
   }
 }

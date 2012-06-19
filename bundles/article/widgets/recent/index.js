@@ -21,7 +21,7 @@ module.exports = function(serviceLocator) {
     },
     load: function(req, res, next) {
       serviceLocator.articleModel.findWithUrl({},
-        { limit: 5, sort: { created: -1} }, function(error, dataSet) {
+        { limit: 5, sort: { publishedDate: -1} }, function(error, dataSet) {
 
         if (!error && dataSet.length() !== 0) {
           data = _.extend({}, data, {

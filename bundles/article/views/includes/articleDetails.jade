@@ -12,7 +12,7 @@ mixin articleDetails(article, options)
 
   .meta
     p Posted on 
-      em=longDateTime(article.created)
+      em=longDateTime(article.publishedDate)
       |  in
       a(href='/#{article.section}')=article.section
       |  by

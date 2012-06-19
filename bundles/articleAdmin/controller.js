@@ -19,10 +19,10 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
         },
         section: {
           list: true,
-          view: false
+          view: true
         },
         slug: {
-          list: true,
+          list: false,
           view: true,
           searchType: 'text'
         },
@@ -43,8 +43,14 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           view: true
         },
         created: {
+          list: false,
+          view: true,
+          type: 'dateTime'
+        },
+        publishedDate: {
           list: true,
           view: true,
+          edit: true,
           type: 'dateTime'
         }
       }
@@ -79,6 +85,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
         images: proc.file,
         live: proc.boolean,
         comments: proc.boolean,
+        publishedDate: proc.date,
         removeImage: proc.removeImage(['images'])
       });
 

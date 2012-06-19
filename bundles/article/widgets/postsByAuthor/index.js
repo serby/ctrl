@@ -21,7 +21,7 @@ module.exports = function(serviceLocator) {
         }
       };
       serviceLocator.articleModel.findWithUrl(searchQuery,
-        { limit: 5, sort: { created: -1 } }, function(error, dataSet) {
+        { limit: 5, sort: { publishedDate: -1 } }, function(error, dataSet) {
 
         data.authorPosts = dataSet.toArray();
         data.author = res.article[0].author;

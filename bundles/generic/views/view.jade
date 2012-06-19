@@ -1,35 +1,39 @@
-include ../../../views/mixins/file
+extend ../../admin/views/layout
 
-h1 View #{crudDelegate.name}
+block content
 
-nav.breadcrumb
-  ul
-    li.nav-home: a(href='/admin') Home
-    li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
-    li View #{crudDelegate.name}
+  include ../../../views/mixins/file
 
-include includes/view-actions
+  h1 View #{crudDelegate.name}
 
-//-h2 #{crudDelegate.name} Details
-- each group in viewSchema.groups
-  .panel-group
-    - if (typeof group.name !== 'undefined')
-      h3=group.name
-    - if (typeof group.description !== 'undefined')
-      p.group-description=group.description
-      dl
-        - each propertyMeta, key in group.properties
-          - if (propertyMeta.view)
-            dt=crudDelegate.entityDelegate.propertyName(key)
-            dd
-              - if (propertyMeta.type === 'file')
-                mixin downloadLink(entity[key], false)
-              - else if (propertyMeta.type === 'dateTime')
-                p=dateTime(propertyMeta.format(entity[key]))
-              - else if (propertyMeta.type === 'checkbox')
-                p=booleanFormatter(entity[key])
-              - else if (propertyMeta.type === 'link')
-                p
-                  a(href=entity[key], target='_blank')=entity[key]
-              - else
-                #{propertyMeta.format(entity[key])}
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+      li View #{crudDelegate.name}
+
+  include includes/view-actions
+
+  //-h2 #{crudDelegate.name} Details
+  - each group in viewSchema.groups
+    .panel-group
+      - if (typeof group.name !== 'undefined')
+        h3=group.name
+      - if (typeof group.description !== 'undefined')
+        p.group-description=group.description
+        dl
+          - each propertyMeta, key in group.properties
+            - if (propertyMeta.view)
+              dt=crudDelegate.entityDelegate.propertyName(key)
+              dd
+                - if (propertyMeta.type === 'file')
+                  mixin downloadLink(entity[key], false)
+                - else if (propertyMeta.type === 'dateTime')
+                  p=dateTime(propertyMeta.format(entity[key]))
+                - else if (propertyMeta.type === 'checkbox')
+                  p=booleanFormatter(entity[key])
+                - else if (propertyMeta.type === 'link')
+                  p
+                    a(href=entity[key], target='_blank')=entity[key]
+                - else
+                  #{propertyMeta.format(entity[key])}
