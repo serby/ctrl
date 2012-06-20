@@ -50,5 +50,9 @@ module.exports = {
   },
   created: {
     defaultValue: function() { return new Date(); }
+  },
+  publishedDate: {
+    defaultValue: function() { return new Date(); },
+    type: 'date'
   }
 };

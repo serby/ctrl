@@ -28,9 +28,8 @@ html(lang='en')
       block nav
         include includes/nav
       
-      block content
-        #main-content
-          != body
+      #main-content
+        block content
 
       block footer
         include includes/footer

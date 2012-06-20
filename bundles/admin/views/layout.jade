@@ -38,9 +38,8 @@ html(lang='en')
       block header
         include includes/structure/header
 
-      block content
-        #main-content
-          != body
+      #main-content
+        block content
 
       block footer
         include includes/structure/footer

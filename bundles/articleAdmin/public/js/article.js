@@ -1,6 +1,9 @@
 $(function($) {
-  var titleElement = $('input[name=title]')
-    , slugElement = $('input[name=slug]')
+
+  var $titleControl = $('input[name=title]')
+    , $slugControl = $('input[name=slug]')
+    , $bodyControl = $('textarea[name=body]')
+    , $typeControl = $('select[name=type]')
     ;
 
   function toUrl(value) {
@@ -11,8 +14,38 @@ $(function($) {
   }
 
   function onTitleBlur(event) {
-    slugElement.val(toUrl(titleElement.val()));
+    $slugControl.val(toUrl($titleControl.val()));
   }
 
-  $('input[name=title]').blur(onTitleBlur);
+  $titleControl.blur(onTitleBlur);
+
+  switch ($typeControl.val()) {
+    case 'Markdown':
+      break;
+    case 'HTML':
+      $bodyControl.redactor({
+        path: '/js/redactor'
+      });
+      break;
+  }
+
+  $typeControl.on('change', function() {
+    var body = $bodyControl.val();
+
+    switch ($(this).val()) {
+      case 'Markdown':
+        if (confirm('Switching type will lose formatting. Do you want to convert to plain text?')) {
+          $bodyControl.destroyEditor();
+          $bodyControl.val($('<div>').html(body).text());
+        } else {
+          $bodyControl.destroyEditor();
+        }
+        break;
+      case 'HTML':
+        $bodyControl.redactor({
+          path: '/js/redactor'
+        });
+        break;
+    }
+  });
 });

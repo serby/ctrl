@@ -1,17 +1,21 @@
-include ../../../views/mixins/formFields
+extend loginLayout
 
-form(action='/admin/setup', method='post')
-  h1 Admin Setup
-  h2 There is currently no administrator account.
-  p Create a default administrator by entering details below.
-  fieldset
-    -if (error)
-      errors
-        p.error
-          strong= error
-    mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
-    mixin textField({ name :'firstName' }, { label: 'First Name' })
-    mixin textField({ name :'lastName' }, { label: 'Last Name' })
-    mixin passwordField({ name :'password' }, { label: 'Password' })
-  fieldset.actions
-    input.button.primary(name='Submit', type='submit', value='Create now')
+block content
+
+  include ../../../views/mixins/formFields
+
+  form(action='/admin/setup', method='post')
+    h1 Admin Setup
+    h2 There is currently no administrator account.
+    p Create a default administrator by entering details below.
+    fieldset
+      -if (error)
+        errors
+          p.error
+            strong= error
+      mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
+      mixin textField({ name :'firstName' }, { label: 'First Name' })
+      mixin textField({ name :'lastName' }, { label: 'Last Name' })
+      mixin passwordField({ name :'password' }, { label: 'Password' })
+    fieldset.actions
+      input.button.primary(name='Submit', type='submit', value='Create now')

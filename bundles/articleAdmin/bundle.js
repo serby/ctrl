@@ -35,12 +35,10 @@ module.exports = {
       serviceLocator.compact.addNamespace('article-admin', __dirname + '/public/')
         .addJs('/js/article.js');
 
-      serviceLocator.compact.addNamespace('markdown-editor')
-        .addJs('/js/admin/markItUp/jquery.markitup.js')
-        .addJs('/js/admin/markItUp/jquery.markitup.js')
-        .addJs('/js/admin/markItUp/html.js')
-        .addJs('/js/admin/markItUp/markdown.js')
-        .addJs('/js/admin/markItUp/main.js');
+      serviceLocator.compact.addNamespace('markdown-editor', __dirname + '/public/')
+        .addJs('/js/redactor/redactor.js')
+        .addJs('/js/article.js');
     }
+
   ]
 };

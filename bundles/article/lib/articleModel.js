@@ -3,7 +3,8 @@ var
   schema = require('./articleEntitySchema'),
   MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate'),
   path = require('path'),
-  url = require('url');
+  url = require('url'),
+  RSS = require('rss');
 
 module.exports.createModel = function(properties, serviceLocator) {
 
@@ -30,6 +31,35 @@ module.exports.createModel = function(properties, serviceLocator) {
     MongodbCrudDelegate.objectIdFilter(connection),
     serviceLocator.logger
   );
+
+  function createRss(callback) {
+
+    var feed = new RSS({
+      title: 'Clock Blog',
+      description: 'Clock Blog',
+      feed_url: url.resolve(properties.siteUrl, '/feed'),
+      site_url: properties.siteUrl,
+      image_url: url.resolve(properties.siteUrl, '/favicon.ico'),
+      author: 'Clock Ltd'
+    });
+
+    crudDelegate.findWithUrl({}, { sort: { publishedDate: -1 } }, function(error, dataSet) {
+      if (error) {
+        return callback(error);
+      }
+      dataSet.forEach(function(article) {
+        feed.item({
+          title: article.title,
+          description: article.body,
+          url: article.url,
+          author: article.author,
+          date: article.publishedDate
+        });
+      });
+
+      callback(null, feed.xml());
+    });
+  }
 
   function findWithUrl(query, options, callback) {
 
@@ -62,6 +92,7 @@ module.exports.createModel = function(properties, serviceLocator) {
   });
 
   crudDelegate.findWithUrl = findWithUrl;
+  crudDelegate.createRss = createRss;
 
   return crudDelegate;
 };
