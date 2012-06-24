@@ -52,7 +52,8 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
   function accessCheck(action) {
     return serviceLocator.adminAccessControl.requiredAccess(
       options.requiredAccess,
-      action
+      action,
+      '/admin/login'
     );
   }
 
