@@ -1,27 +1,31 @@
-include includes/articleDetails
-h2.big
-  a.lettering(href = '/' + section.slug) #{section.name}
-section#blog-post.two-column
-  mixin articleDetails(article)
+extend ../../../views/layout
 
-  - if (article.type === 'Markdown')
-    !=markdown(article.body)
-  - else if (article.type === 'HTML')
-    !=article.body
+block content
 
-  .like-post
-    p Like what you've read?
-    .social-icons
-      a(href='https://twitter.com/share', class='twitter-share-button',
-        data-via='clock', data-url=article.url, data-text=article.url, data-count='none') Tweet
-      .fb-like(data-href=article.url ,data-send='false',
-        data-layout='button_count', data-width='450')
+  include includes/articleDetails
+  h2.big
+    a.lettering(href = '/' + section.slug) #{section.name}
+  section#blog-post.two-column
+    mixin articleDetails(article)
 
-  #disqus_thread
-  noscript Please enable JavaScript to view the
-    a(href='http://disqus.com/?ref_noscript') comments powered by Disqus.
-  a(href='http://disqus.com',class='dsq-brlink') blog comments powered by 
-    span(class='logo-disqus') Disqus
+    - if (article.type === 'Markdown')
+      !=markdown(article.body)
+    - else if (article.type === 'HTML')
+      !=article.body
+
+    .like-post
+      p Like what you've read?
+      .social-icons
+        a(href='https://twitter.com/share', class='twitter-share-button',
+          data-via='clock', data-url=article.url, data-text=article.url, data-count='none') Tweet
+        .fb-like(data-href=article.url ,data-send='false',
+          data-layout='button_count', data-width='450')
+
+    #disqus_thread
+    noscript Please enable JavaScript to view the
+      a(href='http://disqus.com/?ref_noscript') comments powered by Disqus.
+    a(href='http://disqus.com',class='dsq-brlink') blog comments powered by 
+      span(class='logo-disqus') Disqus
 
 
-include sidebar
+  include sidebar
