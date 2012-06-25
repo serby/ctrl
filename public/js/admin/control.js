@@ -122,7 +122,7 @@ module('control-misc-ui', function (module) {
       return [];
     }
 
-    function confirm(message, fn, danger, verb) {
+    function confirm(message, confirm, deny, danger, confirmVerb, denyVerb) {
 
       var dialog = $('<div/>').addClass('dialog-confirm');
       var overlay = $('<div/>').addClass('dialog-overlay');
@@ -136,20 +136,21 @@ module('control-misc-ui', function (module) {
       var controls = $('<div/>').addClass('controls');
 
       controls.append(
-        $('<button/>').text(verb || 'Confirm')
+        $('<button/>').text(confirmVerb || 'Confirm')
           .addClass(danger ? 'danger' : 'primary')
           .bind('click', function (e) {
             e.preventDefault();
             remove();
-            fn();
+            confirm();
           })
       );
 
       controls.append(
-        $('<button/>').text('Cancel')
+        $('<button/>').text(denyVerb || 'Cancel')
           .bind('click', function (e) {
             e.preventDefault();
             remove();
+            deny();
           })
       );
 
