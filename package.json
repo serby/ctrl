@@ -1,52 +1,40 @@
 {
-  "name": "Control",
-  "main": "app.js",
-  "version": "0.0.1",
-  "private": true,
-  "engine": "~0.6",
-  "dependencies": {
-    "async": "~0.1",
-    "bundled": "~0.0",
-    "compact": "~0.0",
-    "connect-mongodb": "~1.1",
-    "date-utils": "~1.2",
-    "express": "~2.5",
-    "express-validator": "~0.2",
-    "fileupload": "~0.2",
-    "gm": "~0.5",
-    "gzippo": "~0.1",
-    "jade": "~0.25",
-    "markdown": "~0.3",
-    "mime": "~1.2",
-    "mongodb": "~0.9",
-    "nib": "~0.4",
-    "nodemailer": "~0.2",
-    "piton-entity": "~0.1",
-    "piton-pipe": "~0.0",
-    "piton-string-utils": "~0.0",
-    "piton-validity": "~0.1",
-    "rss": "0.0.3",
-    "service-locator": "~0.0",
-    "stylus": "~0.22",
-    "trunky": "~0.1",
-    "underscore": "~1.2",
-    "versionator": "~0.1",
-    "winston": "~0.5"
-  },
-  "devDependencies": {
-    "mocha": "*",
-    "should": "*",
-    "coffee-script": "*"
-  },
-  "devDependencies": {
-    "request": "~2.9",
-    "mocha": ">= 0.0.8",
-    "should": ">= 0.0.8",
-    "coffee-script": ">= 1.1.1",
-    "soda": ">= 0.2.4",
-    "xml2js": "~0.1"
-  },
-  "directories": {
-    "lib": "lib"
+    "name": "Control"
+  , "main": "app.js"
+  , "version": "0.0.1"
+  , "private": true
+  , "engine": "~0.6"
+  , "dependencies": {
+      "async": "~0.1"
+    , "bundled": "~0.0"
+    , "compact": "~0.0"
+    , "connect-mongodb": "~1.1"
+    , "date-utils": "~1.2"
+    , "express": "~2.5"
+    , "express-validator": "~0.2"
+    , "fileupload": "~0.2"
+    , "gm": "~0.5"
+    , "gzippo": "~0.1"
+    , "jade": "~0.25"
+    , "markdown": "~0.3"
+    , "mime": "~1.2"
+    , "mongodb": "~0.9"
+    , "nib": "~0.4"
+    , "nodemailer": "~0.2"
+    , "piton-entity": "~0.1"
+    , "piton-pipe": "~0.0"
+    , "piton-string-utils": "~0.0"
+    , "piton-validity": "~0.1"
+    , "service-locator": "~0.0"
+    , "stylus": "~0.22"
+    , "trunky": "~0.1"
+    , "underscore": "~1.2"
+    , "versionator": "~0.1"
+    , "winston": "~0.5"
+  }
+  , "devDependencies": {
+      "mocha": "*"
+    , "should": "*"
+    , "coffee-script": "*"
   }
 }

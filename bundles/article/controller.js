@@ -93,7 +93,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     serviceLocator.widgetManager.load([
       'article::recent', 'article::categories', 'article::postsByAuthor'
     ]),
-    serviceLocator.compact.js(['article']),
+    serviceLocator.compact.js([['global'], ['article']]),
     function (req, res, next) {
 
       viewRender(req, res, 'article', {

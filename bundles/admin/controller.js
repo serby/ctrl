@@ -39,28 +39,36 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     });
   });
 
-  app.get('/admin', compact.js(['admin-common']));
-  app.get('/admin', ensureSetup,
-    serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', properties.siteUrl + '/admin/login'), function(req, res) {
+  app.get(
+    '/admin',
+    ensureSetup,
+    compact.js(['global'], ['admin-common']),
+    serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', properties.siteUrl + '/admin/login'),
+    function(req, res) {
 
-    viewRender(req, res, 'index', {
-      page: {
-        title: 'Admin / ' + properties.name,
-        section: 'admin'
-      }
-    });
-  });
+      viewRender(req, res, 'index', {
+        page: {
+          title: 'Admin / ' + properties.name,
+          section: 'admin'
+        }
+      });
+    }
+  );
 
-  app.get('/admin/login', compact.js(['admin-common']));
-  app.get('/admin/login', ensureSetup, function(req, res) {
-    viewRender(req, res, 'login', {
-      page: {
-        title: 'Login / Admin / ' + properties.name,
-        section: 'login'
-      },
-      error: ''
-    });
-  });
+  app.get(
+    '/admin/login',
+    compact.js(['global'], ['admin-common']),
+    ensureSetup,
+    function (req, res) {
+      viewRender(req, res, 'login', {
+        page: {
+          title: 'Login / Admin / ' + properties.name,
+          section: 'login'
+        },
+        error: ''
+      });
+    }
+  );
 
   app.get('/admin/logout', function(req, res) {
     serviceLocator.adminAccessControl.destroy(req, res);

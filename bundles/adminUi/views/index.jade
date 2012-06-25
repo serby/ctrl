@@ -1,18 +1,22 @@
-h1 Admin User Interface
+extend ../../admin/views/layout
 
-nav.breadcrumb
-  ul
-    li.nav-home: a(href='/admin') Home
-    li Admin UI
+block content
 
-section#form-elements
-  include form-elements
+  h1 Admin User Interface
 
-section#tables
-  include tables
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li Admin UI
 
-section#misc-ui
-  include misc-ui
+  section#form-elements
+    include form-elements
 
-section#grid
-  include grid
+  section#tables
+    include tables
+
+  section#misc-ui
+    include misc-ui
+
+  section#grid
+    include grid

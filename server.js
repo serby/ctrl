@@ -46,6 +46,9 @@ module.exports.createServer = function(properties, serviceLocator) {
 
   serviceLocator.register('app', app);
 
+  compact.addNamespace('global')
+    .addJs('js/module.js');
+
   databaseAdaptor.createConnection(function(connection) {
 
     serviceLocator

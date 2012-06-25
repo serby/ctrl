@@ -37,11 +37,11 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
   function compactMiddleware(view) {
     if (options.scripts[view]) {
       return serviceLocator.compact.js(
-        ['admin-common'],
+        ['global'], ['admin-common'],
         options.scripts[view]
       );
     } else {
-      return serviceLocator.compact.js(['admin-common']);
+      return serviceLocator.compact.js(['global'], ['admin-common']);
     }
   }
 

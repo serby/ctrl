@@ -11,7 +11,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
   app.get(
     '/admin/asset',
-    compact.js([['admin-common'], ['admin-asset']]),
+    compact.js(['global'], ['admin-common'], ['admin-asset']),
     function (req, res) {
       viewRender(req, res, 'assetAdmin', {
         page: {

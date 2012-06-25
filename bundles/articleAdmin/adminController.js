@@ -53,9 +53,12 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
   }
 
   app.get('/admin/' + crudDelegate.urlName + '/new',
-    compact.js(['admin-common'], ['article-admin', 'markdown-editor']));
-  app.get('/admin/' + crudDelegate.urlName + '/new',
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
+    compact.js(
+      ['global'],
+      ['admin-common'],
+      ['article-admin', 'markdown-editor']
+    ),
     getDropdownOptions, function (req, res) {
 
     viewRender(req, res, 'adminForm', {
