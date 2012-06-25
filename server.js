@@ -33,7 +33,6 @@ module.exports.createServer = function(properties, serviceLocator) {
     , 'rolesAdmin'
     , 'generic'
     , 'adminUi'
-    , 'image'
     , 'section'
     , 'articleAdmin'
     , 'article'
@@ -54,23 +53,26 @@ module.exports.createServer = function(properties, serviceLocator) {
         main: connection
     });
 
-    bundled.initialize();
+    bundled.initialize(function(error) {
 
-    // Make the bundle manager available to views
-    app.configure(function() {
-      app.dynamicHelpers({
-        bundled: function(req, res) {
-          return bundled;
-        },
-        serviceLocator: function(req, res) {
-          return serviceLocator;
-        }
+      // Make the bundle manager available to views
+      app.configure(function() {
+        app.dynamicHelpers({
+          bundled: function(req, res) {
+            return bundled;
+          },
+          serviceLocator: function(req, res) {
+            return serviceLocator;
+          }
+        });
       });
+
+      // Add helpers
+      globalViewHelpers.createHelpers(serviceLocator, properties, app);
+
+      app.start();
+
     });
 
-    // Add helpers
-    globalViewHelpers.createHelpers(serviceLocator, properties, app);
-
-    app.start();
   });
 };

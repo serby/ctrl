@@ -24,11 +24,13 @@ module.exports = {
   ],
   publicRoute: '/',
   initialize: [
-    function(serviceLocator) {
+    function(serviceLocator, done) {
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
       // Create controllers
       require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
 
@@ -38,6 +40,7 @@ module.exports = {
       serviceLocator.compact.addNamespace('markdown-editor', __dirname + '/public/')
         .addJs('/js/redactor/redactor.js')
         .addJs('/js/article.js');
+      done();
     }
 
   ]

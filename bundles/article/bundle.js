@@ -7,7 +7,7 @@ module.exports = {
   description: 'Manage the articles on the site',
   publicRoute: '/article',
   initialize: [
-    function(serviceLocator) {
+    function(serviceLocator, done) {
 
       // Add some JavaScript to be compacted
       serviceLocator.compact
@@ -19,14 +19,15 @@ module.exports = {
       serviceLocator.register('articleModel',
         require('./lib/articleModel').createModel(serviceLocator.properties,
           serviceLocator));
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
 
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Article');
-
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
 
       // Create controllers
       require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties,
@@ -50,6 +51,8 @@ module.exports = {
         }
         return trunky.truncateWithEllipsis(summary, length);
       };
+
+      done();
     }
   ]
 

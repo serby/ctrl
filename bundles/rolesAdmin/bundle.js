@@ -22,17 +22,19 @@ module.exports = {
     ]
   }],
   initialize: [
-    function(serviceLocator) {
+    function(serviceLocator, done) {
 
       // Register the bundles models
       serviceLocator.register('roleModel',
         require('./lib/roleModel').createModel(serviceLocator.properties, serviceLocator));
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Role');
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
 
       function reloadAcl() {
         serviceLocator.logger.info('Reloading admin ACL');
@@ -49,7 +51,7 @@ module.exports = {
       serviceLocator.roleModel.ensureRootRoleExisits(function(error, role) {
 
         if (error) {
-          return serviceLocator.logger.warn('Unable to create root role', error);
+          return done(new Error('Unable to create root role'));
         }
         if (role) {
           serviceLocator.logger.info('Role \'root\' created. ' +
@@ -57,10 +59,12 @@ module.exports = {
         } else {
           serviceLocator.logger.info('Role \'root\' exists as expected');
         }
+        done();
       });
 
       // Create controllers
       require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
+
     }
   ]
 };
