@@ -23,21 +23,22 @@ module.exports = {
     }
   ],
   initialize: [
-    function(serviceLocator) {
+    function(serviceLocator, done) {
       // Register the bundles models
       serviceLocator.register('sectionModel',
         require('./lib/sectionModel').createModel(serviceLocator.properties, serviceLocator));
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Section');
-
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
       // Create controllers
       require('./controller').createRoutes(serviceLocator.app,
         serviceLocator.properties, serviceLocator, __dirname + '/views');
+      done();
     }
   ]
-
 };

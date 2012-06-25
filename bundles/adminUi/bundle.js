@@ -52,18 +52,20 @@ module.exports = {
     ]
   }],
   initialize: [
-    function(serviceLocator) {
+    function(serviceLocator, done) {
 
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Admin UI');
 
       serviceLocator.adminAccessControlList.grant('*', 'Admin UI', 'read');
+      done();
     },
-    function(serviceLocator) {
+    function(serviceLocator, done) {
       // Create controller
       require('./controller').createRoutes(serviceLocator.app,
         serviceLocator.properties,
         serviceLocator, __dirname + '/views');
+      done();
     }
   ]
 };
