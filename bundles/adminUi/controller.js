@@ -5,6 +5,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   app.get('/admin/ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'index', {
         page: {
@@ -17,6 +18,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   app.get('/admin/ui/form-elements',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'form-elements', {
         page: {
@@ -29,6 +31,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   app.get('/admin/ui/tables',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'tables', {
         page: {
@@ -41,6 +44,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   app.get('/admin/ui/grid',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'grid', {
         page: {
@@ -53,6 +57,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   app.get('/admin/ui/misc-ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'misc-ui', {
         page: {
