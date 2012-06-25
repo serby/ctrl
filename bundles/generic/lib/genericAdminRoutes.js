@@ -37,11 +37,11 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
   function compactMiddleware(view) {
     if (options.scripts[view]) {
       return serviceLocator.compact.js(
-        ['admin-common'],
+        ['global'], ['admin-common'],
         options.scripts[view]
       );
     } else {
-      return serviceLocator.compact.js(['admin-common']);
+      return serviceLocator.compact.js(['global'], ['admin-common']);
     }
   }
 
@@ -172,7 +172,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     '/admin/' + model.urlName + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
-    serviceLocator.uploadDelegate,
+    serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     schemaHelper(schema), function (req, res, next) {
 
@@ -254,7 +254,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
   app.post(
     '/admin/' + model.urlName + '/:id/edit',
     compactMiddleware('form'),
-    serviceLocator.uploadDelegate,
+    serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     accessCheck('update'),
     function (req, res, next) {

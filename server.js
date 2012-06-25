@@ -35,6 +35,8 @@ module.exports.createServer = function(properties, serviceLocator) {
     , 'adminUi'
     , 'image'
     , 'section'
+    , 'asset'
+    , 'assetAdmin'
     , 'articleAdmin'
     , 'article'
     ]
@@ -43,6 +45,9 @@ module.exports.createServer = function(properties, serviceLocator) {
   app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
 
   serviceLocator.register('app', app);
+
+  compact.addNamespace('global')
+    .addJs('js/module.js');
 
   databaseAdaptor.createConnection(function(connection) {
 

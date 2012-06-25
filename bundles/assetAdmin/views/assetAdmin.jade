@@ -1,0 +1,22 @@
+extend ../../admin/views/layout
+
+block content
+
+  h1 Asset Manager
+
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li Asset Manager
+
+  .panel-group
+
+    h3 Upload asset
+
+    form#fileupload
+      input(type='file', name='files[]', multiple)
+    input.button(type='submit', value='Upload')
+
+  .panel-group
+
+    h3 Assets
