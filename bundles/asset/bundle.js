@@ -5,23 +5,11 @@ module.exports = {
   initialize: [
     function(serviceLocator) {
       serviceLocator.register('assetModel',
-        require('./lib/assetModel').createModel(serviceLocator.properties,
-          serviceLocator));
+        require('./lib/assetModel')
+        .createModel(serviceLocator.properties, serviceLocator));
     },
     function(serviceLocator) {
-
-      // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Asset');
-
-    },
-    function(serviceLocator) {
-      // Create controller
-      require('./controller').createRoutes(
-        serviceLocator.app,
-        serviceLocator.properties,
-        serviceLocator,
-        __dirname + '/views'
-      );
     }
   ]
 };
