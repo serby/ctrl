@@ -33,7 +33,6 @@ module.exports.createServer = function(properties, serviceLocator) {
     , 'rolesAdmin'
     , 'generic'
     , 'adminUi'
-    , 'image'
     , 'section'
     , 'articleAdmin'
     , 'article'
