@@ -10,19 +10,19 @@ block content
 
   h1
     -if (page.action == 'create')
-      | New #{crudDelegate.name}
+      | New #{model.name}
     -else
-      | Edit #{crudDelegate.name}
+      | Edit #{model.name}
 
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
+      li: a(href='/admin/#{model.urlName}') #{model.plural}
       li
         -if (page.action == 'create')
-          | New #{crudDelegate.name}
+          | New #{model.name}
         -else
-          | Edit #{crudDelegate.name}
+          | Edit #{model.name}
 
   p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
 
@@ -63,5 +63,5 @@ block content
       mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
 
     fieldset.actions
-      a.button(href='/admin/#{crudDelegate.urlName}') Cancel
+      a.button(href='/admin/#{model.urlName}') Cancel
       input.button.primary(type='submit',value='Submit')

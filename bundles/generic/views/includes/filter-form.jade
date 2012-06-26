@@ -1,6 +1,6 @@
 .filter-form
   - if (Object.keys(searchProperties).length > 0)
-    form(method='get', action='#{crudDelegate.urlName}')
+    form(method='get', action='#{model.urlName}')
       label
         strong Filter Results
         - if (typeof url.Filter === 'undefined' || url.Filter === '')

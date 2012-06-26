@@ -4,17 +4,17 @@ block content
 
   include ../../../views/mixins/file
 
-  h1 View #{crudDelegate.name}
+  h1 View #{model.name}
 
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{crudDelegate.urlName}') #{crudDelegate.plural}
-      li View #{crudDelegate.name}
+      li: a(href='/admin/#{model.urlName}') #{model.plural}
+      li View #{model.name}
 
   include includes/view-actions
 
-  //-h2 #{crudDelegate.name} Details
+  //-h2 #{model.name} Details
   - each group in viewSchema.groups
     .panel-group
       - if (typeof group.name !== 'undefined')
@@ -24,7 +24,7 @@ block content
         dl
           - each propertyMeta, key in group.properties
             - if (propertyMeta.view)
-              dt=crudDelegate.entityDelegate.propertyName(key)
+              dt=model.entityDelegate.propertyName(key)
               dd
                 - if (propertyMeta.type === 'file')
                   mixin downloadLink(entity[key], false)

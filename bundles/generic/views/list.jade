@@ -4,17 +4,17 @@ block content
 
   include ../../../views/mixins/file
 
-  h1 #{crudDelegate.plural}
+  h1 #{model.plural}
 
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li #{crudDelegate.plural}
+      li #{model.plural}
 
   include includes/list-actions
 
   .panel-list
-    h3 All #{crudDelegate.plural}
+    h3 All #{model.plural}
 
     include includes/filter-form
     include includes/filter-summary
@@ -22,9 +22,9 @@ block content
     - if (dataSet.length === 0)
       p
         | No records found.
-      - if (adminIsAllowed(crudDelegate.name, 'create')) 
+      - if (adminIsAllowed(model.name, 'create')) 
         p Would you like to 
-          a(href='/admin/#{crudDelegate.urlName}/new') add one?
+          a(href='/admin/#{model.urlName}/new') add one?
 
     - else
       table.highlight.sortable
@@ -33,7 +33,7 @@ block content
             - each group in viewSchema.groups
               - each val, key in group.properties
                 - if (val.list)
-                  - var property = crudDelegate.entityDelegate.propertyName(key)
+                  - var property = model.entityDelegate.propertyName(key)
                   - var directionClass = ''
                   - if (url.Sort === key)
                     - if (url.Direction === 'asc')
@@ -51,19 +51,19 @@ block content
                   - if (propertyMeta.list)
                     - if (viewSchema.title === key)
                       td.title
-                        strong: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}')=propertyMeta.format(entityName)
+                        strong: a(href='/admin/#{model.urlName}/#{entity[model.idProperty]}')=propertyMeta.format(entityName)
                         ul.row-actions
-                          - if (adminIsAllowed(crudDelegate.name, 'update')) 
-                            li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
-                          - if (adminIsAllowed(crudDelegate.name, 'delete')) 
-                            li: a(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete').delete Delete
+                          - if (adminIsAllowed(model.name, 'update')) 
+                            li: a(href='/admin/#{model.urlName}/#{entity[model.idProperty]}/edit') Edit
+                          - if (adminIsAllowed(model.name, 'delete')) 
+                            li: a(href='/admin/#{model.urlName}/#{entity[model.idProperty]}/delete').delete Delete
                     - else
                       - if (propertyMeta.type === 'checkbox')
                         td=booleanFormatter(entity[key])
                       - else if (propertyMeta.type === 'file')
                         td.thumbnail
                           - if (entity[key])
-                            mixin displayImage(100, 100, entity[key][0], crudDelegate.name + ' - ' + entityName, 'crop')
+                            mixin displayImage(100, 100, entity[key][0], model.name + ' - ' + entityName, 'crop')
                       - else if (propertyMeta.type === 'link')
                         td
                           a(href=entity[key], target='_blank')=entity[key]

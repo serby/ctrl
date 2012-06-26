@@ -93,7 +93,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
         function (errors, dataSet) {
           options.renderFn(req, res, views.list, {
             viewSchema: schema,
-            crudDelegate: model,
+            model: model,
             dataSet: dataSet.toArray(),
             page: {
               title: model.name,
@@ -152,7 +152,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
 
       options.renderFn(req, res, views.form, {
         viewSchema: schema,
-        crudDelegate: model,
+        model: model,
         entity: model.entityDelegate.makeDefault(),
         page: {
           title: model.name,
@@ -181,7 +181,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
           if (isValidationError(errors)) {
             options.renderFn(req, res, views.form, {
               viewSchema: schema,
-              crudDelegate: model,
+              model: model,
               entity: newEntity,
               page: {
                 title: model.name,
@@ -212,7 +212,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
         function (errors, entity) {
           options.renderFn(req, res, views.view, {
             viewSchema: schema,
-            crudDelegate: model,
+            model: model,
             entity: entity,
             page: {
               title: model.name,
@@ -233,7 +233,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
 
         options.renderFn(req, res, views.form, {
           viewSchema: schema,
-          crudDelegate: model,
+          model: model,
           entity: entity,
           page: {
             title: model.name,
@@ -267,7 +267,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
           if (isValidationError(errors)) {
             options.renderFn(req, res, views.form, {
               viewSchema: schema,
-              crudDelegate: model,
+              model: model,
               entity: entity,
               page: {
                 title: model.name,
