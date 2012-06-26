@@ -1,12 +1,11 @@
 var
   _ = require('underscore'),
   formHelper = require('../../lib/utils/formHelper'),
-  generic = require('../generic'),
   viewRenderDelegate = require('../../lib/viewRenderDelegate');
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
 
-  var viewSchema = generic.createViewSchema({
+  var viewSchema = serviceLocator.generic.createViewSchema({
     groups: [{
       name: 'Administrator Details',
       description: 'These are the details for an administrator',
@@ -72,15 +71,14 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   });
 
-  generic.createRoutes(
-    app,
-    generic.createViewRender('../../admin/views/layout'),
+  serviceLocator.generic.createRoutes(
+    serviceLocator,
     viewSchema,
     serviceLocator.administratorModel,
-    serviceLocator,
     {
       updateTag: 'update',
-      requiredAccess: 'Administrator'
+      requiredAccess: 'Administrator',
+      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
     }
   );
 };
