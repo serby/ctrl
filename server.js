@@ -28,10 +28,10 @@ module.exports.createServer = function(properties, serviceLocator) {
 
   bundled.addBundles(__dirname + '/bundles/',
     [ 'home'
+    , 'generic'
     , 'administrator'
     , 'admin'
     , 'rolesAdmin'
-    , 'generic'
     , 'adminUi'
     , 'section'
     , 'articleAdmin'

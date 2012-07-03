@@ -1,6 +1,6 @@
 nav.page-actions.view-actions
   ul.actions
-    - if (adminIsAllowed(crudDelegate.name, 'update')) 
-      li: a.button.primary(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/edit') Edit
-    - if (adminIsAllowed(crudDelegate.name, 'delete')) 
-      li: a.button.delete(href='/admin/#{crudDelegate.urlName}/#{entity[crudDelegate.idProperty]}/delete') Delete
+    - if (adminIsAllowed(model.name, 'update')) 
+      li: a.button.primary(href='/admin/#{model.urlName}/#{entity[model.idProperty]}/edit') Edit
+    - if (adminIsAllowed(model.name, 'delete')) 
+      li: a.button.delete(href='/admin/#{model.urlName}/#{entity[model.idProperty]}/delete') Delete

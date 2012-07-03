@@ -1,11 +1,10 @@
 var
   _ = require('underscore'),
-  generic = require('../generic'),
   viewRenderDelegate = require('../../lib/viewRenderDelegate');
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
 
-  var viewSchema = generic.createViewSchema({
+  var viewSchema = serviceLocator.generic.createViewSchema({
     groups: [{
       name: 'Section Details',
       description: 'These are the details for a Section',
@@ -44,14 +43,13 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   });
 
-  generic.createRoutes(
-    app,
-    generic.createViewRender('../../admin/views/layout'),
+  serviceLocator.generic.createRoutes(
+    serviceLocator,
     viewSchema,
     serviceLocator.sectionModel,
-    serviceLocator,
     {
-      requiredAccess: 'Section'
+      requiredAccess: 'Section',
+      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
     }
   );
 };

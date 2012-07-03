@@ -1,11 +1,10 @@
 var
   formHelper = require('../../lib/utils/formHelper'),
-  generic = require('../generic'),
   viewRenderDelegate = require('../../lib/viewRenderDelegate');
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
 
-  var viewSchema = generic.createViewSchema({
+  var viewSchema = serviceLocator.generic.createViewSchema({
     groups: [{
       name: 'Role Details',
       description: 'These are the details for a role',
@@ -61,14 +60,13 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
       next();
     }
   });
-  generic.createRoutes(
-    app,
-    generic.createViewRender('../../admin/views/layout'),
+  serviceLocator.generic.createRoutes(
+    serviceLocator,
     viewSchema,
     serviceLocator.roleModel,
-    serviceLocator,
     {
-      requiredAccess: 'Role'
+      requiredAccess: 'Role',
+      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
     }
   );
 };

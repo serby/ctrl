@@ -62,7 +62,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     getDropdownOptions, function (req, res) {
 
     viewRender(req, res, 'adminForm', {
-      crudDelegate: crudDelegate,
+      model: crudDelegate,
       entity: crudDelegate.entityDelegate.makeDefault(),
       page: {
         title: crudDelegate.name,
@@ -89,7 +89,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
       if (errors) {
         viewRender(req, res, 'adminForm', {
           viewSchema: adminViewSchema,
-          crudDelegate: crudDelegate,
+          model: crudDelegate,
           entity: newEntity,
           page: {
             title: crudDelegate.name,
@@ -116,7 +116,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
 
       viewRender(req, res, 'adminForm', {
         viewSchema: adminViewSchema,
-        crudDelegate: crudDelegate,
+        model: crudDelegate,
         entity: entity,
         page: {
           title: crudDelegate.name,
@@ -142,7 +142,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
       if (errors) {
         viewRender(req, res, 'adminForm', {
           viewSchema: adminViewSchema,
-          crudDelegate: crudDelegate,
+          model: crudDelegate,
           entity: entity,
           page: {
             title: crudDelegate.name,

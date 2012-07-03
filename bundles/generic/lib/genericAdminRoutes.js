@@ -1,15 +1,11 @@
 var _ = require('underscore')
-  , fs = require('fs')
-  , path = require('path')
   , async = require('async')
-  , util = require('util')
   , url = require('url')
-  , httpErrors = require('../../../lib/httpErrorHandler')
-  , SearchQueryBuilder = require('../../../lib/utils/buildSearchQuery')
-  , buildSortOptions = require('../../../lib/utils/buildSortOptions')
+  , SearchQueryBuilder = require('./buildSearchQuery')
+  , buildSortOptions = require('./buildSortOptions')
   , Pagination = require('../../../lib/utils/pagination');
 
-module.exports.createRoutes = function (app, render, schema, model, serviceLocator, options) {
+module.exports.createRoutes = function (serviceLocator, schema, model, options) {
 
   var defaults = {
     createValidationSet: '',
@@ -17,7 +13,9 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     createTag: undefined,
     updateTag: undefined,
     requiredAccess: model.urlName,
-    scripts: {}
+    scripts: {},
+    renderFn: null,
+    adminRoute: '/admin/'
   };
 
   options = _.extend(defaults, options);
@@ -53,7 +51,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     return serviceLocator.adminAccessControl.requiredAccess(
       options.requiredAccess,
       action,
-      '/admin/login'
+      options.adminRoute + 'login'
     );
   }
 
@@ -80,8 +78,8 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
       )
     , paginate = Pagination.createPagination(model.count, 10);
 
-  app.get(
-    '/admin/' + model.urlName,
+  serviceLocator.app.get(
+    options.adminRoute + model.urlName,
     compactMiddleware('view'),
     buildSearchQuery,
     buildSortOptions,
@@ -93,9 +91,9 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
         req.searchQuery,
         _.extend(req.options, req.searchOptions),
         function (errors, dataSet) {
-          render(req, res, views.list, {
+          options.renderFn(req, res, views.list, {
             viewSchema: schema,
-            crudDelegate: model,
+            model: model,
             dataSet: dataSet.toArray(),
             page: {
               title: model.name,
@@ -145,16 +143,16 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     return next('Error saving/updating to database');
   }
 
-  app.get(
-    '/admin/' + model.urlName + '/new',
+  serviceLocator.app.get(
+    options.adminRoute + model.urlName + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
     schemaHelper(schema),
     function (req, res) {
 
-      render(req, res, views.form, {
+      options.renderFn(req, res, views.form, {
         viewSchema: schema,
-        crudDelegate: model,
+        model: model,
         entity: model.entityDelegate.makeDefault(),
         page: {
           title: model.name,
@@ -168,8 +166,8 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     }
   );
 
-  app.post(
-    '/admin/' + model.urlName + '/new',
+  serviceLocator.app.post(
+    options.adminRoute + model.urlName + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
     serviceLocator.uploadDelegate.middleware,
@@ -181,9 +179,9 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
         { validationSet: options.createValidationSet },
         function (errors, newEntity) {
           if (isValidationError(errors)) {
-            render(req, res, views.form, {
+            options.renderFn(req, res, views.form, {
               viewSchema: schema,
-              crudDelegate: model,
+              model: model,
               entity: newEntity,
               page: {
                 title: model.name,
@@ -197,7 +195,7 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
           } else if (errors) {
             render500(next);
           } else {
-            res.redirect('/admin/' + model.urlName + '/' + newEntity._id);
+            res.redirect(options.adminRoute + model.urlName + '/' + newEntity._id);
           }
         }
       );
@@ -205,16 +203,16 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     }
   );
 
-  app.get(
-    '/admin/' + model.urlName + '/:id',
+  serviceLocator.app.get(
+    options.adminRoute + model.urlName + '/:id',
     compactMiddleware('view'),
     accessCheck('read'), function (req, res) {
       model.read(
         req.params.id,
         function (errors, entity) {
-          render(req, res, views.view, {
+          options.renderFn(req, res, views.view, {
             viewSchema: schema,
-            crudDelegate: model,
+            model: model,
             entity: entity,
             page: {
               title: model.name,
@@ -225,17 +223,17 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
       });
   });
 
-  app.get(
-    '/admin/' + model.urlName + '/:id/edit',
+  serviceLocator.app.get(
+    options.adminRoute + model.urlName + '/:id/edit',
     compactMiddleware('form'),
     schemaHelper(schema),
     accessCheck('update'),
     function (req, res) {
       model.read(req.params.id, function (errors, entity) {
 
-        render(req, res, views.form, {
+        options.renderFn(req, res, views.form, {
           viewSchema: schema,
-          crudDelegate: model,
+          model: model,
           entity: entity,
           page: {
             title: model.name,
@@ -251,8 +249,8 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
     }
   );
 
-  app.post(
-    '/admin/' + model.urlName + '/:id/edit',
+  serviceLocator.app.post(
+    options.adminRoute + model.urlName + '/:id/edit',
     compactMiddleware('form'),
     serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
@@ -267,9 +265,9 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
         },
         function (errors, entity) {
           if (isValidationError(errors)) {
-            render(req, res, views.form, {
+            options.renderFn(req, res, views.form, {
               viewSchema: schema,
-              crudDelegate: model,
+              model: model,
               entity: entity,
               page: {
                 title: model.name,
@@ -283,22 +281,22 @@ module.exports.createRoutes = function (app, render, schema, model, serviceLocat
           } else if (errors) {
             render500(next);
           } else {
-            res.redirect('/admin/' + model.urlName + '/' + entity._id);
+            res.redirect(options.adminRoute + model.urlName + '/' + entity._id);
           }
         }
       );
     }
   );
 
-  app.get(
-    '/admin/' + model.urlName + '/:id/delete',
+  serviceLocator.app.get(
+    options.adminRoute + model.urlName + '/:id/delete',
     accessCheck('delete'),
     function(req, res, next) {
       model['delete'](req.params.id, function(error) {
         if (error !== null) {
           res.send(404);
         } else {
-          res.redirect('/admin/' + model.urlName);
+          res.redirect(options.adminRoute + model.urlName);
         }
       });
     }
