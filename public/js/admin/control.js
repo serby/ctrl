@@ -122,44 +122,59 @@ module('control-misc-ui', function (module) {
       return [];
     }
 
-    function confirm(message, confirm, deny, danger, confirmVerb, denyVerb) {
+  /*
+   * A custom confirm overlay, alternative
+   * to window.confirm (with more options)
+   */
+  function confirm(options) {
 
-      var dialog = $('<div/>').addClass('dialog-confirm');
-      var overlay = $('<div/>').addClass('dialog-overlay');
-      dialog.append($('<p/>').text(message));
+    var settings = {
+      message: 'Are you sure?',
+      confirm: function () {},
+      deny: function () {},
+      confirmVerb: 'Confirm',
+      denyVerb: 'Cancel',
+      danger: false
+    };
 
-      function remove() {
-        overlay.remove();
-        dialog.remove();
-      }
+    settings = $.extend(settings, options);
 
-      var controls = $('<div/>').addClass('controls');
+    var dialog = $('<div/>').addClass('dialog-confirm');
+    var overlay = $('<div/>').addClass('dialog-overlay');
+    dialog.append($('<p/>').text(settings.message));
 
-      controls.append(
-        $('<button/>').text(confirmVerb || 'Confirm')
-          .addClass(danger ? 'danger' : 'primary')
-          .bind('click', function (e) {
-            e.preventDefault();
-            remove();
-            confirm();
-          })
-      );
-
-      controls.append(
-        $('<button/>').text(denyVerb || 'Cancel')
-          .bind('click', function (e) {
-            e.preventDefault();
-            remove();
-            deny();
-          })
-      );
-
-      dialog.append(controls);
-      $('body').append(overlay, dialog);
-
+    function remove() {
+      overlay.remove();
+      dialog.remove();
     }
 
-    window.confirmDialog = confirm;
+    var controls = $('<div/>').addClass('controls');
+
+    controls.append(
+      $('<button/>').text(settings.confirmVerb)
+        .addClass(settings.danger ? 'danger' : 'primary')
+        .bind('click', function (e) {
+          e.preventDefault();
+          remove();
+          settings.confirm();
+        })
+    );
+
+    controls.append(
+      $('<button/>').text(settings.denyVerb)
+        .bind('click', function (e) {
+          e.preventDefault();
+          remove();
+          settings.deny();
+        })
+    );
+
+    dialog.append(controls);
+    $('body').append(overlay, dialog);
+
+  }
+
+  window.confirmDialog = confirm;
 
   });
 
