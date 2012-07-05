@@ -1,0 +1,47 @@
+extend ../../admin/views/layout
+
+block content
+
+  h1 Asset Manager
+
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li Asset Manager
+
+  .panel-group
+
+    h3 Upload
+
+    form#fileupload
+      input(type='file', name='files[]', multiple, style='display:none')
+      .form-row
+        .label
+          span Upload an asset:
+          input.button.primary(type='submit', value='Choose assets to upload')
+          .description
+            p You can upload mutliple files at once by cmd/ctrl clicking them.
+
+  #asset-list
+
+prepend script
+  script(type='text/template', id='asset-list-item-template')
+    .panel-asset-item
+      .asset-item-thumbnail
+        img(src!='<%= preview %>')
+      .asset-item-details
+        .editable(data-field-name='title')
+          span.label Title
+          span.data <%= title %>
+        .editable(data-field-name='description')
+          span.label Description
+          span.data <%= description %>
+        .editable(data-field-name='tags')
+          span.label Tags
+          span.data <%= tags %>
+      .asset-item-meta
+        span Filename: <%= basename %>
+        span Type: <%= type %>
+        span Size: <%= size %> Bytes
+        span Created: <%= created %>
+      button.delete(data-id!='<%= _id %>') Delete

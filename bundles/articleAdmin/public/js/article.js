@@ -17,15 +17,28 @@ $(function($) {
     $slugControl.val(toUrl($titleControl.val()));
   }
 
+  function wysiwyg() {
+    $bodyControl.redactor({
+      path: '/js/redactor',
+      buttons: [
+        'html', '|', 'formatting', '|', 'bold', 'italic',
+        'deleted', '|', 'unorderedlist', 'orderedlist',
+        'outdent', 'indent', '|', 'image', 'video', 'file',
+        'table', 'link', '|', 'alignleft', 'aligncenter',
+        'alignright', 'justify', '|', 'horizontalrule', 'fullscreen'
+      ],
+      imageUpload: '/admin/asset/api/new?format=redactor',
+      imageGetJson: '/admin/asset/api/list?format=redactor&type=image'
+    });
+  }
+
   $titleControl.blur(onTitleBlur);
 
   switch ($typeControl.val()) {
     case 'Markdown':
       break;
     case 'HTML':
-      $bodyControl.redactor({
-        path: '/js/redactor'
-      });
+      wysiwyg();
       break;
   }
 
@@ -50,9 +63,7 @@ $(function($) {
         );
         break;
       case 'HTML':
-        $bodyControl.redactor({
-          path: '/js/redactor'
-        });
+        wysiwyg();
         break;
     }
   });

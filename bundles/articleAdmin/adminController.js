@@ -52,7 +52,8 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     });
   }
 
-  app.get('/admin/' + crudDelegate.urlName + '/new',
+  app.get(
+    '/admin/' + crudDelegate.urlName + '/new',
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
     compact.js(
       ['global'],
@@ -74,9 +75,13 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     });
   });
 
-   app.post('/admin/' + crudDelegate.urlName + '/new',
-    compact.js(['admin-common'], ['article-admin', 'markdown-editor']));
-  app.post('/admin/' + crudDelegate.urlName + '/new',
+  app.post(
+    '/admin/' + crudDelegate.urlName + '/new',
+    compact.js(
+      ['global'],
+      ['admin-common'],
+      ['article-admin', 'markdown-editor']
+    ),
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
     serviceLocator.uploadDelegate.middleware,
     adminViewSchema.formPostHelper,
@@ -105,9 +110,13 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     });
   });
 
-  app.get('/admin/' + crudDelegate.urlName + '/:id/edit',
-    compact.js(['admin-common'], ['article-admin', 'markdown-editor']));
-  app.get('/admin/' + crudDelegate.urlName + '/:id/edit',
+  app.get(
+    '/admin/' + crudDelegate.urlName + '/:id/edit',
+    compact.js(
+      ['global'],
+      ['admin-common'],
+      ['article-admin', 'markdown-editor']
+    ),
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'),
     getDropdownOptions,
     function (req, res) {
@@ -129,9 +138,13 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     });
   });
 
-  app.post('/admin/' + crudDelegate.urlName + '/:id/edit',
-    compact.js(['admin-common'], ['article-admin', 'markdown-editor']));
-  app.post('/admin/' + crudDelegate.urlName + '/:id/edit',
+  app.post(
+    '/admin/' + crudDelegate.urlName + '/:id/edit',
+    compact.js(
+      ['global'],
+      ['admin-common'],
+      ['article-admin', 'markdown-editor']
+    ),
     serviceLocator.uploadDelegate.middleware,
     adminViewSchema.formPostHelper,
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'update'),
