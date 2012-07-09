@@ -1,42 +1,53 @@
-module('assetItemModel', function (module) {
+module('AssetItemModel', function (module) {
 
-  function assetItemModel(data) {
-
-    var model = {
-      data: data,
-      preview: '/images/file.png'
-    };
-
-    if ((/^image\//).test(data.type)) {
-      model.preview = '/asset/thumb/' + data._id + '/' + data.basename;
+  var AssetItemModel = Backbone.Model.extend({
+    getThumbnail : function () {
+      if ((/^image\//).test(this.get('type'))) {
+        return '/asset/thumb/' + this.get('_id') +
+               '/' + this.get('basename');
+      } else {
+        return '/images/file.png';
+      }
     }
+  });
 
-    model.del = function (success, error) {
-      $.ajax({
-        type: 'DELETE',
-        url: '/admin/asset/api/' + data._id,
-        dataType: 'json',
-        success: success,
-        error: error
-      });
-    };
+  // function assetItemModel(data) {
 
-    model.save = function (success, error) {
+  //   var model = {
+  //     data: data,
+  //     preview: '/images/file.png'
+  //   };
 
-      $.ajax({
-        type: 'PUT',
-        url: '/admin/asset/api/' + data._id,
-        dataType: 'json',
-        data: model.data,
-        success: success,
-        error: error
-      });
-    };
+  //   if ((/^image\//).test(data.type)) {
+  //     model.preview = '/asset/thumb/' + data._id + '/' + data.basename;
+  //   }
 
-    return model;
+  //   model.del = function (success, error) {
+  //     $.ajax({
+  //       type: 'DELETE',
+  //       url: '/admin/asset/api/' + data._id,
+  //       dataType: 'json',
+  //       success: success,
+  //       error: error
+  //     });
+  //   };
 
-  }
+  //   model.save = function (success, error) {
 
-  module.exports = assetItemModel;
+  //     $.ajax({
+  //       type: 'PUT',
+  //       url: '/admin/asset/api/' + data._id,
+  //       dataType: 'json',
+  //       data: model.data,
+  //       success: success,
+  //       error: error
+  //     });
+  //   };
+
+  //   return model;
+
+  // }
+
+  module.exports = AssetItemModel;
 
 });

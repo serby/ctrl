@@ -7,10 +7,13 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
   compact.addNamespace('admin-asset', __dirname + '/public')
     .addJs('js/deps/underscore.js')
+    .addJs('js/deps/backbone.js')
     .addJs('js/deps/jquery.iframe-transport.js')
     .addJs('js/deps/jquery.fileupload.js')
     .addJs('js/assetListView.js')
-    .addJs('js/assetItemModel.js')
+    .addJs('js/AssetItemModel.js')
+    .addJs('js/AssetItemView.js')
+    .addJs('js/AssetItemDetailsView.js')
     .addJs('js/notifier.js')
     .addJs('js/assetManager.js');
 

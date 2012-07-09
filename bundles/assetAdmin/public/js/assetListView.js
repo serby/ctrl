@@ -1,7 +1,8 @@
 module('assetListView', function (module) {
 
   var assetItemTemplate = $('#asset-list-item-template').html()
-    , assetItemModel = require('assetItemModel');
+    , AssetItemModel = require('AssetItemModel')
+    , AssetItemView = require('AssetItemView');
 
   var assetListView = function (el, notify) {
 
@@ -135,8 +136,11 @@ module('assetListView', function (module) {
 
       function populate(data) {
         $.each(data, function () {
-          var model = assetItemModel(this);
-          el.append(renderAsset(model));
+          var model = new AssetItemModel(this)
+            , view = new AssetItemView({
+                model: model
+              }).render();
+          el.append(view.$el);
         });
       }
 
