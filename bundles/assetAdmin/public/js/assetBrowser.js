@@ -33,7 +33,7 @@ module('assetBrowser', function (module) {
 
     }
 
-    $.getJSON('/admin/asset/api/list', function(data) {
+    $.getJSON('/admin/asset/api', function(data) {
 
       data.forEach(function(file) {
         if (mime.test(file.type)) {

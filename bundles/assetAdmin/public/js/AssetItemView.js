@@ -1,6 +1,8 @@
 module('AssetItemView', function (module) {
 
-  var AssetItemDetailsView = require('AssetItemDetailsView');
+  var AssetItemDetailsView = require('AssetItemDetailsView')
+    , notification = require('notification');
+
 
   var AssetItemView = Backbone.View.extend({
 
@@ -20,6 +22,21 @@ module('AssetItemView', function (module) {
         this.remove();
       }, this));
 
+      this.model.on('sync', function (model, collection) {
+        if (model.changedAttributes()) {
+          return;
+        }
+        notification
+          .notify('Asset details saved')
+          .effect('slide');
+      });
+
+      this.model.on('error', function () {
+        notification
+          .error('Failed to save')
+          .effect('slide');
+      });
+
     },
 
     template: _.template($('#asset-list-item-template').html()),
@@ -37,7 +54,13 @@ module('AssetItemView', function (module) {
         message: 'Are you sure you want to delete this asset? Any ' +
                   'links to it will break.',
         confirm: _.bind(function () {
-          this.model.destroy();
+          this.model.destroy({
+            success: function () {
+              notification
+                .notify('Asset deleted')
+                .effect('slide');
+            }
+          });
         }, this),
         confirmVerb: 'Delete asset',
         denyVerb: 'Don\'t delete',

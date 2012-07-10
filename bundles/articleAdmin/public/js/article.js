@@ -27,8 +27,8 @@ $(function($) {
         'table', 'link', '|', 'alignleft', 'aligncenter',
         'alignright', 'justify', '|', 'horizontalrule', 'fullscreen'
       ],
-      imageUpload: '/admin/asset/api/new?format=redactor',
-      imageGetJson: '/admin/asset/api/list?format=redactor&type=image'
+      imageUpload: '/admin/asset/api?format=redactor',
+      imageGetJson: '/admin/asset/api?format=redactor&type=image'
     });
   }
 

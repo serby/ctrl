@@ -1,32 +1,32 @@
 (function () {
 
-  var assetListView = require('assetListView')
-    , notifier = require('notifier')
-    , notify = notifier($('#container'),
-      [ 'item(s) uploaded successfully', 'item upload(s) failed'
-      , 'item(s) deleted successfully', 'item delete(s) failed'
-      , 'item(s) updated successfully', 'item update(s) failed'
-      ])
-    , assets = assetListView($('#asset-list'), notify);
+  var AssetManagerView = require('AssetManagerView')
+    , AssetManagerModel = require('AssetManagerModel')
+    , AssetItemView = require('AssetItemView')
+    , notification = require('notification');
 
-  function done(e, data) {
-    if (Array.isArray(data.result) && data.result.length > 0) {
-      $.each(data.result, function () {
-        assets.add(this);
-        notify('item(s) uploaded successfully');
-      });
-    } else {
-      notify('item upload(s) failed');
-    }
-  }
+  var assetManager = new AssetManagerView({
+    model: new AssetManagerModel()
+  }).render();
 
-  $('#fileupload')
-    .fileupload({ url: '/admin/asset/api/new' })
-    .bind('submit', function (e) {
-      e.preventDefault();
-      $(this).find('input[type=file]').click();
+  assetManager.model.on('populate', function () {
+    assetManager.model.assets.each(function (asset) {
+      $('#asset-list').append(new AssetItemView({
+        model: asset
+      }).render().$el);
     });
+  });
 
-  assets.init();
+  assetManager.model.on('newAsset', function (asset) {
+
+    notification
+      .notify('Asset uploaded')
+      .effect('slide');
+
+    $('#asset-list').append(new AssetItemView({
+        model: asset
+    }).render().$el);
+
+  });
 
 }());

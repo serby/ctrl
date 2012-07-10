@@ -10,11 +10,14 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     .addJs('js/deps/backbone.js')
     .addJs('js/deps/jquery.iframe-transport.js')
     .addJs('js/deps/jquery.fileupload.js')
-    .addJs('js/assetListView.js')
+    .addJs('js/AssetManagerModel.js')
+    .addJs('js/AssetManagerView.js')
+    .addJs('js/FileUploadView.js')
     .addJs('js/AssetItemModel.js')
     .addJs('js/AssetItemView.js')
+    .addJs('js/AssetItemCollection.js')
     .addJs('js/AssetItemDetailsView.js')
-    .addJs('js/notifier.js')
+    .addJs('js/notification.js')
     .addJs('js/assetManager.js');
 
   compact.addNamespace('admin-asset-browser', __dirname + '/public')
@@ -46,7 +49,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
    * API routes
    */
   app.get(
-    '/admin/asset/api/list',
+    '/admin/asset/api',
     assetAccess('read'),
     function (req, res) {
 
@@ -76,7 +79,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
   );
 
   app.post(
-    '/admin/asset/api/new',
+    '/admin/asset/api',
     assetAccess('create'),
     serviceLocator.uploadDelegate.middleware,
     function (req, res) {
