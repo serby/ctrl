@@ -35,22 +35,6 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
       .requiredAccess('Asset', action, '/admin/login');
   }
 
-  /*
-   * Admin routes
-   */
-  app.get(
-    '/admin/asset',
-    assetAccess('read'),
-    compact.js(['global'], ['admin-common'], ['admin-asset']),
-    function (req, res) {
-      viewRender(req, res, 'assetAdmin', {
-        page: {
-          title: 'Asset Manager',
-          section: 'asset'
-        }
-      });
-    }
-  );
 
   /*
    * API routes
@@ -206,6 +190,23 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
         });
       });
 
+    }
+  );
+
+  /*
+   * Admin routes
+   */
+  app.get(
+    '/admin/asset*',
+    assetAccess('read'),
+    compact.js(['global'], ['admin-common'], ['admin-asset']),
+    function (req, res) {
+      viewRender(req, res, 'assetAdmin', {
+        page: {
+          title: 'Asset Manager',
+          section: 'asset'
+        }
+      });
     }
   );
 
