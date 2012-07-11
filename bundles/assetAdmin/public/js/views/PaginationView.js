@@ -18,12 +18,14 @@ module('PaginationView', function (module) {
     events: {
       'click .next': 'next',
       'click .prev': 'prev',
-      'click [data-index]': 'goTo'
+      'click [data-index]': 'goTo',
+      'click .first': 'first',
+      'click .last': 'last'
     },
 
     next: function (e) {
       e.preventDefault();
-      if (this.collection.pagination.pageLength === this.collection.currentPage) {
+      if (this.collection.pagination.end === this.collection.currentPage) {
         return;
       } else {
         this.collection.requestNextPage();
@@ -42,7 +44,21 @@ module('PaginationView', function (module) {
     goTo: function (e) {
       e.preventDefault();
       var index = parseInt($(e.currentTarget).attr('data-index'), 10);
-      this.collection.goTo(index);
+      if (index < 1 || index > this.collection.pagination.end) {
+        return;
+      } else {
+        this.collection.goTo(index);
+      }
+    },
+
+    first: function (e) {
+      e.preventDefault();
+      this.collection.goTo(1);
+    },
+
+    last: function (e) {
+      e.preventDefault();
+      this.collection.goTo(this.collection.pagination.end);
     },
 
     render: function () {

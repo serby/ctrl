@@ -65,19 +65,19 @@ module('AssetItemDetailsView', function (module) {
 
       function blur(e) {
         this.$el.trigger('save');
-        this.input.off('blur', blur);
-        this.input.off('keydown', keydown);
+        this.input.off('blur');
+        this.input.off('keydown');
       }
 
       function keydown(e) {
         if (e.keyCode === 13 || e.keyCode === 9) {
           this.$el.trigger('save');
-          this.input.off('blur', blur);
-          this.input.off('keydown', keydown);
+          this.input.off('blur');
+          this.input.off('keydown');
         } else if (e.keyCode === 27) {
           this.$el.trigger('cancel');
-          this.input.off('blur', blur);
-          this.input.off('keydown', keydown);
+          this.input.off('blur');
+          this.input.off('keydown');
         }
       }
 
