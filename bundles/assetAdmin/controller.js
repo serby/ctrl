@@ -1,22 +1,29 @@
-var viewRenderDelegate = require('../../lib/viewRenderDelegate');
+var viewRenderDelegate = require('../../lib/viewRenderDelegate')
+  , createPagination = require('../../lib/utils/pagination').createPagination;
 
 function createRoutes(app, properties, serviceLocator, viewPath) {
 
   var viewRender = viewRenderDelegate.create(viewPath)
-    , compact = serviceLocator.compact;
+    , compact = serviceLocator.compact
+    , pagination = createPagination(
+        serviceLocator.assetModel.count, 3
+      );
 
   compact.addNamespace('admin-asset', __dirname + '/public')
     .addJs('js/deps/underscore.js')
     .addJs('js/deps/backbone.js')
+    .addJs('js/deps/backbone.paginator.js')
     .addJs('js/deps/jquery.iframe-transport.js')
     .addJs('js/deps/jquery.fileupload.js')
-    .addJs('js/AssetManagerModel.js')
-    .addJs('js/AssetManagerView.js')
-    .addJs('js/FileUploadView.js')
-    .addJs('js/AssetItemModel.js')
-    .addJs('js/AssetItemView.js')
-    .addJs('js/AssetItemCollection.js')
-    .addJs('js/AssetItemDetailsView.js')
+    .addJs('js/models/AssetManagerModel.js')
+    .addJs('js/models/AssetItemModel.js')
+    .addJs('js/collections/AssetItemCollection.js')
+    .addJs('js/collections/PaginatedCollection.js')
+    .addJs('js/views/AssetManagerView.js')
+    .addJs('js/views/FileUploadView.js')
+    .addJs('js/views/AssetItemView.js')
+    .addJs('js/views/AssetItemDetailsView.js')
+    .addJs('js/views/PaginationView.js')
     .addJs('js/notification.js')
     .addJs('js/assetManager.js');
 
@@ -57,24 +64,44 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
         ? serviceLocator.assetModel.listImages
         : serviceLocator.assetModel.list;
 
-      list(function (err, results) {
-        if (!err) {
-          if (req.query.format !== 'redactor') {
-            res.json(results);
-          } else {
-            var redactorResponse = [];
-            results.forEach(function (result) {
-              redactorResponse.push({
-                thumb: '/asset/thumb/' + result._id + '/' + result.basename,
-                image: '/asset/' + result._id + '/' + result.basename
+      if (req.query.paginate) {
+
+        pagination(req, res, function () {
+
+          list(req.searchOptions, function (err, results) {
+            if (!err) {
+              res.json({
+                pagination: res.local('pagination'),
+                results: results
               });
-            });
-            res.json(redactorResponse);
+            } else {
+              res.status(500).end('Format not supported');
+            }
+          });
+
+        });
+
+      } else {
+
+        list(function (err, results) {
+          if (!err) {
+            if (!req.query.format) {
+              res.json(results);
+            } else if (req.query.format === 'redactor') {
+              var redactorResponse = [];
+              results.forEach(function (result) {
+                redactorResponse.push({
+                  thumb: '/asset/thumb/' + result._id + '/' + result.basename,
+                  image: '/asset/' + result._id + '/' + result.basename
+                });
+              });
+              res.json(redactorResponse);
+            }
+          } else {
+            res.status(500).end('Format not supported');
           }
-        } else {
-          res.status(500).end();
-        }
-      });
+        });
+      }
     }
   );
 

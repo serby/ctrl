@@ -3,19 +3,13 @@
   var AssetManagerView = require('AssetManagerView')
     , AssetManagerModel = require('AssetManagerModel')
     , AssetItemView = require('AssetItemView')
+    , PaginatedCollection = require('PaginatedCollection')
+    , PaginationView = require('PaginationView')
     , notification = require('notification');
 
   var assetManager = new AssetManagerView({
     model: new AssetManagerModel()
   }).render();
-
-  assetManager.model.on('populate', function () {
-    assetManager.model.assets.each(function (asset) {
-      $('#asset-list').append(new AssetItemView({
-        model: asset
-      }).render().$el);
-    });
-  });
 
   assetManager.model.on('newAsset', function (asset) {
 
@@ -23,10 +17,11 @@
       .notify('Asset uploaded')
       .effect('slide');
 
-    $('#asset-list').append(new AssetItemView({
-        model: asset
-    }).render().$el);
+  });
 
+  var paginator = new PaginationView({
+    collection: new PaginatedCollection(),
+    el: $('#asset-list')
   });
 
 }());

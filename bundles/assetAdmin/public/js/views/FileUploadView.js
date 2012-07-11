@@ -6,7 +6,6 @@ module('FileUploadView', function (module) {
 
     initialize: function () {
 
-
       $('#fileupload')
         .fileupload({ url: '/admin/asset/api' })
         .bind('submit', function (e) {
