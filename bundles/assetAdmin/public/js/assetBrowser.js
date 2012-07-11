@@ -3,16 +3,19 @@ module('assetBrowser', function (module) {
   function assetBrowser(mime, cb) {
 
     var itemCount = 0
-      , leftAssetList = $('<ul/>').addClass('left asset-list')
-      , rightAssetList = $('<ul/>').addClass('right asset-list');
+      , cols = [ $('<ul/>').addClass('asset-list')
+               , $('<ul/>').addClass('asset-list')
+               , $('<ul/>').addClass('asset-list')
+               , $('<ul/>').addClass('asset-list')
+               ];
 
-    function buildListItem(id) {
+    function buildListItem(id, basename) {
 
       var item;
 
       var image = $('<img/>')
-        .attr('src', '/asset/thumb/' + id)
-        .data('id', id)
+        .attr('src', '/asset/thumb/' + id + '/' + basename)
+        .data('path', id + '/' + basename)
         .on('click', function() {
           item
             .closest('.custom-content')
@@ -22,22 +25,27 @@ module('assetBrowser', function (module) {
         });
 
       image.load(function() {
+
         item = $('<li/>').addClass('asset-browser-item').append($(this));
 
-        if (leftAssetList.innerHeight() < rightAssetList.innerHeight()) {
-          leftAssetList.append(item);
-        } else {
-          rightAssetList.append(item);
-        }
+        var shortest;
+        cols.forEach(function (col) {
+          if (!shortest || (col.innerHeight() < shortest.innerHeight())) {
+            shortest = col
+          }
+        });
+
+        shortest.append(item);
+
       });
 
     }
 
-    $.getJSON('/admin/asset/api/list', function(data) {
+    $.getJSON('/admin/asset/api', function(data) {
 
       data.forEach(function(file) {
         if (mime.test(file.type)) {
-          buildListItem(file._id);
+          buildListItem(file._id, file.basename);
           itemCount += 1;
         }
       });
@@ -47,8 +55,9 @@ module('assetBrowser', function (module) {
         , content = $('<div/>').addClass('custom-content');
 
       if (itemCount > 0) {
-        content.append(leftAssetList);
-        content.append(rightAssetList);
+        cols.forEach(function (col) {
+          content.append(col);
+        });
       } else {
         content.append($('<p>').addClass('empty').text('No matching assets found.'));
       }
@@ -69,7 +78,7 @@ module('assetBrowser', function (module) {
             e.preventDefault();
             var selected = dialog.find('img.selected')
             if (selected.length > 0) {
-              cb(null, selected.data('id'));
+              cb(null, selected.data('path'));
               remove();
             }
           })

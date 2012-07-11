@@ -1,48 +1,55 @@
 (function () {
 
-  var assetListView = require('assetListView')
-    , notifier = require('notifier')
-    , notify = notifier($('#container'),
-      [ 'item(s) uploaded successfully', 'item upload(s) failed'
-      , 'item(s) deleted successfully', 'item delete(s) failed'
-      , 'item(s) updated successfully', 'item update(s) failed'
-      ])
-    , assets = assetListView($('#asset-list'), notify);
+  var AssetManagerView = require('AssetManagerView')
+    , AssetManagerModel = require('AssetManagerModel')
+    , AssetItemView = require('AssetItemView')
+    , PaginatedCollection = require('PaginatedCollection')
+    , PaginationView = require('PaginationView')
+    , notification = require('notification')
+    , paginator;
 
-  function doNothing(e, data) {
-    // Yeah
-  }
 
-  function done(e, data) {
-    if (Array.isArray(data.result) && data.result.length > 0) {
-      $.each(data.result, function () {
-        assets.add(this);
-        notify('item(s) uploaded successfully');
-      });
-    } else {
-      notify('item upload(s) failed');
+  var Router = Backbone.Router.extend({
+
+    routes: {
+      'admin/asset': 'index',
+      'admin/asset/:page': 'page'
+    },
+
+    index: function () {
+      paginator.collection.goTo(1);
+    },
+
+    page: function (page) {
+      paginator.collection.goTo(parseInt(page, 10));
     }
-  }
 
-  $('#fileupload')
-    .fileupload({
-      url: '/admin/asset/api/new'
-    })
-    .bind('fileuploadadd', doNothing)
-    .bind('fileuploadsubmit', doNothing)
-    .bind('fileuploadsend', doNothing)
-    .bind('fileuploaddone', done)
-    .bind('fileuploadfail', doNothing)
-    .bind('fileuploadalways', doNothing)
-    .bind('fileuploadprogress', doNothing)
-    .bind('fileuploadprogressall', doNothing)
-    .bind('fileuploadstart', doNothing)
-    .bind('fileuploadstop', doNothing)
-    .bind('submit', function (e) {
-      e.preventDefault();
-      $(this).find('input[type=file]').click();
-    });
+  });
 
-  assets.init();
+  var assetManager = new AssetManagerView({
+    model: new AssetManagerModel()
+  }).render();
+
+  var appRouter = new Router();
+
+  paginator = new PaginationView({
+    collection: new PaginatedCollection(),
+    el: $('#asset-list'),
+    router: appRouter
+  });
+
+  assetManager.model.on('newAsset', function (asset) {
+
+    notification
+      .notify('Asset uploaded')
+      .effect('slide');
+
+    // Reset the paginator view
+    var currentPage = paginator.collection.currentPage;
+    paginator.collection.goTo(currentPage);
+
+  });
+
+  Backbone.history.start({ pushState: true });
 
 }());

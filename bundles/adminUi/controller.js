@@ -3,9 +3,18 @@ var viewRenderDelegate = require('../../lib/viewRenderDelegate');
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
   var viewRender = viewRenderDelegate.create(bundleViewPath);
 
+  serviceLocator.compact
+    .addNamespace('asset-browser-demo', __dirname + '/public')
+    .addJs('js/asset-browser-demo.js');
+
   app.get('/admin/ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(
+      ['global'],
+      ['admin-common'],
+      ['admin-asset-browser'],
+      ['asset-browser-demo']
+    ),
     function(req, res) {
       viewRender(req, res, 'index', {
         page: {
@@ -57,7 +66,12 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
   app.get('/admin/ui/misc-ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(
+      ['global'],
+      ['admin-common'],
+      ['admin-asset-browser'],
+      ['asset-browser-demo']
+    ),
     function(req, res) {
       viewRender(req, res, 'misc-ui', {
         page: {
