@@ -8,7 +8,11 @@
       "async": "~0.1"
     , "bundled": "~0.0"
     , "compact": "~0.1"
+<<<<<<< HEAD
     , "connect-mongodb": "*"
+=======
+    , "connect-mongodb": "~1.1"
+>>>>>>> eb8741bf8786222d18482721c9b7205e5ac17789
     , "date-utils": "~1.2"
     , "express": "~2"
     , "express-validator": "~0.2"
@@ -18,6 +22,7 @@
     , "jade": "~0.25"
     , "markdown": "~0.3"
     , "mime": "~1.2"
+    , "mkdirp": "~0.3"
     , "mongodb": "~0.9"
     , "nib": "~0.4"
     , "nodemailer": "~0.2"
