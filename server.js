@@ -5,6 +5,7 @@ module.exports.createServer = function(properties, serviceLocator) {
     , Application = require('./lib/expressApplication')
     , bundled
     , app
+    , bundles = require('./bundles.json')
     , globalViewHelpers = require('./viewHelpers/global')
     , versionator = require('versionator').createBasic('v' + properties.version)
     , compact = require('compact').createCompact({
@@ -27,18 +28,7 @@ module.exports.createServer = function(properties, serviceLocator) {
   serviceLocator.logger.info('Starting \'' + properties.name + '\'');
 
   bundled.addBundles(__dirname + '/bundles/',
-    [ 'home'
-    , 'generic'
-    , 'administrator'
-    , 'admin'
-    , 'rolesAdmin'
-    , 'adminUi'
-    , 'section'
-    , 'asset'
-    , 'assetAdmin'
-    , 'articleAdmin'
-    , 'article'
-    ]
+    bundles
   );
 
   app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
