@@ -7,12 +7,8 @@ module('PaginationView', function (module) {
     template: _.template($('#asset-list-template').html()),
 
     initialize: function () {
-
       _.bindAll(this);
-
-      this.collection.goTo(1);
       this.collection.on('reset', this.render, this);
-
     },
 
     events: {
@@ -29,6 +25,7 @@ module('PaginationView', function (module) {
         return;
       } else {
         this.collection.requestNextPage();
+        this.options.router.navigate('/admin/asset/' + this.collection.currentPage);
       }
     },
 
@@ -38,6 +35,7 @@ module('PaginationView', function (module) {
         return;
       } else {
         this.collection.requestPreviousPage();
+        this.options.router.navigate('/admin/asset/' + this.collection.currentPage);
       }
     },
 
@@ -48,12 +46,14 @@ module('PaginationView', function (module) {
         return;
       } else {
         this.collection.goTo(index);
+        this.options.router.navigate('/admin/asset/' + this.collection.currentPage);
       }
     },
 
     first: function (e) {
       e.preventDefault();
       this.collection.goTo(1);
+      this.options.router.navigate('/admin/asset/' + this.collection.currentPage);
     },
 
     last: function (e) {
