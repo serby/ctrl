@@ -8,7 +8,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     .addJs('js/asset-browser-demo.js');
 
   app.get('/admin/ui',
-    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read', '/admin/login'),
     serviceLocator.compact.js(
       ['global'],
       ['admin-common'],
@@ -26,7 +26,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   });
 
   app.get('/admin/ui/form-elements',
-    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read', '/admin/login'),
     serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'form-elements', {
@@ -39,7 +39,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   });
 
   app.get('/admin/ui/tables',
-    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read', '/admin/login'),
     serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'tables', {
@@ -52,7 +52,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   });
 
   app.get('/admin/ui/grid',
-    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read', '/admin/login'),
     serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
       viewRender(req, res, 'grid', {
@@ -65,7 +65,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   });
 
   app.get('/admin/ui/misc-ui',
-    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
+    serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read', '/admin/login'),
     serviceLocator.compact.js(
       ['global'],
       ['admin-common'],
