@@ -149,7 +149,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
   app.get(
     '/admin/asset/api/:id',
-    serviceLocator.adminAccessControl.requiredAccess('Asset', 'read', '/admin/login'),
+    serviceLocator.adminAccessControl.requiredAccess('Asset', 'read'),
     function(req, res) {
       serviceLocator.assetModel.read(req.params.id, function(err, file) {
         if (err) {
@@ -165,7 +165,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
   app.delete(
     '/admin/asset/api/:id',
-    serviceLocator.adminAccessControl.requiredAccess('Asset', 'delete', '/admin/login'),
+    serviceLocator.adminAccessControl.requiredAccess('Asset', 'delete'),
     function (req, res) {
 
       var id = req.params.id;
@@ -180,7 +180,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
   app.put(
     '/admin/asset/api/:id',
-    serviceLocator.adminAccessControl.requiredAccess('Asset', 'update', '/admin/login'),
+    serviceLocator.adminAccessControl.requiredAccess('Asset', 'update'),
     function (req, res) {
 
       var id = req.params.id;
