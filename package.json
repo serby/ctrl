@@ -8,13 +8,9 @@
       "async": "~0.1"
     , "bundled": "~0.0"
     , "compact": "~0.1"
-<<<<<<< HEAD
-    , "connect-mongodb": "*"
-=======
     , "connect-mongodb": "~1.1"
->>>>>>> eb8741bf8786222d18482721c9b7205e5ac17789
     , "date-utils": "~1.2"
-    , "express": "~2"
+    , "express": "~2.5"
     , "express-validator": "~0.2"
     , "fileupload": "~0.2"
     , "gm": "~0.5"
@@ -30,17 +26,16 @@
     , "piton-pipe": "~0.0"
     , "piton-string-utils": "~0.0"
     , "piton-validity": "~0.1"
+    , "rss": "~0.0"
     , "service-locator": "~0.0"
     , "stylus": "~0.22"
     , "trunky": "~0.1"
     , "underscore": "~1.2"
     , "versionator": "~0.1"
     , "winston": "~0.5"
-    , "rss": "0.0.3"
   }
   , "devDependencies": {
       "mocha": "*"
     , "should": "*"
-    , "coffee-script": "*"
   }
 }
