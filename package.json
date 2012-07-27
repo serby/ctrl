@@ -33,6 +33,7 @@
     , "underscore": "~1.2"
     , "versionator": "~0.1"
     , "winston": "~0.5"
+    , "bcrypt": "~0.7"
   }
   , "devDependencies": {
       "mocha": "*"
