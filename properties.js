@@ -22,6 +22,7 @@ var properties = {
     , name: 'Control-Development'
     }
   , defaultSearchResultSize: 30
+  , bcryptWorkFactor: 9
   , debug: true
   , changeEmailSender: 'nobody@example.com'
 };

@@ -1,9 +1,8 @@
 var markdown = require('markdown').markdown
-  , condensedWeekdayList = require('../lib/utils/condenseWeekdayList')
   , paginationHelpers = require('../lib/utils/pagination').helpers
   ;
 
-  require('date-utils');
+require('date-utils');
 
 module.exports.createHelpers = function(serviceLocator, properties, app) {
 
@@ -78,7 +77,6 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
 
           return formattedNumber;
         }
-        , condensedWeekdayList: condensedWeekdayList
         , querystring: paginationHelpers
       }).helpers(serviceLocator.viewHelpers);
   });
