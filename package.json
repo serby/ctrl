@@ -21,7 +21,7 @@
     , "mkdirp": "~0.3"
     , "mongodb": "~0.9"
     , "nib": "~0.4"
-    , "nodemailer": "~0.2"
+    , "nodemailer": "~0.3"
     , "piton-entity": "~0.1"
     , "piton-pipe": "~0.0"
     , "piton-string-utils": "~0.0"
