@@ -1,0 +1,7 @@
+mixin groupedMultiselectMixin(groups)
+  - var name, grants, output = [];
+  - for (name in groups)
+    - grants = groups[name].join(', ')
+    - if (grants !== '')
+      - output.push(name + '[' + grants + ']')
+  | #{output.join(' ; ')}
