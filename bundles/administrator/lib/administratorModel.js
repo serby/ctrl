@@ -1,6 +1,6 @@
 var
   async = require('async'),
-  crypto = require('crypto'),
+  bcrypt = require('bcrypt'),
   Entity = require('piton-entity'),
   schema = require('./administratorEntitySchema'),
   MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate');
@@ -9,8 +9,13 @@ module.exports.createModel = function(properties, serviceLocator) {
 
   var
     collection,
-    connection = serviceLocator.databaseConnections.main,
-    salt = 'secret';
+    connection = serviceLocator.databaseConnections.main;
+
+  if (typeof properties.bcryptWorkFactor === 'number' && properties.bcryptWorkFactor >= 1) {
+    properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor);
+  } else {
+    properties.bcryptWorkFactor = 1;
+  }
 
   connection.collection('administrator', function(error, loadedCollection) {
     collection = loadedCollection;
@@ -32,8 +37,12 @@ module.exports.createModel = function(properties, serviceLocator) {
     serviceLocator.logger
   );
 
-  function saltyHash(salt, value) {
-    return crypto.createHash('sha1').update(salt + value).digest('hex');
+  function bcryptHash(value, callback) {
+    bcrypt.hash(value, properties.bcryptWorkFactor, callback);
+  }
+
+  function bcryptCompare(value, hash, callback) {
+    bcrypt.compare(value, hash, callback);
   }
 
   function duplicateEmailChecker(entity, callback) {
@@ -44,21 +53,36 @@ module.exports.createModel = function(properties, serviceLocator) {
 
   function passwordHasher(entity, callback) {
     if (entity.password) {
-      entity.password = saltyHash(salt, entity.password);
+      bcryptHash(entity.password, function(err, hash) {
+        if (err) {
+          callback(err);
+        } else {
+          entity.password = hash;
+          callback(null, entity);
+        }
+      });
+    } else {
+      callback(null, entity);
     }
-    callback(null, entity);
   }
 
   function authenticate(credentials, callback) {
-    crudDelegate.find({ emailAddress: credentials.emailAddress, password: saltyHash(salt, credentials.password) }, {}, function(errors, items) {
-
-    if (errors) {
-        callback(errors, credentials);
-      } else if (items.length() === 0) {
-        callback(new Error('Wrong Email and password combination.'), credentials);
-      } else {
-        callback(null, items.first());
+    crudDelegate.findOne({ emailAddress: credentials.emailAddress }, function(err, entity) {
+      if (err) {
+        return callback(err, credentials);
+      } else if (!entity) {
+        return callback(new Error('Wrong Email and password combination.'), credentials);
       }
+
+      bcrypt.compare(credentials.password, entity.password, function(err, match) {
+        if (err) {
+          return callback(err, credentials);
+        } else if (!match) {
+          return callback(new Error('Wrong Email and password combination.'), credentials);
+        }
+
+        return callback(null, entity);
+      });
     });
   }
 

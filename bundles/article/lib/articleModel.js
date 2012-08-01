@@ -88,7 +88,15 @@ module.exports.createModel = function(properties, serviceLocator) {
   }
 
   crudDelegate.pipes.beforeCreate.add(function(entity, callback) {
-    callback(null, entityDelegate.makeDefault(entity));
+    var e = entityDelegate.makeDefault(entity);
+    e.publishedDate = new Date(e.publishedDate);
+    callback(null, e);
+  });
+
+  // Co-erce any stringy date into an actual date
+  crudDelegate.pipes.beforeUpdate.add(function(entity, callback) {
+    entity.publishedDate = new Date(entity.publishedDate);
+    callback(null, entity);
   });
 
   crudDelegate.findWithUrl = findWithUrl;

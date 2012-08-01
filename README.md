@@ -9,9 +9,9 @@ More information can be found in the [wiki](https://github.com/serby/control/wik
 Create the control app:
 
      git clone git://github.com/serby/control.git
-     
+
 Install dependencies:
-     
+
      npm install
 
 ## Usage
@@ -21,6 +21,9 @@ Install dependencies:
      node app
 
 Then goto [http://localhost:3021/admin](http://localhost:3021/admin) in a browser and follow the instructions.
+
+## Author
+[Paul Serby](https://github.com/serby/) follow me on [twitter](http://twitter.com/serby)
 
 ## Credits
 

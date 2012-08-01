@@ -6,6 +6,7 @@
   , "engine": "~0.6"
   , "dependencies": {
       "async": "~0.1"
+    , "bcrypt": "~0.7"
     , "bundled": "~0.0"
     , "compact": "~0.1"
     , "connect-mongodb": "~1.1"
@@ -26,17 +27,16 @@
     , "piton-pipe": "~0.0"
     , "piton-string-utils": "~0.0"
     , "piton-validity": "~0.1"
+    , "rss": "~0.0"
     , "service-locator": "~0.0"
     , "stylus": "~0.22"
     , "trunky": "~0.1"
     , "underscore": "~1.2"
     , "versionator": "~0.1"
     , "winston": "~0.5"
-    , "rss": "0.0.3"
   }
   , "devDependencies": {
       "mocha": "*"
     , "should": "*"
-    , "coffee-script": "*"
   }
 }
