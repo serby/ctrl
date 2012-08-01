@@ -7,7 +7,7 @@ var cluster = require('cluster')
 
 serviceLocator
   .register('properties', properties)
-  .register('mailer', nodemailer.transport('SMTP', { host: 'localhost' }))
+  .register('mailer', nodemailer.createTransport('SMTP', { host: 'localhost' }))
   .register('logger', require('./lib/logger').createLogger(properties));
 
 if ((properties.env !== 'development') && (cluster.isMaster)) {

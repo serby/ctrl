@@ -9,9 +9,11 @@ block content
     p You must login to access this part of the site
     fieldset
       -if (error)
-        errors
-          p.error
-            strong= error
+        p.error
+          strong= error
+      -if (changed)
+        p
+          strong A verification e-mail has been sent to #{changed}
       mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
       mixin passwordField({ name :'password' }, { label: 'Password' })
       .form-row
@@ -19,4 +21,5 @@ block content
           input(name='rememberMe', type='checkbox')
           span Remember me
     fieldset.actions
+      a.password-reset(href="/admin/request-password-change") I have forgotten my password
       input.button.primary(type='submit', value='Login')

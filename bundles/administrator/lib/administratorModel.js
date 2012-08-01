@@ -69,6 +69,48 @@ module.exports.createModel = function(properties, serviceLocator) {
     callback(null, entity);
   }
 
+  function hashAdminState(admin) {
+    var str = admin.created + ':' + admin.emailAddress + ':' + admin.password;
+    return crypto.createHash('sha1').update(str).digest('hex');
+  }
+
+  function requestPasswordChange(entity, callback) {
+    var hash = hashAdminState(entity)
+      , url = properties.siteUrl + '/admin/change-password?token=' + hash;
+
+    var mail = {
+      to: entity.emailAddress,
+      from: properties.changeEmailSender,
+      subject: 'Password reset confirmation',
+      html: '<!doctype html><html><body>To complete the password changing process for your account at ' +
+            properties.name + ', please click the link below.<br>If you no longer need to change your ' +
+            'password, no action is required.<br><br><a href="' + url + '">' + url + '</a></body></html>'
+    };
+
+    serviceLocator.mailer.sendMail(mail, callback);
+  }
+
+  function findByHash(hash, callback) {
+    crudDelegate.find({}, {}, function(err, admins) {
+      if (err) {
+        return callback(err);
+      }
+
+      var match = null;
+
+      admins.toArray().every(function(admin) {
+        if (hashAdminState(admin) === hash) {
+          match = admin;
+        }
+
+        // continue until we find a match
+        return (match != null);
+      });
+
+      callback(null, match);
+    });
+  }
+
   /**
    * Create a new administrator with the '*' role which
    * will allow full access to all admin bundles that have been created correctly
@@ -92,6 +134,8 @@ module.exports.createModel = function(properties, serviceLocator) {
     .add(dontSetBlankPassword);
 
   crudDelegate.authenticate = authenticate;
+  crudDelegate.requestPasswordChange = requestPasswordChange;
+  crudDelegate.findByHash = findByHash;
   crudDelegate.createWithFullAccess = createWithFullAccess;
 
   return crudDelegate;

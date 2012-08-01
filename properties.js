@@ -23,6 +23,7 @@ var properties = {
     }
   , defaultSearchResultSize: 30
   , debug: true
+  , changeEmailSender: 'nobody@example.com'
 };
 
 var environmentProperties = {
