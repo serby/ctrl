@@ -27,7 +27,8 @@ module.exports = {
   password: {
     validators: {
       all: [validation.required]
-    }
+    },
+    tag: ['password']
   },
   roles: {
     type: 'array',
