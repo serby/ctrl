@@ -3,6 +3,7 @@ extend ../../admin/views/layout
 block content
 
   include ../../../views/mixins/file
+  include includes/grouped-multiselect-mixin
 
   h1 View #{model.name}
 
@@ -32,6 +33,9 @@ block content
                 p=dateTime(propertyMeta.format(entity[key]))
               - else if (propertyMeta.type === 'checkbox')
                 p=booleanFormatter(entity[key])
+              - else if (propertyMeta.type === 'groupedMultiselect')
+                p
+                  mixin groupedMultiselectMixin(entity[key])
               - else if (propertyMeta.type === 'link')
                 p
                   a(href=entity[key], target='_blank')=entity[key]

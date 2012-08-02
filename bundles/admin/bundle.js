@@ -32,7 +32,10 @@ module.exports = {
       serviceLocator.register('adminAccessControl',
         require('../../lib/secure/accessControl').createAccessControl(
           serviceLocator.administratorModel, serviceLocator.adminAccessControlList,
-          {}, 'admin', serviceLocator.logger));
+          {}, 'admin', serviceLocator.logger,
+          function(req, res, resource, action, next) {
+            res.redirect('/admin/login');
+          }));
       done();
     },
     function(serviceLocator, done) {

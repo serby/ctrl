@@ -3,6 +3,7 @@ extend ../../admin/views/layout
 block content
 
   include ../../../views/mixins/file
+  include includes/grouped-multiselect-mixin
 
   h1 #{model.plural}
 
@@ -69,6 +70,9 @@ block content
                           a(href=entity[key], target='_blank')=entity[key]
                       - else if (propertyMeta.type === 'dateTime')
                         td=dateTime(propertyMeta.format(entity[key]))
+                      - else if (propertyMeta.type === 'groupedMultiselect')
+                        td
+                          mixin groupedMultiselectMixin(entity[key])
                       - else
                         td=propertyMeta.format(entity[key])
 
