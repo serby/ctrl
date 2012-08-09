@@ -86,7 +86,6 @@ mixin fileFieldForObject(inputParams, params)
   - inputParams.value = params.data[inputParams.name];
   mixin fileField(inputParams, params)
 
-//-mixin textField(label, name, value, required, error, maxLength, information, placeholder)
 mixin textField(inputParams, params)
   - inputParams.type = 'text'
   mixin inputField(inputParams, params)
@@ -106,12 +105,10 @@ mixin datepickerFieldForObject(inputParams, params)
   - inputParams.value = params.data[inputParams.name];
   mixin datepickerField(inputParams, params)
 
-//-mixin passwordField(label, name, required, error, maxLength, information, placeholder)
 mixin passwordField(inputParams, params)
   - inputParams.type = 'password'
   mixin inputField(inputParams, params)
 
-//-mixin passwordFieldForObject(label, name, dataObject, required, errors, maxLength, information, placeholder)
 mixin passwordFieldForObject(inputParams, params)
   - params.error = params.errors[inputParams.name]
   mixin passwordField(inputParams, params)
