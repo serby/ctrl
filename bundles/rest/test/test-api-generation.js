@@ -2,7 +2,7 @@ var http = require('http')
   , express = require('express')
   , request = require('request')
   , assert = require('assert')
-  , generateApi = require('../');
+  , generateRestApi = require('../');
 
 
 var mockModel = {
@@ -80,7 +80,7 @@ describe('generated api', function() {
 
 
   it('should list all resources on "GET /"', function(done) {
-    generateApi(app, mockModel, { base: '/api' });
+    generateRestApi(app, mockModel, { base: '/api' });
 
     request.get(prefix + '/api', function(err, res, body) {
       assert.equal(err, null);
@@ -95,7 +95,7 @@ describe('generated api', function() {
   });
 
   it('display a specific resource on "GET /id"', function(done) {
-    generateApi(app, mockModel, { base: '/api' });
+    generateRestApi(app, mockModel, { base: '/api' });
 
     request.get(prefix + '/api/3', function(err, res, body) {
       assert.equal(err, null);
@@ -107,7 +107,7 @@ describe('generated api', function() {
   });
 
   it('should create a resource on "POST /"', function(done) {
-    generateApi(app, mockModel, { base: '/api' });
+    generateRestApi(app, mockModel, { base: '/api' });
 
     request.post(prefix + '/api', { form: { colour: 'yellow' } }, function(err, res, body) {
       assert.equal(err, null);
@@ -119,7 +119,7 @@ describe('generated api', function() {
   });
 
   it('should update a resource on "PUT /id"', function(done) {
-    generateApi(app, mockModel, { base: '/api' });
+    generateRestApi(app, mockModel, { base: '/api' });
 
     request.put(prefix + '/api/7', { form: { colour: 'purple' } }, function(err, res, body) {
       assert.equal(err, null);
@@ -131,7 +131,7 @@ describe('generated api', function() {
   });
 
   it('should not allow PUT requests to unexisting IDs', function(done) {
-    generateApi(app, mockModel, { base: '/api' });
+    generateRestApi(app, mockModel, { base: '/api' });
 
     request.put(prefix + '/api/2', { form: { colour: 'black' } }, function(err, res, body) {
       assert.equal(err, null);
@@ -143,7 +143,7 @@ describe('generated api', function() {
   });
 
   it('should delete a resource on "DELETE /id"', function(done) {
-    generateApi(app, mockModel, { base: '/api' });
+    generateRestApi(app, mockModel, { base: '/api' });
 
     request.del(prefix + '/api/9', function(err, res, body) {
       assert.equal(err, null);
@@ -158,7 +158,7 @@ describe('generated api', function() {
     var nothing = function(){}
       , n = 0;
 
-    generateApi(app, mockModel, { base: '/api', before: function(action, req, res, next) {
+    generateRestApi(app, mockModel, { base: '/api', before: function(action, req, res, next) {
       assert.equal(action, req.query.action);
       if (++n === 5) {
         done();
@@ -173,7 +173,7 @@ describe('generated api', function() {
   });
 
   it('should allow any base path', function(done) {
-    generateApi(app, mockModel, { base: '/something/or/whatever' });
+    generateRestApi(app, mockModel, { base: '/something/or/whatever' });
 
     request.get(prefix + '/something/or/whatever', function(err, res, body) {
       assert.equal(err, null);
@@ -188,7 +188,7 @@ describe('generated api', function() {
   });
 
   it('should reply with 405 for disallowed methods', function(done) {
-    generateApi(app, mockModel, {
+    generateRestApi(app, mockModel, {
       'base':   '/api',
       'list':   false,
       'read':   false,
@@ -218,7 +218,7 @@ describe('generated api', function() {
   });
 
   it('should hide error messages by default', function(done) {
-    generateApi(app, mockErrorModel, { base: '/api' });
+    generateRestApi(app, mockErrorModel, { base: '/api' });
 
     var n = 0;
 
@@ -241,7 +241,7 @@ describe('generated api', function() {
   });
 
   it('should display error messages when enabled', function(done) {
-    generateApi(app, mockErrorModel, { base: '/api', explain: true });
+    generateRestApi(app, mockErrorModel, { base: '/api', explain: true });
 
     var n = 0;
 

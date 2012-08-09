@@ -4,7 +4,7 @@ function pass(action, req, res, next) {
   next();
 }
 
-module.exports = function generateApi(app, model, options) {
+module.exports = function generateRestApi(app, model, options) {
   options = _.extend({
     before:   pass,
     base:     '/',
