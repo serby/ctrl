@@ -172,6 +172,21 @@ describe('generated api', function() {
     request.del(prefix + '/api/3?action=delete', nothing);
   });
 
+  it('should allow any base path', function(done) {
+    generateApi(app, mockModel, { base: '/something/or/whatever' });
+
+    request.get(prefix + '/something/or/whatever', function(err, res, body) {
+      assert.equal(err, null);
+      assert.equal(res.statusCode, 200);
+      assert(/^application\/json/.test(res.headers['content-type']));
+      assert.deepEqual(JSON.parse(body), { error: null, result: [
+        { id: 3, colour: 'blue' },
+        { id: 7, colour: 'red' }
+      ]});
+      done();
+    });
+  });
+
   it('should reply with 405 for disallowed methods', function(done) {
     generateApi(app, mockModel, {
       'base':   '/api',
