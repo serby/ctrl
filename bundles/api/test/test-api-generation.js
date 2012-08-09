@@ -154,6 +154,24 @@ describe('generated api', function() {
     });
   });
 
+  it('should invoke the "before" function with the correct action', function(done) {
+    var nothing = function(){}
+      , n = 0;
+
+    generateApi(app, mockModel, { base: '/api', before: function(action, req, res, next) {
+      assert.equal(action, req.query.action);
+      if (++n === 5) {
+        done();
+      }
+    } });
+
+    request.get(prefix + '/api?action=list', nothing);
+    request.post(prefix + '/api?action=create', nothing);
+    request.get(prefix + '/api/3?action=read', nothing);
+    request.put(prefix + '/api/3?action=update', nothing);
+    request.del(prefix + '/api/3?action=delete', nothing);
+  });
+
   it('should reply with 405 for disallowed methods', function(done) {
     generateApi(app, mockModel, {
       'base':   '/api',
