@@ -1,12 +1,12 @@
-var
-  Validity = require('piton-validity'),
-  validation = Validity.validation;
+var validation = require('piton-validity').validation
+  , schemata = require('schemata')
+  ;
 
-module.exports = {
+module.exports = schemata({
   _id: {
     tag: ['update']
   },
-  emailAddress: {
+  emailAddress  : {
     validators: {
       all: [validation.required, validation.email]
     },
@@ -30,10 +30,10 @@ module.exports = {
     }
   },
   roles: {
-    type: 'array',
+    type: Array,
     tag: ['update']
   },
   created: {
     defaultValue: function() { return new Date(); }
   }
-};
+});

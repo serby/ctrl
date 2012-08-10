@@ -1,7 +1,7 @@
 var
   async = require('async'),
   Entity = require('piton-entity'),
-  schema = require('./roleEntitySchema'),
+  schema = require('./roleSchema'),
   MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate');
 
 module.exports.createModel = function(properties, serviceLocator) {

@@ -1,5 +1,5 @@
 var Entity = require('piton-entity')
-  , schema = require('./assetEntitySchema')
+  , schema = require('./assetSchema')
   , MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate')
   , path = require('path');
 

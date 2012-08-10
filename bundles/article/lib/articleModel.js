@@ -1,6 +1,6 @@
 var
   Entity = require('piton-entity'),
-  schema = require('./articleEntitySchema'),
+  schema = require('./articleSchema'),
   MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate'),
   path = require('path'),
   url = require('url'),

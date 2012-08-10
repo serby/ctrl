@@ -2,7 +2,7 @@ var
   async = require('async'),
   bcrypt = require('bcrypt'),
   Entity = require('piton-entity'),
-  schema = require('./administratorEntitySchema'),
+  schema = require('./administratorSchema'),
   MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate');
 
 module.exports.createModel = function(properties, serviceLocator) {

@@ -1,8 +1,8 @@
-var
-  Validity = require('piton-validity'),
-  validation = Validity.validation;
+var validation = require('piton-validity').validation
+  , schemata = require('schemata')
+  ;
 
-module.exports = {
+module.exports = schemata({
   _id: {
   },
   name: {
@@ -18,4 +18,4 @@ module.exports = {
   created: {
     defaultValue: function() { return new Date(); }
   }
-};
+});
