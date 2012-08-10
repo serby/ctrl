@@ -65,7 +65,110 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           title: 'Login / Admin / ' + properties.name,
           section: 'login'
         },
+        error: '',
+        changed: req.query.changed
+      });
+    }
+  );
+
+  app.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
+    function (req, res) {
+      viewRender(req, res, 'requestPasswordChange', {
+        page: {
+          title: 'Request Password Change / Admin / ' + properties.name,
+          section: 'login'
+        },
         error: ''
+      });
+    }
+  );
+
+  app.post('/admin/request-password-change', ensureSetup,
+    function(req, res, next) {
+      var email = req.body.emailAddress;
+
+      function renderFailure() {
+        viewRender(req, res, 'requestPasswordChange', {
+          page: {
+            title: 'Request Password Change / Admin / ' + properties.name,
+            section: 'login'
+          },
+          error: 'Unknown e-mail address'
+        });
+      }
+
+      if (email) {
+        serviceLocator.administratorModel.findOne({ emailAddress: email }, function(err, admin) {
+          if (!admin) {
+            return renderFailure();
+          }
+
+          serviceLocator.administratorModel.requestPasswordChange(admin, function(err) {
+            if (err) {
+              return next(err);
+            }
+
+            res.redirect('/admin/login?changed=' + encodeURI(email));
+          });
+        });
+      } else {
+        renderFailure();
+      }
+    }
+  );
+
+  app.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+    function(req, res, next) {
+      serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
+        if (err) {
+          return next(err);
+        }
+
+        viewRender(req, res, 'changePassword', {
+          page: {
+            title: 'Change Your Password / Admin / ' + properties.name,
+            section: 'login'
+          },
+          error: '',
+          entity: entity
+        });
+      });
+    }
+  );
+
+  app.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+    function(req, res, next) {
+      serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
+        if (err) {
+          return next(err);
+        }
+
+        if (!entity) {
+          return next('Invalid token');
+        }
+
+        var password = req.body.password;
+        if (!password || password === '') {
+          viewRender(req, res, 'changePassword', {
+            page: {
+              title: 'Change Your Password / Admin / ' + properties.name,
+              section: 'login'
+            },
+            error: 'Invalid password',
+            entity: entity
+          });
+          return;
+        }
+
+        serviceLocator.administratorModel.update(entity._id.toString(), { password: password }, { tag: 'password' },
+          function(err, updated) {
+            if (err) {
+              return next(err);
+            }
+
+            res.redirect('/admin/login');
+          }
+        );
       });
     }
   );

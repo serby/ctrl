@@ -24,6 +24,7 @@ var properties = {
   , defaultSearchResultSize: 30
   , bcryptWorkFactor: 9
   , debug: true
+  , changeEmailSender: 'nobody@example.com'
 };
 
 var environmentProperties = {

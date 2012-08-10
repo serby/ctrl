@@ -22,7 +22,7 @@
     , "mkdirp": "~0.3"
     , "mongodb": "~0.9"
     , "nib": "~0.4"
-    , "nodemailer": "~0.2"
+    , "nodemailer": "~0.3"
     , "piton-pipe": "~0.0"
     , "piton-validity": "~0.1"
     , "rss": "~0.0"
