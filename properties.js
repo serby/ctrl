@@ -4,11 +4,11 @@ var
 
 var properties = {
     version: '0.0.1'
-  , name: 'Control'
-  , tagline: 'Control CMS by Paul Serby'
+  , name: 'ctrl'
+  , tagline: 'ctrl CMS by Paul Serby'
   , description: 'This is the initial config'
-  , keywords: 'Control'
-  , pageTitle: 'Control CMS'
+  , keywords: 'ctrl'
+  , pageTitle: 'ctrl CMS'
   , port: basePort + 1
   , email: 'paul.serby@clock.co.uk'
   , siteUrl: 'http://localhost:' + (basePort + 1)
@@ -16,13 +16,13 @@ var properties = {
   , cachePath: __dirname + '/cache'
   , dataPath: __dirname + '/data'
   , binaryCachePath: '/image/'
-  , database: 
+  , database:
     { host: '127.0.0.1'
     , port: 27017
-    , name: 'Control-Development'
+    , name: 'ctrl-Development'
     }
   , defaultSearchResultSize: 30
-  , bcryptWorkFactor: 9
+  , bcryptWorkFactor: 1
   , debug: true
   , changeEmailSender: 'nobody@example.com'
 };
@@ -38,14 +38,14 @@ var environmentProperties = {
       }
     ]
     , database: {
-      replSet: 
-      { name: 'Control'
+      replSet:
+      { name: 'ctrl'
       , servers: [
         { host: 'localhost', port: 28000 }
         , { host: 'localhost', port: 28001 }
         ]
       }
-      , name: 'Control-Testing'
+      , name: 'ctrl-Testing'
     }
   }
   , production: {
@@ -57,10 +57,10 @@ var environmentProperties = {
       , sshPort: 17510
       }
     ]
-    , database: 
+    , database:
     { host: '127.0.0.1'
     , port: 27017
-    , name: 'Control-Production'
+    , name: 'ctrl-Production'
     }
   }
 };
@@ -76,5 +76,5 @@ exports.getProperties = function(environment) {
   if (environmentProperties[environment] === undefined) {
     throw new RangeError('No properties for environment \'' + environment + '\'');
   }
-  return _.extend(properties, environmentProperties[environment]);
+  return _.extend({}, properties, environmentProperties[environment]);
 };
