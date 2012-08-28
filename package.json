@@ -1,8 +1,7 @@
-{
-    "name": "Control"
+{ "name": "ctrl"
+  , "description": "A node.js CMS for quickly building powerful web sites, tailored to your exact needs"
   , "main": "app.js"
   , "version": "0.0.1"
-  , "private": true
   , "engine": "~0.6"
   , "dependencies": {
       "async": "~0.1"
