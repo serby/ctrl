@@ -1,5 +1,5 @@
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-var disqus_shortname = 'controlcms'; // required: replace example with your forum shortname
+var disqus_shortname = 'ctrlcms'; // required: replace example with your forum shortname
 var disqus_developer = 1;
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
