@@ -1,15 +1,61 @@
-var
-  async = require('async'),
-  bcrypt = require('bcrypt'),
-  Entity = require('piton-entity'),
-  schema = require('./administratorSchema'),
-  MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate');
+var async = require('async')
+  , bcrypt = require('bcrypt')
+  , crypto = require('crypto')
+  , validity = require('validity')
+  , schemata = require('schemata')
+  ;
 
-module.exports.createModel = function(properties, serviceLocator) {
 
-  var
-    collection,
-    connection = serviceLocator.databaseConnections.main;
+
+module.exports.createModel = function(serviceLocator) {
+
+  var save = require('save')(serviceLocator.saveFactory('administrator'))
+    , properties = serviceLocator.properties
+    ;
+
+  function duplicateEmailValidator(key, errorProperty, object, callback) {
+    save.findOne({ emailAddress: object.emailAddress })(function(error, found) {
+      callback(undefined, found || found._id.toString() === object._id ?
+        undefined : object.emailAddress + ' already in use');
+    });
+  }
+
+  var schema = schemata({
+    _id: {
+      tag: ['update']
+    },
+    emailAddress  : {
+      validators: {
+        all: [validity.required, validity.email, duplicateEmailValidator]
+      },
+      tag: ['update']
+    },
+    firstName: {
+      validators: {
+        all: [validity.required]
+      },
+      tag: ['update']
+    },
+    lastName: {
+      validators: {
+        all: [validity.required]
+      },
+      tag: ['update']
+    },
+    password: {
+      validators: {
+        all: [validity.required]
+      },
+      tag: ['password']
+    },
+    roles: {
+      type: Array,
+      tag: ['update']
+    },
+    created: {
+      defaultValue: function() { return new Date(); }
+    }
+  });
 
   if (typeof properties.bcryptWorkFactor === 'number' && properties.bcryptWorkFactor >= 1) {
     properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor);
@@ -17,38 +63,12 @@ module.exports.createModel = function(properties, serviceLocator) {
     properties.bcryptWorkFactor = 1;
   }
 
-  connection.collection('administrator', function(error, loadedCollection) {
-    collection = loadedCollection;
-  });
-
-  var
-    crudDelegate,
-    entityDelegate = Entity.createEntityDefinition(schema);
-
-  entityDelegate.schema = schema;
-
-  crudDelegate = MongodbCrudDelegate.createMongodbCrudDelegate(
-    'Administrator',
-    'Administrators',
-    '_id',
-    collection,
-    entityDelegate,
-    MongodbCrudDelegate.objectIdFilter(connection),
-    serviceLocator.logger
-  );
-
   function bcryptHash(value, callback) {
     bcrypt.hash(value, properties.bcryptWorkFactor, callback);
   }
 
   function bcryptCompare(value, hash, callback) {
     bcrypt.compare(value, hash, callback);
-  }
-
-  function duplicateEmailChecker(entity, callback) {
-    collection.find({ emailAddress: entity.emailAddress }).toArray(function(error, data) {
-      callback(data.length === 0 || data[0]._id.toString() === entity._id ? null : MongodbCrudDelegate.validationError({ emailAddress: 'Already in use' }), entity);
-    });
   }
 
   function passwordHasher(entity, callback) {
@@ -67,7 +87,7 @@ module.exports.createModel = function(properties, serviceLocator) {
   }
 
   function authenticate(credentials, callback) {
-    crudDelegate.findOne({ emailAddress: credentials.emailAddress }, function(err, entity) {
+    save.findOne({ emailAddress: credentials.emailAddress }, function(err, entity) {
       if (err) {
         return callback(err, credentials);
       } else if (!entity) {
@@ -115,7 +135,7 @@ module.exports.createModel = function(properties, serviceLocator) {
   }
 
   function findByHash(hash, callback) {
-    crudDelegate.find({}, {}, function(err, admins) {
+    save.find({}, {}, function(err, admins) {
       if (err) {
         return callback(err);
       }
@@ -143,24 +163,30 @@ module.exports.createModel = function(properties, serviceLocator) {
 
     administratorDetails.roles = ['root'];
 
-    crudDelegate.create(administratorDetails, {}, callback);
+    save.create(administratorDetails, {}, callback);
   }
 
-  crudDelegate.pipes.beforeCreate.add(function(entity, callback) {
-    callback(null, entityDelegate.makeDefault(entity));
-  })
-    .add(duplicateEmailChecker)
-    .add(passwordHasher);
+  // crudDelegate.pipes.beforeCreate.add()
+  //   .add(passwordHasher);
 
-  crudDelegate.pipes.beforeUpdate
-    .add(duplicateEmailChecker)
-    .add(passwordHasher)
-    .add(dontSetBlankPassword);
+  // crudDelegate.pipes.beforeUpdate
+  //   .add(passwordHasher)
+  //   .add(dontSetBlankPassword);
 
-  crudDelegate.authenticate = authenticate;
-  crudDelegate.requestPasswordChange = requestPasswordChange;
-  crudDelegate.findByHash = findByHash;
-  crudDelegate.createWithFullAccess = createWithFullAccess;
+  var model = genericCrudModel('Administrator', save, schema, { slug: 'administrator' });
 
-  return crudDelegate;
+  model.pre('createValidate', function(entity, callback) {
+    callback(null, schema.makeDefault(entity));
+  });
+
+  model.pre('create', passwordHasher);
+  model.pre('update', passwordHasher);
+  model.pre('update', dontSetBlankPassword);
+
+  model.authenticate = authenticate;
+  model.requestPasswordChange = requestPasswordChange;
+  model.findByHash = findByHash;
+  model.createWithFullAccess = createWithFullAccess;
+
+  return model;
 };
