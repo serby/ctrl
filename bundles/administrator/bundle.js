@@ -1,7 +1,7 @@
 module.exports = {
   name: 'Administrator',
   version: '0.0.1',
-  description: 'Manage the user who administer the site',
+  description: 'Manage the users who administer the site',
   adminNav: [{
       label: 'Administrators',
       url: '/admin/administrator',
