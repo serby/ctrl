@@ -4,7 +4,8 @@ var Pipe = require('piton-pipe')
 
 module.exports = function(name, save, schema, options) {
 
-  var slug = (options && options.slug) ? options.slug : name.toLowerCase().replace(/ /g, '');
+  var slug = (options && options.slug) ? options.slug : name.toLowerCase().replace(/ /g, '')
+    , plural = (options && options.plural) ? options.plural : name + 's';
 
   var pre = {
     create: Pipe.createPipe(),
@@ -22,6 +23,7 @@ module.exports = function(name, save, schema, options) {
   return {
     name: name,
     slug: slug,
+    plural: plural,
     schema: schema,
     idProperty: save.idProperty,
     create: function(object, validateOptions, callback) {
