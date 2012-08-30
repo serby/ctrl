@@ -41,7 +41,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           list: false,
           createForm: true,
           updateForm: false,
-          view: true,
+          view: false,
           type: 'password',
           required: true
         },
