@@ -9,10 +9,11 @@ block content
     h2 There is currently no administrator account.
     p Create a default administrator by entering details below.
     fieldset
-      -if (error)
-        errors
-          p.error
-            strong= error
+      - if (Object.keys(errors).length > 0)
+      .notification.error
+        h4 Please check the form and try again
+        - each error in errors
+          p= error
       mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
       mixin textField({ name :'firstName' }, { label: 'First Name' })
       mixin textField({ name :'lastName' }, { label: 'Last Name' })

@@ -10,7 +10,7 @@ block content
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.urlName}') #{model.plural}
+      li: a(href='/admin/#{model.slug}') #{model.plural}
       li View #{model.name}
 
   include includes/view-actions
@@ -25,7 +25,7 @@ block content
       dl
         - each propertyMeta, key in group.properties
           - if (propertyMeta.view)
-            dt=model.entityDelegate.propertyName(key)
+            dt=model.schema.propertyName(key)
             dd
               - if (propertyMeta.type === 'file')
                 mixin downloadLink(entity[key], false)

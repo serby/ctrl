@@ -25,7 +25,7 @@ block content
         | No records found.
       - if (adminIsAllowed(model.name, 'create')) 
         p Would you like to 
-          a(href='/admin/#{model.urlName}/new') add one?
+          a(href='/admin/#{model.slug}/new') add one?
 
     - else
       table.highlight.sortable
@@ -34,7 +34,7 @@ block content
             - each group in viewSchema.groups
               - each val, key in group.properties
                 - if (val.list)
-                  - var property = model.entityDelegate.propertyName(key)
+                  - var property = model.schema.propertyName(key)
                   - var directionClass = ''
                   - if (url.Sort === key)
                     - if (url.Direction === 'asc')
@@ -52,12 +52,12 @@ block content
                   - if (propertyMeta.list)
                     - if (viewSchema.title === key)
                       td.title
-                        strong: a(href='/admin/#{model.urlName}/#{entity[model.idProperty]}')=propertyMeta.format(entityName)
+                        strong: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}')=propertyMeta.format(entityName)
                         ul.row-actions
                           - if (adminIsAllowed(model.name, 'update')) 
-                            li: a(href='/admin/#{model.urlName}/#{entity[model.idProperty]}/edit') Edit
+                            li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/edit') Edit
                           - if (adminIsAllowed(model.name, 'delete')) 
-                            li: a(href='/admin/#{model.urlName}/#{entity[model.idProperty]}/delete').delete Delete
+                            li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/delete').delete Delete
                     - else
                       - if (propertyMeta.type === 'checkbox')
                         td=booleanFormatter(entity[key])

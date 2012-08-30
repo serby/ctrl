@@ -11,7 +11,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
         title: 'Setup / Admin / ' + properties.name,
         section: 'admin'
       },
-      error: errors
+      errors: errors
     });
   }
 
@@ -27,9 +27,9 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   app.post('/admin/setup', function(req, res, next) {
     serviceLocator.administratorModel.count({}, function(error, count) {
       if (count === 0) {
-        serviceLocator.administratorModel.createWithFullAccess(req.body, function(errors, item) {
-          if (errors) {
-            return renderSetup(res, req, errors);
+        serviceLocator.administratorModel.createWithFullAccess(req.body, function(error, item) {
+          if (error) {
+            return renderSetup(res, req, error.errors);
           }
           res.redirect('/admin');
         });

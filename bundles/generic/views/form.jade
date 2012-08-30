@@ -14,7 +14,7 @@ block content
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.urlName}') #{model.plural}
+      li: a(href='/admin/#{model.slug}') #{model.plural}
       li
         -if (page.action == 'create')
           | New #{model.name}
@@ -38,7 +38,7 @@ block content
           p.group-description=group.description
         - each propertyMeta, key in group.properties
           - if (propertyMeta[formType])
-            - var name = model.entityDelegate.propertyName(key)
+            - var name = model.schema.propertyName(key)
             - if ([undefined, 'url'].indexOf(propertyMeta.type) !== -1 || propertyMeta.type === 'link')
               mixin textFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
             - if (propertyMeta.type === 'dropdown')
@@ -60,5 +60,5 @@ block content
             - if (propertyMeta.type === 'date')
               mixin datepickerFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
     fieldset.actions
-      a.button(href='/admin/#{model.urlName}') Cancel
+      a.button(href='/admin/#{model.slug}') Cancel
       input.button.primary(type='submit',value='Submit')

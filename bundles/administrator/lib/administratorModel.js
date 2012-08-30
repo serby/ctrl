@@ -3,20 +3,19 @@ var async = require('async')
   , crypto = require('crypto')
   , validity = require('validity')
   , schemata = require('schemata')
+  , genericCrudModel = require('../../generic/lib/genericCrudModel')
   ;
 
+module.exports = function(serviceLocator) {
 
-
-module.exports.createModel = function(serviceLocator) {
-
-  var save = require('save')(serviceLocator.saveFactory('administrator'))
+  var save = serviceLocator.saveFactory.administrator()
     , properties = serviceLocator.properties
     ;
 
   function duplicateEmailValidator(key, errorProperty, object, callback) {
-    save.findOne({ emailAddress: object.emailAddress })(function(error, found) {
-      callback(undefined, found || found._id.toString() === object._id ?
-        undefined : object.emailAddress + ' already in use');
+    save.findOne({ emailAddress: object.emailAddress }, function(error, found) {
+      callback(undefined, found && found._id.toString() === object._id ?
+        object.emailAddress + ' already in use' : undefined);
     });
   }
 
@@ -56,6 +55,8 @@ module.exports.createModel = function(serviceLocator) {
       defaultValue: function() { return new Date(); }
     }
   });
+
+  var model = genericCrudModel('Administrator', save, schema, { slug: 'administrator' });
 
   if (typeof properties.bcryptWorkFactor === 'number' && properties.bcryptWorkFactor >= 1) {
     properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor);
@@ -101,7 +102,7 @@ module.exports.createModel = function(serviceLocator) {
           return callback(new Error('Wrong Email and password combination.'), credentials);
         }
 
-        return callback(null, entity);
+        return callback(undefined, entity);
       });
     });
   }
@@ -110,7 +111,7 @@ module.exports.createModel = function(serviceLocator) {
     if (entity.password === '') {
       delete entity.password;
     }
-    callback(null, entity);
+    callback(undefined, entity);
   }
 
   function hashAdminState(admin) {
@@ -163,7 +164,7 @@ module.exports.createModel = function(serviceLocator) {
 
     administratorDetails.roles = ['root'];
 
-    save.create(administratorDetails, {}, callback);
+    model.create(administratorDetails, callback);
   }
 
   // crudDelegate.pipes.beforeCreate.add()
@@ -172,8 +173,6 @@ module.exports.createModel = function(serviceLocator) {
   // crudDelegate.pipes.beforeUpdate
   //   .add(passwordHasher)
   //   .add(dontSetBlankPassword);
-
-  var model = genericCrudModel('Administrator', save, schema, { slug: 'administrator' });
 
   model.pre('createValidate', function(entity, callback) {
     callback(null, schema.makeDefault(entity));

@@ -22,7 +22,9 @@ module.exports = function(name, save, schema, options) {
   return {
     name: name,
     slug: slug,
-    create: function(object, callback) {
+    schema: schema,
+    idProperty: save.idProperty,
+    create: function(object, validateOptions, callback) {
       callback = callback || emptyFn;
 
       var cleanObject = schema.cast(schema.stripUnknownProperties(object));
@@ -31,7 +33,7 @@ module.exports = function(name, save, schema, options) {
         if (error) {
           return callback(error);
         }
-        schema.validate(pipedObject, function(error, validationErrors) {
+        schema.validate(pipedObject, validateOptions, function(error, validationErrors) {
           if (error) {
             return callback(error);
           }
@@ -55,7 +57,7 @@ module.exports = function(name, save, schema, options) {
       });
     },
     read: save.read,
-    update: function(object, callback) {
+    update: function(object, validateOptions, callback) {
       callback = callback || emptyFn;
 
       var cleanObject = schema.cast(schema.stripUnknownProperties(object));
@@ -64,7 +66,7 @@ module.exports = function(name, save, schema, options) {
         if (error) {
           return callback(error);
         }
-        schema.validate(pipedObject, function(error, validationErrors) {
+        schema.validate(pipedObject, validateOptions, function(error, validationErrors) {
           if (error) {
             return callback(error);
           }
@@ -88,12 +90,12 @@ module.exports = function(name, save, schema, options) {
       });
     },
     'delete': function(id, callback) {
+      save['delete'](id, callback);
     },
     count: save.count,
     find: save.find,
     pre: function(method, processor) {
       return pre[method].add(processor);
-    },
-    makeDefault: schema.makeDefault
+    }
   };
 };

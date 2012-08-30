@@ -9,7 +9,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
     updateValidationSet: '',
     createTag: undefined,
     updateTag: undefined,
-    requiredAccess: crudDelegate.urlName
+    requiredAccess: crudDelegate.slug
   }
   , compact = serviceLocator.compact;
 
@@ -53,7 +53,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
   }
 
   app.get(
-    '/admin/' + crudDelegate.urlName + '/new',
+    '/admin/' + crudDelegate.slug + '/new',
     serviceLocator.adminAccessControl.requiredAccess(options.requiredAccess, 'create'),
     compact.js(
       ['global'],
@@ -67,7 +67,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
       entity: crudDelegate.entityDelegate.makeDefault(),
       page: {
         title: crudDelegate.name,
-        section: crudDelegate.urlName,
+        section: crudDelegate.slug,
         action: 'create'
       },
       formType: 'createForm',
@@ -76,7 +76,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
   });
 
   app.post(
-    '/admin/' + crudDelegate.urlName + '/new',
+    '/admin/' + crudDelegate.slug + '/new',
     compact.js(
       ['global'],
       ['admin-common'],
@@ -98,20 +98,20 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
           entity: newEntity,
           page: {
             title: crudDelegate.name,
-            section: crudDelegate.urlName,
+            section: crudDelegate.slug,
             action: 'create'
           },
           formType: 'createForm',
           errors: errors.errors
         });
       } else {
-        res.redirect('/admin/' + crudDelegate.urlName + '/' + newEntity._id);
+        res.redirect('/admin/' + crudDelegate.slug + '/' + newEntity._id);
       }
     });
   });
 
   app.get(
-    '/admin/' + crudDelegate.urlName + '/:id/edit',
+    '/admin/' + crudDelegate.slug + '/:id/edit',
     compact.js(
       ['global'],
       ['admin-common'],
@@ -129,7 +129,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
         entity: entity,
         page: {
           title: crudDelegate.name,
-          section: crudDelegate.urlName,
+          section: crudDelegate.slug,
           action: 'update'
         },
         formType: 'updateForm',
@@ -139,7 +139,7 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
   });
 
   app.post(
-    '/admin/' + crudDelegate.urlName + '/:id/edit',
+    '/admin/' + crudDelegate.slug + '/:id/edit',
     compact.js(
       ['global'],
       ['admin-common'],
@@ -159,14 +159,14 @@ module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDe
           entity: entity,
           page: {
             title: crudDelegate.name,
-            section: crudDelegate.urlName,
+            section: crudDelegate.slug,
             action: 'update'
           },
           formType: 'updateForm',
           errors: errors.errors
         });
       } else {
-        res.redirect('/admin/' + crudDelegate.urlName + '/' + entity._id);
+        res.redirect('/admin/' + crudDelegate.slug + '/' + entity._id);
       }
     });
   });

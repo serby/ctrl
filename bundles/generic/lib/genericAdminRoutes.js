@@ -12,7 +12,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
     updateValidationSet: '',
     createTag: undefined,
     updateTag: undefined,
-    requiredAccess: model.urlName,
+    requiredAccess: model.slug,
     scripts: {},
     renderFn: null,
     adminRoute: '/admin/'
@@ -79,7 +79,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
     , paginate = Pagination.createPagination(model.count, 10);
 
   serviceLocator.app.get(
-    options.adminRoute + model.urlName,
+    options.adminRoute + model.slug,
     compactMiddleware('view'),
     buildSearchQuery,
     buildSortOptions,
@@ -94,11 +94,11 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
           options.renderFn(req, res, views.list, {
             viewSchema: schema,
             model: model,
-            dataSet: dataSet.toArray(),
+            dataSet: dataSet,
             page: {
               title: model.name,
               name: model.name,
-              section: model.urlName
+              section: model.slug
             },
             url: url.parse(req.url, true).query,
             searchProperties: searchProperties
@@ -144,7 +144,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   }
 
   serviceLocator.app.get(
-    options.adminRoute + model.urlName + '/new',
+    options.adminRoute + model.slug + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
     schemaHelper(schema),
@@ -153,10 +153,10 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
       options.renderFn(req, res, views.form, {
         viewSchema: schema,
         model: model,
-        entity: model.entityDelegate.makeDefault(),
+        entity: model.schema.makeDefault(),
         page: {
           title: model.name,
-          section: model.urlName,
+          section: model.slug,
           action: 'create'
         },
         formType: 'createForm',
@@ -167,7 +167,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   );
 
   serviceLocator.app.post(
-    options.adminRoute + model.urlName + '/new',
+    options.adminRoute + model.slug + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
     serviceLocator.uploadDelegate.middleware,
@@ -177,25 +177,25 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
       model.create(
         req.body,
         { validationSet: options.createValidationSet },
-        function (errors, newEntity) {
-          if (isValidationError(errors)) {
+        function (error, newEntity) {
+          if (error && error.errors) {
             options.renderFn(req, res, views.form, {
               viewSchema: schema,
               model: model,
               entity: newEntity,
               page: {
                 title: model.name,
-                section: model.urlName,
+                section: model.slug,
                 action: 'create'
               },
               formType: 'createForm',
-              errors: errors.errors,
-              unshownErrors: listUnshownErrors(errors, 'createForm')
+              errors: error.errors,
+              unshownErrors: listUnshownErrors(error, 'createForm')
             });
-          } else if (errors) {
+          } else if (error) {
             render500(next);
           } else {
-            res.redirect(options.adminRoute + model.urlName + '/' + newEntity._id);
+            res.redirect(options.adminRoute + model.slug + '/' + newEntity._id);
           }
         }
       );
@@ -204,7 +204,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   );
 
   serviceLocator.app.get(
-    options.adminRoute + model.urlName + '/:id',
+    options.adminRoute + model.slug + '/:id',
     compactMiddleware('view'),
     accessCheck('read'), function (req, res) {
       model.read(
@@ -216,7 +216,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
             entity: entity,
             page: {
               title: model.name,
-              section: model.urlName,
+              section: model.slug,
               action: 'read'
             }
           });
@@ -224,7 +224,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   });
 
   serviceLocator.app.get(
-    options.adminRoute + model.urlName + '/:id/edit',
+    options.adminRoute + model.slug + '/:id/edit',
     compactMiddleware('form'),
     schemaHelper(schema),
     accessCheck('update'),
@@ -237,7 +237,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
           entity: entity,
           page: {
             title: model.name,
-            section: model.urlName,
+            section: model.slug,
             action: 'update'
           },
           formType: 'updateForm',
@@ -250,38 +250,37 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   );
 
   serviceLocator.app.post(
-    options.adminRoute + model.urlName + '/:id/edit',
+    options.adminRoute + model.slug + '/:id/edit',
     compactMiddleware('form'),
     serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     accessCheck('update'),
     function (req, res, next) {
       model.update(
-        req.params.id,
         req.body,
         {
           tag: options.updateTag,
           validationSet: options.updateValidationSet
         },
-        function (errors, entity) {
-          if (isValidationError(errors)) {
+        function (error, entity) {
+          if (error && error.errors) {
             options.renderFn(req, res, views.form, {
               viewSchema: schema,
               model: model,
               entity: entity,
               page: {
                 title: model.name,
-                section: model.urlName,
+                section: model.slug,
                 action: 'update'
               },
               formType: 'updateForm',
-              errors: errors.errors,
-              unshownErrors: listUnshownErrors(errors, 'updateForm')
+              errors: error.errors,
+              unshownErrors: listUnshownErrors(error, 'updateForm')
             });
-          } else if (errors) {
+          } else if (error) {
             render500(next);
           } else {
-            res.redirect(options.adminRoute + model.urlName + '/' + entity._id);
+            res.redirect(options.adminRoute + model.slug + '/' + entity._id);
           }
         }
       );
@@ -289,14 +288,14 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   );
 
   serviceLocator.app.get(
-    options.adminRoute + model.urlName + '/:id/delete',
+    options.adminRoute + model.slug + '/:id/delete',
     accessCheck('delete'),
     function(req, res, next) {
       model['delete'](req.params.id, function(error) {
-        if (error !== null) {
+        if (error !== undefined) {
           res.send(404);
         } else {
-          res.redirect(options.adminRoute + model.urlName);
+          res.redirect(options.adminRoute + model.slug);
         }
       });
     }

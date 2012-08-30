@@ -1,6 +1,6 @@
 .filter-form
   - if (Object.keys(searchProperties).length > 0)
-    form(method='get', action='#{model.urlName}')
+    form(method='get', action='#{model.slug}')
       label
         strong Filter Results
         - if (typeof url.Filter === 'undefined' || url.Filter === '')

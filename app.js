@@ -8,7 +8,9 @@ var cluster = require('cluster')
 serviceLocator
   .register('properties', properties)
   .register('mailer', nodemailer.createTransport('SMTP', { host: 'localhost' }))
-  .register('logger', require('./lib/logger').createLogger(properties));
+  .register('logger', require('./lib/logger').createLogger(properties))
+  .register('saveFactory', {})
+  ;
 
 if ((properties.env !== 'development') && (cluster.isMaster)) {
 

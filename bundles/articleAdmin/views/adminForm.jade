@@ -17,7 +17,7 @@ block content
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.urlName}') #{model.plural}
+      li: a(href='/admin/#{model.slug}') #{model.plural}
       li
         -if (page.action == 'create')
           | New #{model.name}
@@ -63,5 +63,5 @@ block content
       mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
 
     fieldset.actions
-      a.button(href='/admin/#{model.urlName}') Cancel
+      a.button(href='/admin/#{model.slug}') Cancel
       input.button.primary(type='submit',value='Submit')
