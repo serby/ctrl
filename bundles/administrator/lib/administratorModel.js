@@ -3,7 +3,8 @@ var
   bcrypt = require('bcrypt'),
   Entity = require('piton-entity'),
   schema = require('./administratorEntitySchema'),
-  MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate');
+  MongodbCrudDelegate = require('../../../lib/utils/mongodbCrudDelegate'),
+  crypto = require('crypto');
 
 module.exports.createModel = function(properties, serviceLocator) {
 
