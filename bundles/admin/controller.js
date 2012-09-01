@@ -105,20 +105,20 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     function(req, res, next) {
       var email = req.body.emailAddress;
 
-      function renderFailure() {
+      function renderFailure(error) {
         viewRender(req, res, 'requestPasswordChange', {
           page: {
             title: 'Request Password Change / Admin / ' + properties.name,
             section: 'login'
           },
-          error: 'Unknown e-mail address'
+          error: error.message
         });
       }
 
       if (email) {
         serviceLocator.administratorModel.findOne({ emailAddress: email }, function(err, admin) {
           if (!admin) {
-            return renderFailure();
+            return renderFailure(new Error('Unknown e-mail address'));
           }
 
           serviceLocator.administratorModel.requestPasswordChange(admin, function(err) {
@@ -130,7 +130,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           });
         });
       } else {
-        renderFailure();
+        renderFailure(new Error('No e-mail address entered'));
       }
     }
   );
