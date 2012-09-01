@@ -71,6 +71,24 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
+  app.post('/admin/login', function(req, res, next) {
+    serviceLocator.adminAccessControl.authenticate(req, res, req.body, function(error, user) {
+      if (error === null) {
+        res.redirect('/admin');
+      } else if (error instanceof Error) {
+
+        viewRender(req, res, 'login', {
+          page: {
+            title: 'Login / Admin / ' + properties.name,
+            section: 'login'
+          },
+          error: error.message,
+          changed: false
+        });
+      }
+    });
+  });
+
   app.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
     function (req, res) {
       viewRender(req, res, 'requestPasswordChange', {
@@ -176,24 +194,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   app.get('/admin/logout', function(req, res) {
     serviceLocator.adminAccessControl.destroy(req, res);
     res.redirect('/admin/login');
-  });
-
-  app.post('/admin/login', function(req, res, next) {
-    serviceLocator.adminAccessControl.authenticate(req, res, req.body, function(error, user) {
-
-      if (error === null) {
-        res.redirect('/admin');
-      } else if (error instanceof Error) {
-
-        viewRender(req, res, 'login', {
-          page: {
-            title: 'Login / Admin / ' + properties.name,
-            section: 'login'
-          },
-          error: error.message
-        });
-      }
-    });
   });
 
 };
