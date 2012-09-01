@@ -1,10 +1,10 @@
-//     Underscore.js 1.3.3
+//     lodash.js 1.3.3
 //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
-//     Underscore is freely distributable under the MIT license.
-//     Portions of Underscore are inspired or borrowed from Prototype,
+//     lodash is freely distributable under the MIT license.
+//     Portions of lodash are inspired or borrowed from Prototype,
 //     Oliver Steele's Functional, and John Resig's Micro-Templating.
 //     For all details and documentation:
-//     http://documentcloud.github.com/underscore
+//     http://documentcloud.github.com/lodash
 
 (function() {
 
@@ -15,7 +15,7 @@
   var root = this;
 
   // Save the previous value of the `_` variable.
-  var previousUnderscore = root._;
+  var previouslodash = root._;
 
   // Establish the object that gets returned to break out of a loop iteration.
   var breaker = {};
@@ -45,10 +45,10 @@
     nativeKeys         = Object.keys,
     nativeBind         = FuncProto.bind;
 
-  // Create a safe reference to the Underscore object for use below.
+  // Create a safe reference to the lodash object for use below.
   var _ = function(obj) { return new wrapper(obj); };
 
-  // Export the Underscore object for **Node.js**, with
+  // Export the lodash object for **Node.js**, with
   // backwards-compatibility for the old `require()` API. If we're in
   // the browser, add `_` as a global object via a string identifier,
   // for Closure Compiler "advanced" mode.
@@ -865,10 +865,10 @@
   // Utility Functions
   // -----------------
 
-  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
-  // previous owner. Returns a reference to the Underscore object.
+  // Run lodash.js in *noConflict* mode, returning the `_` variable to its
+  // previous owner. Returns a reference to the lodash object.
   _.noConflict = function() {
-    root._ = previousUnderscore;
+    root._ = previouslodash;
     return this;
   };
 
@@ -895,7 +895,7 @@
     return _.isFunction(value) ? value.call(object) : value;
   };
 
-  // Add your own custom functions to the Underscore object, ensuring that
+  // Add your own custom functions to the lodash object, ensuring that
   // they're correctly added to the OOP wrapper as well.
   _.mixin = function(obj) {
     each(_.functions(obj), function(name){
@@ -911,7 +911,7 @@
     return prefix ? prefix + id : id;
   };
 
-  // By default, Underscore uses ERB-style template delimiters, change the
+  // By default, lodash uses ERB-style template delimiters, change the
   // following template settings to use alternative delimiters.
   _.templateSettings = {
     evaluate    : /<%([\s\S]+?)%>/g,
@@ -949,7 +949,7 @@
   };
 
   // JavaScript micro-templating, similar to John Resig's implementation.
-  // Underscore templating handles arbitrary delimiters, preserves whitespace,
+  // lodash templating handles arbitrary delimiters, preserves whitespace,
   // and correctly escapes quotes within interpolated code.
   _.template = function(text, data, settings) {
     settings = _.defaults(settings || {}, _.templateSettings);
@@ -1000,9 +1000,9 @@
   // The OOP Wrapper
   // ---------------
 
-  // If Underscore is called as a function, it returns a wrapped object that
+  // If lodash is called as a function, it returns a wrapped object that
   // can be used OO-style. This wrapper holds altered versions of all the
-  // underscore functions. Wrapped objects may be chained.
+  // lodash functions. Wrapped objects may be chained.
   var wrapper = function(obj) { this._wrapped = obj; };
 
   // Expose `wrapper.prototype` as `_.prototype`
@@ -1022,7 +1022,7 @@
     };
   };
 
-  // Add all of the Underscore functions to the wrapper object.
+  // Add all of the lodash functions to the wrapper object.
   _.mixin(_);
 
   // Add all mutator Array functions to the wrapper.
@@ -1045,7 +1045,7 @@
     };
   });
 
-  // Start chaining a wrapped Underscore object.
+  // Start chaining a wrapped lodash object.
   wrapper.prototype.chain = function() {
     this._chain = true;
     return this;

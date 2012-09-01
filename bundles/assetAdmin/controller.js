@@ -10,7 +10,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
       );
 
   compact.addNamespace('admin-asset', __dirname + '/public')
-    .addJs('js/deps/underscore.js')
+    .addJs('js/deps/lodash.js')
     .addJs('js/deps/backbone.js')
     .addJs('js/deps/backbone.paginator.js')
     .addJs('js/deps/jquery.iframe-transport.js')

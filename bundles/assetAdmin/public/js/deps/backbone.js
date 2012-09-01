@@ -34,9 +34,9 @@
   // Current version of the library. Keep in sync with `package.json`.
   Backbone.VERSION = '0.9.2';
 
-  // Require Underscore, if we're on the server, and it's not already present.
+  // Require lodash, if we're on the server, and it's not already present.
   var _ = root._;
-  if (!_ && (typeof require !== 'undefined')) _ = require('underscore');
+  if (!_ && (typeof require !== 'undefined')) _ = require('lodash');
 
   // For Backbone's purposes, jQuery, Zepto, or Ender owns the `$` variable.
   var $ = root.jQuery || root.Zepto || root.ender;
@@ -792,7 +792,7 @@
     },
 
     // Proxy to _'s chain. Can't be proxied the same way the rest of the
-    // underscore methods are proxied because it relies on the underscore
+    // lodash methods are proxied because it relies on the lodash
     // constructor.
     chain: function () {
       return _(this.models).chain();
@@ -846,14 +846,14 @@
 
   });
 
-  // Underscore methods that we want to implement on the Collection.
+  // lodash methods that we want to implement on the Collection.
   var methods = ['forEach', 'each', 'map', 'reduce', 'reduceRight', 'find',
     'detect', 'filter', 'select', 'reject', 'every', 'all', 'some', 'any',
     'include', 'contains', 'invoke', 'max', 'min', 'sortBy', 'sortedIndex',
     'toArray', 'size', 'first', 'initial', 'rest', 'last', 'without', 'indexOf',
     'shuffle', 'lastIndexOf', 'isEmpty', 'groupBy'];
 
-  // Mix in each Underscore method as a proxy to `Collection#models`.
+  // Mix in each lodash method as a proxy to `Collection#models`.
   _.each(methods, function(method) {
     Collection.prototype[method] = function() {
       return _[method].apply(_, [this.models].concat(_.toArray(arguments)));

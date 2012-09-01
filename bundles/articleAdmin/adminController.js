@@ -1,6 +1,6 @@
 var
   async = require('async'),
-  _ = require('underscore');
+  _ = require('lodash');
 
 module.exports.createRoutes = function (app, viewRender, adminViewSchema, crudDelegate, serviceLocator, customOptions) {
 
