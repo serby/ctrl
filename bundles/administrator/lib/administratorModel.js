@@ -56,7 +56,7 @@ module.exports = function(serviceLocator) {
     }
   });
 
-  var model = genericCrudModel('Administrator', save, schema, { slug: 'administrator' });
+  var model = genericCrudModel('Administrator', save, schema);
 
   if (typeof properties.bcryptWorkFactor === 'number' && properties.bcryptWorkFactor >= 1) {
     properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor);
@@ -143,7 +143,7 @@ module.exports = function(serviceLocator) {
 
       var match = null;
 
-      admins.toArray().every(function(admin) {
+      admins.every(function(admin) {
         if (hashAdminState(admin) === hash) {
           match = admin;
         }

@@ -13,7 +13,8 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           list: true,
           view: true,
           createForm: true,
-          updateForm: true
+          updateForm: true,
+          required: true
         },
         _id: {
           form: true,

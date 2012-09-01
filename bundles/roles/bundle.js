@@ -1,3 +1,7 @@
+var save = require('save')
+  , saveMongodb = require('save-mongodb')
+  ;
+
 module.exports = {
   name: 'Roles',
   description: 'Manage the user who administer the site',
@@ -23,13 +27,19 @@ module.exports = {
   }],
   initialize: [
     function(serviceLocator, done) {
-
-      // Register the bundles models
-      serviceLocator.register('roleModel',
-        require('./lib/roleModel').createModel(serviceLocator.properties, serviceLocator));
-      done();
+      serviceLocator.databaseConnections.main.collection('role', function(error, collection) {
+        serviceLocator.saveFactory.role = function() {
+          return save('role', { logger: serviceLocator.logger,
+            engine: saveMongodb(collection)});
+        };
+        done();
+      });
     },
     function(serviceLocator, done) {
+      // Register the bundles models
+      serviceLocator.register('roleModel',
+        require('./lib/roleModel')(serviceLocator));
+
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Role');
       done();
@@ -44,11 +54,11 @@ module.exports = {
 
       reloadAcl();
 
-      serviceLocator.roleModel.on('onCreate', reloadAcl);
-      serviceLocator.roleModel.on('onUpdate', reloadAcl);
+      serviceLocator.roleModel.on('create', reloadAcl);
+      serviceLocator.roleModel.on('update', reloadAcl);
 
       // The main admin account needs this role to have ultimate power.
-      serviceLocator.roleModel.ensureRootRoleExisits(function(error, role) {
+      serviceLocator.roleModel.ensureRootRoleExists(function(error, role) {
 
         if (error) {
           return done(new Error('Unable to create root role'));

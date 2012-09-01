@@ -1,5 +1,7 @@
-var Pipe = require('piton-pipe')
+var _ = require('lodash')
+  , Pipe = require('piton-pipe')
   , emptyFn = function() {}
+  , events = require('events')
   ;
 
 module.exports = function(name, save, schema, options) {
@@ -20,7 +22,7 @@ module.exports = function(name, save, schema, options) {
     throw new Error();
   }
 
-  return {
+  return _.extend(new events.EventEmitter(), {
     name: name,
     slug: slug,
     plural: plural,
@@ -99,5 +101,5 @@ module.exports = function(name, save, schema, options) {
     pre: function(method, processor) {
       return pre[method].add(processor);
     }
-  };
+  });
 };

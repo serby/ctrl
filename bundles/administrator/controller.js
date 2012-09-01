@@ -53,7 +53,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           type: 'multiselect',
           createOptions: function(callback) {
             serviceLocator.roleModel.find({}, {}, function(error, roles) {
-              callback(_.pluck(roles.toArray(), 'name'));
+              callback(_.pluck(roles, 'name'));
             });
           }
         },
