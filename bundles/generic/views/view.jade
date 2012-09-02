@@ -39,5 +39,8 @@ block content
               - else if (propertyMeta.type === 'link')
                 p
                   a(href=entity[key], target='_blank')=entity[key]
+              - else if (propertyMeta.type === 'password')
+                p Your password is stored securly, the following is the encrypted version:
+                | #{propertyMeta.format(entity[key])}
               - else
                 #{propertyMeta.format(entity[key])}

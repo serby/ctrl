@@ -71,6 +71,24 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
+  app.post('/admin/login', function(req, res, next) {
+    serviceLocator.adminAccessControl.authenticate(req, res, req.body, function(error, user) {
+      if (error === null) {
+        res.redirect('/admin');
+      } else if (error instanceof Error) {
+
+        viewRender(req, res, 'login', {
+          page: {
+            title: 'Login / Admin / ' + properties.name,
+            section: 'login'
+          },
+          error: error.message,
+          changed: false
+        });
+      }
+    });
+  });
+
   app.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
     function (req, res) {
       viewRender(req, res, 'requestPasswordChange', {
@@ -87,20 +105,20 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     function(req, res, next) {
       var email = req.body.emailAddress;
 
-      function renderFailure() {
+      function renderFailure(error) {
         viewRender(req, res, 'requestPasswordChange', {
           page: {
             title: 'Request Password Change / Admin / ' + properties.name,
             section: 'login'
           },
-          error: 'Unknown e-mail address'
+          error: error.message
         });
       }
 
       if (email) {
         serviceLocator.administratorModel.findOne({ emailAddress: email }, function(err, admin) {
           if (!admin) {
-            return renderFailure();
+            return renderFailure(new Error('Unknown e-mail address'));
           }
 
           serviceLocator.administratorModel.requestPasswordChange(admin, function(err) {
@@ -112,7 +130,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
           });
         });
       } else {
-        renderFailure();
+        renderFailure(new Error('No e-mail address entered'));
       }
     }
   );
@@ -176,24 +194,6 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
   app.get('/admin/logout', function(req, res) {
     serviceLocator.adminAccessControl.destroy(req, res);
     res.redirect('/admin/login');
-  });
-
-  app.post('/admin/login', function(req, res, next) {
-    serviceLocator.adminAccessControl.authenticate(req, res, req.body, function(error, user) {
-
-      if (error === null) {
-        res.redirect('/admin');
-      } else if (error instanceof Error) {
-
-        viewRender(req, res, 'login', {
-          page: {
-            title: 'Login / Admin / ' + properties.name,
-            section: 'login'
-          },
-          error: error.message
-        });
-      }
-    });
   });
 
 };
