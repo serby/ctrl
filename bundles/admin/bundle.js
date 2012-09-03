@@ -5,12 +5,10 @@ module.exports = {
   middleware: [
     function(serviceLocator) {
       return function(req, res, next) {
-        serviceLocator.adminAccessControl.isAllowed(req, res, 'Admin Bar', 'read', function(error, allowed) {
-          if (allowed) {
-            res.bodyStart = [__dirname + '/views/adminBar.jade'];
-          }
-          next();
-        });
+        if (serviceLocator.adminAccessControl.isAllowed(req, 'Admin Bar', 'read')) {
+          res.bodyStart = [__dirname + '/views/adminBar.jade'];
+        }
+        next();
       };
     }
   ],
@@ -19,7 +17,7 @@ module.exports = {
 
       // Adding this bundle registers the admin acl
       serviceLocator.register('adminAccessControlList',
-        require('../../lib/secure/accessControlList').createAccessControlList(serviceLocator.logger));
+        require('secure').createAccessControlList(serviceLocator.logger));
       done();
     },
     function(serviceLocator, done) {
@@ -30,8 +28,8 @@ module.exports = {
 
       // This controls the authentication and authorisation of the admin
       serviceLocator.register('adminAccessControl',
-        require('../../lib/secure/accessControl').createAccessControl(
-          serviceLocator.administratorModel, serviceLocator.adminAccessControlList,
+        require('secure').createAccessControl(
+          serviceLocator.administratorModel.authenticate, serviceLocator.adminAccessControlList,
           {}, 'admin', serviceLocator.logger,
           function(req, res, resource, action, next) {
             res.redirect('/admin/login');
@@ -57,7 +55,7 @@ module.exports = {
         serviceLocator.app.dynamicHelpers({
           adminIsAllowed: function(req, res) {
             return function (resource, action) {
-              return serviceLocator.adminAccessControl.isAllowed(req, res, resource, action);
+              return serviceLocator.adminAccessControl.isAllowed(req, resource, action);
             };
           }
         });
