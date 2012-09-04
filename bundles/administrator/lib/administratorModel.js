@@ -3,7 +3,7 @@ var async = require('async')
   , crypto = require('crypto')
   , validity = require('validity')
   , schemata = require('schemata')
-  , genericCrudModel = require('../../generic/lib/genericCrudModel')
+  , genericCrudModel = require('../../generic-admin/lib/genericCrudModel')
   ;
 
 module.exports = function(serviceLocator) {
