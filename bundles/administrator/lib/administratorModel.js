@@ -14,7 +14,10 @@ module.exports = function(serviceLocator) {
 
   function duplicateEmailValidator(key, errorProperty, object, callback) {
     save.findOne({ emailAddress: object.emailAddress }, function(error, found) {
-      callback(undefined, found && found._id.toString() === object._id ?
+      if (error) {
+        return callback(error);
+      }
+      callback(undefined, found && found._id.toString() !== object._id ?
         object.emailAddress + ' already in use' : undefined);
     });
   }
