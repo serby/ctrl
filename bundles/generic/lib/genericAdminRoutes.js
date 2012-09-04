@@ -18,7 +18,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
     adminRoute: '/admin/'
   };
 
-  options = _.extend(defaults, options);
+  options = _.extend({}, defaults, options);
 
   var views =  {
     form: __dirname + '/../views/form',
@@ -60,7 +60,7 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   */
   function listUnshownErrors(errors, formType) {
 
-    return Object.keys(errors.errors).filter(function(property) {
+    return Object.keys(errors).filter(function(property) {
       for (var i = 0; i < schema.groups.length; i++) {
         if ((schema.groups[i].properties[property] === undefined) || (!schema.groups[i].properties[property][formType])) {
           return true;
@@ -176,13 +176,14 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
 
       model.create(
         req.body,
-        { validationSet: options.createValidationSet },
-        function (error, newEntity) {
+        { set: options.createValidationSet
+        , tag: options.createTag },
+        function (error, object) {
           if (error && error.errors) {
             options.renderFn(req, res, views.form, {
               viewSchema: schema,
               model: model,
-              entity: newEntity,
+              entity: object,
               page: {
                 title: model.name,
                 section: model.slug,
@@ -190,12 +191,12 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
               },
               formType: 'createForm',
               errors: error.errors,
-              unshownErrors: listUnshownErrors(error, 'createForm')
+              unshownErrors: listUnshownErrors(error.errors, 'createForm')
             });
           } else if (error) {
             render500(next);
           } else {
-            res.redirect(options.adminRoute + model.slug + '/' + newEntity._id);
+            res.redirect(options.adminRoute + model.slug + '/' + object._id);
           }
         }
       );
@@ -206,20 +207,24 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   serviceLocator.app.get(
     options.adminRoute + model.slug + '/:id',
     compactMiddleware('view'),
-    accessCheck('read'), function (req, res) {
+    accessCheck('read'), function (req, res, next) {
       model.read(
         req.params.id,
-        function (errors, entity) {
-          options.renderFn(req, res, views.view, {
-            viewSchema: schema,
-            model: model,
-            entity: entity,
-            page: {
-              title: model.name,
-              section: model.slug,
-              action: 'read'
-            }
-          });
+        function (error, object) {
+          if (error) {
+            render500(next);
+          } else {
+            options.renderFn(req, res, views.view, {
+              viewSchema: schema,
+              model: model,
+              entity: object,
+              page: {
+                title: model.name,
+                section: model.slug,
+                action: 'read'
+              }
+            });
+          }
       });
   });
 
@@ -228,23 +233,25 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
     compactMiddleware('form'),
     schemaHelper(schema),
     accessCheck('update'),
-    function (req, res) {
-      model.read(req.params.id, function (errors, entity) {
-
-        options.renderFn(req, res, views.form, {
-          viewSchema: schema,
-          model: model,
-          entity: entity,
-          page: {
-            title: model.name,
-            section: model.slug,
-            action: 'update'
-          },
-          formType: 'updateForm',
-          errors: {},
-          unshownErrors: []
-        });
-
+    function (req, res, next) {
+      model.read(req.params.id, function (error, object) {
+        if (error) {
+          render500(next);
+        } else {
+          options.renderFn(req, res, views.form, {
+            viewSchema: schema,
+            model: model,
+            entity: object,
+            page: {
+              title: model.name,
+              section: model.slug,
+              action: 'update'
+            },
+            formType: 'updateForm',
+            errors: {},
+            unshownErrors: []
+          });
+        }
       });
     }
   );
@@ -258,16 +265,14 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
     function (req, res, next) {
       model.update(
         req.body,
-        {
-          tag: options.updateTag,
-          validationSet: options.updateValidationSet
-        },
-        function (error, entity) {
+        { set: options.updateValidationSet
+        , tag: options.updateTag },
+        function (error, object) {
           if (error && error.errors) {
             options.renderFn(req, res, views.form, {
               viewSchema: schema,
               model: model,
-              entity: entity,
+              entity: object,
               page: {
                 title: model.name,
                 section: model.slug,
@@ -275,12 +280,12 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
               },
               formType: 'updateForm',
               errors: error.errors,
-              unshownErrors: listUnshownErrors(error, 'updateForm')
+              unshownErrors: listUnshownErrors(error.errors, 'updateForm')
             });
           } else if (error) {
             render500(next);
           } else {
-            res.redirect(options.adminRoute + model.slug + '/' + entity._id);
+            res.redirect(options.adminRoute + model.slug + '/' + object._id);
           }
         }
       );

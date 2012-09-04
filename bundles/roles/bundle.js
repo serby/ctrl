@@ -73,7 +73,7 @@ module.exports = {
       });
 
       // Create controllers
-      require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
+      require('./controller').createRoutes(serviceLocator, __dirname + '/views');
 
     }
   ]

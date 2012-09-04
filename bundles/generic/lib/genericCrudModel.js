@@ -31,20 +31,20 @@ module.exports = function(name, save, schema, options) {
     create: function(object, validateOptions, callback) {
       callback = callback || emptyFn;
 
-      var cleanObject = schema.cast(schema.stripUnknownProperties(object));
+      var cleanObject = schema.cast(schema.stripUnknownProperties(schema.makeDefault(object), validateOptions.tag));
 
       pre.createValidate.run(cleanObject, function(error, pipedObject) {
         if (error) {
           return callback(error);
         }
-        schema.validate(pipedObject, validateOptions, function(error, validationErrors) {
+        schema.validate(pipedObject, validateOptions.set, validateOptions.tag, function(error, validationErrors) {
           if (error) {
             return callback(error);
           }
           if (Object.keys(validationErrors).length > 0) {
             var validationError = new Error('Validation Error');
             validationError.errors = validationErrors;
-            return callback(validationError);
+            return callback(validationError, pipedObject);
           }
           pre.create.run(pipedObject, function(error, pipedObject) {
             if (error) {
@@ -64,24 +64,25 @@ module.exports = function(name, save, schema, options) {
     update: function(object, validateOptions, callback) {
       callback = callback || emptyFn;
 
-      var cleanObject = schema.cast(schema.stripUnknownProperties(object));
+      var cleanObject = schema.cast(schema.stripUnknownProperties(schema.makeDefault(object), validateOptions.tag));
 
       pre.updateValidate.run(cleanObject, function(error, pipedObject) {
         if (error) {
           return callback(error);
         }
-        schema.validate(pipedObject, validateOptions, function(error, validationErrors) {
+        schema.validate(pipedObject, validateOptions.set, validateOptions.tag,
+          function(error, validationErrors) {
           if (error) {
             return callback(error);
           }
           if (Object.keys(validationErrors).length > 0) {
             var validationError = new Error('Validation Error');
             validationError.errors = validationErrors;
-            return callback(validationError);
+            return callback(validationError, pipedObject);
           }
           pre.update.run(pipedObject, function(error, pipedObject) {
             if (error) {
-              return callback(error);
+              return callback(error, pipedObject);
             }
             save.update(pipedObject, function(error, savedObject) {
               if (error) {
