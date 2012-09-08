@@ -1,5 +1,5 @@
 var
-  _ = require('underscore'),
+  _ = require('lodash'),
   formHelper = require('../../lib/utils/formHelper'),
   generic = require('../generic'),
   adminController = require('./adminController'),

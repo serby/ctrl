@@ -1,5 +1,5 @@
 var
-  _ = require('underscore'),
+  _ = require('lodash'),
   basePort = 3020;
 
 var properties = {
