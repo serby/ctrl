@@ -1,4 +1,4 @@
-var _ = require('underscore')
+var _ = require('lodash')
   , widget = require('../../../../lib/widget-manager/widget-manager').widget
   , jade = require('../../../../lib/widget-manager/engines/jade')
   , fn = {

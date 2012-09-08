@@ -1,5 +1,5 @@
 var
-  _ = require('underscore'),
+  _ = require('lodash'),
   formHelper = require('../../lib/utils/formHelper'),
   viewRenderDelegate = require('../../lib/viewRenderDelegate');
 
