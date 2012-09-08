@@ -1,5 +1,5 @@
 var
-  _ = require('underscore'),
+  _ = require('lodash'),
   viewRenderDelegate = require('../../lib/viewRenderDelegate');
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
