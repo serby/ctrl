@@ -170,13 +170,6 @@ module.exports = function(serviceLocator) {
     model.create(administratorDetails, callback);
   }
 
-  // crudDelegate.pipes.beforeCreate.add()
-  //   .add(passwordHasher);
-
-  // crudDelegate.pipes.beforeUpdate
-  //   .add(passwordHasher)
-  //   .add(dontSetBlankPassword);
-
   model.pre('createValidate', function(entity, callback) {
     callback(null, schema.makeDefault(entity));
   });
@@ -189,6 +182,8 @@ module.exports = function(serviceLocator) {
   model.requestPasswordChange = requestPasswordChange;
   model.findByHash = findByHash;
   model.createWithFullAccess = createWithFullAccess;
+
+  model.findOne = save.findOne;
 
   return model;
 };
