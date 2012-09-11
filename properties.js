@@ -53,7 +53,7 @@ var environmentProperties = {
   }
 };
 
-module.exports = function(environment) {
+module.exports = function getProperties (environment) {
 
   properties.env = environment = environment || process.env.NODE_ENV || 'development';
 
