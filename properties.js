@@ -1,9 +1,9 @@
-var
-  _ = require('lodash'),
-  basePort = 3020;
+var _ = require('lodash')
+  , basePort = 3020
+  ;
 
 var properties = {
-    version: '0.0.1'
+    version: '0.1.0'
   , name: 'ctrl'
   , tagline: 'ctrl CMS by Paul Serby'
   , description: 'This is the initial config'
@@ -15,13 +15,12 @@ var properties = {
   , logPath: __dirname + '/logs'
   , cachePath: __dirname + '/cache'
   , dataPath: __dirname + '/data'
-  , binaryCachePath: '/image/'
+  , binaryCachePath: '/binary/'
   , database:
     { host: '127.0.0.1'
     , port: 27017
     , name: 'ctrl-Development'
     }
-  , defaultSearchResultSize: 30
   , bcryptWorkFactor: 1
   , debug: true
   , changeEmailSender: 'nobody@example.com'
@@ -31,12 +30,6 @@ var environmentProperties = {
     development: {}
   , testing: {
     siteUrl: 'http://localhost:' + (basePort + 2)
-    , port: basePort + 2,
-    hosts: [
-      { host: 'localhost'
-      , sshPort: 22
-      }
-    ]
     , database: {
       replSet:
       { name: 'ctrl'
@@ -52,11 +45,6 @@ var environmentProperties = {
     siteUrl: 'http://localhost:' + (basePort + 3)
     , port: basePort + 3
     , email: 'paul.serby@clock.co.uk'
-    , hosts: [
-      { host: ''
-      , sshPort: 17510
-      }
-    ]
     , database:
     { host: '127.0.0.1'
     , port: 27017

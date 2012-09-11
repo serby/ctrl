@@ -7,8 +7,7 @@ module.exports = function createRoutes (serivceLocator, bundleViewPath) {
         layoutType: 'feature',
         title: 'Home ',
         section: 'home'
-      },
-      javascriptSrc: []
+      }
     });
   });
 
