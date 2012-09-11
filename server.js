@@ -1,4 +1,4 @@
-module.exports.createServer = function(properties, serviceLocator) {
+module.exports = function createServer(properties, serviceLocator) {
 
   var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
     , sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
