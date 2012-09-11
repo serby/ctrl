@@ -7,7 +7,7 @@ var
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
 
-  var viewSchema = serviceLocator.generic.createViewSchema({
+  var viewSchema = require('ctrl-generic/view-config')({
     groups: [{
       name: 'Article Details',
       description: 'These are the details for an Article',
@@ -107,13 +107,13 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  serviceLocator.generic.createRoutes(
+  require('ctrl-generic/routes')(
     serviceLocator,
     viewSchema,
     serviceLocator.articleModel,
     {
       requiredAccess: 'Article',
-      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
+      renderFn: require('ctrl-generic/view-render')('../../admin/views/layout')
     }
   );
 };

@@ -1,7 +1,7 @@
 var async = require('async')
   , validity = require('validity')
   , schemata = require('schemata')
-  , genericCrudModel = require('../../generic-admin/lib/genericCrudModel')
+  , crudModel = require('crud-model')
   ;
 
 module.exports = function(serviceLocator) {
@@ -25,7 +25,7 @@ module.exports = function(serviceLocator) {
           defaultValue: function() { return new Date(); }
         }
       })
-    , model = genericCrudModel('Role', save, schema);
+    , model = crudModel('Role', save, schema);
 
   function createRootRole(callback) {
     save.create({ name: 'root', grants: {'*': ['*']} }, callback);

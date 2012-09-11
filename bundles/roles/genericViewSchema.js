@@ -1,5 +1,6 @@
 module.exports = function(serviceLocator) {
-  return serviceLocator.generic.createViewSchema({
+
+  return serviceLocator.admin.viewConfig({
     groups: [{
       name: 'Role Details',
       description: 'These are the details for a role',

@@ -1,3 +1,6 @@
+var _ = require('lodash')
+  ;
+
 module.exports = {
   name: 'Admin',
   version: '0.0.1',
@@ -13,11 +16,23 @@ module.exports = {
     }
   ],
   initialize: [
+
     function(serviceLocator, done) {
+
+      // Register the admin view helpers for global use
+      serviceLocator.viewHelpers.querystring = require('./lib/pagination-helpers');
+
+      // Register the generic route creator for other admin bundles to use.
+      serviceLocator.register('admin',
+        { routes: require('./lib/routes')
+        , viewConfig: require('./lib/view-config')
+        , viewRender: require('./lib/view-render')
+        });
 
       // Adding this bundle registers the admin acl
       serviceLocator.register('adminAccessControlList',
         require('secure').createAccessControlList(serviceLocator.logger));
+
       done();
     },
     function(serviceLocator, done) {

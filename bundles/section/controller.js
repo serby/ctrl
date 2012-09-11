@@ -4,7 +4,7 @@ var
 
 module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
 
-  var viewSchema = serviceLocator.generic.createViewSchema({
+  var viewSchema = require('ctrl-generic/view-config')({
     groups: [{
       name: 'Section Details',
       description: 'These are the details for a Section',
@@ -43,13 +43,13 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   });
 
-  serviceLocator.generic.createRoutes(
+  require('ctrl-generic/routes')(
     serviceLocator,
     viewSchema,
     serviceLocator.sectionModel,
     {
       requiredAccess: 'Section',
-      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
+      renderFn: require('ctrl-generic/view-render')('../../admin/views/layout')
     }
   );
 };

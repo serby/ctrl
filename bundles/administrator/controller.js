@@ -4,14 +4,14 @@ var formHelper = require('../../lib/utils/formHelper')
 
 module.exports.createRoutes = function(serviceLocator, bundleViewPath) {
 
-  serviceLocator.generic.createRoutes(
+  serviceLocator.admin.routes(
     serviceLocator,
     require('./genericViewSchema')(serviceLocator),
     serviceLocator.administratorModel,
     {
       updateTag: 'update',
       requiredAccess: 'Administrator',
-      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
+      renderFn: serviceLocator.admin.viewRender('../../admin/views/layout')
     }
   );
 };

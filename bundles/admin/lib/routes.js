@@ -1,11 +1,11 @@
 var _ = require('lodash')
   , async = require('async')
   , url = require('url')
-  , SearchQueryBuilder = require('./buildSearchQuery')
-  , buildSortOptions = require('./buildSortOptions')
-  , Pagination = require('../../../lib/utils/pagination');
+  , searchQuery = require('./search-query')
+  , sortOptions = require('./sort-options')
+  , pagination = require('./pagination');
 
-module.exports.createRoutes = function (serviceLocator, schema, model, options) {
+module.exports = function routes(serviceLocator, schema, model, options) {
 
   var defaults = {
     createValidationSet: '',
@@ -21,9 +21,9 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
   options = _.extend({}, defaults, options);
 
   var views =  {
-    form: __dirname + '/../views/form',
-    list: __dirname + '/../views/list',
-    view: __dirname + '/../views/view'
+    form: __dirname + '/../views/generic/form',
+    list: __dirname + '/../views/generic/list',
+    view: __dirname + '/../views/generic/view'
   };
 
   _.extend(views, options.views);
@@ -70,19 +70,19 @@ module.exports.createRoutes = function (serviceLocator, schema, model, options) 
     });
   }
 
-  var searchProperties = SearchQueryBuilder.createSearchProperties(schema.groups)
-    , buildSearchQuery = SearchQueryBuilder.createSearchQueryBuilder(
+  var searchProperties = searchQuery(schema.groups)
+    , buildSearchQuery = searchQuery(
         searchProperties,
         serviceLocator.logger,
         model.name
       )
-    , paginate = Pagination.createPagination(model.count, 10);
+    , paginate = pagination(model.count, 10);
 
   serviceLocator.app.get(
     options.adminRoute + model.slug,
     compactMiddleware('view'),
     buildSearchQuery,
-    buildSortOptions,
+    sortOptions,
     paginate,
     accessCheck('read'),
     function (req, res) {

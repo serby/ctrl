@@ -1,5 +1,4 @@
 var markdown = require('markdown').markdown
-  , paginationHelpers = require('../lib/utils/pagination').helpers
   ;
 
 require('date-utils');
@@ -77,7 +76,6 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
 
           return formattedNumber;
         }
-        , querystring: paginationHelpers
       }).helpers(serviceLocator.viewHelpers);
   });
 };

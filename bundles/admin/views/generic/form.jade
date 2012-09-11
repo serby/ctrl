@@ -1,9 +1,9 @@
-extend ../../admin/views/layout
+extend ../layout
 
 block content
 
-  include ../../../views/mixins/formFields
-  include ../../../views/mixins/file
+  include ../mixins/formFields
+  include ../mixins/file
 
   h1
     -if (page.action == 'create')

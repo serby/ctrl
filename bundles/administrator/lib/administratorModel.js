@@ -3,7 +3,7 @@ var async = require('async')
   , crypto = require('crypto')
   , validity = require('validity')
   , schemata = require('schemata')
-  , genericCrudModel = require('../../generic-admin/lib/genericCrudModel')
+  , crudModel = require('crud-model')
   ;
 
 module.exports = function(serviceLocator) {
@@ -59,7 +59,7 @@ module.exports = function(serviceLocator) {
     }
   });
 
-  var model = genericCrudModel('Administrator', save, schema);
+  var model = crudModel('Administrator', save, schema);
 
   if (typeof properties.bcryptWorkFactor === 'number' && properties.bcryptWorkFactor >= 1) {
     properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor);

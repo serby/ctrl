@@ -1,9 +1,9 @@
-extend ../../admin/views/layout
+extend ../layout
 
 block content
 
-  include ../../../views/mixins/file
-  include includes/grouped-multiselect-mixin
+  include ../mixins/file
+  include ../mixins/grouped-multiselect-mixin
 
   h1 #{model.plural}
 

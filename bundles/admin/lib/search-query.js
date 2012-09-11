@@ -1,6 +1,7 @@
-var url = require('url');
+var url = require('url')
+;
 
-module.exports.createSearchQueryBuilder = function(searchProperties, logger, serviceName) {
+module.exports = function(searchProperties, logger, serviceName) {
 
   return function buildSearchQuery(req, res, next) {
     var urlObj = url.parse(req.url, true).query

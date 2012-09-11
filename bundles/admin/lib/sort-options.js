@@ -1,4 +1,5 @@
 var url = require('url');
+
 module.exports = function buildOptions(req, res, next) {
   var urlObj = url.parse(req.url, true).query
     , options = {}

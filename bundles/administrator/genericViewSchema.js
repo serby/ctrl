@@ -2,7 +2,7 @@ var _ = require('lodash')
   ;
 
 module.exports = function(serviceLocator) {
-  return serviceLocator.generic.createViewSchema({
+  return serviceLocator.admin.viewConfig({
     groups: [{
       name: 'Administrator Details',
       description: 'These are the details for an administrator',

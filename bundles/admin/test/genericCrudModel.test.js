@@ -1,4 +1,4 @@
-var genericCrudModel = require('../lib/genericCrudModel')
+var crudModel = require('../lib/crudModel')
   , should = require('should')
   , validity = require('validity')
   , schemata = require('schemata')
@@ -25,7 +25,7 @@ function createModel(options) {
     }
   });
 
-  return genericCrudModel('Contact', save, schema, options);
+  return crudModel('Contact', save, schema, options);
 }
 
 function createContact(model, callback) {
@@ -33,7 +33,7 @@ function createContact(model, callback) {
 }
 
 
-describe('genericCrudModel', function() {
+describe('crudModel', function() {
 
   describe('#name', function() {
 
