@@ -38,7 +38,7 @@ module.exports = {
     function(serviceLocator, done) {
       // Register the bundles models
       serviceLocator.register('roleModel',
-        require('./lib/roleModel')(serviceLocator));
+        require('./lib/model')(serviceLocator));
 
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Role');
@@ -73,7 +73,7 @@ module.exports = {
       });
 
       // Create controllers
-      require('./controller').createRoutes(serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
 
     }
   ]

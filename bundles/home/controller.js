@@ -1,10 +1,7 @@
-var
-  viewRenderDelegate = require('../../lib/viewRenderDelegate');
+module.exports = function createRoutes (serivceLocator, bundleViewPath) {
+  var viewRender = serivceLocator.viewRender(bundleViewPath);
 
-module.exports.createRoutes = function(app, properties, models, bundleViewPath) {
-  var viewRender = viewRenderDelegate.create(bundleViewPath);
-
-  app.get('/', function(req, res) {
+  serivceLocator.app.get('/', function(req, res) {
     viewRender(req, res, 'index', {
       page: {
         layoutType: 'feature',

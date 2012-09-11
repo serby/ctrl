@@ -30,7 +30,7 @@ module.exports = {
     function(serviceLocator, done) {
 
       // Create controllers
-      require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties,
+      require('./controller')(serviceLocator,
         serviceLocator, __dirname + '/views');
 
       serviceLocator.widgetManager

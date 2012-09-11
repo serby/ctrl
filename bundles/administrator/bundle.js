@@ -1,6 +1,7 @@
 var save = require('save')
   , saveMongodb = require('save-mongodb')
   ;
+
 module.exports = {
   name: 'Administrator',
   version: '0.0.1',
@@ -41,7 +42,7 @@ module.exports = {
 
       // Register the bundles models
       serviceLocator.register('administratorModel',
-        require('./lib/administratorModel')(serviceLocator));
+        require('./lib/model')(serviceLocator));
 
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Administrator');
@@ -49,7 +50,7 @@ module.exports = {
     },
     function(serviceLocator, done) {
       // Create controllers
-      require('./controller').createRoutes(serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
 
       done();
     }

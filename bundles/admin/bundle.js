@@ -62,7 +62,7 @@ module.exports = {
         .addJs('/js/admin/control.js');
 
       // Create controller
-      require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
       done();
     },
     function(serviceLocator, done) {

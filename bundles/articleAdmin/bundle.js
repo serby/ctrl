@@ -32,7 +32,7 @@ module.exports = {
     },
     function(serviceLocator, done) {
       // Create controllers
-      require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
 
       serviceLocator.compact.addNamespace('article-admin', __dirname + '/public/')
         .addJs('/js/article.js');

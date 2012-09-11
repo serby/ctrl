@@ -1,12 +1,12 @@
 var formHelper = require('../../lib/utils/formHelper')
-  , viewRenderDelegate = require('../../lib/viewRenderDelegate')
+  , viewRender = require('../../lib/viewRender')
   ;
 
-module.exports.createRoutes = function(serviceLocator, bundleViewPath) {
+module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.admin.routes(
     serviceLocator,
-    require('./genericViewSchema')(serviceLocator),
+    require('./admin-view-schema')(serviceLocator),
     serviceLocator.administratorModel,
     {
       updateTag: 'update',

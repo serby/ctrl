@@ -1,8 +1,4 @@
-var
-  _ = require('lodash'),
-  viewRenderDelegate = require('../../lib/viewRenderDelegate');
-
-module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
+module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   var viewSchema = require('ctrl-generic/view-config')({
     groups: [{

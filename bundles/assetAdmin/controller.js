@@ -1,11 +1,10 @@
-var viewRenderDelegate = require('../../lib/viewRenderDelegate')
-  , createPagination = require('../../lib/utils/pagination').createPagination;
+var createPagination = require('../../lib/utils/pagination').createPagination;
 
-function createRoutes(app, properties, serviceLocator, viewPath) {
+function createRoutes(serviceLocator, viewPath) {
 
-  var viewRender = viewRenderDelegate.create(viewPath)
+  var viewRender = serviceLocator.viewRender(viewPath)
     , compact = serviceLocator.compact
-    , pagination = createPagination(
+    , pagination = serviceLocator.pagination(
         serviceLocator.assetModel.count, 3
       );
 
@@ -39,7 +38,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
   /*
    * API routes
    */
-  app.get(
+  serviceLocator.app.get(
     '/admin/asset/api',
     assetAccess('read'),
     function (req, res) {
@@ -89,7 +88,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.post(
+  serviceLocator.app.post(
     '/admin/asset/api',
     assetAccess('create'),
     serviceLocator.uploadDelegate.middleware,
@@ -147,7 +146,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.get(
+  serviceLocator.app.get(
     '/admin/asset/api/:id',
     serviceLocator.adminAccessControl.requiredAccess('Asset', 'read'),
     function(req, res) {
@@ -163,7 +162,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.delete(
+  serviceLocator.app.delete(
     '/admin/asset/api/:id',
     serviceLocator.adminAccessControl.requiredAccess('Asset', 'delete'),
     function (req, res) {
@@ -178,7 +177,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.put(
+  serviceLocator.app.put(
     '/admin/asset/api/:id',
     serviceLocator.adminAccessControl.requiredAccess('Asset', 'update'),
     function (req, res) {
@@ -196,7 +195,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
   /*
    * Admin routes
    */
-  app.get(
+  serviceLocator.app.get(
     '/admin/asset*',
     assetAccess('read'),
     compact.js(['global'], ['admin-common'], ['admin-asset']),

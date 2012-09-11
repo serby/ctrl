@@ -1,11 +1,11 @@
 var async = require('async')
   , httpErrorHandler = require('../../lib/httpErrorHandler')
-  , viewRenderDelegate = require('../../lib/viewRenderDelegate')
+  , viewRender = require('../../lib/viewRender')
   , markdown = require('markdown');
 
 function createRoutes(app, properties, serviceLocator, viewPath) {
 
-  var viewRender = viewRenderDelegate.create(viewPath)
+  var viewRender = serviceLocator.viewRender(bundleViewPath)
     , sectionModel = serviceLocator.sectionModel
     , articleModel = serviceLocator.articleModel;
 
