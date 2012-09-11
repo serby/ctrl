@@ -15,7 +15,7 @@ var cluster = require('cluster')
 serviceLocator
   .register('properties', properties)
   .register('logger', require('./lib/logger')(properties))
-  .register('mailer', nodemailer.createTransport('SMTP', { host: 'localhost' }))
+  .register('mailer', nodemailer.createTransport('sendmail'))
   .register('saveFactory', {})
   ;
 
