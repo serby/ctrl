@@ -1,21 +1,21 @@
-var httpErrorHandler = require('../../lib/httpErrorHandler')
-  , thumbnail = require('./lib/thumbnail');
+var thumbnail = require('./lib/thumbnail')
+  ;
 
 // MaxAge sum from connect static middleware
 var maxAge = 60 * 60 * 24 * 365 * 1000;
 
-function createRoutes(app, properties, serviceLocator, viewPath) {
+function createRoutes(serviceLocator, viewPath) {
 
   var assetModel = serviceLocator.assetModel;
 
-  thumbnail = thumbnail(properties);
+  thumbnail = thumbnail(serviceLocator.properties);
 
   function findAsset(req, res, next) {
     assetModel.read(req.params.id, function (err, result) {
       if (err) {
         next(err);
       } else if (!result) {
-        next(new httpErrorHandler.NotFound());
+        next(new serviceLocator.httpErrorHandler.NotFound());
       } else {
         serviceLocator.uploadDelegate.get(result, function(err, data) {
           if (err) {
@@ -29,7 +29,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     });
   }
 
-  app.get(
+  serviceLocator.app.get(
     '/asset/:id/:name',
     findAsset,
     function (req, res, next) {
@@ -45,7 +45,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.get(
+  serviceLocator.app.get(
     '/asset/thumb/:id/:name',
     findAsset,
     function (req, res, next) {

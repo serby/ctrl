@@ -1,11 +1,10 @@
 var async = require('async')
-  , httpErrorHandler = require('../../lib/httpErrorHandler')
-  , viewRender = require('../../lib/viewRender')
-  , markdown = require('markdown');
+  , markdown = require('markdown')
+  ;
 
-function createRoutes(app, properties, serviceLocator, viewPath) {
+function createRoutes (serviceLocator, viewPath) {
 
-  var viewRender = serviceLocator.viewRender(bundleViewPath)
+  var viewRender = serviceLocator.viewRender(viewPath)
     , sectionModel = serviceLocator.sectionModel
     , articleModel = serviceLocator.articleModel;
 
@@ -51,7 +50,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
       }
     }, function (error, results) {
       if ((results.section.length === 0) || (results.article.length === 0)) {
-        return next(new httpErrorHandler.NotFound());
+        return next(new serviceLocator.httpErrorHandler.NotFound());
       }
       res.article = results.article;
       res.section = results.section;
@@ -60,7 +59,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     });
   }
 
-  app.get(
+  serviceLocator.app.get(
     '/:section',
     getPageContent,
     serviceLocator.widgetManager.load(
@@ -70,12 +69,12 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
 
       var section = res.section;
       if (!res.article || res.article.length === 0) {
-        return next(new httpErrorHandler.NotFound());
+        return next(new serviceLocator.httpErrorHandler.NotFound());
       }
 
       viewRender(req, res, 'list', {
         page: {
-          title: section.name + ' / ' + properties.pageTitle,
+          title: section.name + ' / ' + serviceLocator.properties.pageTitle,
           section: section.slug
         },
         layoutType: 'feature',
@@ -87,7 +86,7 @@ function createRoutes(app, properties, serviceLocator, viewPath) {
     }
   );
 
-  app.get(
+  serviceLocator.app.get(
     '/:section/:article',
     getPageContent,
     serviceLocator.widgetManager.load([

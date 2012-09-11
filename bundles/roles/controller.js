@@ -1,6 +1,3 @@
-var viewRender = require('../../lib/viewRender')
-  ;
-
 module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.admin.routes(
@@ -9,7 +6,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.roleModel,
     {
       requiredAccess: 'Role',
-      renderFn: serviceLocator.admin.viewRender('../../admin/views/layout')
+      renderFn: serviceLocator.admin.viewRender()
     }
   );
 };

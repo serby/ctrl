@@ -1,7 +1,3 @@
-var formHelper = require('../../lib/utils/formHelper')
-  , viewRender = require('../../lib/viewRender')
-  ;
-
 module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.admin.routes(
@@ -11,7 +7,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     {
       updateTag: 'update',
       requiredAccess: 'Administrator',
-      renderFn: serviceLocator.admin.viewRender('../../admin/views/layout')
+      renderFn: serviceLocator.admin.viewRender()
     }
   );
 };

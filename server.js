@@ -29,7 +29,7 @@ module.exports = function createServer(properties, serviceLocator) {
     bundles
   );
 
-  app = require('./lib/expressApplication')(serviceLocator, sessionDatabaseAdaptor);
+  app = require('./lib/express-application')(serviceLocator, sessionDatabaseAdaptor);
 
   serviceLocator.register('app', app);
 
