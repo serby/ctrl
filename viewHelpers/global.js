@@ -24,14 +24,14 @@ module.exports.createHelpers = function(serviceLocator, properties, app) {
           };
         }
       })
-      .helpers({
-        dateTime: function(date) {
+      .helpers(
+        { dateTime: function(date) {
           return (new Date(date)).toFormat('D MMM YYYY @ HH24:MI ') + 'GMT';
         }
         , date: function(date) {
           return (new Date(date)).toFormat('DDDD, D MMMM YYYY');
-        },
-        longDateTime: function(date) {
+        }
+        , longDateTime: function(date) {
           return (new Date(date)).toFormat('DDDD, D MMMM YYYY @ HH24:MI ') + 'GMT';
         }
         , time: function(date) {
