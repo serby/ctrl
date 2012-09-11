@@ -3,7 +3,7 @@ var markdown = require('markdown').markdown
 
 require('date-utils');
 
-module.exports.createHelpers = function(serviceLocator, properties, app) {
+module.exports = function createHelpers (serviceLocator, properties, app) {
 
   app.configure(function() {
     app

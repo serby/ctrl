@@ -5,7 +5,7 @@
 var cluster = require('cluster')
   , cpus = require('os').cpus()
   , serviceLocator = require('service-locator').createServiceLocator()
-  , properties = require('./properties').getProperties()
+  , properties = require('./properties')()
   , nodemailer = require('nodemailer')
   ;
 
@@ -14,7 +14,7 @@ var cluster = require('cluster')
 // bundles need all of these.
 serviceLocator
   .register('properties', properties)
-  .register('logger', require('./lib/logger').createLogger(properties))
+  .register('logger', require('./lib/logger')(properties))
   .register('mailer', nodemailer.createTransport('SMTP', { host: 'localhost' }))
   .register('saveFactory', {})
   ;
@@ -25,7 +25,7 @@ if ((properties.env !== 'development') && (cluster.isMaster)) {
   serviceLocator.logger.info('Forking ' + cpus.length +
     ' cluster process, one per CPU');
 
-  // Create one instance of the (i.e. one process) app per CPU
+  // Create one instance of the app (i.e. one process) per CPU
   cpus.map(function(cpu) {
     cluster.fork();
   });

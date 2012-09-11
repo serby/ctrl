@@ -1,12 +1,10 @@
 module.exports = function createServer(properties, serviceLocator) {
 
-  var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
-    , sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
-    , Application = require('./lib/expressApplication')
+  var databaseAdaptor = require('./lib/database')(serviceLocator)
+    , sessionDatabaseAdaptor = require('./lib/database')(serviceLocator)
     , bundled
     , app
     , bundles = require('./bundles.json')
-    , globalViewHelpers = require('./viewHelpers/global')
     , versionator = require('versionator').createBasic('v' + properties.version)
     , compact = require('compact').createCompact({
       srcPath: __dirname + '/public/',
@@ -31,7 +29,7 @@ module.exports = function createServer(properties, serviceLocator) {
     bundles
   );
 
-  app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
+  app = require('./lib/expressApplication')(serviceLocator, sessionDatabaseAdaptor);
 
   serviceLocator.register('app', app);
 
@@ -60,7 +58,7 @@ module.exports = function createServer(properties, serviceLocator) {
       });
 
       // Add helpers
-      globalViewHelpers.createHelpers(serviceLocator, properties, app);
+      require('./viewHelpers/global')(serviceLocator, properties, app);
 
       app.start();
 
