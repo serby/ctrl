@@ -90,7 +90,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.app.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
     function (req, res) {
-      viewRender(req, res, 'requestPasswordChange', {
+      viewRender(req, res, 'request-password-change', {
         page: {
           title: 'Request Password Change / Admin / ' + serviceLocator.properties.name,
           section: 'login'
@@ -105,7 +105,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       var email = req.body.emailAddress;
 
       function renderFailure(error) {
-        viewRender(req, res, 'requestPasswordChange', {
+        viewRender(req, res, 'request-password-change', {
           page: {
             title: 'Request Password Change / Admin / ' + serviceLocator.properties.name,
             section: 'login'
@@ -141,7 +141,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
           return next(err);
         }
 
-        viewRender(req, res, 'changePassword', {
+        viewRender(req, res, 'change-password', {
           page: {
             title: 'Change Your Password / Admin / ' + serviceLocator.properties.name,
             section: 'login'
@@ -166,7 +166,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
         var password = req.body.password;
         if (!password || password === '') {
-          viewRender(req, res, 'changePassword', {
+          viewRender(req, res, 'change-password', {
             page: {
               title: 'Change Your Password / Admin / ' + serviceLocator.properties.name,
               section: 'login'

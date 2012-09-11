@@ -9,7 +9,7 @@ module.exports = {
     function(serviceLocator) {
       return function(req, res, next) {
         if (serviceLocator.adminAccessControl.isAllowed(req, 'Admin Bar', 'read')) {
-          res.bodyStart = [__dirname + '/views/adminBar.jade'];
+          res.bodyStart = [__dirname + '/views/admin-bar.jade'];
         }
         next();
       };
