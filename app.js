@@ -46,5 +46,5 @@ if ((properties.env !== 'development') && (cluster.isMaster)) {
 
 } else {
   // Now we create the web server
-  require('./server')(properties, serviceLocator);
+  require('./server')(serviceLocator);
 }

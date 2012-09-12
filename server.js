@@ -1,6 +1,7 @@
-module.exports = function createServer(properties, serviceLocator) {
+module.exports = function createServer(serviceLocator) {
 
-  var databaseAdaptor = require('./lib/database')(serviceLocator)
+  var properties = serviceLocator.properties
+    , databaseAdaptor = require('./lib/database')(serviceLocator)
     , sessionDatabaseAdaptor = require('./lib/database')(serviceLocator)
     , bundled
     , app
@@ -11,7 +12,8 @@ module.exports = function createServer(properties, serviceLocator) {
       destPath: __dirname + '/public/js/compact/',
       webPath: versionator.versionPath('/js/compact/'),
       debug: properties.debug
-    });
+    })
+    ;
 
   // Register the global services needed by your entire application
   serviceLocator
