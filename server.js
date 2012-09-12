@@ -61,7 +61,7 @@ module.exports = function createServer(serviceLocator) {
       });
 
       // Add helpers
-      require('./viewHelpers/global')(serviceLocator, properties, app);
+      require('./lib/view-helpers.js')(serviceLocator, properties, app);
 
       app.start();
 
