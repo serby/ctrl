@@ -78,7 +78,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
       )
     , paginate = pagination(model.count, 10);
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     options.adminRoute + model.slug,
     compactMiddleware('view'),
     buildSearchQuery,
@@ -143,7 +143,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     return next('Error saving/updating to database');
   }
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     options.adminRoute + model.slug + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
@@ -166,7 +166,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     }
   );
 
-  serviceLocator.app.post(
+  serviceLocator.router.post(
     options.adminRoute + model.slug + '/new',
     compactMiddleware('form'),
     accessCheck('create'),
@@ -204,7 +204,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     }
   );
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id',
     compactMiddleware('view'),
     accessCheck('read'), function (req, res, next) {
@@ -228,7 +228,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
       });
   });
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id/edit',
     compactMiddleware('form'),
     schemaHelper(schema),
@@ -256,7 +256,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     }
   );
 
-  serviceLocator.app.post(
+  serviceLocator.router.post(
     options.adminRoute + model.slug + '/:id/edit',
     compactMiddleware('form'),
     serviceLocator.uploadDelegate.middleware,
@@ -292,7 +292,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     }
   );
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id/delete',
     accessCheck('delete'),
     function(req, res, next) {

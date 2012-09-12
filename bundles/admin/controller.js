@@ -23,7 +23,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     });
   }
 
-  serviceLocator.app.post('/admin/setup', function(req, res, next) {
+  serviceLocator.router.post('/admin/setup', function(req, res, next) {
     serviceLocator.administratorModel.count({}, function(error, count) {
       if (count === 0) {
         serviceLocator.administratorModel.createWithFullAccess(req.body, function(error, item) {
@@ -38,7 +38,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     });
   });
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/admin',
     ensureSetup,
     compact.js(['global'], ['admin-common']),
@@ -54,7 +54,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/admin/login',
     compact.js(['global'], ['admin-common']),
     ensureSetup,
@@ -70,7 +70,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.app.post('/admin/login', function(req, res, next) {
+  serviceLocator.router.post('/admin/login', function(req, res, next) {
     serviceLocator.adminAccessControl.authenticate(req, res, req.body, function(error, user) {
       if (error === null) {
         res.redirect('/admin');
@@ -88,7 +88,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     });
   });
 
-  serviceLocator.app.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
+  serviceLocator.router.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
     function (req, res) {
       viewRender(req, res, 'request-password-change', {
         page: {
@@ -100,7 +100,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.app.post('/admin/request-password-change', ensureSetup,
+  serviceLocator.router.post('/admin/request-password-change', ensureSetup,
     function(req, res, next) {
       var email = req.body.emailAddress;
 
@@ -134,7 +134,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.app.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+  serviceLocator.router.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
     function(req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
         if (err) {
@@ -153,7 +153,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.app.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+  serviceLocator.router.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
     function(req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
         if (err) {
@@ -190,7 +190,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.app.get('/admin/logout', function(req, res) {
+  serviceLocator.router.get('/admin/logout', function(req, res) {
     serviceLocator.adminAccessControl.destroy(req, res);
     res.redirect('/admin/login');
   });

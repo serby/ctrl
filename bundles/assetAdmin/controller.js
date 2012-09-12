@@ -38,7 +38,7 @@ function createRoutes(serviceLocator, viewPath) {
   /*
    * API routes
    */
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/admin/asset/api',
     assetAccess('read'),
     function (req, res) {
@@ -88,7 +88,7 @@ function createRoutes(serviceLocator, viewPath) {
     }
   );
 
-  serviceLocator.app.post(
+  serviceLocator.router.post(
     '/admin/asset/api',
     assetAccess('create'),
     serviceLocator.uploadDelegate.middleware,
@@ -146,7 +146,7 @@ function createRoutes(serviceLocator, viewPath) {
     }
   );
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/admin/asset/api/:id',
     serviceLocator.adminAccessControl.requiredAccess('Asset', 'read'),
     function(req, res) {
@@ -162,7 +162,7 @@ function createRoutes(serviceLocator, viewPath) {
     }
   );
 
-  serviceLocator.app.delete(
+  serviceLocator.router.delete(
     '/admin/asset/api/:id',
     serviceLocator.adminAccessControl.requiredAccess('Asset', 'delete'),
     function (req, res) {
@@ -177,7 +177,7 @@ function createRoutes(serviceLocator, viewPath) {
     }
   );
 
-  serviceLocator.app.put(
+  serviceLocator.router.put(
     '/admin/asset/api/:id',
     serviceLocator.adminAccessControl.requiredAccess('Asset', 'update'),
     function (req, res) {
@@ -195,7 +195,7 @@ function createRoutes(serviceLocator, viewPath) {
   /*
    * Admin routes
    */
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/admin/asset*',
     assetAccess('read'),
     compact.js(['global'], ['admin-common'], ['admin-asset']),

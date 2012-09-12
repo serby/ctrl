@@ -29,7 +29,7 @@ function createRoutes(serviceLocator, viewPath) {
     });
   }
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/asset/:id/:name',
     findAsset,
     function (req, res, next) {
@@ -45,7 +45,7 @@ function createRoutes(serviceLocator, viewPath) {
     }
   );
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/asset/thumb/:id/:name',
     findAsset,
     function (req, res, next) {

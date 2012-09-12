@@ -5,7 +5,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     .addNamespace('asset-browser-demo', __dirname + '/public')
     .addJs('js/asset-browser-demo.js');
 
-  serviceLocator.app.get('/admin/ui',
+  serviceLocator.router.get('/admin/ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
@@ -23,7 +23,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       });
   });
 
-  serviceLocator.app.get('/admin/ui/form-elements',
+  serviceLocator.router.get('/admin/ui/form-elements',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
@@ -36,7 +36,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       });
   });
 
-  serviceLocator.app.get('/admin/ui/tables',
+  serviceLocator.router.get('/admin/ui/tables',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
@@ -49,7 +49,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       });
   });
 
-  serviceLocator.app.get('/admin/ui/grid',
+  serviceLocator.router.get('/admin/ui/grid',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(['global'], ['admin-common']),
     function(req, res) {
@@ -62,7 +62,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       });
   });
 
-  serviceLocator.app.get('/admin/ui/misc-ui',
+  serviceLocator.router.get('/admin/ui/misc-ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],

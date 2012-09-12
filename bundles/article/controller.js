@@ -59,7 +59,7 @@ function createRoutes (serviceLocator, viewPath) {
     });
   }
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/:section',
     getPageContent,
     serviceLocator.widgetManager.load(
@@ -86,7 +86,7 @@ function createRoutes (serviceLocator, viewPath) {
     }
   );
 
-  serviceLocator.app.get(
+  serviceLocator.router.get(
     '/:section/:article',
     getPageContent,
     serviceLocator.widgetManager.load([

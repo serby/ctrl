@@ -32,6 +32,7 @@ module.exports = function createServer(properties, serviceLocator) {
   app = require('./lib/express-application')(serviceLocator, sessionDatabaseAdaptor);
 
   serviceLocator.register('app', app);
+  serviceLocator.register('router', app);
 
   compact.addNamespace('global')
     .addJs('js/module.js');
