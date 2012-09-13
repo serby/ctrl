@@ -1,0 +1,44 @@
+!!! 5
+html(lang='en')
+  head
+    block head
+      meta(charset='utf-8')
+      meta(name='description', content=properties.description)
+      meta(name='keywords', content=properties.keyWords)
+    
+      //- SITE INFORMATION
+      title=page.title
+
+    block styles
+      //- CSS
+      link(rel='stylesheet', type='text/css', href=versionPath('/css/main/index.css'), media='all')
+
+    script
+      document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+
+  body(class=page.section)
+
+    each bodyStart in includes.bodyStart
+      !=partial(bodyStart)
+
+    #container
+      block header
+        include includes/header
+
+      block nav
+        include includes/nav
+      
+      #main-content
+        block content
+
+      block footer
+        include includes/footer
+
+    block script
+      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+      script
+        if (typeof jQuery === 'undefined') {
+          document.write('<script src="/js/jquery-1.7.2.min.js" />');
+        }
+      - if (typeof compactJsHtml !== 'undefined')
+          !=compactJsHtml()

@@ -27,6 +27,8 @@ module.exports = function createServer(serviceLocator) {
 
   serviceLocator.logger.info('Starting \'' + properties.name + '\'');
 
+  serviceLocator.register('watch', require('./lib/watch'));
+
   bundled.addBundles(__dirname + '/bundles/',
     bundles
   );
@@ -35,9 +37,6 @@ module.exports = function createServer(serviceLocator) {
 
   serviceLocator.register('app', app);
   serviceLocator.register('router', app);
-
-  compact.addNamespace('global')
-    .addJs('js/module.js');
 
   databaseAdaptor.createConnection(function(connection) {
 

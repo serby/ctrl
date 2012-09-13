@@ -9,7 +9,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
-      ['admin-common'],
+      ['admin'],
       ['admin-asset-browser'],
       ['asset-browser-demo']
     ),
@@ -25,7 +25,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.get('/admin/ui/form-elements',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(['global'], ['admin']),
     function(req, res) {
       viewRender(req, res, 'form-elements', {
         page: {
@@ -38,7 +38,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.get('/admin/ui/tables',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(['global'], ['admin']),
     function(req, res) {
       viewRender(req, res, 'tables', {
         page: {
@@ -51,7 +51,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.get('/admin/ui/grid',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(['global'], ['admin']),
     function(req, res) {
       viewRender(req, res, 'grid', {
         page: {
@@ -66,7 +66,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
-      ['admin-common'],
+      ['admin'],
       ['admin-asset-browser'],
       ['asset-browser-demo']
     ),

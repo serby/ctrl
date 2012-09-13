@@ -41,7 +41,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   serviceLocator.router.get(
     '/admin',
     ensureSetup,
-    compact.js(['global'], ['admin-common']),
+    compact.js(['global'], ['admin']),
     serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', serviceLocator.properties.siteUrl + '/admin/login'),
     function(req, res) {
 
@@ -56,7 +56,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.get(
     '/admin/login',
-    compact.js(['global'], ['admin-common']),
+    compact.js(['global'], ['admin']),
     ensureSetup,
     function (req, res) {
       viewRender(req, res, 'login', {
@@ -88,7 +88,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     });
   });
 
-  serviceLocator.router.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
+  serviceLocator.router.get('/admin/request-password-change', compact.js(['global'], ['admin']), ensureSetup,
     function (req, res) {
       viewRender(req, res, 'request-password-change', {
         page: {
@@ -134,7 +134,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.router.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+  serviceLocator.router.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin']),
     function(req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
         if (err) {
@@ -153,7 +153,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   );
 
-  serviceLocator.router.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+  serviceLocator.router.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin']),
     function(req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
         if (err) {

@@ -5,6 +5,7 @@ module.exports = {
   name: 'Admin',
   version: '0.0.1',
   description: 'Admin section for the site',
+  publicRoute: '/admin',
   middleware: [
     function(serviceLocator) {
       return function(req, res, next) {
@@ -55,11 +56,11 @@ module.exports = {
 
       var compact = serviceLocator.compact;
 
-      compact
-        .addNamespace('admin-common')
-        .addJs('/js/chosen/chosen.jquery.js')
-        .addJs('/js/fancybox/jquery.fancybox.pack.js')
-        .addJs('/js/admin/control.js');
+      compact.addNamespace('admin', __dirname + '/public')
+        .addJs('/js/lib/chosen/chosen.jquery.js')
+        .addJs('/js/lib/fancybox/jquery.fancybox.pack.js')
+        .addJs('/js/admin.js')
+        ;
 
       // Create controller
       require('./controller')(serviceLocator, __dirname + '/views');
@@ -75,6 +76,7 @@ module.exports = {
           }
         });
       });
+      serviceLocator.watch(__dirname + '/public/css/index.styl');
       done();
     }
   ]

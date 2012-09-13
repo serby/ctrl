@@ -35,11 +35,11 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   function compactMiddleware(view) {
     if (options.scripts[view]) {
       return serviceLocator.compact.js(
-        ['global'], ['admin-common'],
+        ['global'], ['admin'],
         options.scripts[view]
       );
     } else {
-      return serviceLocator.compact.js(['global'], ['admin-common']);
+      return serviceLocator.compact.js(['global'], ['admin']);
     }
   }
 
