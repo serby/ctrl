@@ -167,7 +167,7 @@ module.exports = function(serviceLocator) {
 
     administratorDetails.roles = ['root'];
 
-    model.create(administratorDetails, callback);
+    model.create(administratorDetails, {}, callback);
   }
 
   model.pre('createValidate', function(entity, callback) {
