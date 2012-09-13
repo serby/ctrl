@@ -15,9 +15,12 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   }
 
   function ensureSetup(req, res, next) {
-    serviceLocator.administratorModel.count({}, function(errors, count) {
+    serviceLocator.administratorModel.count({}, function(error, count) {
+      if (error) {
+        return next(error);
+      }
       if (count === 0) {
-        return renderSetup(res, req, errors);
+        return renderSetup(res, req, {});
       }
       next();
     });
