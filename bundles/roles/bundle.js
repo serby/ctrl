@@ -46,16 +46,15 @@ module.exports = {
     },
     function(serviceLocator, done) {
 
-      function reloadAcl() {
+      //TODO: This all could be considered business logic and therefore should
+      // possibly go in the model. Also maybe admin, administrator and roles
+      // should all be in the admin bundle.
+
+      function reloadAcl(callback) {
         serviceLocator.logger.info('Reloading admin ACL');
         serviceLocator.adminAccessControlList.clearGrants();
-        serviceLocator.roleModel.loadAcl(serviceLocator.adminAccessControlList);
+        serviceLocator.roleModel.loadAcl(serviceLocator.adminAccessControlList, callback);
       }
-
-      reloadAcl();
-
-      serviceLocator.roleModel.on('create', reloadAcl);
-      serviceLocator.roleModel.on('update', reloadAcl);
 
       // The main admin account needs this role to have ultimate power.
       serviceLocator.roleModel.ensureRootRoleExists(function(error, role) {
@@ -69,11 +68,20 @@ module.exports = {
         } else {
           serviceLocator.logger.info('Role \'root\' exists as expected');
         }
-        done();
-      });
+        // Create controllers
+        require('./controller')(serviceLocator, __dirname + '/views');
 
-      // Create controllers
-      require('./controller')(serviceLocator, __dirname + '/views');
+        reloadAcl(function(error) {
+          if (error) {
+            return done(error);
+          }
+          serviceLocator.roleModel.on('create', reloadAcl);
+          serviceLocator.roleModel.on('update', reloadAcl);
+
+          done();
+        });
+
+      });
 
     }
   ]
