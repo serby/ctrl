@@ -27,8 +27,6 @@ module.exports = function createServer(serviceLocator) {
 
   serviceLocator.logger.info('Starting \'' + properties.name + '\'');
 
-  serviceLocator.register('watch', require('./lib/watch'));
-
   bundled.addBundles(__dirname + '/bundles/',
     bundles
   );

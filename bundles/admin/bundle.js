@@ -76,7 +76,12 @@ module.exports = {
           }
         });
       });
-      serviceLocator.watch(__dirname + '/public/css/index.styl');
+
+      // This is watch recompiles your stylus. Any that you need to compile to CSS
+      // need to be defined here. This is quicker than the standard middleware.
+      serviceLocator.stylusWatch(__dirname + '/public/css/index.styl',
+      { compile: serviceLocator.stylusCompile });
+
       done();
     }
   ]
