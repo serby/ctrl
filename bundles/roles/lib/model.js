@@ -28,7 +28,7 @@ module.exports = function(serviceLocator) {
     , model = crudModel('Role', save, schema);
 
   function createRootRole(callback) {
-    save.create({ name: 'root', grants: {'*': ['*']} }, callback);
+    model.create({ name: 'root', grants: {'*': ['*']} }, {}, callback);
   }
 
   function ensureRootRoleExists(callback) {
@@ -56,7 +56,11 @@ module.exports = function(serviceLocator) {
     }
 
     save.find({}, {}, function(error, roles) {
+      if (error) {
+        return callback(error);
+      }
       roles.forEach(addRoleToAcl);
+      callback();
     });
   }
 
