@@ -9,6 +9,11 @@ module.exports = {
   middleware: [
     function(serviceLocator) {
       return function(req, res, next) {
+
+        res.locals.adminIsAllowed = function (resource, action) {
+          return serviceLocator.adminAccessControl.isAllowed(req, resource, action);
+        };
+
         if (serviceLocator.adminAccessControl.isAllowed(req, 'Admin Bar', 'read')) {
           res.bodyStart = [__dirname + '/views/admin-bar.jade'];
         }
@@ -67,15 +72,6 @@ module.exports = {
       done();
     },
     function(serviceLocator, done) {
-      serviceLocator.app.configure(function() {
-        serviceLocator.app.dynamicHelpers({
-          adminIsAllowed: function(req, res) {
-            return function (resource, action) {
-              return serviceLocator.adminAccessControl.isAllowed(req, resource, action);
-            };
-          }
-        });
-      });
 
       // This is watch recompiles your stylus. Any that you need to compile to CSS
       // need to be defined here. This is quicker than the standard middleware.

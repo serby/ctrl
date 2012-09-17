@@ -46,19 +46,14 @@ module.exports = function createServer(serviceLocator) {
     bundled.initialize(function(error) {
 
       // Make the bundle manager available to views
-      app.configure(function() {
-        app.dynamicHelpers({
-          bundled: function(req, res) {
-            return bundled;
-          },
-          serviceLocator: function(req, res) {
-            return serviceLocator;
-          }
+      app.locals(
+        { bundled: bundled
+        , serviceLocator: serviceLocator
+        , properties: properties
         });
-      });
 
       // Add helpers
-      require('./lib/view-helpers.js')(serviceLocator, properties, app);
+      require('./lib/view-helpers.js')(serviceLocator, app);
 
       app.start();
 

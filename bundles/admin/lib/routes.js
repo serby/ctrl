@@ -86,7 +86,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     paginate,
     accessCheck('read'),
     function (req, res) {
-
       model.find(
         req.searchQuery,
         _.extend(req.options, req.searchOptions),

@@ -11,7 +11,7 @@
     , "connect-mongodb": "~1.1"
     , "crud-model": "git://github.com/serby/crud-model.git"
     , "date-utils": "~1.2"
-    , "express": "~2.5"
+    , "express": "*"
     , "express-validator": "~0.2"
     , "fileupload": "~0.2"
     , "gzippo": "~0.1"

@@ -23,13 +23,14 @@ module.exports = function pagination(count, pageLength) {
         , end = Math.min(start + 6, Math.ceil(count / pageLength))
         ;
 
-      res.local('pagination',
-        { collectionLength: count
-        , pageLength: pageLength
-        , page: urlObj.Page
-        , start: Math.max(end - 6, 1)
-        , end: end
-        , lastPage: Math.ceil(count/pageLength)
+      res.locals({ pagination:
+          { collectionLength: count
+          , pageLength: pageLength
+          , page: urlObj.Page
+          , start: Math.max(end - 6, 1)
+          , end: end
+          , lastPage: Math.ceil(count/pageLength)
+          }
         }
       );
 

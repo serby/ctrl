@@ -47,7 +47,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     compact.js(['global'], ['admin']),
     serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', serviceLocator.properties.siteUrl + '/admin/login'),
     function(req, res) {
-
       viewRender(req, res, 'index', {
         page: {
           title: 'Admin / ' + serviceLocator.properties.name,
