@@ -5,6 +5,16 @@ module.exports = {
   publicRoute: '/main',
 
   initialize: function(serviceLocator, done) {
+
+    var compact = require('compact').createCompact({
+      srcPath: __dirname + '/public/',
+      destPath: __dirname + '/public/js/compact/',
+      webPath: serviceLocator.versionator.versionPath('/main/js/compact/'),
+      debug: serviceLocator.properties.debug
+    });
+
+    serviceLocator.register('compact', compact);
+
     require('./controller')(serviceLocator, __dirname + '/views');
 
     serviceLocator.compact.addNamespace('global', __dirname + '/public/')
