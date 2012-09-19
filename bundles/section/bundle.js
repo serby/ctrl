@@ -1,3 +1,7 @@
+var save = require('save')
+  , saveMongodb = require('save-mongodb')
+  ;
+
 module.exports = {
   name: 'Section',
   version: '0.0.1',
@@ -23,21 +27,28 @@ module.exports = {
     }
   ],
   initialize: [
-    function(serviceLocator, done) {
-      // Register the bundles models
-      serviceLocator.register('sectionModel',
-        require('./lib/sectionModel').createModel(serviceLocator.properties, serviceLocator));
-      done();
+    function (serviceLocator, done) {
+
+      serviceLocator.databaseConnections.main.collection('section', function(error, collection) {
+        serviceLocator.saveFactory.section = function() {
+          return save('section', { logger: serviceLocator.logger,
+            engine: saveMongodb(collection)});
+        };
+        done();
+      });
+
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
+      serviceLocator.register('sectionModel',
+        require('./lib/model')(serviceLocator));
+
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Section');
       done();
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
       // Create controllers
-      require('./controller')(serviceLocator.app,
-        serviceLocator.properties, serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
       done();
     }
   ]

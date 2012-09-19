@@ -1,51 +1,27 @@
 module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
-  var viewSchema = require('ctrl-generic/view-config')({
-    groups: [{
-      name: 'Section Details',
-      description: 'These are the details for a Section',
-      properties: {
-        _id: {
-          form: true,
-          type: 'hidden'
-        },
-        name: {
-          list: true,
-          view: true,
-          createForm: true,
-          updateForm: true,
-          searchType: 'text',
-          required: true
-        },
-        slug: {
-          list: true,
-          view: true,
-          createForm: true,
-          updateForm: true,
-          searchType: 'text',
-          required: true
-        },
-        created: {
-          list: true,
-          view: true,
-          createForm: false,
-          type: 'dateTime'
-        }
-      }
-    }],
-    title: 'name',
-    formPostHelper: function(req, res, next) {
-      next();
-    }
-  });
-
-  require('ctrl-generic/routes')(
+  serviceLocator.admin.routes(
     serviceLocator,
-    viewSchema,
+    require('./section-view-schema')(serviceLocator),
     serviceLocator.sectionModel,
     {
+      updateTag: 'update',
       requiredAccess: 'Section',
-      renderFn: require('ctrl-generic/view-render')('../../admin/views/layout')
+      renderFn: serviceLocator.admin.viewRender()
     }
   );
+
+  serviceLocator.router.get('/:section', function(req, res, next) {
+    serviceLocator.sectionModel.find( { slug: req.params.section}, function(error, section) {
+      if (error) {
+        next(error);
+      }
+      if (section.length === 0) {
+        return next();
+      }
+      res.send(section[0].name);
+      res.end();
+    });
+  });
+
 };
