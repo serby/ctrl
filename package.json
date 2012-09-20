@@ -28,7 +28,7 @@
   , "save-mongodb": "~0.0"
   , "schemata": "~0.0"
   , "service-locator": "~0.0"
-  , "st": "git://github.com/bengourley/st.git"
+  , "st": "~0.0.7"
   , "stylus": "~0.29"
   , "trunky": "~0.1"
   , "validity": "~0.0"
