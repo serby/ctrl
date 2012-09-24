@@ -59,8 +59,12 @@ module.exports = function(serviceLocator) {
       if (error) {
         return callback(error);
       }
+
       roles.forEach(addRoleToAcl);
-      callback();
+
+      if (typeof callback === 'function') {
+        callback();
+      }
     });
   }
 

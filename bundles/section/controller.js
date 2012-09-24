@@ -6,7 +6,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   // take a model and a view-schema.
   serviceLocator.admin.routes(
     serviceLocator,
-    require('./section-view-schema')(serviceLocator),
+    require('./admin-view-config')(serviceLocator),
     serviceLocator.sectionModel,
       // What ACL role is needed to preform the crud actions
       { requiredAccess: 'Section'
