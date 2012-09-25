@@ -178,6 +178,21 @@ module('control-misc-ui', function (module) {
 
   });
 
+  // Intercept all clicks on links with class
+  // 'delete' and get the user to confirm first...
+  $('a.button.delete').on('click', function (e) {
+    window.confirmDialog({
+      message: 'Are you sure you want to delete this?',
+      confirm: function () {
+        document.location.href = $(e.target).attr('href');
+      },
+      confirmVerb: 'Delete',
+      denyVerb: 'Don\'t delete'
+    });
+    return false;
+
+  });
+
 });
 
 require('control-misc-ui');
