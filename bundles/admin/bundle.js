@@ -17,7 +17,7 @@ module.exports = {
 
       // Adding this bundle registers the admin acl
       serviceLocator.register('adminAccessControlList',
-        require('secure').createAccessControlList(serviceLocator.logger));
+        require('secure/access-control-list')(serviceLocator.logger));
       done();
     },
     function(serviceLocator, done) {
@@ -28,7 +28,7 @@ module.exports = {
 
       // This controls the authentication and authorisation of the admin
       serviceLocator.register('adminAccessControl',
-        require('secure').createAccessControl(
+        require('secure/access-control')(
           serviceLocator.administratorModel.authenticate, serviceLocator.adminAccessControlList,
           {}, 'admin', serviceLocator.logger,
           function(req, res, resource, action, next) {

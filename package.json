@@ -33,7 +33,7 @@
     , "lodash": "~0.6"
     , "versionator": "~0.1"
     , "winston": "~0.5"
-    , "secure": "~0.0"
+    , "secure": "~0.1"
   }
   , "devDependencies": {
       "mocha": "*"
