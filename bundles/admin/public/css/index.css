@@ -357,18 +357,6 @@ table.sortable th.sort-desc a:hover{background-position:100% -113px}
 .dialog-custom .asset-browser-item img.selected{border-color:#47a9a4}
 .dialog-custom .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);-moz-box-shadow:0 3px 3px rgba(0,0,0,0.1);-ms-box-shadow:0 3px 3px rgba(0,0,0,0.1);-o-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;-ms-border-radius:0 0 3px 3px;-o-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;clear:left;}
 .dialog-custom .controls button{float:right;margin-left:10px}
-.panel-asset-item{overflow:hidden;position:relative;padding-bottom:45px;}
-.panel-asset-item .asset-item-thumbnail{float:left;width:17%;margin-right:3%;}
-.panel-asset-item .asset-item-thumbnail img{max-width:80%}
-.panel-asset-item .asset-item-details{float:left;width:70%;overflow:hidden;}
-.panel-asset-item .asset-item-details .editable{border-bottom:1px solid #ccc;float:left;clear:left;padding:7px 0 5px;width:100%;}
-.panel-asset-item .asset-item-details .editable .data,.panel-asset-item .asset-item-details .editable span,.panel-asset-item .asset-item-details .editable input{float:left;width:80%;padding:2px 0}
-.panel-asset-item .asset-item-details .editable .data{font-style:normal}
-.panel-asset-item .asset-item-details .editable .label{float:left;width:20%;clear:left;font-style:normal;font-weight:bold}
-.panel-asset-item .asset-item-details .editable input{padding:2px 0;position:relative;top:-1px;left:-2px}
-.panel-asset-item .asset-item-meta{position:absolute;bottom:0;left:0;right:0;background-color:#e6e6e6;border-top:1px solid #d9d9d9;padding:5px;text-align:center;}
-.panel-asset-item .asset-item-meta span{margin-right:10px;font-size:11px}
-.panel-asset-item .delete{position:absolute;top:18px;right:20px}
 .chzn-container span{width:auto;line-height:18px;margin-right:0}
 .chzn-container{position:relative;display:inline-block;vertical-align:top;zoom:1;*display:inline}
 .chzn-container .chzn-drop{background:#fff;border:1px solid #ccc;border-top:0;position:absolute;top:29px;left:0;z-index:999;}
