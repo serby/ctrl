@@ -3,29 +3,29 @@ module('control-misc-ui', function (module) {
 
   $(document).ready(function() {
 
-    /** jQuery UI Datepicker **/
-    $.datepicker.setDefaults({dayNamesMin: $.datepicker._defaults.dayNamesShort});
-    $(".datepicker").datepicker(
-      { dateFormat: 'DD d MM, yy'
-      , showOtherMonths: true
-      , selectOtherMonths: true
-      , minDate: 0
-      , firstDay: 1
-      , beforeShow : function (input, picker) {
-          picker.dpDiv
-            .removeClass('above')
-            .removeClass('below');
-          setTimeout(function () {
-            var dppos = $(picker.dpDiv).offset().top
-             , inputpos = $(input).offset().top;
-            if (dppos < inputpos) {
-              picker.dpDiv.addClass('above');
-            } else {
-              picker.dpDiv.addClass('below');
-            }
-          });
-        }
-      });
+    // /** jQuery UI Datepicker **/
+    // $.datepicker.setDefaults({dayNamesMin: $.datepicker._defaults.dayNamesShort});
+    // $(".datepicker").datepicker(
+    //   { dateFormat: 'DD d MM, yy'
+    //   , showOtherMonths: true
+    //   , selectOtherMonths: true
+    //   , minDate: 0
+    //   , firstDay: 1
+    //   , beforeShow : function (input, picker) {
+    //       picker.dpDiv
+    //         .removeClass('above')
+    //         .removeClass('below');
+    //       setTimeout(function () {
+    //         var dppos = $(picker.dpDiv).offset().top
+    //          , inputpos = $(input).offset().top;
+    //         if (dppos < inputpos) {
+    //           picker.dpDiv.addClass('above');
+    //         } else {
+    //           picker.dpDiv.addClass('below');
+    //         }
+    //       });
+    //     }
+    //   });
 
     /** Chosen Select Boxes **/
     $(".chzn-select").chosen({
@@ -33,10 +33,10 @@ module('control-misc-ui', function (module) {
       , disable_search_threshold: 10
     });
 
-    var availableTags = ["ActionScript","AppleScript","Asp","BASIC","C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran","Groovy","Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme"];
-    $( ".autocomplete" ).autocomplete({
-      source: availableTags
-    });
+    // var availableTags = ["ActionScript","AppleScript","Asp","BASIC","C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran","Groovy","Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme"];
+    // $( ".autocomplete" ).autocomplete({
+    //   source: availableTags
+    // });
 
     /** Fancybox **/
     $(".fancybox, [rel='fancybox-group']").fancybox(
@@ -175,6 +175,21 @@ module('control-misc-ui', function (module) {
   }
 
   window.confirmDialog = confirm;
+
+  });
+
+  // Intercept all clicks on links with class
+  // 'delete' and get the user to confirm first...
+  $('a.button.delete').on('click', function (e) {
+    window.confirmDialog({
+      message: 'Are you sure you want to delete this?',
+      confirm: function () {
+        document.location.href = $(e.target).attr('href');
+      },
+      confirmVerb: 'Delete',
+      denyVerb: 'Don\'t delete'
+    });
+    return false;
 
   });
 

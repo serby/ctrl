@@ -1,43 +1,45 @@
-{ "name": "ctrl"
-, "description": "A node.js CMS for quickly building powerful web sites, tailored to your exact needs"
-, "main": "app.js"
-, "version": "0.1.0"
-, "engine": "~0.8"
-, "dependencies":
-  { "async": "~0.1"
-  , "bcrypt": "~0.7"
-  , "bundled": "~0.0"
-  , "compact": "~0.1"
-  , "connect-mongodb": "~1.1"
-  , "crud-model": "git://github.com/serby/crud-model.git"
-  , "date-utils": "~1.2"
-  , "express": "*"
-  , "express-validator": "~0.2"
-  , "fileupload": "~0.2"
-  , "jade": "~0.25"
-  , "lodash": "~0.6"
-  , "markdown": "~0.3"
-  , "mime": "~1.2"
-  , "mkdirp": "~0.3"
-  , "mongodb": "~0.9"
-  , "nib": "~0.4"
-  , "nodemailer": "~0.3"
-  , "piton-pipe": "~0.0"
-  , "rss": "~0.0"
-  , "save": "~0.0"
-  , "save-mongodb": "~0.0"
-  , "schemata": "~0.0"
-  , "service-locator": "~0.0"
-  , "st": "~0.0.7"
-  , "stylus": "~0.29"
-  , "trunky": "~0.1"
-  , "validity": "~0.0"
-  , "versionator": "~0.1"
-  , "winston": "~0.5"
-  , "secure": "~0.0"
-  }
-, "devDependencies":
-  { "mocha": "*"
-  , "should": "*"
+{
+  "name": "ctrl",
+  "description": "A node.js CMS for quickly building powerful web sites, tailored to your exact needs",
+  "main": "app.js",
+  "version": "0.1.0",
+  "engine": "~0.8",
+  "dependencies": {
+    "async": "~0.1",
+    "bcrypt": "~0.7",
+    "bundled": "~0.0",
+    "compact": "~0.1",
+    "connect-mongodb": "~1.1",
+    "crud-model": "git://github.com/serby/crud-model.git",
+    "date-utils": "~1.2",
+    "express": "*",
+    "express-validator": "~0.2",
+    "fileupload": "~0.2",
+    "jade": "~0.25",
+    "lodash": "~0.6",
+    "markdown": "~0.3",
+    "mime": "~1.2",
+    "mkdirp": "~0.3",
+    "mongodb": "~0.9",
+    "nib": "~0.4",
+    "nodemailer": "~0.3",
+    "piton-pipe": "~0.0",
+    "rss": "~0.0",
+    "save": "~0.0",
+    "save-mongodb": "~0.0",
+    "schemata": "~0.0",
+    "service-locator": "~0.0",
+    "st": "~0.0.7",
+    "stylus": "~0.29",
+    "trunky": "~0.1",
+    "validity": "~0.0",
+    "versionator": "~0.1",
+    "winston": "~0.5",
+    "secure": "~0.0",
+    "gm": "~1.5.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
   }
 }
