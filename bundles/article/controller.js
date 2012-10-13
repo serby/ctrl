@@ -49,7 +49,7 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
       delete sectionQuery.slug;
     }
 
-    async.series({
+    async.parallel({
       section: function (callback) {
         sectionModel.find(sectionQuery, function (error, dataSet) {
           if (!dataSet || dataSet.length === 0) {
@@ -80,33 +80,6 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
     })
   }
 
-  // serviceLocator.router.get(
-  //   '/:section',
-  //   getPageContent,
-  //   serviceLocator.widgetManager.load(
-  //     ['article::recent', 'article::categories']
-  //   ),
-  //   function (req, res, next) {
-
-  //     var section = res.section
-  //     if (!res.article || res.article.length === 0) {
-  //       return next(new serviceLocator.httpErrorHandler.NotFound())
-  //     }
-
-  //     viewRender(req, res, 'list', {
-  //       page: {
-  //         title: section.name + ' / ' + serviceLocator.properties.pageTitle,
-  //         section: section.slug
-  //       },
-  //       layoutType: 'feature',
-  //       title: 'list',
-  //       section: res.section,
-  //       articles: res.article
-  //     })
-
-  //   }
-  // )
-
   serviceLocator.router.get(
     '/:section/:article',
     getPageContent,
@@ -121,11 +94,9 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
           title: res.article[0].title + ' by ' + res.article[0].author,
           section: res.section.slug
         },
-        layoutType: 'feature',
         title: 'article',
         section: res.section,
         article: res.article[0]
       })
-
-  })
+    })
 }

@@ -1,6 +1,8 @@
 // Creates the routes
 
-module.exports = function createRoutes (serviceLocator, bundleViewPath) {
+module.exports = function createRoutes (serviceLocator, viewPath) {
+
+  var viewRender = serviceLocator.viewRender(viewPath)
 
   // The admin bundle provides a crud based generic route controller that can
   // take a model and a view-schema.
@@ -13,24 +15,29 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       // Render function for the templates
       , renderFn: serviceLocator.admin.viewRender()
       }
-  );
+  )
 
   // ### Custom Routes
   // Catch all route for matching to sections in the system.
   serviceLocator.router.get('/:section', function(req, res, next) {
 
     // Does the section match any of the slugs?
-    serviceLocator.sectionModel.find( { slug: req.params.section}, function(error, section) {
+    serviceLocator.sectionModel.findOne( { slug: req.params.section}, function(error, section) {
       if (error) {
-        next(error);
+        next(error)
       }
       // If no section is found move on.
-      if (section.length === 0) {
-        return next();
+      if (section === null) {
+        return next()
       }
-      res.send(section[0].name);
-      res.end();
-    });
-  });
+      viewRender(req, res, 'section', {
+        page: {
+          title: section.name ,
+          section: section.slug
+        },
+        section: section
+      })
+    })
+  })
 
-};
+}
