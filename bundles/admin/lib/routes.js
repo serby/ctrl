@@ -7,26 +7,35 @@ var _ = require('lodash')
 
 module.exports = function routes(serviceLocator, schema, model, options) {
 
-  var defaults = {
-    createValidationSet: '',
-    updateValidationSet: '',
-    createTag: undefined,
-    updateTag: undefined,
-    requiredAccess: model.slug,
-    scripts: {},
-    renderFn: null,
-    adminRoute: '/admin/'
-  };
+  var defaults =
+    { createValidationSet: ''
+    , updateValidationSet: ''
+    , createTag: undefined
+    , updateTag: undefined
+    , requiredAccess: model.slug
+    , scripts: {}
+    , renderFn: null
+    , adminRoute: '/admin/'
+    },
+  views =
+    { form: __dirname + '/../views/generic/form'
+    , list: __dirname + '/../views/generic/list'
+    , view: __dirname + '/../views/generic/view'
+    }
+  , emptyMiddleware = function (req, res, next) {
+      next();
+    }
+  , middleware =
+    { create: emptyMiddleware
+    , read: emptyMiddleware
+    , update: emptyMiddleware
+    , delete: emptyMiddleware
+    , list: emptyMiddleware
+    }
 
   options = _.extend({}, defaults, options);
-
-  var views =  {
-    form: __dirname + '/../views/generic/form',
-    list: __dirname + '/../views/generic/list',
-    view: __dirname + '/../views/generic/view'
-  };
-
   _.extend(views, options.views);
+  _.extend(middleware, options.middleware);
 
   /*
    * Adds the common JavaScript
@@ -85,6 +94,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     sortOptions,
     paginate,
     accessCheck('read'),
+    middleware.list,
     function (req, res) {
       model.find(
         req.searchQuery,
@@ -108,8 +118,8 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   );
 
   // This is the default view schema helpers.
-  // Allows for options to be defined in the view schema as an array or a funciton
-  // and then use in the presentation of the form.
+  // Allows for options to be defined in the view schema as an array or a
+  // function and then use in the presentation of the form.
   function schemaHelper(schema) {
     return function(req, res, next) {
       var fn = [];
@@ -125,7 +135,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
           }
         });
       });
-      async.parallel(fn, function(errors, results) {
+      async.parallel(fn, function() {
         next();
       });
     };
@@ -147,6 +157,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     compactMiddleware('form'),
     accessCheck('create'),
     schemaHelper(schema),
+    middleware.create,
     function (req, res) {
 
       options.renderFn(req, res, views.form, {
@@ -171,7 +182,9 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     accessCheck('create'),
     serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
-    schemaHelper(schema), function (req, res, next) {
+    schemaHelper(schema),
+    middleware.create,
+    function (req, res, next) {
 
       model.create(
         req.body,
@@ -206,7 +219,9 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id',
     compactMiddleware('view'),
-    accessCheck('read'), function (req, res, next) {
+    accessCheck('read'),
+    middleware.read,
+    function (req, res, next) {
       model.read(
         req.params.id,
         function (error, object) {
@@ -232,6 +247,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     compactMiddleware('form'),
     schemaHelper(schema),
     accessCheck('update'),
+    middleware.update,
     function (req, res, next) {
       model.read(req.params.id, function (error, object) {
         if (error) {
@@ -261,6 +277,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     accessCheck('update'),
+    middleware.update,
     function (req, res, next) {
       model.update(
         req.body,
@@ -294,7 +311,8 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id/delete',
     accessCheck('delete'),
-    function(req, res, next) {
+    middleware.delete,
+    function(req, res) {
       model['delete'](req.params.id, function(error) {
         if (error !== undefined) {
           res.send(404);
