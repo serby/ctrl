@@ -1,5 +1,0 @@
-//- Actions and Filter Controls
-nav.page-actions.list-actions
-  ul.actions
-    - if (adminIsAllowed(model.name, 'create'))
-      li: a.button.primary(href='/admin/#{model.urlName}/new') Add

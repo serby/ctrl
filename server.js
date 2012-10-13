@@ -1,19 +1,13 @@
-module.exports.createServer = function(properties, serviceLocator) {
+module.exports = function createServer(serviceLocator) {
 
-  var databaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
-    , sessionDatabaseAdaptor = require('./lib/database').createDatabaseAdaptor(properties, serviceLocator)
-    , Application = require('./lib/expressApplication')
+  var properties = serviceLocator.properties
+    , databaseAdaptor = require('./lib/database')(serviceLocator)
+    , sessionDatabaseAdaptor = require('./lib/database')(serviceLocator)
     , bundled
     , app
     , bundles = require('./bundles.json')
-    , globalViewHelpers = require('./viewHelpers/global')
     , versionator = require('versionator').createBasic('v' + properties.version)
-    , compact = require('compact').createCompact({
-      srcPath: __dirname + '/public/',
-      destPath: __dirname + '/public/js/compact/',
-      webPath: versionator.versionPath('/js/compact/'),
-      debug: properties.debug
-    });
+    ;
 
   // Register the global services needed by your entire application
   serviceLocator
@@ -21,7 +15,6 @@ module.exports.createServer = function(properties, serviceLocator) {
     .register('bundled', bundled = require('bundled')(serviceLocator, { logger: serviceLocator.logger }))
     .register('widgetManager', require('./lib/widget-manager/widget-manager').createWidgetManager({ logger: serviceLocator.logger }))
     .register('viewHelpers', {})
-    .register('compact', compact)
     .register('versionator', versionator)
     ;
 
@@ -31,12 +24,10 @@ module.exports.createServer = function(properties, serviceLocator) {
     bundles
   );
 
-  app = Application.createApplication(properties, serviceLocator, sessionDatabaseAdaptor);
+  app = require('./lib/web-stack')(serviceLocator, sessionDatabaseAdaptor);
 
   serviceLocator.register('app', app);
-
-  compact.addNamespace('global')
-    .addJs('js/module.js');
+  serviceLocator.register('router', app);
 
   databaseAdaptor.createConnection(function(connection) {
 
@@ -48,19 +39,14 @@ module.exports.createServer = function(properties, serviceLocator) {
     bundled.initialize(function(error) {
 
       // Make the bundle manager available to views
-      app.configure(function() {
-        app.dynamicHelpers({
-          bundled: function(req, res) {
-            return bundled;
-          },
-          serviceLocator: function(req, res) {
-            return serviceLocator;
-          }
+      app.locals(
+        { bundled: bundled
+        , serviceLocator: serviceLocator
+        , properties: properties
         });
-      });
 
       // Add helpers
-      globalViewHelpers.createHelpers(serviceLocator, properties, app);
+      require('./lib/view-helpers.js')(serviceLocator, app);
 
       app.start();
 

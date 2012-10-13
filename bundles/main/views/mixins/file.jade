@@ -1,0 +1,25 @@
+mixin downloadLink(files, removeLink)
+  - if (files && files.length > 0)
+    table.image-summary.highlight
+      thead
+        tr
+          th Preview
+          th Image
+          - if (removeLink)
+            th.remove Remove
+      tbody
+        - each file in files
+          tr
+            td.thumbnail
+              mixin displayImage('100', '100', file, '', 'crop')
+            td
+              .file-summary
+                a.file-preview(rel='fancybox-group', href='/binary/#{file.path + file.basename}') #{file.basename}
+                p (#{file.size} bytes) - #{file.type}
+            - if (removeLink)
+              td.checkbox
+                input(name='removeImage[]', type='checkbox', value='#{file.path}')
+
+mixin displayImage(width, height, file, alt, process)
+  - var size = width + 'x' + height
+  img(src=properties.binaryCachePath + '#{process}/#{file.path}' + '#{size}/' + '#{file.basename}', width='#{width}', height='#{height}', alt='#{alt}')

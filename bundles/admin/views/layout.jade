@@ -16,7 +16,7 @@ html(lang='en')
       meta(name='description', content=properties.description)
       meta(name='keywords', content=properties.keywords)
       title=page.title + ' - ' + properties.name
-      link(rel='shortcut icon', type='image/x-icon', href='/images/admin/structure/favicon.ico')
+      link(rel='shortcut icon', type='image/x-icon', href='/admin/images/structure/favicon.ico')
 
     script
       document.getElementsByTagName('html')[0].setAttribute('class', 'js');
@@ -30,8 +30,7 @@ html(lang='en')
       document.createElement('hgroup');
 
     block styles
-      link(rel='stylesheet', type='text/css', href=versionPath('/css/admin/index.css'), media='all')
-      link(rel='stylesheet', type='text/css', href=versionPath('/js/fancybox/jquery.fancybox.css'), media='all')
+      link(rel='stylesheet', type='text/css', href=versionPath('/admin/css/index.css'), media='all')
 
   body(class=page.section)
     #container

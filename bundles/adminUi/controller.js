@@ -1,81 +1,79 @@
-var viewRenderDelegate = require('../../lib/viewRenderDelegate');
-
-module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
-  var viewRender = viewRenderDelegate.create(bundleViewPath);
+module.exports = function createRoutes (serviceLocator, bundleViewPath) {
+  var viewRender = serviceLocator.viewRender(bundleViewPath);
 
   serviceLocator.compact
     .addNamespace('asset-browser-demo', __dirname + '/public')
     .addJs('js/asset-browser-demo.js');
 
-  app.get('/admin/ui',
+  serviceLocator.router.get('/admin/ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
-      ['admin-common'],
+      ['admin'],
       ['admin-asset-browser'],
       ['asset-browser-demo']
     ),
     function(req, res) {
       viewRender(req, res, 'index', {
         page: {
-          title: 'Admin UI / ' + properties.name,
+          title: 'Admin UI / ' + serviceLocator.properties.name,
           section: 'admin-ui'
         },
         error: ''
       });
   });
 
-  app.get('/admin/ui/form-elements',
+  serviceLocator.router.get('/admin/ui/form-elements',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(['global'], ['admin']),
     function(req, res) {
       viewRender(req, res, 'form-elements', {
         page: {
-          title: 'Form Elements / Admin UI / ' + properties.name,
+          title: 'Form Elements / Admin UI / ' + serviceLocator.properties.name,
           section: 'admin-ui'
         },
         error: ''
       });
   });
 
-  app.get('/admin/ui/tables',
+  serviceLocator.router.get('/admin/ui/tables',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(['global'], ['admin']),
     function(req, res) {
       viewRender(req, res, 'tables', {
         page: {
-          title: 'Tables / Admin UI / ' + properties.name,
+          title: 'Tables / Admin UI / ' + serviceLocator.properties.name,
           section: 'admin-ui'
         },
         error: ''
       });
   });
 
-  app.get('/admin/ui/grid',
+  serviceLocator.router.get('/admin/ui/grid',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
-    serviceLocator.compact.js(['global'], ['admin-common']),
+    serviceLocator.compact.js(['global'], ['admin']),
     function(req, res) {
       viewRender(req, res, 'grid', {
         page: {
-          title: 'Grid / Admin UI / ' + properties.name,
+          title: 'Grid / Admin UI / ' + serviceLocator.properties.name,
           section: 'admin-ui'
         },
         error: ''
       });
   });
 
-  app.get('/admin/ui/misc-ui',
+  serviceLocator.router.get('/admin/ui/misc-ui',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
-      ['admin-common'],
+      ['admin'],
       ['admin-asset-browser'],
       ['asset-browser-demo']
     ),
     function(req, res) {
       viewRender(req, res, 'misc-ui', {
         page: {
-          title: 'Misc UI Elements / Admin UI / ' + properties.name,
+          title: 'Misc UI Elements / Admin UI / ' + serviceLocator.properties.name,
           section: 'admin-ui'
         },
         error: ''

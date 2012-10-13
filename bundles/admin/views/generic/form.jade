@@ -1,0 +1,64 @@
+extend ../layout
+
+block content
+
+  include ../mixins/form-fields
+  include ../mixins/file
+
+  h1
+    -if (page.action == 'create')
+      | New #{model.name}
+    -else
+      | Edit #{model.name}
+
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li: a(href='/admin/#{model.slug}') #{model.plural}
+      li
+        -if (page.action == 'create')
+          | New #{model.name}
+        -else
+          | Edit #{model.name}
+
+  -if (page.action == 'update')
+    include includes/form-actions
+
+  form(method='post', enctype='multipart/form-data')
+    - if (Object.keys(errors).length > 0)
+      .notification.error
+        h4 Please check the form and try again
+        - each error in unshownErrors
+          p= errors[error]
+    - each group in viewSchema.groups
+      fieldset
+        - if (typeof group.name !== 'undefined')
+          h3=group.name
+        - if (typeof group.description !== 'undefined')
+          p.group-description=group.description
+        - each propertyMeta, key in group.properties
+          - if (propertyMeta[formType])
+            - var name = model.schema.propertyName(key)
+            - if ([undefined, 'url'].indexOf(propertyMeta.type) !== -1 || propertyMeta.type === 'link')
+              mixin textFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'dropdown')
+              mixin dropdownForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, list: propertyMeta.options, information: propertyMeta.info})
+            - if (propertyMeta.type === 'multiselect')
+              mixin checkBoxGroupForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, list: propertyMeta.options, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'groupedMultiselect')
+              mixin groupedCheckBoxGroupForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, groups: propertyMeta.options, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'textbox')
+              mixin textboxFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'checkbox')
+              mixin checkboxFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'file')
+              mixin fileFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'hidden')
+              input(type='hidden', name=key, value=entity[key])
+            - if (propertyMeta.type === 'password')
+              mixin passwordFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
+            - if (propertyMeta.type === 'date')
+              mixin datepickerFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
+    fieldset.actions
+      a.button(href='/admin/#{model.slug}') Cancel
+      input.button.primary(type='submit',value='Submit')

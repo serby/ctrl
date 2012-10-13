@@ -1,6 +1,4 @@
-public/css/*
-public/fonts/*
-public/images/*
-public/js/compact/*
-views/*
+public/
 data/*
+.git
+*/public/*

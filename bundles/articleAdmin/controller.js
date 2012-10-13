@@ -1,13 +1,10 @@
-var
-  _ = require('lodash'),
-  formHelper = require('../../lib/utils/formHelper'),
-  generic = require('../generic'),
-  adminController = require('./adminController'),
-  viewRenderDelegate = require('../../lib/viewRenderDelegate');
+var formHelper = require('../../lib/utils/formHelper')
+  , adminController = require('./adminController')
+  ;
 
-module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
+module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
-  var viewSchema = serviceLocator.generic.createViewSchema({
+  var viewSchema = require('ctrl-generic/view-config')({
     groups: [{
       name: 'Article Details',
       description: 'These are the details for an Article',
@@ -93,11 +90,11 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   });
 
-  var articleViewRender = viewRenderDelegate.create(__dirname + '/views');
+  var articleViewRender = serviceLocator.viewRender(__dirname + '/views');
 
   // These routes are here to override the default generic form
   adminController.createRoutes(
-    app,
+    serviceLocator.app,
     articleViewRender,
     viewSchema,
     serviceLocator.articleModel,
@@ -107,13 +104,13 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  serviceLocator.generic.createRoutes(
+  require('ctrl-generic/routes')(
     serviceLocator,
     viewSchema,
     serviceLocator.articleModel,
     {
       requiredAccess: 'Article',
-      renderFn: serviceLocator.generic.createViewRender('../../admin/views/layout')
+      renderFn: require('ctrl-generic/view-render')('../../admin/views/layout')
     }
   );
 };

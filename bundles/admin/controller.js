@@ -1,35 +1,37 @@
-var viewRenderDelegate = require('../../lib/viewRenderDelegate');
+module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
-module.exports.createRoutes = function(app, properties, serviceLocator, bundleViewPath) {
-
-  var viewRender = viewRenderDelegate.create(bundleViewPath)
-    , compact = serviceLocator.compact;
+  var viewRender = serviceLocator.viewRender(bundleViewPath)
+    , compact = serviceLocator.compact
+    ;
 
   function renderSetup(res, req, errors) {
     viewRender(req, res, 'setup', {
       page: {
-        title: 'Setup / Admin / ' + properties.name,
+        title: 'Setup / Admin / ' + serviceLocator.properties.name,
         section: 'admin'
       },
-      error: errors
+      errors: errors
     });
   }
 
   function ensureSetup(req, res, next) {
-    serviceLocator.administratorModel.count({}, function(errors, count) {
+    serviceLocator.administratorModel.count({}, function(error, count) {
+      if (error) {
+        return next(error);
+      }
       if (count === 0) {
-        return renderSetup(res, req, errors);
+        return renderSetup(res, req, {});
       }
       next();
     });
   }
 
-  app.post('/admin/setup', function(req, res, next) {
+  serviceLocator.router.post('/admin/setup', function(req, res, next) {
     serviceLocator.administratorModel.count({}, function(error, count) {
       if (count === 0) {
-        serviceLocator.administratorModel.createWithFullAccess(req.body, function(errors, item) {
-          if (errors) {
-            return renderSetup(res, req, errors);
+        serviceLocator.administratorModel.createWithFullAccess(req.body, function(error, item) {
+          if (error) {
+            return renderSetup(res, req, error.errors);
           }
           res.redirect('/admin');
         });
@@ -39,30 +41,29 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     });
   });
 
-  app.get(
+  serviceLocator.router.get(
     '/admin',
     ensureSetup,
-    compact.js(['global'], ['admin-common']),
-    serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', properties.siteUrl + '/admin/login'),
+    compact.js(['global'], ['admin']),
+    serviceLocator.adminAccessControl.requiredAccess('Admin', 'read', serviceLocator.properties.siteUrl + '/admin/login'),
     function(req, res) {
-
       viewRender(req, res, 'index', {
         page: {
-          title: 'Admin / ' + properties.name,
+          title: 'Admin / ' + serviceLocator.properties.name,
           section: 'admin'
         }
       });
     }
   );
 
-  app.get(
+  serviceLocator.router.get(
     '/admin/login',
-    compact.js(['global'], ['admin-common']),
+    compact.js(['global'], ['admin']),
     ensureSetup,
     function (req, res) {
       viewRender(req, res, 'login', {
         page: {
-          title: 'Login / Admin / ' + properties.name,
+          title: 'Login / Admin / ' + serviceLocator.properties.name,
           section: 'login'
         },
         error: '',
@@ -71,7 +72,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  app.post('/admin/login', function(req, res, next) {
+  serviceLocator.router.post('/admin/login', function(req, res, next) {
     serviceLocator.adminAccessControl.authenticate(req, res, req.body, function(error, user) {
       if (error === null) {
         res.redirect('/admin');
@@ -79,7 +80,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
         viewRender(req, res, 'login', {
           page: {
-            title: 'Login / Admin / ' + properties.name,
+            title: 'Login / Admin / ' + serviceLocator.properties.name,
             section: 'login'
           },
           error: error.message,
@@ -89,11 +90,11 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     });
   });
 
-  app.get('/admin/request-password-change', compact.js(['global'], ['admin-common']), ensureSetup,
+  serviceLocator.router.get('/admin/request-password-change', compact.js(['global'], ['admin']), ensureSetup,
     function (req, res) {
-      viewRender(req, res, 'requestPasswordChange', {
+      viewRender(req, res, 'request-password-change', {
         page: {
-          title: 'Request Password Change / Admin / ' + properties.name,
+          title: 'Request Password Change / Admin / ' + serviceLocator.properties.name,
           section: 'login'
         },
         error: ''
@@ -101,14 +102,14 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  app.post('/admin/request-password-change', ensureSetup,
+  serviceLocator.router.post('/admin/request-password-change', ensureSetup,
     function(req, res, next) {
       var email = req.body.emailAddress;
 
       function renderFailure(error) {
-        viewRender(req, res, 'requestPasswordChange', {
+        viewRender(req, res, 'request-password-change', {
           page: {
-            title: 'Request Password Change / Admin / ' + properties.name,
+            title: 'Request Password Change / Admin / ' + serviceLocator.properties.name,
             section: 'login'
           },
           error: error.message
@@ -135,16 +136,16 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  app.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+  serviceLocator.router.get('/admin/change-password', ensureSetup, compact.js(['global'], ['admin']),
     function(req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
         if (err) {
           return next(err);
         }
 
-        viewRender(req, res, 'changePassword', {
+        viewRender(req, res, 'change-password', {
           page: {
-            title: 'Change Your Password / Admin / ' + properties.name,
+            title: 'Change Your Password / Admin / ' + serviceLocator.properties.name,
             section: 'login'
           },
           error: '',
@@ -154,7 +155,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  app.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin-common']),
+  serviceLocator.router.post('/admin/change-password', ensureSetup, compact.js(['global'], ['admin']),
     function(req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token, function(err, entity) {
         if (err) {
@@ -167,9 +168,9 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
 
         var password = req.body.password;
         if (!password || password === '') {
-          viewRender(req, res, 'changePassword', {
+          viewRender(req, res, 'change-password', {
             page: {
-              title: 'Change Your Password / Admin / ' + properties.name,
+              title: 'Change Your Password / Admin / ' + serviceLocator.properties.name,
               section: 'login'
             },
             error: 'Invalid password',
@@ -191,7 +192,7 @@ module.exports.createRoutes = function(app, properties, serviceLocator, bundleVi
     }
   );
 
-  app.get('/admin/logout', function(req, res) {
+  serviceLocator.router.get('/admin/logout', function(req, res) {
     serviceLocator.adminAccessControl.destroy(req, res);
     res.redirect('/admin/login');
   });

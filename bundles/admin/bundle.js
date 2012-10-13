@@ -1,19 +1,39 @@
+var _ = require('lodash')
+  ;
+
 module.exports = {
   name: 'Admin',
   version: '0.0.1',
   description: 'Admin section for the site',
+  publicRoute: '/admin',
   middleware: [
     function(serviceLocator) {
       return function(req, res, next) {
+
+        res.locals.adminIsAllowed = function (resource, action) {
+          return serviceLocator.adminAccessControl.isAllowed(req, resource, action);
+        };
+
         if (serviceLocator.adminAccessControl.isAllowed(req, 'Admin Bar', 'read')) {
-          res.bodyStart = [__dirname + '/views/adminBar.jade'];
+          res.bodyStart = [__dirname + '/views/admin-bar.jade'];
         }
         next();
       };
     }
   ],
   initialize: [
+
     function(serviceLocator, done) {
+
+      // Register the admin view helpers for global use
+      serviceLocator.viewHelpers.querystring = require('./lib/pagination-helpers');
+
+      // Register the generic route creator for other admin bundles to use.
+      serviceLocator.register('admin',
+        { routes: require('./lib/routes')
+        , viewConfig: require('./lib/view-config')
+        , viewRender: require('./lib/view-render')
+        });
 
       // Adding this bundle registers the admin acl
       serviceLocator.register('adminAccessControlList',
@@ -40,26 +60,23 @@ module.exports = {
 
       var compact = serviceLocator.compact;
 
-      compact
-        .addNamespace('admin-common')
-        .addJs('/js/chosen/chosen.jquery.js')
-        .addJs('/js/fancybox/jquery.fancybox.pack.js')
-        .addJs('/js/admin/control.js');
+      compact.addNamespace('admin', __dirname + '/public')
+        .addJs('/js/lib/chosen/chosen.jquery.js')
+        .addJs('/js/lib/fancybox/jquery.fancybox.pack.js')
+        .addJs('/js/admin.js')
+        ;
 
       // Create controller
-      require('./controller').createRoutes(serviceLocator.app, serviceLocator.properties, serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
       done();
     },
     function(serviceLocator, done) {
-      serviceLocator.app.configure(function() {
-        serviceLocator.app.dynamicHelpers({
-          adminIsAllowed: function(req, res) {
-            return function (resource, action) {
-              return serviceLocator.adminAccessControl.isAllowed(req, resource, action);
-            };
-          }
-        });
-      });
+
+      // This is watch recompiles your stylus. Any that you need to compile to CSS
+      // need to be defined here. This is quicker than the standard middleware.
+      serviceLocator.stylusWatch(__dirname + '/public/css/index.styl',
+      { compile: serviceLocator.stylusCompile });
+
       done();
     }
   ]

@@ -1,7 +1,11 @@
+var save = require('save')
+  , saveMongodb = require('save-mongodb')
+  ;
+
 module.exports = {
   name: 'Administrator',
   version: '0.0.1',
-  description: 'Manage the user who administer the site',
+  description: 'Manage the users who administer the site',
   adminNav: [{
       label: 'Administrators',
       url: '/admin/administrator',
@@ -25,21 +29,28 @@ module.exports = {
   initialize: [
     function(serviceLocator, done) {
 
-      // Register the bundles models
-      serviceLocator.register('administratorModel',
-        require('./lib/administratorModel').createModel(serviceLocator.properties, serviceLocator));
+      serviceLocator.databaseConnections.main.collection('administrator', function(error, collection) {
+        serviceLocator.saveFactory.administrator = function() {
+          return save('administrator', { logger: serviceLocator.logger,
+            engine: saveMongodb(collection)});
+        };
+        done();
+      });
 
-      done();
     },
     function(serviceLocator, done) {
+
+      // Register the bundles models
+      serviceLocator.register('administratorModel',
+        require('./lib/model')(serviceLocator));
+
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Administrator');
       done();
     },
     function(serviceLocator, done) {
       // Create controllers
-      require('./controller').createRoutes(serviceLocator.app,
-        serviceLocator.properties, serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
 
       done();
     }

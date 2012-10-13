@@ -8,7 +8,7 @@ public/css/admin/*.css
 /data
 /cache
 
-/public/js/compact
+bundles/main/public/js/compact
 
 # Windows
 Thumbs.db
@@ -27,10 +27,3 @@ Icon?
 
 # nodejs npm modules
 node_modules
-
-# node-cluster
-/pids
-*.sock
-
-# ZSH Cake plugin cache
-/.cake_task_cache

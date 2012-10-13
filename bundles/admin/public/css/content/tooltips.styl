@@ -1,0 +1,84 @@
+/** Tooltips **/
+[data-tooltip]
+	border-bottom 1px dotted $primaryColor
+	position relative
+	cursor pointer
+
+	font-size 12px
+	font-weight normal
+	line-height 18px
+	z-index 999
+	&:before,
+	&:after
+		position absolute
+		display block
+		left -9999px
+		opacity 0
+		if $baseTransitionDuration != 0
+			transition opacity $baseTransitionDuration $baseTransitionEasing
+	&:before
+		content attr(data-tooltip)
+		top -30px
+		background #111
+		border-top 1px solid #222
+		border-bottom 1px solid #000
+		color #fff
+		padding 3px 8px
+		white-space nowrap
+		box-shadow 0px 1px 3px rgba(0,0,0,.5)
+		if $baseBorderRadius != 0
+			border-radius $baseBorderRadius
+	&:after
+		content ""
+		top -4px
+		width 0
+		height 0
+		border-style solid
+		border-width 4px
+		border-color #000 transparent transparent transparent
+	&:hover
+		&:before
+			left -8px
+			opacity 1
+		&:after
+			opacity 1
+			left 0
+
+[data-tooltip].left
+	&:before
+		top 50%
+		margin-top -13px /* TODO - half line-height + padding top*/
+		margin-right 6px
+	&:after
+		top 50%
+		margin-right -2px
+		margin-top -4px
+		border-color transparent transparent transparent #000
+	&:hover
+		&:before
+		&:after
+			right 100%
+			left auto
+
+[data-tooltip].right
+	&:before
+		top 50%
+		margin-top -13px /* TODO - half line-height + padding top*/
+		margin-left 6px
+	&:after
+		top 50%
+		margin-left -2px
+		margin-top -4px
+		border-color transparent #000 transparent transparent
+	&:hover
+		&:before
+		&:after
+			left 100%
+
+/** Site specific tooltips **/
+[data-tooltip][href*="github.com"]:before {
+	background-image versionPath("/admin/images/content/tooltip-sprite.png")
+	background-position 5px 4px
+	background-repeat no-repeat
+	padding-left 25px
+}

@@ -3,10 +3,13 @@ test:
 		-r should \
 		-R spec
 
-lint-changed:
-	@jshint `git status --porcelain | sed -e "s/^...//g"`
-
 lint:
 	@jshint lib test
 
-.PHONY: test lint lint-changed
+lint-changed:
+	@jshint `git status --porcelain | sed -e "s/^...//g"`
+
+clean:
+	@find . -name '*.orig' -delete
+
+.PHONY: test lint lint-changed clean

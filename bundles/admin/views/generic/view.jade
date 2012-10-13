@@ -1,0 +1,46 @@
+extend ../layout
+
+block content
+
+  include ../mixins/file
+  include ../mixins/grouped-multiselect-mixin
+
+  h1 View #{model.name}
+
+  nav.breadcrumb
+    ul
+      li.nav-home: a(href='/admin') Home
+      li: a(href='/admin/#{model.slug}') #{model.plural}
+      li View #{model.name}
+
+  include includes/view-actions
+
+  //-h2 #{model.name} Details
+  - each group in viewSchema.groups
+    .panel-group
+      - if (typeof group.name !== 'undefined')
+        h3=group.name
+      - if (typeof group.description !== 'undefined')
+        p.group-description=group.description
+      dl
+        - each propertyMeta, key in group.properties
+          - if (propertyMeta.view)
+            dt=model.schema.propertyName(key)
+            dd
+              - if (propertyMeta.type === 'file')
+                mixin downloadLink(entity[key], false)
+              - else if (propertyMeta.type === 'dateTime')
+                p=dateTime(propertyMeta.format(entity[key]))
+              - else if (propertyMeta.type === 'checkbox')
+                p=booleanFormatter(entity[key])
+              - else if (propertyMeta.type === 'groupedMultiselect')
+                p
+                  mixin groupedMultiselectMixin(entity[key])
+              - else if (propertyMeta.type === 'link')
+                p
+                  a(href=entity[key], target='_blank')=entity[key]
+              - else if (propertyMeta.type === 'password')
+                p Your password is stored securly, the following is the encrypted version:
+                | #{propertyMeta.format(entity[key])}
+              - else
+                #{propertyMeta.format(entity[key])}

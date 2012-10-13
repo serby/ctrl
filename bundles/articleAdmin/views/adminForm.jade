@@ -5,7 +5,7 @@ append styles
 
 block content
 
-  include ../../../views/mixins/formFields
+  include mixins/form-fields
   include ../../../views/mixins/file
 
   h1
@@ -17,7 +17,7 @@ block content
   nav.breadcrumb
     ul
       li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.urlName}') #{model.plural}
+      li: a(href='/admin/#{model.slug}') #{model.plural}
       li
         -if (page.action == 'create')
           | New #{model.name}
@@ -27,7 +27,7 @@ block content
   p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
 
   -if (page.action == 'update')
-    include ../../generic/views/includes/form-actions
+    include ../../generic-admin/views/includes/form-actions
 
   form(method='post', enctype='multipart/form-data')
     - if (Object.keys(errors).length > 0)
@@ -63,5 +63,5 @@ block content
       mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
 
     fieldset.actions
-      a.button(href='/admin/#{model.urlName}') Cancel
+      a.button(href='/admin/#{model.slug}') Cancel
       input.button.primary(type='submit',value='Submit')
