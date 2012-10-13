@@ -1,8 +1,8 @@
-extend ../../../views/layout
+extend ../../main/views/layout
 
 block content
 
-  include includes/articleDetails
+  include includes/article-details
   h2.big
     a.lettering(href = '/' + section.slug) #{section.name}
   section#blog-post.two-column

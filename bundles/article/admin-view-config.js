@@ -17,12 +17,17 @@ module.exports = function(serviceLocator) {
         },
         section: {
           list: true,
-          view: true
+          view: false
         },
         slug: {
           list: false,
-          view: true,
+          view: false,
           searchType: 'text'
+        },
+        path: {
+          list: false,
+          view: true,
+          type: 'link'
         },
         summary: {
           view: true,

@@ -20,10 +20,10 @@ module.exports = function(serviceLocator) {
           $ne: res.article[0].title
         }
       };
-      serviceLocator.articleModel.findWithUrl(searchQuery,
+      serviceLocator.articleModel.findLive(searchQuery,
         { limit: 5, sort: { publishedDate: -1 } }, function(error, dataSet) {
 
-        data.authorPosts = dataSet.toArray();
+        data.authorPosts = dataSet;
         data.author = res.article[0].author;
         next();
       });

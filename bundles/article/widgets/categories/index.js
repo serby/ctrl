@@ -15,7 +15,7 @@ module.exports = function(serviceLocator) {
     },
     load: function(req, res, next) {
       serviceLocator.sectionModel.find({}, { sort: { name: 1 } }, function(error, dataSet) {
-        data.sections = dataSet.toArray();
+        data.sections = dataSet;
         next();
       });
     }

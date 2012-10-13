@@ -13,7 +13,7 @@ $(function($) {
       .replace(/(\-+|\s+)/g, '-');
   }
 
-  function onTitleBlur(event) {
+  function onTitleBlur() {
     $slugControl.val(toUrl($titleControl.val()));
   }
 

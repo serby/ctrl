@@ -110,9 +110,9 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
   serviceLocator.router.get(
     '/:section/:article',
     getPageContent,
-    serviceLocator.widgetManager.load([
-      'article::recent', 'article::categories', 'article::postsByAuthor'
-    ]),
+    // serviceLocator.widgetManager.load([
+    //   'article::recent', 'article::categories', 'article::postsByAuthor'
+    // ]),
     serviceLocator.compact.js([['global'], ['article']]),
     function (req, res) {
 

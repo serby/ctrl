@@ -37,6 +37,11 @@ module.exports = function(serviceLocator) {
         all: [validity.required]
       }
     },
+    path: {
+      validators: {
+        all: [validity.required]
+      }
+    },
     summary: {
     },
     type: {
@@ -89,6 +94,17 @@ module.exports = function(serviceLocator) {
   model.pre('createValidate', function(entity, callback) {
     callback(null, schema.makeDefault(entity))
   })
+
+  function addPath(entity, callback) {
+    entity.path = '/' + entity.section + '/' + entity.slug
+    callback(null, entity)
+  }
+
+  model.pre('createValidate', function(entity, callback) {
+    callback(null, schema.makeDefault(entity))
+  })
+  model.pre('createValidate', addPath)
+  model.pre('updateValidate', addPath)
 
   function findLive(query, options, callback) {
 
