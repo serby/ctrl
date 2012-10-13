@@ -1,4 +1,5 @@
 module.exports = function createRoutes (serviceLocator, bundleViewPath) {
+
   var viewRender = serviceLocator.viewRender(bundleViewPath);
 
   serviceLocator.compact
@@ -10,7 +11,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.compact.js(
       ['global'],
       ['admin'],
-      ['admin-asset-browser'],
       ['asset-browser-demo']
     ),
     function(req, res) {

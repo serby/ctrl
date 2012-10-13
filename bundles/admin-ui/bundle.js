@@ -62,9 +62,7 @@ module.exports = {
     },
     function(serviceLocator, done) {
       // Create controller
-      require('./controller')(serviceLocator.app,
-        serviceLocator.properties,
-        serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views');
       done();
     }
   ]
