@@ -4,7 +4,7 @@ test:
 		-R spec
 
 lint:
-	@jshint lib test
+	@find . -name '*.js' -and -not -regex '.*/public/.*' -and -not -regex '.*/node_modules/.*' -exec jshint {} \;
 
 lint-changed:
 	@jshint `git status --porcelain | sed -e "s/^...//g"`
