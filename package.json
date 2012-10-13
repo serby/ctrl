@@ -12,10 +12,10 @@
     "connect-mongodb": "~1.1",
     "crud-model": "git://github.com/serby/crud-model.git",
     "date-utils": "~1.2",
-    "express": "~3.0.0",
+    "express": "~3.0",
     "express-validator": "~0.2",
     "fileupload": "~0.2",
-    "jade": "~0.25",
+    "jade": "~0",
     "lodash": "~0.6",
     "markdown": "~0.3",
     "mime": "~1.2",
@@ -35,8 +35,7 @@
     "validity": "~0.0",
     "versionator": "~0.1",
     "winston": "~0.5",
-    "secure": "~0.0",
-    "gm": "~1.5.0"
+    "secure": "*"
   },
   "devDependencies": {
     "mocha": "*",
