@@ -5,8 +5,8 @@ append styles
 
 block content
 
-  include mixins/form-fields
-  include ../../../views/mixins/file
+  include ../../admin/views/mixins/form-fields
+  include ../../admin/views/mixins/file
 
   h1
     -if (page.action == 'create')
@@ -27,7 +27,7 @@ block content
   p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
 
   -if (page.action == 'update')
-    include ../../generic-admin/views/includes/form-actions
+    include ../../admin/views/generic/includes/form-actions
 
   form(method='post', enctype='multipart/form-data')
     - if (Object.keys(errors).length > 0)
@@ -37,6 +37,7 @@ block content
     fieldset
       h3 Article Details
       p These are the details for an Article
+          input(type='hidden', name='_id', value=entity._id)
           mixin textFieldForObject({ name: 'title' }, { label: 'Title', data: entity, required: true, errors: errors})
           mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
           mixin textFieldForObject({ name: 'slug' }, {label: 'Slug', data: entity, required: true, errors: errors, information: 'This will be part of the url. Leave blank to auto-generate'})

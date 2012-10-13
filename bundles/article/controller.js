@@ -1,12 +1,33 @@
 var async = require('async')
-  , markdown = require('markdown')
-  ;
+  , join = require('path').join
+  , createAdminFormMiddleware = require('./lib/admin-form-middleware')
 
-function createRoutes (serviceLocator, viewPath) {
+module.exports = function createRoutes (serviceLocator, viewPath) {
 
   var viewRender = serviceLocator.viewRender(viewPath)
     , sectionModel = serviceLocator.sectionModel
-    , articleModel = serviceLocator.articleModel;
+    , articleModel = serviceLocator.articleModel
+    , formMiddleware = createAdminFormMiddleware(serviceLocator)
+
+  // The admin bundle provides a crud based generic route controller that can
+  // take a model and a view-schema.
+  serviceLocator.admin.routes(
+    serviceLocator,
+    require('./admin-view-config')(serviceLocator),
+    serviceLocator.articleModel,
+      // What ACL role is needed to preform the crud actions
+      { requiredAccess: 'Article'
+      , views:
+        { form: join(__dirname, 'views', 'admin-form.jade')
+        }
+      , middleware:
+        { create: formMiddleware
+        , update: formMiddleware
+        }
+      // Render function for the templates
+      , renderFn: serviceLocator.admin.viewRender()
+      }
+  );
 
   function getPageContent(req, res, next) {
     var section = req.params.section
@@ -17,10 +38,10 @@ function createRoutes (serviceLocator, viewPath) {
       , articleQuery = {
         section: section,
         slug: article
-      };
+      }
 
     if (!article) {
-      delete articleQuery.slug;
+      delete articleQuery.slug
     }
 
     if (!section) {
@@ -31,60 +52,60 @@ function createRoutes (serviceLocator, viewPath) {
     async.series({
       section: function (callback) {
         sectionModel.find(sectionQuery, function (error, dataSet) {
-          if (!dataSet || dataSet.length() === 0) {
-            return callback(true, []);
+          if (!dataSet || dataSet.length === 0) {
+            return callback(true, [])
           }
-          callback(null, dataSet.first());
-        });
+          callback(null, dataSet[0])
+        })
       },
       article: function (callback) {
-        articleModel.findWithUrl(articleQuery, { limit: 100, sort: { created: -1 } },
+        articleModel.findLive(articleQuery, { limit: 100, sort: { created: -1 } },
           function (error, dataSet) {
 
-          if (!dataSet || dataSet.length() === 0) {
-            return callback(true, []);
+          if (!dataSet || dataSet.length === 0) {
+            return callback(true, [])
           }
-          callback(null, dataSet.toArray());
-        });
+          callback(null, dataSet)
+        })
 
       }
     }, function (error, results) {
       if ((results.section.length === 0) || (results.article.length === 0)) {
-        return next(new serviceLocator.httpErrorHandler.NotFound());
+        return next(new serviceLocator.httpErrorHandler.NotFound())
       }
-      res.article = results.article;
-      res.section = results.section;
+      res.article = results.article
+      res.section = results.section
 
-      next();
-    });
+      next()
+    })
   }
 
-  serviceLocator.router.get(
-    '/:section',
-    getPageContent,
-    serviceLocator.widgetManager.load(
-      ['article::recent', 'article::categories']
-    ),
-    function (req, res, next) {
+  // serviceLocator.router.get(
+  //   '/:section',
+  //   getPageContent,
+  //   serviceLocator.widgetManager.load(
+  //     ['article::recent', 'article::categories']
+  //   ),
+  //   function (req, res, next) {
 
-      var section = res.section;
-      if (!res.article || res.article.length === 0) {
-        return next(new serviceLocator.httpErrorHandler.NotFound());
-      }
+  //     var section = res.section
+  //     if (!res.article || res.article.length === 0) {
+  //       return next(new serviceLocator.httpErrorHandler.NotFound())
+  //     }
 
-      viewRender(req, res, 'list', {
-        page: {
-          title: section.name + ' / ' + serviceLocator.properties.pageTitle,
-          section: section.slug
-        },
-        layoutType: 'feature',
-        title: 'list',
-        section: res.section,
-        articles: res.article
-      });
+  //     viewRender(req, res, 'list', {
+  //       page: {
+  //         title: section.name + ' / ' + serviceLocator.properties.pageTitle,
+  //         section: section.slug
+  //       },
+  //       layoutType: 'feature',
+  //       title: 'list',
+  //       section: res.section,
+  //       articles: res.article
+  //     })
 
-    }
-  );
+  //   }
+  // )
 
   serviceLocator.router.get(
     '/:section/:article',
@@ -93,7 +114,7 @@ function createRoutes (serviceLocator, viewPath) {
       'article::recent', 'article::categories', 'article::postsByAuthor'
     ]),
     serviceLocator.compact.js([['global'], ['article']]),
-    function (req, res, next) {
+    function (req, res) {
 
       viewRender(req, res, 'article', {
         page: {
@@ -104,9 +125,7 @@ function createRoutes (serviceLocator, viewPath) {
         title: 'article',
         section: res.section,
         article: res.article[0]
-      });
+      })
 
-  });
+  })
 }
-
-module.exports.createRoutes = createRoutes;

@@ -2,26 +2,7 @@ module.exports = {
   name: 'Article Admin',
   version: '0.0.1',
   description: 'Manage the articles on the site',
-  adminNav: [{
-      label: 'Article',
-      url: '/admin/article',
-      section: 'article',
-      permission: {
-        resource: 'Article',
-        action: 'read'
-      },
-      items: [
-        {
-          label: 'Add Article',
-          url: '/admin/article/new',
-          permission: {
-            resource: 'Article',
-            action: 'create'
-          }
-        }
-      ]
-    }
-  ],
+
   publicRoute: '/',
   initialize: [
     function(serviceLocator, done) {

@@ -148,8 +148,8 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     return error.name === 'ValidationError' ? true : false;
   }
 
-  function render500(next) {
-    return next('Error saving/updating to database');
+  function render500(next, error) {
+    return next(error);
   }
 
   serviceLocator.router.get(
@@ -251,7 +251,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     function (req, res, next) {
       model.read(req.params.id, function (error, object) {
         if (error) {
-          render500(next);
+          render500(next, error);
         } else {
           options.renderFn(req, res, views.form, {
             viewSchema: schema,
@@ -299,7 +299,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
               unshownErrors: listUnshownErrors(error.errors, 'updateForm')
             });
           } else if (error) {
-            render500(next);
+            render500(next, error);
           } else {
             res.redirect(options.adminRoute + model.slug + '/' + object._id);
           }
