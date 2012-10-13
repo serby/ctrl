@@ -119,7 +119,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       if (email) {
         serviceLocator.administratorModel.findOne({ emailAddress: email }, function(err, admin) {
           if (!admin) {
-            return renderFailure(new Error('Unknown e-mail address'));
+            return renderFailure(new Error('Unknown email address'));
           }
 
           serviceLocator.administratorModel.requestPasswordChange(admin, function(err) {
@@ -131,7 +131,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
           });
         });
       } else {
-        renderFailure(new Error('No e-mail address entered'));
+        renderFailure(new Error('No email address entered'));
       }
     }
   );
