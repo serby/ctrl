@@ -39,8 +39,10 @@ Please run the linter and fix any errors before committing.
 
 The .jslintrc that should be used can be found in the project root.
 
-## Author [Paul Serby](https://github.com/serby/) follow me on
-[twitter](http://twitter.com/serby)
+## Author
 
-## Licence Licenced under the [New BSD License](http://opensource.org/licenses
-/bsd-license.php)
+[Paul Serby](https://github.com/serby/) follow me on [twitter](http://twitter.com/serby)
+
+## Licence
+
+Licenced under the [New BSD License](http://opensource.org/licenses/bsd-license.php)
