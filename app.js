@@ -26,7 +26,7 @@ if ((properties.env !== 'development') && (cluster.isMaster)) {
     ' cluster process, one per CPU');
 
   // Create one instance of the app (i.e. one process) per CPU
-  cpus.map(function(cpu) {
+  cpus.map(function() {
     cluster.fork();
   });
 
