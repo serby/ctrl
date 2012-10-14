@@ -79,7 +79,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     });
   }
 
-  var searchProperties = searchQuery(schema.groups)
+  var searchProperties = searchQuery.createSearchProperties(schema.groups)
     , buildSearchQuery = searchQuery(
         searchProperties,
         serviceLocator.logger,

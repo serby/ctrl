@@ -61,6 +61,5 @@ module.exports.createSearchProperties = function(viewSchemaGroups) {
       }
     });
   });
-
   return searchProperties;
 };
