@@ -1,5 +1,5 @@
-::selection{color:#fff;background-color:#47a9a4;text-shadow:none}
-::-moz-selection{color:#fff;background-color:#47a9a4;text-shadow:none}
+::selection{color:#fff;background-color:#666;text-shadow:none}
+::-moz-selection{color:#fff;background-color:#666;text-shadow:none}
 body{height:100%;background:#fff;margin:0;padding:0}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;margin:0;padding:0}
 body,dl,dt,dd,ul,ol,pre,code,form,fieldset,legend,input,button,textarea,blockquote,th,td{margin:0;padding:0}
@@ -20,8 +20,8 @@ ul ul li{list-style-type:circle}
 ol ol li{list-style-type:lower-alpha}
 nav ul,nav ul li{list-style:none;padding:0;margin:0}
 strong,em{color:#4d4d4d}
-a{color:#47a9a4;text-decoration:underline;}
-a:hover,a:focus{color:#388581;text-decoration:none}
+a{color:#666;text-decoration:underline;}
+a:hover,a:focus{color:#4d4d4d;text-decoration:none}
 a:active{outline:none}
 sub{vertical-align:sub;font-size:smaller}
 sup{vertical-align:super;font-size:smaller}
