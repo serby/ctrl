@@ -47,17 +47,11 @@ block content
     fieldset
       h3 Article Content
       p This is the content for an Article
-        #form-row
-          label
-          mixin dropdownForObject({ name: 'type' }, { label: 'Type', data: entity, required: true, errors: errors, list: typesDropdown })
-
-        #form-row
-          mixin textboxFieldForObject({ name: 'body', class: 'rich-editor biggest' }, { label: '', data: entity, required: false, errors: errors })
+        mixin dropdownForObject({ name: 'type' }, { label: 'Type', data: entity, required: true, errors: errors, list: typesDropdown })
+        mixin textboxFieldForObject({ name: 'body', class: 'rich-editor biggest' }, { label: '', data: entity, required: false, errors: errors })
 
     fieldset
       h3 Article Images
-      #form-row
-      label
       mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
 
     fieldset.actions
