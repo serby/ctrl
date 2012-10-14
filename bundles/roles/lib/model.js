@@ -57,7 +57,10 @@ module.exports = function(serviceLocator) {
 
     save.find({}, {}, function(error, roles) {
       if (error) {
-        return callback(error);
+        if (typeof callback === 'function') {
+          return callback(error);
+        }
+        return error;
       }
 
       roles.forEach(addRoleToAcl);
