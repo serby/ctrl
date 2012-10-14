@@ -8,6 +8,5 @@ mailer.sendMail(
     , text: 'Congratulations you received an email'
   }
   , function(error, responseStatus) {
-    console.log(error, responseStatus)
   }
 )
