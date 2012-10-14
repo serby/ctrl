@@ -116,9 +116,10 @@ mixin passwordFieldForObject(inputParams, params)
 mixin textboxField(inputParams, params)
   .form-row(class=params.formRowClass || '')
     label(class=(params.error !== undefined ? 'error ' : '') + params.labelClass)
-      span #{params.label}
-        - if (params.required)
-          abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+      - if (params.label)
+        span #{params.label}
+          - if (params.required)
+            abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
       textarea(class=inputParams.class, name=inputParams.name)=inputParams.value
       mixin fieldFooter(params.information, params.error)
 

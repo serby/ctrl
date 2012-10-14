@@ -38,7 +38,7 @@ block content
           mixin textFieldForObject({ name: 'title' }, { label: 'Title', data: entity, required: true, errors: errors})
           mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
           mixin textFieldForObject({ name: 'slug' }, {label: 'Slug', data: entity, required: true, errors: errors, information: 'This will be part of the url. Leave blank to auto-generate'})
-          mixin textFieldForObject({ name: 'summary' }, { label: 'Summary', data: entity, required: true, errors: errors, information: 'If you leave this blank a first part of the main content will be used.' })
+          mixin textboxFieldForObject({ name: 'summary', class: 'short' }, { label: 'Summary', data: entity, required: true, errors: errors, information: 'If you leave this blank a first part of the main content will be used.' })
           mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
           mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, required: true, errors: errors})
           mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, required: true, errors: errors})
@@ -48,7 +48,7 @@ block content
       h3 Article Content
       p This is the content for an Article
         mixin dropdownForObject({ name: 'type' }, { label: 'Type', data: entity, required: true, errors: errors, list: typesDropdown })
-        mixin textboxFieldForObject({ name: 'body', class: 'rich-editor biggest' }, { label: '', data: entity, required: false, errors: errors })
+        mixin textboxFieldForObject({ name: 'body', class: 'rich-editor tallest' }, { formRowClass: 'full', label: '', data: entity, required: false, errors: errors })
 
     fieldset
       h3 Article Images

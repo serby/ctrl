@@ -61,8 +61,24 @@ textarea
   resize vertical
   overflow auto /* Hides scrollber in IE when not needed*/
 
-textarea.biggest
+textarea.short
+  height 100px
+
+textarea.tallest
 	height 600px
+
+.form-row.full
+  width 100%
+  label
+    & > span
+      width 0%
+  textarea
+    width 100%
+  label.error
+    .error-description
+      margin-left 0%
+  .description
+    margin-left 0%
 
 .checkbox > span,
 .radio > span,
@@ -138,7 +154,7 @@ fieldset.actions
 
 /** Form Errors **/
 label.error
-  input
+  input, textarea
     border 1px solid darken($errorColor, 14)
     border-radius $baseBorderRadius $baseBorderRadius 0 0
     &:active,

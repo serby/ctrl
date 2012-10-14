@@ -178,7 +178,13 @@ input:hover,select:hover,textarea:hover{border-color:#b3b3b3}
 input:active,select:active,textarea:active,input:focus,select:focus,textarea:focus{border-color:#222;-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(34,34,34,0.8);-moz-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(34,34,34,0.8);-ms-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(34,34,34,0.8);-o-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(34,34,34,0.8);box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(34,34,34,0.8)}
 select{height:30px;width:70%}
 textarea{height:100px;vertical-align:top;resize:vertical;overflow:auto;}
-textarea.biggest{height:600px}
+textarea.short{height:100px}
+textarea.tallest{height:600px}
+.form-row.full{width:100%;}
+.form-row.full label > span{width:0%}
+.form-row.full textarea{width:100%}
+.form-row.full label.error .error-description{margin-left:0%}
+.form-row.full .description{margin-left:0%}
 .checkbox > span,.radio > span,.field-group label > span,.field-group .label > span{padding-top:1px}
 .checkbox input,.radio input,.field-group input{width:auto;vertical-align:middle;background:none;border:0;margin-right:6px}
 .checkbox span,.radio span{width:70%;margin-left:-20px;padding-left:20px;padding-right:0}
@@ -193,8 +199,8 @@ fieldset.actions input{margin-left:20px}
 .form-row .description{margin-left:30%;width:auto;font-size:11px;color:#999;-webkit-transition:color .1s ease;-moz-transition:color .1s ease;-ms-transition:color .1s ease;-o-transition:color .1s ease;transition:color .1s ease;}
 .form-row .description p,.form-row .description ul,.form-row .description li{margin-bottom:0}
 .form-row:hover .description{color:#555}
-label.error input{border:1px solid #ac2c2c;-webkit-border-radius:0 0 0 0;-moz-border-radius:0 0 0 0;-ms-border-radius:0 0 0 0;-o-border-radius:0 0 0 0;border-radius:0 0 0 0;}
-label.error input:active,label.error input:focus{-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);-moz-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);-ms-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);-o-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8)}
+label.error input,label.error textarea{border:1px solid #ac2c2c;-webkit-border-radius:0 0 0 0;-moz-border-radius:0 0 0 0;-ms-border-radius:0 0 0 0;-o-border-radius:0 0 0 0;border-radius:0 0 0 0;}
+label.error input:active,label.error textarea:active,label.error input:focus,label.error textarea:focus{-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);-moz-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);-ms-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);-o-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8);box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(210,77,77,0.8)}
 label.error .error-description{margin-left:30%;padding:2px 5px;background-color:#d24d4d;border:1px solid #ac2c2c;border-top:0;text-shadow:0 1px 1px #ac2c2c;-webkit-border-radius:0 0 0 0;-moz-border-radius:0 0 0 0;-ms-border-radius:0 0 0 0;-o-border-radius:0 0 0 0;border-radius:0 0 0 0;color:#fff}
 .ui-autocomplete{position:absolute;cursor:default}
 .ui-menu{float:left;display:block;list-style:none;margin:0 3px 3px 0;max-height:190px;padding:3px;position:relative;overflow-x:hidden;overflow-y:auto;border:1px solid #ccc;background-color:#fff;-webkit-transition:border .1s ease,box-shadow .1s ease;-moz-transition:border .1s ease,box-shadow .1s ease;-ms-transition:border .1s ease,box-shadow .1s ease;-o-transition:border .1s ease,box-shadow .1s ease;transition:border .1s ease,box-shadow .1s ease;}
