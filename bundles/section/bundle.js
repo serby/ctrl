@@ -66,6 +66,9 @@ module.exports = {
 
     },
     function (serviceLocator, done) {
+      done()
+    },
+    function (serviceLocator, done) {
 
       // register the section model for global usage.
       serviceLocator.register('sectionModel',

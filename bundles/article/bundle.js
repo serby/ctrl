@@ -47,6 +47,9 @@ module.exports = {
       })
     },
     function(serviceLocator, done) {
+      done()
+    },
+    function(serviceLocator, done) {
 
       // register the model for global usage.
       serviceLocator.register('articleModel',
