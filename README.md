@@ -16,6 +16,18 @@ Install dependencies:
 
      npm install
 
+## Updating
+
+If you pull a new version, always install any new packages.
+
+    git pull origin master
+    npm install
+
+If you switch node versions or you are having problems after pulling try and
+rebuild.
+
+    npm rebuild
+
 ## Usage
 
 ### Starting ctrl
@@ -37,7 +49,8 @@ Please run the linter and fix any errors before committing.
 
     make lint
 
-The .jslintrc that should be used can be found in the project root.
+The [.jslintrc](https://github.com/serby/ctrl/blob/master/.jshintrc) that should
+be used can be found in the project root.
 
 ## Author
 
