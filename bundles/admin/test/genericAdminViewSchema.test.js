@@ -1,6 +1,6 @@
-var genericAdminViewSchema = require('../lib/genericAdminViewSchema')
+var genericViewConfig = require(__dirname + '/../lib/view-config')
 
-describe('genericAdminViewSchema', function () {
+describe('genericViewConfig', function () {
   describe('#createViewSchema()', function () {
     it('should not select a hidden field as the object\'s title field', function () {
       var schema = {
@@ -14,7 +14,7 @@ describe('genericAdminViewSchema', function () {
       }
 
       ;(function(){
-        genericAdminViewSchema.createViewSchema(schema)
+        genericViewConfig.createViewSchema(schema)
       }).should.throw()
     })
 
@@ -30,7 +30,7 @@ describe('genericAdminViewSchema', function () {
       }
 
       ;(function(){
-        genericAdminViewSchema.createViewSchema(schema)
+        genericViewConfig.createViewSchema(schema)
       }).should.throw()
     })
 
@@ -46,7 +46,7 @@ describe('genericAdminViewSchema', function () {
       }
 
       ;(function(){
-        genericAdminViewSchema.createViewSchema(schema)
+        genericViewConfig.createViewSchema(schema)
       }).should.throw()
     })
 
@@ -61,7 +61,7 @@ describe('genericAdminViewSchema', function () {
           }
         }]
       }
-      genericAdminViewSchema.createViewSchema(schema).title.should.equal('firstName')
+      genericViewConfig(schema).title.should.equal('firstName')
     })
 
     it('should not override the title if the user has provided one', function () {
@@ -77,7 +77,7 @@ describe('genericAdminViewSchema', function () {
         }],
         title: 'lastName'
       }
-      genericAdminViewSchema.createViewSchema(schema).title.should.equal('lastName')
+      genericViewConfig(schema).title.should.equal('lastName')
     })
 
   })
