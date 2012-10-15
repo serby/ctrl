@@ -1,7 +1,10 @@
 qa: test lint
 
 test:
-	@./node_modules/.bin/mocha -r should --recursive test bundles/**/test
+	@./node_modules/.bin/mocha -r should -R spec --recursive test bundles/**/test/*
+
+watch-test:
+	@./node_modules/.bin/mocha -r should -R spec -w --recursive test bundles/**/test/*
 
 lint:
 	@jshint `find . -name '*.js' -and -not -regex '.*/public/.*' -and -not -regex '.*/node_modules/.*'`
