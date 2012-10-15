@@ -1,9 +1,7 @@
 // Define the how the model properties will be viewed via the generic admin
 // interface.
 
-var formHelper = require('../../lib/form-helper')
-
-module.exports = function(serviceLocator) {
+module.exports = function viewConfig(serviceLocator) {
 
   return serviceLocator.admin.viewConfig({
     groups: [{
@@ -82,9 +80,10 @@ module.exports = function(serviceLocator) {
     }],
     title: 'title',
     formPostHelper: function(req, res, next) {
-      var proc = formHelper.processors;
 
-      formHelper.process(req, {
+      var proc = serviceLocator.formHelper
+
+      proc(req, {
         images: proc.file,
         live: proc.boolean,
         comments: proc.boolean,

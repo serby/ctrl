@@ -14,7 +14,7 @@ describe('genericViewConfig', function () {
       }
 
       ;(function(){
-        genericViewConfig.createViewSchema(schema)
+        genericViewConfig(schema)
       }).should.throw()
     })
 
@@ -30,7 +30,7 @@ describe('genericViewConfig', function () {
       }
 
       ;(function(){
-        genericViewConfig.createViewSchema(schema)
+        genericViewConfig(schema)
       }).should.throw()
     })
 
@@ -46,7 +46,7 @@ describe('genericViewConfig', function () {
       }
 
       ;(function(){
-        genericViewConfig.createViewSchema(schema)
+        genericViewConfig(schema)
       }).should.throw()
     })
 

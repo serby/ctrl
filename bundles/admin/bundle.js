@@ -24,8 +24,11 @@ module.exports = {
 
     function(serviceLocator, done) {
 
-      // Register the admin view helpers for global use
+      // Register the admin view helpers for global use.
       serviceLocator.viewHelpers.querystring = require('./lib/pagination-helpers')
+
+      // For processing form data when using the generic view-configs
+      serviceLocator.register('formHelper', require('./lib/form-helper'))
 
       // Register the generic route creator for other admin bundles to use.
       serviceLocator.register('admin',
