@@ -1,10 +1,12 @@
+qa: test lint
+
 test:
 	@./node_modules/.bin/mocha \
 		-r should \
 		-R spec
 
 lint:
-	@find . -name '*.js' -and -not -regex '.*/public/.*' -and -not -regex '.*/node_modules/.*' -exec jshint {} \;
+	@jshint `find . -name '*.js' -and -not -regex '.*/public/.*' -and -not -regex '.*/node_modules/.*'`
 
 lint-changed:
 	@jshint `git status --porcelain | sed -e "s/^...//g"`
