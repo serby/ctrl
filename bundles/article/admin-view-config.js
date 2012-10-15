@@ -8,47 +8,73 @@ module.exports = function viewConfig(serviceLocator) {
       name: 'Article Details',
       description: 'These are the details for an Article',
       properties: {
+        _id: {
+          // Show on the create and edit form
+          updateForm: true,
+          // The input type on the form
+          type: 'hidden'
+        },
         title: {
+          createForm: true,
           list: true,
           view: true,
           searchType: 'text'
         },
         section: {
+          createForm: true,
           list: true,
           view: false
         },
         slug: {
+          createForm: true,
           list: false,
           view: false,
           searchType: 'text'
         },
         path: {
+          createForm: false,
           list: false,
           view: true,
           type: 'link'
         },
         summary: {
+          createForm: true,
           view: true,
           searchType: 'text'
         },
         author: {
+          createForm: true,
           list: true,
           view: true,
           searchType: 'text'
         },
+       type: {
+         createForm: true,
+         list: true,
+         view: true
+       },
+        body: {
+          createForm: true,
+          list: true,
+          view: true
+        },
         live: {
+          createForm: true,
           list: true,
           view: true
         },
         comments: {
+          createForm: true,
           view: true
         },
         created: {
+          createForm: true,
           list: false,
           view: true,
           type: 'dateTime'
         },
         publishedDate: {
+          createForm: true,
           list: true,
           view: true,
           edit: true,
@@ -64,7 +90,7 @@ module.exports = function viewConfig(serviceLocator) {
           view: true
         },
         body: {
-          view: true
+          view: false
         }
       }
     },
@@ -78,10 +104,9 @@ module.exports = function viewConfig(serviceLocator) {
         }
       }
     }],
-    title: 'title',
     formPostHelper: function(req, res, next) {
 
-      var proc = serviceLocator.formHelper
+      var proc = serviceLocator.admin.formHelper
 
       proc(req, {
         images: proc.file,
