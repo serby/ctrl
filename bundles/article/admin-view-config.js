@@ -61,11 +61,13 @@ module.exports = function viewConfig(serviceLocator) {
         live: {
           createForm: true,
           list: true,
-          view: true
+          view: true,
+          type: 'checkbox'
         },
         comments: {
           createForm: true,
-          view: true
+          view: true,
+          type: 'checkbox'
         },
         created: {
           createForm: true,
