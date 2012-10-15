@@ -18,7 +18,7 @@ module.exports = {
     require('./controller')(serviceLocator, __dirname + '/views');
 
     serviceLocator.compact.addNamespace('global', __dirname + '/public/')
-      .addJs('js/lib/module.js')
+      .addJs('/js/lib/module.js')
       ;
 
     serviceLocator.register('errorPage', __dirname + '/views/error')
