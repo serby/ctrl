@@ -33,7 +33,7 @@ _.extend(process, {
     form[key] = ((form[key] === undefined) || form[key] === false ||
       form[key] === null || form[key] === '') ? false : true
   },
-  // If a value is given try and make it a date obejct
+  // If a value is given try and make it a date object
   date: function(key, form) {
     if (form[key] !== undefined) {
       form[key] = new Date(form[key])
