@@ -30,19 +30,21 @@ block content
     - if (Object.keys(errors).length > 0)
       .notification.error
         h4 Please check the form and try again
-
+        - each error in unshownErrors
+          p= errors[error]
     fieldset
       h3 Article Details
       p These are the details for an Article
+        - if (formType === 'updateForm')
           input(type='hidden', name='_id', value=entity._id)
-          mixin textFieldForObject({ name: 'title' }, { label: 'Title', data: entity, required: true, errors: errors})
-          mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
-          mixin textFieldForObject({ name: 'slug' }, {label: 'Slug', data: entity, required: true, errors: errors, information: 'This will be part of the url. Leave blank to auto-generate'})
-          mixin textboxFieldForObject({ name: 'summary', class: 'short' }, { label: 'Summary', data: entity, required: true, errors: errors, information: 'If you leave this blank a first part of the main content will be used.' })
-          mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
-          mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, required: true, errors: errors})
-          mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, required: true, errors: errors})
-          mixin datepickerFieldForObject({ name: 'publishedDate' }, { label: 'Published Date', data: entity, required: true, errors: errors, information: 'This is used to order the articles' })
+        mixin textFieldForObject({ name: 'title' }, { label: 'Title', data: entity, required: true, errors: errors})
+        mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
+        mixin textFieldForObject({ name: 'slug' }, {label: 'Slug', data: entity, required: true, errors: errors, information: 'This will be part of the url. Leave blank to auto-generate'})
+        mixin textboxFieldForObject({ name: 'summary', class: 'short' }, { label: 'Summary', data: entity, required: true, errors: errors, information: 'If you leave this blank a first part of the main content will be used.' })
+        mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
+        mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, required: true, errors: errors})
+        mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, required: true, errors: errors})
+        mixin datepickerFieldForObject({ name: 'publishedDate' }, { label: 'Published Date', data: entity, required: true, errors: errors, information: 'This is used to order the articles' })
 
     fieldset
       h3 Article Content
