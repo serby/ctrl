@@ -16,56 +16,66 @@ module.exports = function viewConfig(serviceLocator) {
         },
         title: {
           createForm: true,
+          updateForm: true,
           list: true,
           view: true,
           searchType: 'text'
         },
         section: {
           createForm: true,
-          list: true,
+          updateForm: true,
+          list: false,
           view: false
         },
         slug: {
           createForm: true,
+          updateForm: true,
           list: false,
           view: false,
           searchType: 'text'
         },
         path: {
           createForm: false,
-          list: false,
+          updateForm: true,
+          list: true,
           view: true,
           type: 'link'
         },
         summary: {
           createForm: true,
+          updateForm: true,
           view: true,
           searchType: 'text'
         },
         author: {
           createForm: true,
+          updateForm: true,
           list: true,
           view: true,
           searchType: 'text'
         },
        type: {
          createForm: true,
+         updateForm: true,
          list: true,
          view: true
        },
         body: {
           createForm: true,
-          list: true,
+          updateForm: true,
+          list: false,
           view: true
         },
         live: {
           createForm: true,
+          updateForm: true,
           list: true,
           view: true,
           type: 'checkbox'
         },
         comments: {
           createForm: true,
+          updateForm: true,
           view: true,
           type: 'checkbox'
         },
@@ -77,6 +87,7 @@ module.exports = function viewConfig(serviceLocator) {
         },
         publishedDate: {
           createForm: true,
+          updateForm: true,
           list: true,
           view: true,
           edit: true,
@@ -85,22 +96,12 @@ module.exports = function viewConfig(serviceLocator) {
       }
     },
     {
-      name: 'Article Content',
-      description: 'This is the content for an Article',
-      properties: {
-        type: {
-          view: true
-        },
-        body: {
-          view: false
-        }
-      }
-    },
-    {
       name: 'Article Images',
       description: 'Images for an Article',
       properties: {
         images: {
+          createForm: true,
+          updateForm: true,
           view: true,
           type: 'file'
         }

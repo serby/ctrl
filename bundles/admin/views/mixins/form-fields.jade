@@ -13,7 +13,7 @@ mixin booleanField(inputParams, params)
         - if (params.required)
           abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
       input(name=inputParams.name, type=inputParams.type, value='on', checked=(inputParams.checked ? 'checked' : null))
-      mixin fieldFooter(params.information, params.error)
+    mixin fieldFooter(params.information, params.error)
 
 mixin radioField(inputParams, params)
   - inputParams.type = inputParams.class = 'radio';
@@ -120,7 +120,7 @@ mixin textboxField(inputParams, params)
         span #{params.label}
           - if (params.required)
             abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
-      textarea(class=inputParams.class, name=inputParams.name)=inputParams.value
+      textarea(class=inputParams.class, name=inputParams.name, placeholder=inputParams.placeholder)=inputParams.value
       mixin fieldFooter(params.information, params.error)
 
 mixin textboxFieldForObject(inputParams, params)
