@@ -3,7 +3,8 @@ var _ = require('lodash')
   , url = require('url')
   , searchQuery = require('./search-query')
   , sortOptions = require('./sort-options')
-  , pagination = require('./pagination');
+  , pagination = require('./pagination')
+  , join = require('path').join
 
 module.exports = function routes(serviceLocator, schema, model, options) {
 
@@ -18,12 +19,12 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     , adminRoute: '/admin/'
     },
   views =
-    { form: __dirname + '/../views/generic/form'
-    , list: __dirname + '/../views/generic/list'
-    , view: __dirname + '/../views/generic/view'
+    { form: join(__dirname, '/../views/generic/form')
+    , list: join(__dirname, '/../views/generic/list')
+    , view: join(__dirname, '/../views/generic/view')
     }
   , emptyMiddleware = function (req, res, next) {
-      next();
+      next()
     }
   , middleware =
     { create: emptyMiddleware
@@ -33,9 +34,9 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     , list: emptyMiddleware
     }
 
-  options = _.extend({}, defaults, options);
-  _.extend(views, options.views);
-  _.extend(middleware, options.middleware);
+  options = _.extend({}, defaults, options)
+  _.extend(views, options.views)
+  _.extend(middleware, options.middleware)
 
   /*
    * Adds the common JavaScript
@@ -46,9 +47,9 @@ module.exports = function routes(serviceLocator, schema, model, options) {
       return serviceLocator.compact.js(
         ['global'], ['admin'],
         options.scripts[view]
-      );
+      )
     } else {
-      return serviceLocator.compact.js(['global'], ['admin']);
+      return serviceLocator.compact.js(['global'], ['admin'])
     }
   }
 
@@ -61,7 +62,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
       options.requiredAccess,
       action,
       options.adminRoute + 'login'
-    );
+    )
   }
 
   /**
@@ -72,11 +73,11 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     return Object.keys(errors).filter(function(property) {
       for (var i = 0; i < schema.groups.length; i++) {
         if ((schema.groups[i].properties[property] === undefined) || (!schema.groups[i].properties[property][formType])) {
-          return true;
+          return true
         }
       }
-      return false;
-    });
+      return false
+    })
   }
 
   var searchProperties = searchQuery.createSearchProperties(schema.groups)
@@ -85,7 +86,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         serviceLocator.logger,
         model.name
       )
-    , paginate = pagination(model.count, 10);
+    , paginate = pagination(model.count, 10)
 
   serviceLocator.router.get(
     options.adminRoute + model.slug,
@@ -111,45 +112,38 @@ module.exports = function routes(serviceLocator, schema, model, options) {
             },
             url: url.parse(req.url, true).query,
             searchProperties: searchProperties
-          });
+          })
         }
-      );
+      )
     }
-  );
+  )
 
   // This is the default view schema helpers.
   // Allows for options to be defined in the view schema as an array or a
   // function and then use in the presentation of the form.
   function schemaHelper(schema) {
     return function(req, res, next) {
-      var fn = [];
+      var fn = []
       schema.groups.forEach(function(group) {
         Object.keys(group.properties).forEach(function(key) {
           if (typeof group.properties[key].createOptions === 'function') {
             fn.push(function(callback) {
               group.properties[key].createOptions(function(options) {
-                group.properties[key].options = options;
-                callback();
-              });
-            });
+                group.properties[key].options = options
+                callback()
+              })
+            })
           }
-        });
-      });
+        })
+      })
       async.parallel(fn, function() {
-        next();
-      });
-    };
-  }
-
-  function isValidationError(error) {
-    if (error === null) {
-      return false;
+        next()
+      })
     }
-    return error.name === 'ValidationError' ? true : false;
   }
 
   function render500(next, error) {
-    return next(error);
+    return next(error)
   }
 
   serviceLocator.router.get(
@@ -171,10 +165,10 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         },
         formType: 'createForm',
         errors: {}
-      });
+      })
 
     }
-  );
+  )
 
   serviceLocator.router.post(
     options.adminRoute + model.slug + '/new',
@@ -204,17 +198,17 @@ module.exports = function routes(serviceLocator, schema, model, options) {
               formType: 'createForm',
               errors: error.errors,
               unshownErrors: listUnshownErrors(error.errors, 'createForm')
-            });
+            })
           } else if (error) {
-            render500(next);
+            render500(next)
           } else {
-            res.redirect(options.adminRoute + model.slug + '/' + object._id);
+            res.redirect(options.adminRoute + model.slug + '/' + object._id)
           }
         }
-      );
+      )
 
     }
-  );
+  )
 
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id',
@@ -226,7 +220,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         req.params.id,
         function (error, object) {
           if (error) {
-            render500(next);
+            render500(next)
           } else {
             options.renderFn(req, res, views.view, {
               viewSchema: schema,
@@ -237,10 +231,10 @@ module.exports = function routes(serviceLocator, schema, model, options) {
                 section: model.slug,
                 action: 'read'
               }
-            });
+            })
           }
-      });
-  });
+      })
+  })
 
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id/edit',
@@ -251,7 +245,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     function (req, res, next) {
       model.read(req.params.id, function (error, object) {
         if (error) {
-          render500(next, error);
+          render500(next, error)
         } else {
           options.renderFn(req, res, views.form, {
             viewSchema: schema,
@@ -265,11 +259,11 @@ module.exports = function routes(serviceLocator, schema, model, options) {
             formType: 'updateForm',
             errors: {},
             unshownErrors: []
-          });
+          })
         }
-      });
+      })
     }
-  );
+  )
 
   serviceLocator.router.post(
     options.adminRoute + model.slug + '/:id/edit',
@@ -297,16 +291,16 @@ module.exports = function routes(serviceLocator, schema, model, options) {
               formType: 'updateForm',
               errors: error.errors,
               unshownErrors: listUnshownErrors(error.errors, 'updateForm')
-            });
+            })
           } else if (error) {
-            render500(next, error);
+            render500(next, error)
           } else {
-            res.redirect(options.adminRoute + model.slug + '/' + object._id);
+            res.redirect(options.adminRoute + model.slug + '/' + object._id)
           }
         }
-      );
+      )
     }
-  );
+  )
 
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id/delete',
@@ -315,11 +309,11 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     function(req, res) {
       model['delete'](req.params.id, function(error) {
         if (error !== undefined) {
-          res.send(404);
+          res.send(404)
         } else {
-          res.redirect(options.adminRoute + model.slug);
+          res.redirect(options.adminRoute + model.slug)
         }
-      });
+      })
     }
-  );
-};
+  )
+}

@@ -1,5 +1,4 @@
-module.exports = function createRoutes (serviceLocator, bundleViewPath) {
-
+module.exports = function createRoutes (serviceLocator) {
   serviceLocator.admin.routes(
     serviceLocator,
     require('./admin-view-config')(serviceLocator),
@@ -9,5 +8,5 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       requiredAccess: 'Administrator',
       renderFn: serviceLocator.admin.viewRender()
     }
-  );
-};
+  )
+}

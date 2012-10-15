@@ -1,10 +1,11 @@
-var _ = require('lodash');
+var _ = require('lodash')
 
 function pass(action, req, res, next) {
-  next();
+  next()
 }
 
 module.exports = function generateRestApi(app, model, options) {
+
   options = _.extend({
     before:   pass,
     base:     '/',
@@ -14,102 +15,102 @@ module.exports = function generateRestApi(app, model, options) {
     create:   true,
     update:   true,
     'delete': true
-  }, options);
+  }, options)
 
   function before(action) {
     return function(req, res, next) {
-      options.before(action, req, res, next);
-    };
+      options.before(action, req, res, next)
+    }
   }
 
-  function methodNotAllowed(req, res, next) {
-    res.status(405);
-    res.json({ error: 'Method Not Allowed' });
+  function methodNotAllowed(req, res) {
+    res.status(405)
+    res.json({ error: 'Method Not Allowed' })
   }
 
   if (options.list) {
-    app.get(options.base, before('list'), function(req, res, next) {
+    app.get(options.base, before('list'), function(req, res) {
       model.find({}).toArray(function(err, entities) {
         if (err) {
-          res.status(500);
-          res.json({ error: (options.explain ? err.message : 'Internal Server Error') });
+          res.status(500)
+          res.json({ error: (options.explain ? err.message : 'Internal Server Error') })
         } else {
-          res.status(200);
-          res.json({ error: null, result: entities });
+          res.status(200)
+          res.json({ error: null, result: entities })
         }
-      });
-    });
+      })
+    })
   } else {
-    app.get(options.base, methodNotAllowed);
+    app.get(options.base, methodNotAllowed)
   }
 
   if (options.create) {
-    app.post(options.base, before('create'), function(req, res, next) {
+    app.post(options.base, before('create'), function(req, res) {
       model.create(req.body, { tag: 'create' }, function(err, entity) {
         if (err) {
-          res.status(500);
-          res.json({ error: (options.explain ? err.message : 'Internal Server Error') });
+          res.status(500)
+          res.json({ error: (options.explain ? err.message : 'Internal Server Error') })
         } else {
-          res.status(200);
-          res.json({ error: null, result: entity });
+          res.status(200)
+          res.json({ error: null, result: entity })
         }
-      });
-    });
+      })
+    })
   } else {
-    app.post(options.base, methodNotAllowed);
+    app.post(options.base, methodNotAllowed)
   }
 
   if (options.read) {
-    app.get(options.base + '/:id', before('read'), function(req, res, next) {
+    app.get(options.base + '/:id', before('read'), function(req, res) {
       model.findOne(req.params.id, function(err, entity) {
         if (err) {
-          res.status(500);
-          res.json({ error: (options.explain ? err.message : 'Internal Server Error') });
+          res.status(500)
+          res.json({ error: (options.explain ? err.message : 'Internal Server Error') })
         } else if (!entity) {
-          res.status(404);
-          res.json({ error: 'Not Found' });
+          res.status(404)
+          res.json({ error: 'Not Found' })
         } else {
-          res.status(200);
-          res.json({ error: null, result: entity });
+          res.status(200)
+          res.json({ error: null, result: entity })
         }
-      });
-    });
+      })
+    })
   } else {
-    app.get(options.base + '/:id', methodNotAllowed);
+    app.get(options.base + '/:id', methodNotAllowed)
   }
 
   if (options.update) {
-    app.put(options.base + '/:id', before('update'), function(req, res, next) {
+    app.put(options.base + '/:id', before('update'), function(req, res) {
       model.update(req.params.id, req.body, { tag: 'update' }, function(err, entity) {
         if (err) {
-          res.status(500);
-          res.json({ error: (options.explain ? err.message : 'Internal Server Error') });
+          res.status(500)
+          res.json({ error: (options.explain ? err.message : 'Internal Server Error') })
         } else if (!entity) {
-          res.status(404);
-          res.json({ error: 'Not Found' });
+          res.status(404)
+          res.json({ error: 'Not Found' })
         } else {
-          res.status(200);
-          res.json({ error: null, result: entity });
+          res.status(200)
+          res.json({ error: null, result: entity })
         }
-      });
-    });
+      })
+    })
   } else {
-    app.put(options.base + '/:id', methodNotAllowed);
+    app.put(options.base + '/:id', methodNotAllowed)
   }
 
   if (options['delete']) {
-    app['delete'](options.base + '/:id', before('delete'), function(req, res, next) {
+    app['delete'](options.base + '/:id', before('delete'), function(req, res) {
       model['delete'](req.params.id, function(err) {
         if (err) {
-          res.status(500);
-          res.json({ error: (options.explain ? err.message : 'Internal Server Error') });
+          res.status(500)
+          res.json({ error: (options.explain ? err.message : 'Internal Server Error') })
         } else {
-          res.status(200);
-          res.json({ error: null });
+          res.status(200)
+          res.json({ error: null })
         }
-      });
-    });
+      })
+    })
   } else {
-    app['delete'](options.base + '/:id', methodNotAllowed);
+    app['delete'](options.base + '/:id', methodNotAllowed)
   }
-};
+}

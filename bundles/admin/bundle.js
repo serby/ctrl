@@ -1,5 +1,4 @@
-var _ = require('lodash')
-  ;
+var join = require('path').join
 
 module.exports = {
   name: 'Admin',
@@ -11,14 +10,14 @@ module.exports = {
       return function(req, res, next) {
 
         res.locals.adminIsAllowed = function (resource, action) {
-          return serviceLocator.adminAccessControl.isAllowed(req, resource, action);
-        };
+          return serviceLocator.adminAccessControl.isAllowed(req, resource, action)
+        }
 
         if (serviceLocator.adminAccessControl.isAllowed(req, 'Admin Bar', 'read')) {
-          res.bodyStart = [__dirname + '/views/admin-bar.jade'];
+          res.bodyStart = [__dirname + '/views/admin-bar.jade']
         }
-        next();
-      };
+        next()
+      }
     }
   ],
   initialize: [
@@ -26,62 +25,65 @@ module.exports = {
     function(serviceLocator, done) {
 
       // Register the admin view helpers for global use
-      serviceLocator.viewHelpers.querystring = require('./lib/pagination-helpers');
+      serviceLocator.viewHelpers.querystring = require('./lib/pagination-helpers')
 
       // Register the generic route creator for other admin bundles to use.
       serviceLocator.register('admin',
         { routes: require('./lib/routes')
         , viewConfig: require('./lib/view-config')
         , viewRender: require('./lib/view-render')
-        });
+        })
 
       // Adding this bundle registers the admin acl
       serviceLocator.register('adminAccessControlList',
-        require('secure/access-control-list')(serviceLocator.logger));
-      done();
+        require('secure/access-control-list')(serviceLocator.logger))
+      done()
     },
     function(serviceLocator, done) {
 
       // The resource you need access of see the admin bundles
-      serviceLocator.adminAccessControlList.addResource('Admin');
-      serviceLocator.adminAccessControlList.addResource('Admin Bar');
+      serviceLocator.adminAccessControlList.addResource('Admin')
+      serviceLocator.adminAccessControlList.addResource('Admin Bar')
 
       // This controls the authentication and authorisation of the admin
       serviceLocator.register('adminAccessControl',
         require('secure/access-control')(
-          serviceLocator.administratorModel.authenticate, serviceLocator.adminAccessControlList,
+          serviceLocator.administratorModel.authenticate,
+          serviceLocator.adminAccessControlList,
           {}, 'admin', serviceLocator.logger,
-          function(req, res, resource, action, next) {
-            res.redirect('/admin/login');
-          }));
-      done();
+          function(req, res) {
+            // If session hasn't got authorization to view route show login
+            res.redirect('/admin/login')
+          }))
+      done()
     },
     function(serviceLocator, done) {
 
-      var compact = serviceLocator.compact;
+      var compact = serviceLocator.compact
 
       compact.addNamespace('admin', __dirname + '/public')
         .addJs('/js/lib/chosen/chosen.jquery.js')
         .addJs('/js/lib/fancybox/jquery.fancybox.pack.js')
         .addJs('/js/admin.js')
-        ;
 
-      // Create controller
-      require('./controller')(serviceLocator, __dirname + '/views');
-      done();
+
+      // Define the routes
+      require('./controller')(serviceLocator, join(__dirname, '/views'))
+      done()
     },
     function(serviceLocator, done) {
 
-      // This is watch recompiles your stylus. Any that you need to compile to CSS
-      // need to be defined here. This is quicker than the standard middleware.
+      // This is watch recompiles your stylus. Any that you need to compile to
+      // CSS need to be defined here. This is quicker than the standard
+      // middleware.
       var w = serviceLocator.stylusWatch(__dirname + '/public/css/index.styl',
-      { compile: serviceLocator.stylusCompile });
+        { compile: serviceLocator.stylusCompile })
 
       w.on('compile', function(filename) {
-        serviceLocator.logger.silly('Compiling ' + filename);
-      });
+        serviceLocator.logger.silly('Compiling ' + filename)
+      })
 
-      done();
+      done()
     }
   ]
-};
+}
