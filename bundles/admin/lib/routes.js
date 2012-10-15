@@ -142,10 +142,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     }
   }
 
-  function render500(next, error) {
-    return next(error)
-  }
-
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/new',
     compactMiddleware('form'),
@@ -200,7 +196,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
               unshownErrors: listUnshownErrors(error.errors, 'createForm')
             })
           } else if (error) {
-            render500(next)
+            return next(error)
           } else {
             res.redirect(options.adminRoute + model.slug + '/' + object._id)
           }
@@ -220,7 +216,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         req.params.id,
         function (error, object) {
           if (error) {
-            render500(next)
+            return next(error);
           } else {
             options.renderFn(req, res, views.view, {
               viewSchema: schema,
@@ -245,7 +241,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     function (req, res, next) {
       model.read(req.params.id, function (error, object) {
         if (error) {
-          render500(next, error)
+          return next(error)
         } else {
           options.renderFn(req, res, views.form, {
             viewSchema: schema,
@@ -293,7 +289,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
               unshownErrors: listUnshownErrors(error.errors, 'updateForm')
             })
           } else if (error) {
-            render500(next, error)
+            return next(error)
           } else {
             res.redirect(options.adminRoute + model.slug + '/' + object._id)
           }
