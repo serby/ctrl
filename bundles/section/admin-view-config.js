@@ -13,7 +13,7 @@ module.exports = function(serviceLocator) {
       properties: {
         _id: {
           // Show on the create and edit form
-          form: true,
+          updateForm: true,
           // The input type on the form
           type: 'hidden'
         },
