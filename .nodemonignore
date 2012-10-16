@@ -3,3 +3,7 @@ data/*
 .git
 */public/*
 */views/
+
+*.md
+*.css
+*.styl

@@ -1,7 +1,6 @@
+window.module('control-misc-ui', function (module) {
 
-module('control-misc-ui', function (module) {
-
-  $(document).ready(function() {
+  $(function() {
 
     // /** jQuery UI Datepicker **/
     // $.datepicker.setDefaults({dayNamesMin: $.datepicker._defaults.dayNamesShort});
@@ -195,4 +194,4 @@ module('control-misc-ui', function (module) {
 
 });
 
-require('control-misc-ui');
+window.require('control-misc-ui');

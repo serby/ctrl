@@ -1,25 +1,22 @@
-var async = require('async')
-  , bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt')
   , crypto = require('crypto')
   , validity = require('validity')
   , schemata = require('schemata')
   , crudModel = require('crud-model')
-  ;
 
 module.exports = function(serviceLocator) {
 
   var save = serviceLocator.saveFactory.administrator()
     , properties = serviceLocator.properties
-    ;
 
   function duplicateEmailValidator(key, errorProperty, object, callback) {
     save.findOne({ emailAddress: object.emailAddress }, function(error, found) {
       if (error) {
-        return callback(error);
+        return callback(error)
       }
       callback(undefined, found && found._id.toString() !== object._id ?
-        object.emailAddress + ' already in use' : undefined);
-    });
+        object.emailAddress + ' already in use' : undefined)
+    })
   }
 
   var schema = schemata({
@@ -55,76 +52,72 @@ module.exports = function(serviceLocator) {
       tag: ['update']
     },
     created: {
-      defaultValue: function() { return new Date(); }
+      defaultValue: function() { return new Date() }
     }
-  });
+  })
 
-  var model = crudModel('Administrator', save, schema);
+  var model = crudModel('Administrator', save, schema)
 
   if (typeof properties.bcryptWorkFactor === 'number' && properties.bcryptWorkFactor >= 1) {
-    properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor);
+    properties.bcryptWorkFactor = Math.round(properties.bcryptWorkFactor)
   } else {
-    properties.bcryptWorkFactor = 1;
+    properties.bcryptWorkFactor = 1
   }
 
   function bcryptHash(value, callback) {
-    bcrypt.hash(value, properties.bcryptWorkFactor, callback);
-  }
-
-  function bcryptCompare(value, hash, callback) {
-    bcrypt.compare(value, hash, callback);
+    bcrypt.hash(value, properties.bcryptWorkFactor, callback)
   }
 
   function passwordHasher(entity, callback) {
     if (entity.password) {
       bcryptHash(entity.password, function(err, hash) {
         if (err) {
-          callback(err);
+          callback(err)
         } else {
-          entity.password = hash;
-          callback(null, entity);
+          entity.password = hash
+          callback(null, entity)
         }
-      });
+      })
     } else {
-      callback(null, entity);
+      callback(null, entity)
     }
   }
 
   function authenticate(credentials, callback) {
     save.findOne({ emailAddress: credentials.emailAddress }, function(err, entity) {
       if (err) {
-        return callback(err, credentials);
+        return callback(err, credentials)
       } else if (!entity) {
-        return callback(new Error('Wrong Email and password combination.'), credentials);
+        return callback(new Error('Wrong Email and password combination.'), credentials)
       }
 
       bcrypt.compare(credentials.password, entity.password, function(err, match) {
         if (err) {
-          return callback(err, credentials);
+          return callback(err, credentials)
         } else if (!match) {
-          return callback(new Error('Wrong Email and password combination.'), credentials);
+          return callback(new Error('Wrong Email and password combination.'), credentials)
         }
 
-        return callback(undefined, entity);
-      });
-    });
+        return callback(undefined, entity)
+      })
+    })
   }
 
   function dontSetBlankPassword(entity, callback) {
     if (entity.password === '') {
-      delete entity.password;
+      delete entity.password
     }
-    callback(undefined, entity);
+    callback(undefined, entity)
   }
 
   function hashAdminState(admin) {
-    var str = admin.created + ':' + admin.emailAddress + ':' + admin.password;
-    return crypto.createHash('sha1').update(str).digest('hex');
+    var str = admin.created + ':' + admin.emailAddress + ':' + admin.password
+    return crypto.createHash('sha1').update(str).digest('hex')
   }
 
   function requestPasswordChange(entity, callback) {
     var hash = hashAdminState(entity)
-      , url = properties.siteUrl + '/admin/change-password?token=' + hash;
+      , url = properties.siteUrl + '/admin/change-password?token=' + hash
 
     var mail = {
       to: entity.emailAddress,
@@ -133,30 +126,30 @@ module.exports = function(serviceLocator) {
       html: '<!doctype html><html><body>To complete the password changing process for your account at ' +
             properties.name + ', please click the link below.<br>If you no longer need to change your ' +
             'password, no action is required.<br><br><a href="' + url + '">' + url + '</a></body></html>'
-    };
+    }
 
-    serviceLocator.mailer.sendMail(mail, callback);
+    serviceLocator.mailer.sendMail(mail, callback)
   }
 
   function findByHash(hash, callback) {
     save.find({}, {}, function(err, admins) {
       if (err) {
-        return callback(err);
+        return callback(err)
       }
 
-      var match = null;
+      var match = null
 
       admins.every(function(admin) {
         if (hashAdminState(admin) === hash) {
-          match = admin;
+          match = admin
         }
 
         // continue until we find a match
-        return (match != null);
-      });
+        return (match != null)
+      })
 
-      callback(null, match);
-    });
+      callback(null, match)
+    })
   }
 
   /**
@@ -165,25 +158,25 @@ module.exports = function(serviceLocator) {
    */
   function createWithFullAccess(administratorDetails, callback) {
 
-    administratorDetails.roles = ['root'];
+    administratorDetails.roles = ['root']
 
-    model.create(administratorDetails, {}, callback);
+    model.create(administratorDetails, {}, callback)
   }
 
   model.pre('createValidate', function(entity, callback) {
-    callback(null, schema.makeDefault(entity));
-  });
+    callback(null, schema.makeDefault(entity))
+  })
 
-  model.pre('create', passwordHasher);
-  model.pre('update', passwordHasher);
-  model.pre('update', dontSetBlankPassword);
+  model.pre('create', passwordHasher)
+  model.pre('update', passwordHasher)
+  model.pre('update', dontSetBlankPassword)
 
-  model.authenticate = authenticate;
-  model.requestPasswordChange = requestPasswordChange;
-  model.findByHash = findByHash;
-  model.createWithFullAccess = createWithFullAccess;
+  model.authenticate = authenticate
+  model.requestPasswordChange = requestPasswordChange
+  model.findByHash = findByHash
+  model.createWithFullAccess = createWithFullAccess
 
-  model.findOne = save.findOne;
+  model.findOne = save.findOne
 
-  return model;
-};
+  return model
+}

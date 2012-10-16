@@ -1,4 +1,4 @@
-module.exports = function createRoutes (serviceLocator, bundleViewPath) {
+module.exports = function createRoutes (serviceLocator) {
 
   serviceLocator.admin.routes(
     serviceLocator,
@@ -8,5 +8,5 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       requiredAccess: 'Role',
       renderFn: serviceLocator.admin.viewRender()
     }
-  );
-};
+  )
+}

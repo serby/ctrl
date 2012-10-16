@@ -4,6 +4,9 @@
   "main": "app.js",
   "version": "0.1.0",
   "engine": "~0.8",
+  "scripts": {
+    "test": "make qa"
+  },
   "dependencies": {
     "async": "~0.1",
     "bcrypt": "~0.7",

@@ -7,7 +7,7 @@ module.exports = function createServer(serviceLocator) {
     , app
     , bundles = require('./bundles.json')
     , versionator = require('versionator').createBasic('v' + properties.version)
-    ;
+
 
   // Register the global services needed by your entire application
   serviceLocator
@@ -16,41 +16,41 @@ module.exports = function createServer(serviceLocator) {
     .register('widgetManager', require('./lib/widget-manager/widget-manager').createWidgetManager({ logger: serviceLocator.logger }))
     .register('viewHelpers', {})
     .register('versionator', versionator)
-    ;
 
-  serviceLocator.logger.info('Starting \'' + properties.name + '\'');
+
+  serviceLocator.logger.info('Starting \'' + properties.name + '\'')
 
   bundled.addBundles(__dirname + '/bundles/',
     bundles
-  );
+  )
 
-  app = require('./lib/web-stack')(serviceLocator, sessionDatabaseAdaptor);
+  app = require('./lib/web-stack')(serviceLocator, sessionDatabaseAdaptor)
 
-  serviceLocator.register('app', app);
-  serviceLocator.register('router', app);
+  serviceLocator.register('app', app)
+  serviceLocator.register('router', app)
 
   databaseAdaptor.createConnection(function(connection) {
 
     serviceLocator
       .register('databaseConnections', {
         main: connection
-    });
+    })
 
-    bundled.initialize(function(error) {
+    bundled.initialize(function() {
 
       // Make the bundle manager available to views
       app.locals(
         { bundled: bundled
         , serviceLocator: serviceLocator
         , properties: properties
-        });
+        })
 
       // Add helpers
-      require('./lib/view-helpers.js')(serviceLocator, app);
+      require('./lib/view-helpers.js')(serviceLocator, app)
 
-      app.start();
+      app.start()
 
-    });
+    })
 
-  });
-};
+  })
+}

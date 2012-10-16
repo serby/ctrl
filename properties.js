@@ -1,19 +1,20 @@
 var _ = require('lodash')
   , basePort = 3020
+  , join = require('path').join
 
-var properties = {
-    version: '0.1.0'
+var properties =
+  { version: '0.1.0'
   , name: 'ctrl'
-  , tagline: 'ctrl CMS by Paul Serby'
-  , description: 'This is the initial config'
+  , tagline: 'More JavaScripty than your traditional CMS'
+  , description: 'A node.js CMS for quickly building powerful web sites, tailored to your exact needs'
   , keywords: 'ctrl'
   , pageTitle: 'ctrl CMS'
   , port: basePort + 1
   , email: 'paul.serby@clock.co.uk'
   , siteUrl: 'http://localhost:' + (basePort + 1)
-  , logPath: __dirname + '/logs'
-  , cachePath: __dirname + '/cache'
-  , dataPath: __dirname + '/data'
+  , logPath: join(__dirname, '/logs')
+  , cachePath: join(__dirname, '/cache')
+  , dataPath: join(__dirname, '/data')
   , binaryCachePath: '/binary/'
   , database:
     { host: '127.0.0.1'

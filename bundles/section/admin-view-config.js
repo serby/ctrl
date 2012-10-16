@@ -9,11 +9,11 @@ module.exports = function(serviceLocator) {
       // Sections will display the 'name'
       // and 'description' on the form and view page.
       name: 'Section Details',
-      description: 'These are the details for a Section',
+      description: 'These are the sections of your site. ie. /about /blog etc.',
       properties: {
         _id: {
           // Show on the create and edit form
-          form: true,
+          updateForm: true,
           // The input type on the form
           type: 'hidden'
         },

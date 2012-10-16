@@ -1,6 +1,4 @@
-module.exports = function createRoutes (serivceLocator, bundleViewPath) {
-  var viewRender = serivceLocator.viewRender(bundleViewPath);
-
+module.exports = function createRoutes (serivceLocator) {
   serivceLocator.router.get('/', function(req, res) {
     res.render(__dirname + '/views/index', {
       page: {
@@ -8,7 +6,6 @@ module.exports = function createRoutes (serivceLocator, bundleViewPath) {
         title: 'Home ',
         section: 'home'
       }
-    });
-  });
-
-};
+    })
+  })
+}

@@ -60,10 +60,12 @@ module.exports = function(serviceLocator) {
       }
     },
     live: {
-      type: Boolean
+      type: Boolean,
+      defaultValue: false
     },
     comments: {
-      type: Boolean
+      type: Boolean,
+      defaultValue: true
     },
     images: {
       type: Array
@@ -95,17 +97,20 @@ module.exports = function(serviceLocator) {
     callback(null, schema.makeDefault(entity))
   })
 
+  model.pre('createValidate', function(entity, callback) {
+    callback(null, schema.makeDefault(entity))
+  })
+
   function addPath(entity, callback) {
     entity.path = '/' + entity.section + '/' + entity.slug
     callback(null, entity)
   }
 
-  model.pre('createValidate', function(entity, callback) {
-    callback(null, schema.makeDefault(entity))
-  })
   model.pre('createValidate', addPath)
   model.pre('updateValidate', addPath)
 
+  // This should always be called by the frontend to ensure only live articles
+  // are shown.
   function findLive(query, options, callback) {
 
     // Ensuring all queries shown to the front end are live
