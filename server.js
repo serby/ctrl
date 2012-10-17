@@ -1,8 +1,9 @@
 module.exports = function createServer(serviceLocator) {
 
   var properties = serviceLocator.properties
-    , databaseAdaptor = require('./lib/database')(serviceLocator)
-    , sessionDatabaseAdaptor = require('./lib/database')(serviceLocator)
+    , createAdaptor = require('./lib/database/create-adaptor')
+    , databaseAdaptor = createAdaptor(serviceLocator)
+    , sessionDatabaseAdaptor = createAdaptor(serviceLocator)
     , bundled
     , app
     , bundles = require('./bundles.json')
@@ -29,7 +30,12 @@ module.exports = function createServer(serviceLocator) {
   serviceLocator.register('app', app)
   serviceLocator.register('router', app)
 
-  databaseAdaptor.createConnection(function(connection) {
+  databaseAdaptor.createConnection(function(error, connection) {
+
+    if (error) {
+      // Die the database can't be connected to
+      process.exit(1)
+    }
 
     serviceLocator
       .register('databaseConnections', {
