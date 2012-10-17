@@ -38,8 +38,7 @@
     "validity": "~0.0",
     "versionator": "~0.1",
     "winston": "~0.5",
-    "secure": "*",
-    "send": "~0.1.0"
+    "secure": "*"
   },
   "devDependencies": {
     "mocha": "*",
