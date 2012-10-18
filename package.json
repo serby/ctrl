@@ -18,30 +18,29 @@
     "express": "~3.0",
     "express-validator": "~0.2",
     "fileupload": "~0.2",
-    "jade": "~0",
-    "lodash": "~0.6",
-    "markdown": "~0.3",
+    "jade": "~0.27",
+    "lodash": "~0.8",
+    "markdown": "~0.4",
     "mime": "~1.2",
-    "mkdirp": "~0.3",
     "mongodb": "~0.9",
-    "nib": "~0.4",
+    "nib": "~0.8",
     "nodemailer": "~0.3",
-    "piton-pipe": "~0.0",
     "rss": "~0.0",
     "save": "~0.0",
     "save-mongodb": "~0.0",
     "schemata": "~0.0",
     "service-locator": "~0.0",
-    "st": "~0.0.7",
-    "stylus": "~0.29",
-    "trunky": "~0.1",
+    "st": "~0.0.9",
+    "stylus": "~0.30",
+    "trunky": "~0.2",
     "validity": "~0.0",
-    "versionator": "~0.1",
-    "winston": "~0.5",
-    "secure": "*"
+    "versionator": "~0.2",
+    "winston": "~0.6",
+    "winston-loggly": "~0.6",
+    "secure": "~0.1"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "mocha": "~1.6",
+    "should": "~1.2"
   }
 }
