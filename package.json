@@ -36,6 +36,7 @@
     "validity": "~0.0",
     "versionator": "~0.2",
     "winston": "~0.6",
+    "winston-loggly": "~0.6",
     "secure": "~0.1"
   },
   "devDependencies": {
