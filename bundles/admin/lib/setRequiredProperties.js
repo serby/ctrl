@@ -10,12 +10,12 @@ module.exports = function(schema, viewSchema) {
       Object.keys(viewSchema.groups[groupValue].properties).forEach(function(propertyValue){
         if (value === propertyValue && schema[value].required) {
           if (typeof viewSchema.groups[groupValue].properties[propertyValue].required === 'undefined') {
-            viewSchema.groups[groupValue].properties[propertyValue].required = true;
+            viewSchema.groups[groupValue].properties[propertyValue].required = true
           }
         }
-      });
-    });
-  });
+      })
+    })
+  })
 
-  return viewSchema;
-};
+  return viewSchema
+}

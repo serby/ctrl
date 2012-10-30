@@ -219,7 +219,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         req.params.id,
         function (error, object) {
           if (error) {
-            return next(error);
+            return next(error)
           } else {
             options.renderFn(req, res, views.view, {
               viewSchema: schema,

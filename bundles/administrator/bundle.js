@@ -1,6 +1,6 @@
 var save = require('save')
   , saveMongodb = require('save-mongodb')
-  ;
+
 
 module.exports = {
   name: 'Administrator',
@@ -32,27 +32,27 @@ module.exports = {
       serviceLocator.databaseConnections.main.collection('administrator', function(error, collection) {
         serviceLocator.saveFactory.administrator = function() {
           return save('administrator', { logger: serviceLocator.logger,
-            engine: saveMongodb(collection)});
-        };
-        done();
-      });
+            engine: saveMongodb(collection)})
+        }
+        done()
+      })
 
     },
     function(serviceLocator, done) {
 
       // Register the bundles models
       serviceLocator.register('administratorModel',
-        require('./lib/model')(serviceLocator));
+        require('./lib/model')(serviceLocator))
 
       // The resource you need access of see the admin bundles
-      serviceLocator.adminAccessControlList.addResource('Administrator');
-      done();
+      serviceLocator.adminAccessControlList.addResource('Administrator')
+      done()
     },
     function(serviceLocator, done) {
       // Create controllers
-      require('./controller')(serviceLocator, __dirname + '/views');
+      require('./controller')(serviceLocator, __dirname + '/views')
 
-      done();
+      done()
     }
   ]
-};
+}

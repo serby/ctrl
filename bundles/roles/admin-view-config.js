@@ -24,18 +24,18 @@ module.exports = function(serviceLocator) {
           updateForm: true,
           type: 'groupedMultiselect',
           createOptions: function(callback) {
-            var options = [];
+            var options = []
             Object.keys(serviceLocator.adminAccessControlList.acl).forEach(function(value) {
-              var aclItem = serviceLocator.adminAccessControlList.acl[value];
+              var aclItem = serviceLocator.adminAccessControlList.acl[value]
               var option = {
                 label: value,
                 value: value,
                 description: aclItem.description,
                 items: Object.keys(aclItem.actions)
-              };
-              options.push(option);
-            });
-            callback(null, options);
+              }
+              options.push(option)
+            })
+            callback(null, options)
           }
         },
         created: {
@@ -46,16 +46,16 @@ module.exports = function(serviceLocator) {
       }
     }],
     formPostHelper: function(req, res, next) {
-      var newGrants = {};
+      var newGrants = {}
 
       if (typeof req.body.grants !== 'undefined' && Object.keys(req.body.grants).length !== 0) {
         Object.keys(req.body.grants).forEach(function(grant) {
-          newGrants[grant] = Array.isArray(req.body.grants[grant]) ? req.body.grants[grant] : [req.body.grants[grant]];
-        });
-        req.body.grants = newGrants;
+          newGrants[grant] = Array.isArray(req.body.grants[grant]) ? req.body.grants[grant] : [req.body.grants[grant]]
+        })
+        req.body.grants = newGrants
       }
 
-      next();
+      next()
     }
-  });
-};
+  })
+}
