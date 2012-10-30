@@ -128,7 +128,10 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         Object.keys(group.properties).forEach(function(key) {
           if (typeof group.properties[key].createOptions === 'function') {
             fn.push(function(callback) {
-              group.properties[key].createOptions(function(options) {
+              group.properties[key].createOptions(function(error, options) {
+                if (error) {
+                  return callback(error)
+                }
                 group.properties[key].options = options
                 callback()
               })
@@ -136,8 +139,8 @@ module.exports = function routes(serviceLocator, schema, model, options) {
           }
         })
       })
-      async.parallel(fn, function() {
-        next()
+      async.parallel(fn, function(error) {
+        next(error)
       })
     }
   }

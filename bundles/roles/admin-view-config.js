@@ -35,7 +35,7 @@ module.exports = function(serviceLocator) {
               };
               options.push(option);
             });
-            callback(options);
+            callback(null, options);
           }
         },
         created: {
