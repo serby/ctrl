@@ -30,7 +30,7 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
       if (section === null) {
         return next()
       }
-      viewRender(req, res, 'section', {
+      viewRender(req, res, 'index', {
         page: {
           title: section.name ,
           section: section.slug
