@@ -7,9 +7,8 @@ mixin subItems(items)
             a(href=navSubItem.url)= navSubItem.label
             mixin subItems(navSubItem.items)
 
-#main-nav
-  ul#admin-nav
-
+nav.main-navigation
+  ul
     li(class= page.section =='admin' ? 'nav-active' : ''): a(href='/admin') Admin Home
     - var adminNav = bundled.get('adminNav')
     each navItem in adminNav
