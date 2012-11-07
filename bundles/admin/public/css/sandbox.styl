@@ -1,0 +1,187 @@
+//
+// Nothing should ever find a home in this file
+// It is for prototyping only
+//
+
+
+
+fieldset,
+[class^="panel"]
+  margin-bottom $baseLineHeight
+
+  h3
+    position relative
+    text-transform uppercase
+    border-bottom 3px solid #ccc
+    padding-bottom 10px
+
+fieldset.actions
+  text-align right
+  background-color transparent
+  padding 0 20px
+  margin-bottom $baseLineHeight
+  box-shadow none
+
+.page-actions
+  position absolute
+  top 44px
+  right 0
+
+  li
+    float left
+    margin-left 10px
+
+.filter-form
+  position absolute
+  top 7px
+  right 20px
+  form
+    width auto
+
+  label
+    position relative
+    display inline
+    strong
+      display none
+    input
+      width 150px
+      height 26px
+      padding 3px 10px
+      padding-left 10px
+      border-right 0
+      border-radius 30px 0 0 30px
+
+      &:hover
+        border-color darken($baseBorderColor, 10)
+      &:active,
+      &:focus
+        border-color darken($baseBorderColor, 10)
+        box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
+
+    a.reset
+      position absolute
+      display block
+      top 6px
+      right 5px
+      width 12px
+      height 12px
+      text-indent -9999px
+      overflow hidden
+      background-image versionPath("/admin/images/content/ui-sprite.png")
+      background-position -70px -2px
+      background-repeat no-repeat
+      &:hover
+        background-position -100px -2px
+
+  input.button
+    height 26px
+    width 28px
+    text-indent -9999px
+    font-size 0px
+    line-height 0px
+    background-image versionPath("/admin/images/content/ui-sprite.png")
+    background-position -120px 4px
+    background-repeat no-repeat
+    border-radius 0 30px 30px 0
+    &:active
+      top 0
+      border-color darken($baseBorderColor, 10)
+      box-shadow none
+
+/** TEMP table control styles **/
+td
+  vertical-align top
+  padding-top 10px
+  a
+    color $globalColor
+    text-decoration none
+    &:hover
+      text-decoration underline
+  .row-actions,
+  .row-actions-block
+    display inline
+    margin-top 4px
+    margin-left 20px
+    padding 0
+    font-size 12px
+    opacity 0
+    transition opacity 0.2s ease
+    li
+      margin 0 10px 0 0
+      padding 0
+      list-style none
+      display inline
+      a
+  .row-actions-block
+    display block
+    margin-left 0
+tr:hover td
+  .row-actions,
+  .row-actions-block
+    opacity 1
+/* Fading Inline Row Controls */
+td.title
+  strong
+    font-size 14px
+
+
+/**/
+.admin-ui
+  .main-content
+    section
+      float left
+      width 100%
+      clear left
+      padding-top 10px
+      margin-top 8px
+      h1
+        font-size 2em
+        border-bottom 2px solid #bbb
+        padding-bottom 5px
+        margin-bottom 30px
+      .breadcrumb
+        display none
+
+/**/
+
+section:target
+  margin-left -18px
+  margin-right -18px
+  padding-left 17px
+  padding-right 17px
+  border 1px solid transparent
+  border-radius 5px
+  -webkit-animation-name target-highlight
+  -webkit-animation-duration 2.5s
+  -webkit-animation-iteration-count
+  -webkit-animation-timing-function ease-in-out
+
+@-webkit-keyframes target-highlight
+  0%
+    background-color rgba($primaryColor, 0)
+    border-color rgba($primaryColor, 0)
+  20%
+    background-color rgba($primaryColor, 0.2)
+    border-color rgba($primaryColor, 0.4)
+  100%
+    background-color rgba($primaryColor, 0)
+    border-color rgba($primaryColor, 0)
+
+
+/* Code snippets */
+pre code
+  font-family 'Menlo', 'Monaco', monospace
+  color #444
+  border 1px solid #ccc
+  background-color #fff
+  padding 20px
+  display block
+
+/** Login Page **/
+.login
+  #main-content
+    margin 0 200px
+
+.password-reset
+  float left
+  margin-top 6px

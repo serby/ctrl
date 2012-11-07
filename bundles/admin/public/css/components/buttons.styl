@@ -1,0 +1,90 @@
+/** Buttons **/
+
+button
+  box-sizing border-box
+
+button,
+.button
+  position relative
+  display inline-block
+  width auto
+  padding 8px 16px
+  font-size 1em
+  line-height 1.2
+  font-weight bold
+  background-color $buttonColor
+  text-decoration none
+  outline 0 /* Be sure to set a focus style if using this */
+  cursor pointer
+  border 1px solid darken($buttonColor, 15%)
+  box-shadow 0 0 0 1px lighten($buttonColor, 40%) inset
+  if dark($buttonColor)
+    color #fff /* TODO - move to variable */
+  else
+    color #777 /* TODO - move to variable */
+
+  &:hover
+    background-color darken($buttonColor, 10%)
+    color #555
+  &:active,
+  &:focus
+    top 1px
+    background-color darken($buttonColor, 10%)
+
+  &.primary
+    background-color $primaryColor
+    border 1px solid darken($primaryColor, 15%)
+    box-shadow 0 0 0 1px lighten($primaryColor, 20%) inset
+    if dark($primaryColor)
+      color #fff /* TODO - move to variable */
+    else
+      color #333 /* TODO - move to variable */
+    &:hover
+      background-color lighten($primaryColor, 10%)
+    &:active,
+    &:focus
+      background-color darken($primaryColor, 10%)
+
+  &.success
+    background-color $successColor
+    border 1px solid darken($successColor, 10%)
+    box-shadow 0 0 0 1px lighten($successColor, 30%) inset
+    color #FFFFFF
+    &:hover
+      background-color lighten($successColor, 10%)
+    &:active,
+    &:focus
+      background-color darken($successColor, 10%)
+
+  &.notice
+    background-color $noticeColor
+    border 1px solid darken($noticeColor, 10%)
+    box-shadow 0 0 0 1px lighten($noticeColor, 30%) inset
+    color #FFFFFF
+    &:hover
+      background-color lighten($noticeColor, 10%)
+    &:active,
+    &:focus
+      background-color darken($noticeColor, 10%)
+
+  &.warning
+    background-color $warningColor
+    border 1px solid darken($warningColor, 10%)
+    box-shadow 0 0 0 1px lighten($warningColor, 30%) inset
+    color #FFFFFF
+    &:hover
+      background-color lighten($warningColor, 10%)
+    &:active,
+    &:focus
+      background-color darken($warningColor, 10%)
+
+  &.error
+    background-color $errorColor
+    border 1px solid darken($errorColor, 10%)
+    box-shadow 0 0 0 1px lighten($errorColor, 30%) inset
+    color #FFFFFF
+    &:hover
+      background-color lighten($errorColor, 10%)
+    &:active,
+    &:focus
+      background-color darken($errorColor, 10%)
