@@ -38,7 +38,7 @@ window.module('control-misc-ui', function (module) {
     // });
 
     /** Fancybox **/
-    $(".fancybox, [rel='fancybox-group']").fancybox(
+    $('.fancybox, [rel="fancybox-group"]').fancybox(
       { padding: 0
       , prevEffect: 'fade'
       , nextEffect: 'fade'
@@ -54,11 +54,15 @@ window.module('control-misc-ui', function (module) {
 
     /* Check nav height */
     function staticNav() {
-      var sidenavHeight = $("#main-header").outerHeight() + $("#main-footer").outerHeight();
-      var winHeight = $(window).height();
-      $("#main-header").css('position', 'fixed');
-      if (sidenavHeight > winHeight) {
-        $("#main-header").css('position', 'absolute');
+      var mainHeader = $('.main-header')
+        , winHeight = $(window).height()
+        , sidebarHeight = $('.user-navigation').outerHeight(true) +
+                          $('.site-logo').outerHeight(true) +
+                          $('.main-navigation').outerHeight(true) +
+                          $('.main-footer').outerHeight(true)
+
+      if (sidebarHeight > winHeight) {
+        mainHeader.css('position', 'absolute')
       }
     }
 
