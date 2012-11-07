@@ -10,8 +10,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
-      ['admin'],
-      ['asset-browser-demo']
+      ['admin']
     ),
     function(req, res) {
       viewRender(req, res, 'index', {
@@ -66,9 +65,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(
       ['global'],
-      ['admin'],
-      ['admin-asset-browser'],
-      ['asset-browser-demo']
+      ['admin']
     ),
     function(req, res) {
       viewRender(req, res, 'misc-ui', {
