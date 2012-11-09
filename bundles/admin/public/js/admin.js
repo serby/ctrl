@@ -27,7 +27,7 @@ window.module('control-misc-ui', function (module) {
     //   });
 
     /** Chosen Select Boxes **/
-    $(".chzn-select").chosen({
+    $('.chzn-select').chosen({
         allow_single_deselect: true
       , disable_search_threshold: 10
     });

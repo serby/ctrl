@@ -93,7 +93,7 @@
 	outline 0
 	border-color $primaryColor
 	box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
-	width 100% !important
+	// width 100% !important
 
 .chzn-container-single .chzn-drop
 	if $baseBorderRadius != 0
@@ -228,8 +228,11 @@
 		color #333333 /* TODO - move to variable */
 
 .chzn-container .chzn-results li em
-	background #feffde
+	background lighten($primaryColor, 70%)
 	font-style normal
+	margin 0 -2px
+	padding 0 2px
+	border-radius 3px
 
 .chzn-container .chzn-results .highlighted em
 	background transparent
