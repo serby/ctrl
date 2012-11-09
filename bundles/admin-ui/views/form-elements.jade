@@ -8,94 +8,278 @@ nav.breadcrumb
 
 p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
 
-form(method='post', enctype='multipart/form-data')
+form(action='#', method='post', enctype='multipart/form-data')
+
   fieldset
     h3 Standard Elements
     p.group-description Styles for standard browser form inputs.
 
+
+    //-
+    //- Standard Text Input
+    //-
+
     .form-row
       label
-        span Text Input
-          abbr(title='This field is required')*
-        input(type='text',placeholder='Placeholder Text')
-      .description
+        span.form-label-text Text Input
+          abbr(title="This field is required") *
+        input.form-field(type="text", name="name", placeholder="Placeholder Text")
+      .form-row-description.form-copy
         p A description of what is required.
+
+
+    //-
+    //- Textarea
+    //-
+
     .form-row
       label
-        span Textarea
-        textarea Default text
-      .description
+        span.form-label-text Textarea
+        textarea.form-field(name="name", rows="4") Default text
+      .form-row-description.form-copy
         p A more detailed description of what is required
         ul
           li Detailed instruction 1
           li Detailed instruction 2
+
+
+    //-
+    //- Select Dropdown
+    //-
+
     .form-row
       label
-        span Default Select
-        select
-          option(value='') Choose An Option
-          option(value='') Option 1
-          option(value='') Option 2
-          option(value='') Option 3
-          option(value='') Option 4
-          option(value='') Option 5
-          option(value='') Option 6
-          option(value='') Option 7
-          option(value='') Option 8
-          option(value='') Option 9
-          option(value='') Option 10
+        span.form-label-text Default Select
+        select.form-field(name="name")
+          option(value="") Choose An Option
+          option(value="1") Option 1
+          option(value="2") Option 2
+          option(value="3") Option 3
+          option(value="4") Option 4
+          option(value="5") Option 5
+          option(value="6") Option 6
+          option(value="7") Option 7
+          option(value="8") Option 8
+          option(value="9") Option 9
+          option(value="10") Option 10
 
-    .form-row
-      label.checkbox
-        span Single Checkbox
-        input(type='checkbox')
-      
-    .form-row
-      label.checkbox
-        input(type='checkbox')
-        span Single Checkbox Alternate
 
-    .form-row.field-group
-      .label
-        span Multiple Checkboxes
-      ul
+    //-
+    //- Single Checkbox
+    //-
+
+    .form-row.form-row-checkbox
+      label
+        span.form-label-text Single Checkbox
+        input.form-field(type="checkbox", name="name")
+
+
+    //-
+    //- Single Checkbox Alternate
+    //-
+
+    .form-row.form-row-alt.form-row-checkbox
+      label
+        input.form-field(type="checkbox", name="name")
+        span.form-label-text Single Checkbox Alternate
+
+
+    //-
+    //- Grouped Checkboxes
+    //-
+
+    .form-row.form-row-field-group
+      span.form-label-text Grouped Checkboxes
+      ul.form-field
         li
           label
-            input(type='checkbox',checked)
+            input(type="checkbox", name="name", checked="checked")
             span Option 1
         li
           label
-            input(type='checkbox')
+            input(type="checkbox", name="name")
             span Option 2
         li
           label
-            input(type='checkbox')
+            input(type="checkbox", name="name")
             span Option 3
         li
           label
-            input(type='checkbox')
+            input(type="checkbox", name="name")
             span Option 4
 
-    .form-row.field-group
-      .label
-        span Radio Buttons
-      ul
+
+    //-
+    //- Grouped Checkboxes
+    //-
+
+    .form-row.form-row-field-group
+      span.form-label-text Grouped Checkboxes
+      ul.form-field
         li
           label
-            input(type='radio',name='radio',checked)
+            input(type="radio", name="name", checked="checked")
             span Option 1
         li
           label
-            input(type='radio',name='radio')
+            input(type="radio", name="name")
             span Option 2
         li
           label
-            input(type='radio',name='radio')
+            input(type="radio", name="name")
             span Option 3
         li
           label
-            input(type='radio',name='radio')
+            input(type="radio", name="name")
             span Option 4
+
+
+
+  //-
+  //- Form Actions
+  //-
+
+  .form-row.form-row-actions
+    input.button.button-action(type="submit", value="Submit")
+    input.button(type="reset", value="Clear")
+
+
+
+form(action='#', method='post', enctype='multipart/form-data')
+
+
+  fieldset
+    h3 Form Errors
+    p.group-description Examples of form error styling.
+
+
+    //-
+    //- Form Error Summary
+    //-
+
+    .form-copy.form-error
+      strong Oops! Something isn't right.
+      p Please check the form and try again.
+      ul
+        li The 'Text Input' field is required. Please supply a value.
+        li Please ensure your email address is written in the correct format.
+        li Please select a date.
+
+
+    //-
+    //- Standard Text Input
+    //-
+
+    .form-row.form-row-error
+      label
+        span.form-label-text Text Input
+          abbr(title="This field is required") *
+        input.form-field(type="text", name="name", placeholder="Placeholder Text")
+        span.form-row-description.form-row-error-text This field is required
+      .form-row-description.form-copy
+        p A description of what is required.
+
+
+    //-
+    //- Select Dropdown
+    //-
+
+    .form-row.form-row-error
+      label
+        span.form-label-text Default Select
+        select.form-field(name="name")
+          option(value="") Choose An Option
+          option(value="1") Option 1
+          option(value="2") Option 2
+          option(value="3") Option 3
+          option(value="4") Option 4
+          option(value="5") Option 5
+          option(value="6") Option 6
+          option(value="7") Option 7
+          option(value="8") Option 8
+          option(value="9") Option 9
+          option(value="10") Option 10
+        span.form-row-description.form-row-error-text This field is required
+
+
+    //-
+    //- Single Checkbox
+    //-
+
+    .form-row.form-row-checkbox.form-row-error
+      label
+        span.form-label-text Single Checkbox
+        input.form-field(type="checkbox", name="name")
+        span.form-row-description.form-row-error-text This field is required
+
+
+    //-
+    //- Grouped Checkboxes
+    //-
+
+    .form-row.form-row-field-group.form-row-error
+      span.form-label-text Grouped Checkboxes
+      ul.form-field
+        li
+          label
+            input(type="radio", name="name", checked="checked")
+            span Option 1
+        li
+          label
+            input(type="radio", name="name")
+            span Option 2
+        li
+          label
+            input(type="radio", name="name")
+            span Option 3
+        li
+          label
+            input(type="radio", name="name")
+            span Option 4
+      span.form-row-description.form-row-error-text This field is required
+
+
+  //-
+  //- Form Actions
+  //-
+
+  .form-row.form-row-actions
+    input.button.button-action(type="submit", value="Submit")
+    input.button(type="reset", value="Clear")
+
+
+
+
+form(action='#', method='post', enctype='multipart/form-data')
+
+  fieldset
+    h3 jQuery UI Elements
+    p These inputs make use of 
+      a(href='http://jqueryui.com/') jQuery UI
+      | .
+
+
+    //-
+    //- jQuery UI Autocomplete
+    //-
+
+    .form-row
+      label
+        span.form-label-text Autocomplete Input
+        input.form-field.autocomplete(type='text', name="name")
+      .form-row-description.form-copy
+        p Start typing, e.g. as…
+
+    //-
+    //- jQuery UI Datepicker
+    //-
+
+    .form-row
+      label
+        span.form-label-text Date Input
+        .datepicker
+          input.form-field(type="text", name="name")
+
 
   fieldset
     h3 Chosen Select Elements
@@ -107,8 +291,8 @@ form(method='post', enctype='multipart/form-data')
 
     .form-row
       label
-        span Chosen Select
-        select.chzn-select(data-placeholder="Choose An Option")
+        span.form-label-text Chosen Select
+        select.form-field.chzn-select(data-placeholder="Choose An Option")
           option(value='')
           option(value='') Option 1
           option(value='') Option 2
@@ -123,8 +307,8 @@ form(method='post', enctype='multipart/form-data')
 
     .form-row
       label
-        span Chosen Multiple Select
-        select.chzn-select(multiple)
+        span.form-label-text Chosen Multiple Select
+        select.form-field.chzn-select(multiple)
           option(value='') Option 1
           option(value='') Option 2
           option(value='') Option 3
@@ -136,22 +320,11 @@ form(method='post', enctype='multipart/form-data')
           option(value='') Option 9
           option(value='') Option 10
 
-  fieldset
-    h3 jQuery UI Elements
-    p These inputs make use of 
-      a(href='http://jqueryui.com/') jQuery UI
-      | .
 
-    .form-row
-      label
-        span Autocomplete Input
-        input(class='autocomplete',type='text')
+  //-
+  //- Form Actions
+  //-
 
-    .form-row
-      label
-        span Date Input
-        input(class='datepicker',type='text')
-
-  fieldset.actions
-    input.button.primary(type='submit',value='Submit')
-    input.button(type='reset',value='Clear')
+  .form-row.form-row-actions
+    input.button.button-action(type="submit", value="Submit")
+    input.button(type="reset", value="Clear")

@@ -1,354 +1,275 @@
-/*
- * Forms
- */
+$textInputPadding = 5px
+$colorBorder = #ccc
+$pageMarginBottom = 1.5em
+$colorMediumGrey = #777
 
-fieldset
-  margin-bottom $baseLineHeight
+/*------------------------------------*\
+  =TEXT-INPUT
+\*------------------------------------*/
 
-.form-row
-  margin-bottom 18px
-  width 100%
-
-label,
-.label
-  display block
-  color $labelFontColor
-  margin-bottom 2px
-
-  & > span
-    display inline-block
-    padding-right 20px
-    box-sizing border-box
-    width 30%
-    vertical-align top
-    padding-top 6px /* TODO padding must match input padding and border height to line up span corrctly */
-
-    abbr /* Indicates required files */
-      color $errorColor
-      margin-left 4px
-      border 0
-
-input,
-select
-textarea
-  display inline-block
-  width 70%
-  vertical-align top
-  padding 5px
-  box-sizing border-box
-  color $inputFontColor
-  border 1px solid $baseBorderColor
-  background-color $inputBackground
-  outline 0 /* Be sure to set a focus style if using this */
-  if $baseBorderRadius != 0
-    border-radius $baseBorderRadius
-  if $baseTransitionDuration != 0
-    transition border $baseTransitionDuration $baseTransitionEasing, box-shadow $baseTransitionDuration $baseTransitionEasing
-  &:hover
-    border-color darken($baseBorderColor, 10)
-  &:active,
+.text-input
+  padding $textInputPadding
+  outline 0
+  border 1px solid $colorBorder
+  line-height $baseLineHeight
+  transition border-color 0.1s ease, box-shadow 0.2s ease
   &:focus
     border-color $primaryColor
-    box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
+    box-shadow 0px 1px 5px rgba($primaryColor, 0.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
+
+
+/*----- MODIFIERS -----*/
+/*
+We have to nest our modifiers to increase their specificity. Otherwise, a class
+of `text-input-small` isn’t going to beat an attribute selector of
+input[type="text"].
+
+We use a seperate object for the modifiers, so that they can be extended by
+less rules (`input, textarea, select` instead of attribute selectors for
+different sorts of `input`). This saves us about 30 LOC.
+*/
+.text-input-modifiers
+  /* Used for input errors. Extend where needed. */
+  &.text-input-error
+    border-color $colorError
+    &:focus
+      border-color $colorError
+
+
+
+
+/*------------------------------------*\
+  BASE
+\*------------------------------------*/
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea,
+select
+  @extend .text-input
 
 select
-  height 30px
-  width 70%
+  /* We make the select elements the same size as textual inputs */
+  height 28px
 
-textarea
-  height 100px
-  vertical-align top
-  resize vertical
-  overflow auto /* Hides scrollber in IE when not needed*/
+input,
+textarea,
+select
+  @extend .text-input-modifiers
 
-textarea.short
-  height 100px
 
-textarea.tallest
-	height 600px
 
-.form-row.full
-  width 100%
-  label
-    & > span
-      width 0%
-  textarea
-    width 100%
-  label.error
-    .error-description
-      margin-left 0%
-  .description
-    margin-left 0%
 
-.checkbox > span,
-.radio > span,
-.field-group label > span,
-.field-group .label > span
-  padding-top 1px
+/*----------------------------------------------------------------------------*\
+  FORMS
+\*----------------------------------------------------------------------------*/
 
-.checkbox,
-.radio,
-.field-group
-  input
-    width auto
-    vertical-align middle
-    background none
-    border 0
-    margin-right 6px
+/*------------------------------------*\
+  =FORM-ERROR
+\*------------------------------------*/
+.form-error
+  margin-bottom $pageMarginBottom
+  // font-size 0.866666667em /* 15 * 0.866666667 = 13px */
+  background-color $colorError
+  border-radius 3px
+  padding 10px
+  color white
 
-/* Allow source code order dictate styles for single checkboxes with labels left/right */
-.checkbox,
-.radio
-  span
-    width 70%
-    margin-left -20px
-    padding-left 20px
-    padding-right 0
-  span:first-child
-    width 30%
-    margin-left 0
-    padding-left 0
-    padding-right 20px
-  input:first-child
-    margin-left 30%
 
-.field-group
-  .label
-    vertical-align top
-    display inline-block
-    width 30%
-    span
-      width 100%
-      margin-right 0
+
+
+/*------------------------------------*\
+  =FORM-COPY
+\*------------------------------------*/
+.form-copy
+  &,
+  p,
+  ul,
+  ol
+    /*
+    Add small leading margin - we use leading margins because we can’t
+    predict what elements will be used. We also apply the margin to the object
+    itself incase no textual elements are used within.
+    */
+    margin-top 3px
+
+  p,
+  ul,
+  ol
+    /* Remove trailing margins from allowed elements */
+    margin-bottom 0
 
   ul
-    display inline-block
-    width 70%
-    list-style none
-    margin 0
-    padding 0
-  li
-    list-style none
-    margin 0
-    padding 0
+    padding-left 20px
 
-fieldset.actions
-  display block
-  text-align right
-  input
-    margin-left 20px
 
-/** Field Descriptions **/
-.form-row
-  .description
-    margin-left 30%
-    width auto
-    font-size 11px
-    color #999
-    if $baseTransitionDuration != 0
-      transition color $baseTransitionDuration $baseTransitionEasing
-    p,ul,li
-      margin-bottom 0
-  &:hover .description
-    color #555
 
-/** Form Errors **/
-label.error
-  input, textarea
-    border 1px solid darken($errorColor, 14)
-    border-radius $baseBorderRadius $baseBorderRadius 0 0
-    &:active,
-    &:focus
-      box-shadow 0px 1px 5px rgba(0,0,0,.2) inset, 0px 0px 5px rgba($errorColor, 0.8)
-  .error-description
-    margin-left 30%
-    padding 2px 5px
-    background-color $errorColor
-    border 1px solid darken($errorColor, 14)
-    border-top 0
-    text-shadow 0px 1px 1px darken($errorColor, 14)
-    border-radius 0 0 $baseBorderRadius $baseBorderRadius
-    if dark(darken($errorColor, 7))
-      color #FFFFFF
-    else
-      color #333333
 
+/*------------------------------------*\
+  =FORM-ROW
+\*------------------------------------*/
 /*
- * Advanced Controls
- */
+The `form-row` object is the basis of a form.
+*/
+.form-row
+  margin-bottom $pageMarginBottom
 
-/** Autocomplete **/
-
-.ui-autocomplete
-  position absolute
-  cursor default
-
-.ui-menu
-  float left
-  display block
-  list-style none
-
-  margin 0 3px 3px 0
-  max-height 190px
-  padding 3px
-  position relative
-  overflow-x hidden
-  overflow-y auto
-
-  border 1px solid $baseBorderColor
-  background-color $inputBackground
-  if $baseBorderRadius != 0
-    border-radius 0 0 $baseBorderRadius $baseBorderRadius
-  if $baseTransitionDuration != 0
-    transition border $baseTransitionDuration $baseTransitionEasing, box-shadow $baseTransitionDuration $baseTransitionEasing
-
-  .ui-menu-item
-    clear left
-    float left
-    list-style none
-    width 100%
-    margin 0
-
-    a
-      border 1px solid transparent
-      display block
-      padding 3px 7px 4px
-      color $inputFontColor
-      text-decoration none
-
-      &:hover
-      &.ui-state-hover
-        text-shadow 0px 1px 1px darken($primaryColor, 6)
-        background-color $primaryColor
-        border 1px solid darken($primaryColor, 6)
-        box-shadow 0px 0px 0px 1px lighten($primaryColor, 5) inset
-        if dark($primaryColor)
-          color #FFFFFF /* TODO - move to variable */
-        else
-          color #333333 /* TODO - move to variable */
-
-
-/** Datepicker **/
-input.datepicker
-  position relative
-  background-image versionPath("/admin/images/content/datepicker-icon.png")
-  background-repeat no-repeat
-  background-size 16px 16px
-  background-color transparent
-  background-position 99% 6px
-
-#ui-datepicker-div
-  position absolute
-  left -9999px
-  background-color #FFF
-  padding 10px
-  border 1px solid darken($baseBorderColor, 10)
-  if $baseBorderRadius != 0
-    border-radius $baseBorderRadius
-  box-shadow 0px 2px 8px -4px rgba(0,0,0,.5)
-  &.below
-    margin-top 10px
-    &:before
-      content ""
-      position absolute
-      top -12px
-      left 10px
-      width 25px
-      height 12px
-      background versionPath("/admin/images/content/datepicker-sprite.png") 0px -61px no-repeat
-  &.above
-    margin-top -10px
-    &:before
-      content ""
-      position absolute
-      bottom -12px
-      left 10px
-      width 25px
-      height 12px
-      background versionPath("/admin/images/content/datepicker-sprite.png") 0px -73px no-repeat
-
-  .ui-datepicker-title
-    padding-bottom 6px
-    border-bottom 1px solid $baseBorderColor
-    margin-bottom 5px
-    font-weight bold
-    color #333333 /* TODO - Set with variable? */
-
-  .ui-datepicker-next,
-  .ui-datepicker-prev
-    position absolute
-    top 14px
-    right 10px
+  /*
+  We use the label to wrap the actual label text (`.form-label-text`) and the form
+  field.
+  */
+  > label
+    /* Has to be a block element to contain `.form-label-text` and the form field. */
     display block
-    width 15px
-    height 11px
-    margin-left 5px
-    margin-bottom 0
-    overflow hidden
-    text-indent -9999px
-    background-image versionPath("/admin/images/content/datepicker-sprite.png")
-    background-repeat no-repeat
-    background-position -15px -88px
-    cursor pointer
 
-  .ui-datepicker-prev
-    right 28px
-    background-position 0px -88px
+  .form-label-text
+    float left
+    box-sizing border-box
+    width 30%
+    /* We use padding to align the text vertically with textual inputs. */
+    padding-top 4px
+    padding-right 20px
+    abbr
+      color $colorError
+      margin-left 4px
+      /* Remove browser’s default border */
+      border-bottom none
 
-  table
-    width auto
-    margin-bottom 0
-    margin-right 1px /* Rectifies border collapse causing a padding mismatch */
-  th,
-  td
+  .form-field
+    box-sizing border-box
+
+  ul.form-field
+    /*
+    When a `ul` is used as the field, we need to opt-out of default `ul` styles
+    */
     padding 0
-  th
-    font-size 10px
-    text-transform uppercase
-    border none
-    text-align center
-  td
-    border 1px solid $baseBorderColor
-    text-align center
-    a,
-    span
-      display block
-      width 30px
-      height 30px
-      line-height 30px
-      text-decoration none
-      font-weight bold
-      color #333333 /* TODO - convert to variable */
-    a
-      &:hover,
-      &:active,
-      &:focus
-        background-color $primaryColor
-        if dark($primaryColor)
-          color #FFFFFF
-        else
-          color #555555
-    span
-      cursor default
+    margin-bottom 0
+    display inline-block
+    li
+      list-style none
 
-  .ui-datepicker-today
-    a
-      font-weight bold
-      background-color #F7F7F7
-      box-shadow 0px 1px 4px rgba(0,0,0,.2) inset
-  .ui-datepicker-current-day
-    a,
-    span
-      background versionPath("/admin/images/content/datepicker-sprite.png") 0 0 no-repeat $primaryColor
-      &:hover
-        background-image none
-  .ui-datepicker-other-month
-    a,
-    span
-      color #555555
-      font-weight normal
-  .ui-datepicker-unselectable
-    a,
-    span
-      color #CCCCCC
-      font-weight normal
+
+  /*
+  Specificially target the form controls that need styling. We have to be
+  strict to avoid giving styles to other controls, such as radio buttons and
+  checkboxes (the browser wouldn’t render most of them anyway, but things like
+  `display block`, it would).
+  */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select
+    display block
+    width 70%
+
+  input[type="checkbox"],
+  input[type="radio"]
+    margin-right 10px
+
+  select
+    /* The select element has no padding, so it’s width is different. */
+    // width 300px
+
+  textarea
+    resize vertical
+    // height 80px
+
+  /*
+  We do not need to vertically align the text on field groups and checkbox
+  form rows.
+  */
+  &.form-row-field-group,
+  &.form-row-checkbox
+    .form-label-text
+      padding-top 0
+
+
+
+
+
+  // ----- MODIFIERS -----
+  &.form-row-checkbox
+    .form-field
+      /* We don’t need the leading margin on field groups or checkboxes. */
+      /* Unset mobile’s leading margin */
+      margin-top 0
+
+  /* Used for rows containing buttons */
+  &.form-row-actions
+    text-align right
+
+    input
+      margin-left 10px
+      &:first-child
+        margin-left 0
+
+  /*
+  Used for display the label text and field inline, when the field has to come
+  first.
+  */
+
+  // TO DO: No longer needed unless single checkbox alternate is necessary
+
+  &.form-row-alt
+    .form-label-text
+      // When the label appears after the field, we have to apply leading margin
+      // to the label instead
+      margin-top 3px
+      // Unset potential b1 and b2 styles
+      float none
+      margin-right 0
+      // width auto
+      // Force onto new line
+      // display block
+
+    .form-field
+      // Unset potential b1 and b2 styles
+      width auto
+      margin-left 30%
+
+
+  /* Applied to a form row when an error exists in the child form field. */
+  &.form-row-error
+    .form-field
+      @extend .text-input-modifiers.text-input-error
+      border-bottom-left-radius 0
+      border-bottom-right-radius 0
+
+
+
+
+/*------------------------------------*\
+  =FORM-ROW-DESCRIPTION
+\*------------------------------------*/
+.form-row-description
+  color $colorMediumGrey
+  font-size 0.8em
+  margin-left 30%
+  width 70%
+  display block
+  box-sizing border-box
+
+
+/*------------------------------------*\
+  =FORM-ROW-ERROR-TEXT
+\*------------------------------------*/
+.form-row-error-text
+  background-color $colorError
+  color white
+  padding $textInputPadding
+  border-bottom-left-radius 3px
+  border-bottom-right-radius 3px
+
+  select + &,
+  .form-row-checkbox &,
+  .form-row-field-group &
+    /* Set all border radiuses */
+    border-radius 3px
+    margin-top 5px
