@@ -90,7 +90,9 @@ module.exports = function(serviceLocator) {
       } else if (!entity) {
         return callback(new Error('Wrong Email and password combination.'), credentials)
       }
-
+      if (!entity.password) {
+        return callback(new Error('No password for user. Reset required.'), credentials)
+      }
       bcrypt.compare(credentials.password, entity.password, function(err, match) {
         if (err) {
           return callback(err, credentials)
