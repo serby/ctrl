@@ -1,14 +1,14 @@
 .notification
   position relative
-  background-color $notificationColor
-  border 1px solid darken($notificationColor, 14)
-  text-shadow 0px 1px 1px darken($notificationColor, 14)
+  background-color $colorNotification
+  border 1px solid darken($colorNotification, 14)
+  text-shadow 0px 1px 1px darken($colorNotification, 14)
   padding 10px 14px
   margin-bottom $baseLineHeight
   font-weight bold
   if $baseBorderRadius != 0
     border-radius $baseBorderRadius
-  if dark($notificationColor)
+  if dark($colorNotification)
     color #FFFFFF
   else
     color #333333
@@ -22,34 +22,34 @@
 
 
   &.success
-    background-color $successColor
-    border 1px solid darken($successColor, 14)
-    text-shadow 0px 1px 1px darken($successColor, 14)
-    if dark($successColor)
+    background-color $colorSuccess
+    border 1px solid darken($colorSuccess, 14)
+    text-shadow 0px 1px 1px darken($colorSuccess, 14)
+    if dark($colorSuccess)
       color #FFFFFF
     else
       color #333333
   &.notice
-    background-color $noticeColor
-    border 1px solid darken($noticeColor, 14)
-    text-shadow 0px 1px 1px darken($noticeColor, 14)
-    if dark($noticeColor)
+    background-color $colorNotice
+    border 1px solid darken($colorNotice, 14)
+    text-shadow 0px 1px 1px darken($colorNotice, 14)
+    if dark($colorNotice)
       color #FFFFFF
     else
       color #333333
   &.warning
-    background-color $warningColor
-    border 1px solid darken($warningColor, 14)
-    text-shadow 0px 1px 1px darken($warningColor, 14)
-    if dark($warningColor)
+    background-color $colorWarning
+    border 1px solid darken($colorWarning, 14)
+    text-shadow 0px 1px 1px darken($colorWarning, 14)
+    if dark($colorWarning)
       color #FFFFFF
     else
       color #333333
   &.error
-    background-color $errorColor
-    border 1px solid darken($errorColor, 14)
-    text-shadow 0px 1px 1px darken($errorColor, 14)
-    if dark(darken($errorColor, 7))
+    background-color $colorError
+    border 1px solid darken($colorError, 14)
+    text-shadow 0px 1px 1px darken($colorError, 14)
+    if dark(darken($colorError, 7))
       color #FFFFFF
     else
       color #333333
@@ -102,13 +102,13 @@
     top 0px
     bottom 0px
     border-radius 3px 0px 0px 3px
-    border 2px solid $noticeColor
+    border 2px solid $colorNotice
 
   &.warn:after
-    border 2px solid $warningColor
+    border 2px solid $colorWarning
 
   &.error:after
-    border 2px solid $errorColor
+    border 2px solid $colorError
 
 .ui-notification .content
   padding 15px 20px
