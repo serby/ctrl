@@ -151,6 +151,11 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .breadcrumb li:first-child:before{content:""}
 .breadcrumb li,.breadcrumb li a{font-size:12px;color:#919191}
 .breadcrumb li a{text-decoration:underline}
+.ui-autocomplete{position:absolute;cursor:default}
+.ui-menu{float:left;display:block;list-style:none;margin:0 3px 3px 0;max-height:190px;padding:3px;position:relative;overflow-x:hidden;overflow-y:auto;border:1px solid #ccc;background-color:#fff;-webkit-transition:border .1s ease,box-shadow .1s ease;-moz-transition:border .1s ease,box-shadow .1s ease;-ms-transition:border .1s ease,box-shadow .1s ease;-o-transition:border .1s ease,box-shadow .1s ease;transition:border .1s ease,box-shadow .1s ease}
+.ui-menu-item{clear:left;float:left;list-style:none;width:100%;margin:0;}
+.ui-menu-item a{border:1px solid transparent;display:block;padding:3px 7px 4px;color:#333;text-decoration:none;}
+.ui-menu-item a:hover,.ui-menu-item a.ui-state-hover{text-shadow:0 1px 1px #1c4267;background-color:#22527f;border:1px solid #1c4267;-webkit-box-shadow:0 0 0 1px #275f93 inset;-moz-box-shadow:0 0 0 1px #275f93 inset;-ms-box-shadow:0 0 0 1px #275f93 inset;-o-box-shadow:0 0 0 1px #275f93 inset;box-shadow:0 0 0 1px #275f93 inset;color:#fff;}
 .datepicker{position:relative;}
 .datepicker:after{content:"";display:block;position:absolute;top:7px;right:7px;width:16px;height:16px;background-image:url("/admin/images/content/v0.1.0/datepicker-icon.png");background-repeat:no-repeat;background-color:transparent;background-position:0 0;pointer-events:none}
 #ui-datepicker-div{position:absolute;left:-9999px;background-color:#fff;padding:10px;border:1px solid #b3b3b3;-webkit-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);-moz-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);-o-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);}

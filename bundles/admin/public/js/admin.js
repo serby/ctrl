@@ -32,10 +32,10 @@ window.module('control-misc-ui', function (module) {
       , disable_search_threshold: 10
     });
 
-    // var availableTags = ["ActionScript","AppleScript","Asp","BASIC","C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran","Groovy","Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme"];
-    // $( ".autocomplete" ).autocomplete({
-    //   source: availableTags
-    // });
+    var availableTags = ['ActionScript','AppleScript','Asp','BASIC','C','C++','Clojure','COBOL','ColdFusion','Erlang','Fortran','Groovy','Haskell','Java','JavaScript','Lisp','Perl','PHP','Python','Ruby','Scala','Scheme']
+    $('.autocomplete').autocomplete({
+      source: availableTags
+    })
 
     /** Fancybox **/
     $('.fancybox, [rel="fancybox-group"]').fancybox(
