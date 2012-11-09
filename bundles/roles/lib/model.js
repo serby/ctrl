@@ -46,7 +46,7 @@ module.exports = function(serviceLocator) {
     function addRoleToAcl(role) {
       Object.keys(role.grants).forEach(function(resource) {
         role.grants[resource].forEach(function(action) {
-          serviceLocator.logger.silly('Adding grant \'' + role.name + '\\' +  resource  + '\\' + action + '\' to ACL')
+          serviceLocator.logger.debug('Adding grant \'' + role.name + '\\' +  resource  + '\\' + action + '\' to ACL')
           acl.grant(role.name, resource, action)
         })
       })

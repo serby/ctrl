@@ -86,7 +86,7 @@ module.exports = {
         { compile: serviceLocator.stylusCompile })
 
       w.on('compile', function(filename) {
-        serviceLocator.logger.silly('Compiling ' + filename)
+        serviceLocator.logger.debug('Compiling ' + filename)
       })
 
       done()

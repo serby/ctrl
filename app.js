@@ -8,13 +8,18 @@ var cluster = require('cluster')
   , properties = require('./properties')()
   , nodemailer = require('nodemailer')
 
+function log() {
+  var output = Array.prototype.slice.apply(arguments)
+  output.unshift((new Date()).toISOString())
+  console.log.apply(null, output)
+}
 
 // All application need: properties, logger and most likely a mailer for sending
 // emails. saveFactory is also created here for defining data storage. The default
 // bundles need all of these.
 serviceLocator
   .register('properties', properties)
-  .register('logger', require('./lib/logger')(properties))
+  .register('logger', { info: log, debug: log, warn: log, error: log })
   .register('mailer', nodemailer.createTransport('sendmail'))
   .register('saveFactory', {})
 

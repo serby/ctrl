@@ -37,7 +37,8 @@
     "versionator": "~0.2",
     "winston": "~0.6",
     "winston-loggly": "~0.6",
-    "secure": "~0.1"
+    "secure": "~0.1",
+    "bunyan": "~0.14.6"
   },
   "devDependencies": {
     "mocha": "~1.6",
