@@ -13,6 +13,8 @@ $colorMediumGrey = #777
   border 1px solid $colorBorder
   line-height $baseLineHeight
   transition border-color 0.1s ease, box-shadow 0.2s ease
+  font-family inherit
+  font-size inherit
   &:focus
     border-color $primaryColor
     box-shadow 0px 1px 5px rgba($primaryColor, 0.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
@@ -51,9 +53,15 @@ textarea,
 select
   @extend .text-input
 
+input[type="file"]
+  font-family inherit
+  font-size inherit
+
 select
   /* We make the select elements the same size as textual inputs */
   height 28px
+  padding-top 2px
+  padding-bottom 2px
 
 input,
 textarea,
@@ -103,7 +111,7 @@ select
     margin-bottom 0
 
   ul
-    padding-left 20px
+    padding-left 10px
 
 
 
@@ -186,7 +194,8 @@ The `form-row` object is the basis of a form.
   form rows.
   */
   &.form-row-field-group,
-  &.form-row-checkbox
+  &.form-row-checkbox,
+  &.form-row-upload
     .form-label-text
       padding-top 0
 
@@ -201,11 +210,17 @@ The `form-row` object is the basis of a form.
       /* Unset mobile’s leading margin */
       margin-top 0
 
+  &.form-row-upload
+    .form-field
+      line-height 1
+
   /* Used for rows containing buttons */
   &.form-row-actions
     text-align right
 
-    input
+    input,
+    button,
+    .button
       margin-left 10px
       &:first-child
         margin-left 0
