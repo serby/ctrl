@@ -22,8 +22,8 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row
       label
         span.form-label-text Text Input
-          abbr(title="This field is required") *
-        input.form-field(type="text", name="name", placeholder="Placeholder Text")
+          abbr(title='This field is required') *
+        input.form-field(type='text', name='name', placeholder='Placeholder Text')
       .form-row-description.form-copy
         p A description of what is required.
 
@@ -35,7 +35,7 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row
       label
         span.form-label-text Textarea
-        textarea.form-field(name="name", rows="4") Default text
+        textarea.form-field(name='name', rows='4') Default text
       .form-row-description.form-copy
         p A more detailed description of what is required
         ul
@@ -50,18 +50,18 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row
       label
         span.form-label-text Default Select
-        select.form-field(name="name")
-          option(value="") Choose An Option
-          option(value="1") Option 1
-          option(value="2") Option 2
-          option(value="3") Option 3
-          option(value="4") Option 4
-          option(value="5") Option 5
-          option(value="6") Option 6
-          option(value="7") Option 7
-          option(value="8") Option 8
-          option(value="9") Option 9
-          option(value="10") Option 10
+        select.form-field(name='name')
+          option(value='') Choose An Option
+          option(value='1') Option 1
+          option(value='2') Option 2
+          option(value='3') Option 3
+          option(value='4') Option 4
+          option(value='5') Option 5
+          option(value='6') Option 6
+          option(value='7') Option 7
+          option(value='8') Option 8
+          option(value='9') Option 9
+          option(value='10') Option 10
 
 
     //-
@@ -71,7 +71,7 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row.form-row-checkbox
       label
         span.form-label-text Single Checkbox
-        input.form-field(type="checkbox", name="name")
+        input.form-field(type='checkbox', name='name')
 
 
     //-
@@ -80,7 +80,7 @@ form(action='#', method='post', enctype='multipart/form-data')
 
     .form-row.form-row-alt.form-row-checkbox
       label
-        input.form-field(type="checkbox", name="name")
+        input.form-field(type='checkbox', name='name')
         span.form-label-text Single Checkbox Alternate
 
 
@@ -93,19 +93,19 @@ form(action='#', method='post', enctype='multipart/form-data')
       ul.form-field
         li
           label
-            input(type="checkbox", name="name", checked="checked")
+            input(type='checkbox', name='name', checked='checked')
             span Option 1
         li
           label
-            input(type="checkbox", name="name")
+            input(type='checkbox', name='name')
             span Option 2
         li
           label
-            input(type="checkbox", name="name")
+            input(type='checkbox', name='name')
             span Option 3
         li
           label
-            input(type="checkbox", name="name")
+            input(type='checkbox', name='name')
             span Option 4
 
 
@@ -118,21 +118,31 @@ form(action='#', method='post', enctype='multipart/form-data')
       ul.form-field
         li
           label
-            input(type="radio", name="name", checked="checked")
+            input(type='radio', name='name', checked='checked')
             span Option 1
         li
           label
-            input(type="radio", name="name")
+            input(type='radio', name='name')
             span Option 2
         li
           label
-            input(type="radio", name="name")
+            input(type='radio', name='name')
             span Option 3
         li
           label
-            input(type="radio", name="name")
+            input(type='radio', name='name')
             span Option 4
 
+    //-
+    //- File Upload
+    //-
+
+    .form-row.form-row-upload
+      label
+        span.form-label-text File Upload
+        input.form-field(type='file', name='name', multiple='multiple')
+      .form-row-description.form-copy
+        p Choose up to 3 images.
 
 
   //-
@@ -140,8 +150,8 @@ form(action='#', method='post', enctype='multipart/form-data')
   //-
 
   .form-row.form-row-actions
-    input.button.button-action(type="submit", value="Submit")
-    input.button(type="reset", value="Clear")
+    input.button(type='reset', value='Clear')
+    input.button.button-action(type='submit', value='Submit')
 
 
 
@@ -173,8 +183,8 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row.form-row-error
       label
         span.form-label-text Text Input
-          abbr(title="This field is required") *
-        input.form-field(type="text", name="name", placeholder="Placeholder Text")
+          abbr(title='This field is required') *
+        input.form-field(type='text', name='name', placeholder='Placeholder Text')
         span.form-row-description.form-row-error-text This field is required
       .form-row-description.form-copy
         p A description of what is required.
@@ -187,18 +197,18 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row.form-row-error
       label
         span.form-label-text Default Select
-        select.form-field(name="name")
-          option(value="") Choose An Option
-          option(value="1") Option 1
-          option(value="2") Option 2
-          option(value="3") Option 3
-          option(value="4") Option 4
-          option(value="5") Option 5
-          option(value="6") Option 6
-          option(value="7") Option 7
-          option(value="8") Option 8
-          option(value="9") Option 9
-          option(value="10") Option 10
+        select.form-field(name='name')
+          option(value='') Choose An Option
+          option(value='1') Option 1
+          option(value='2') Option 2
+          option(value='3') Option 3
+          option(value='4') Option 4
+          option(value='5') Option 5
+          option(value='6') Option 6
+          option(value='7') Option 7
+          option(value='8') Option 8
+          option(value='9') Option 9
+          option(value='10') Option 10
         span.form-row-description.form-row-error-text This field is required
 
 
@@ -209,7 +219,7 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row.form-row-checkbox.form-row-error
       label
         span.form-label-text Single Checkbox
-        input.form-field(type="checkbox", name="name")
+        input.form-field(type='checkbox', name='name')
         span.form-row-description.form-row-error-text This field is required
 
 
@@ -222,19 +232,19 @@ form(action='#', method='post', enctype='multipart/form-data')
       ul.form-field
         li
           label
-            input(type="radio", name="name", checked="checked")
+            input(type='radio', name='name', checked='checked')
             span Option 1
         li
           label
-            input(type="radio", name="name")
+            input(type='radio', name='name')
             span Option 2
         li
           label
-            input(type="radio", name="name")
+            input(type='radio', name='name')
             span Option 3
         li
           label
-            input(type="radio", name="name")
+            input(type='radio', name='name')
             span Option 4
       span.form-row-description.form-row-error-text This field is required
 
@@ -244,8 +254,8 @@ form(action='#', method='post', enctype='multipart/form-data')
   //-
 
   .form-row.form-row-actions
-    input.button.button-action(type="submit", value="Submit")
-    input.button(type="reset", value="Clear")
+    input.button(type='reset', value='Clear')
+    input.button.button-action(type='submit', value='Submit')
 
 
 
@@ -266,7 +276,7 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row
       label
         span.form-label-text Autocomplete Input
-        input.form-field.autocomplete(type='text', name="name")
+        input.form-field.autocomplete(type='text', name='name')
       .form-row-description.form-copy
         p Start typing, e.g. as…
 
@@ -278,7 +288,7 @@ form(action='#', method='post', enctype='multipart/form-data')
       label
         span.form-label-text Date Input
         .datepicker
-          input.form-field(type="text", name="name")
+          input.form-field(type='text', name='name')
 
 
   fieldset
@@ -292,7 +302,7 @@ form(action='#', method='post', enctype='multipart/form-data')
     .form-row
       label
         span.form-label-text Chosen Select
-        select.form-field.chzn-select(data-placeholder="Choose An Option")
+        select.form-field.chzn-select(data-placeholder='Choose An Option')
           option(value='')
           option(value='') Option 1
           option(value='') Option 2
@@ -326,5 +336,5 @@ form(action='#', method='post', enctype='multipart/form-data')
   //-
 
   .form-row.form-row-actions
-    input.button.button-action(type="submit", value="Submit")
-    input.button(type="reset", value="Clear")
+    input.button(type='reset', value='Clear')
+    input.button.button-action(type='submit', value='Submit')

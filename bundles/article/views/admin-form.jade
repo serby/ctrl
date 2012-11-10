@@ -27,11 +27,10 @@ block content
     include ../../admin/views/generic/includes/form-actions
 
   form(method='post', enctype='multipart/form-data')
-    - if (Object.keys(errors).length > 0)
-      .notification.error
-        h4 Please check the form and try again
-        - each error in unshownErrors
-          p= errors[error]
+
+    //- Summary of errors
+    mixin formError()
+
     fieldset
       h3 Article Details
       - if (formType === 'updateForm')
@@ -55,6 +54,6 @@ block content
       h3 Article Images
       mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
 
-    fieldset.actions
+    .form-row.form-row-actions
       a.button(href='/admin/#{model.slug}') Cancel
-      input.button.primary(type='submit',value='Submit')
+      input.button.button-action(type='submit',value='Submit')

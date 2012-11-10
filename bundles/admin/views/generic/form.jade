@@ -25,11 +25,10 @@ block content
     include includes/form-actions
 
   form(method='post', enctype='multipart/form-data')
-    - if (Object.keys(errors).length > 0)
-      .notification.error
-        h4 Please check the form and try again
-        - each error in unshownErrors
-          p= errors[error]
+
+    //- Summary of errors
+    mixin formError()
+
     - each group in viewSchema.groups
       fieldset
         - if (typeof group.name !== 'undefined')
@@ -59,6 +58,7 @@ block content
               mixin passwordFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
             - if (propertyMeta.type === 'date')
               mixin datepickerFieldForObject({ name: key }, { label: name, data: entity, required: propertyMeta.required, errors: errors, information: propertyMeta.info})
-    fieldset.actions
+
+    .form-row.form-row-actions
       a.button(href='/admin/#{model.slug}') Cancel
-      input.button.primary(type='submit',value='Submit')
+      input.button.button-action(type='submit',value='Submit')

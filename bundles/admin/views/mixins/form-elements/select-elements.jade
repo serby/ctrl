@@ -1,0 +1,34 @@
+//-
+//- Select Elements
+//-
+
+mixin selectField(inputParams, params)
+  .form-row(class=params.error !== undefined ? 'form-row-error ' : '')
+    label
+      span.form-label-text #{params.label}
+        - if (params.required)
+          abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+      - if (Array.isArray(params.list))
+        select.form-field(class=inputParams.class,name='#{inputParams.name}', multiple=(params.multiple ? 'multiple' : null ))
+          - each option in params.list
+            option(selected=(option == inputParams.value) ? 'selected' : null)=option
+      - else
+        select.form-field(class=inputParams.class,name='#{inputParams.name}')
+          - each option, text in params.list
+            option(selected=(option == inputParams.value) ? 'selected' : null, value=option)=text
+
+      mixin formRowErrorText(params.error)
+    mixin formRowDescription(params.information)
+
+mixin listboxField(inputParams, params)
+  - params.multiple = true;
+  mixin selectField(inputParams, params)
+
+mixin dropdownField(inputParams, params)
+  - params.multiple = false;
+  mixin selectField(inputParams, params)
+
+mixin dropdownForObject(inputParams, params)
+  - params.error = params.errors[inputParams.name];
+  - inputParams.value = params.data[inputParams.name];
+  mixin dropdownField(inputParams, params)
