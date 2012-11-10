@@ -190,31 +190,6 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 #ui-datepicker-div .ui-datepicker-current-day a:hover,#ui-datepicker-div .ui-datepicker-current-day span:hover{background-image:none}
 #ui-datepicker-div .ui-datepicker-other-month a,#ui-datepicker-div .ui-datepicker-other-month span{color:#555;font-weight:normal}
 #ui-datepicker-div .ui-datepicker-unselectable a,#ui-datepicker-div .ui-datepicker-unselectable span{color:#ccc;font-weight:normal}
-[class*="grid-"]{float:left}
-.row{float:left;clear:left;margin-bottom:20px;width:100%}
-[class*="col-"]{float:left;margin-left:20px;text-align:center;background:#ccc;background:rgba(0,0,0,0.1);-webkit-border-radius:3px;-moz-border-radius:3px;-ms-border-radius:3px;-o-border-radius:3px;border-radius:3px;line-height:32px;}
-.row [class*="col-"]:first-child{margin-left:0 !important}
-[class*="col-"]:hover{background-color:rgba(0,0,0,0.2)}
-.grid-12{width:100%;}
-.grid-12 [class*="col-"]{margin-left:2%}
-.grid-12 .col-1{width:6.5%}
-.grid-12 .col-2{width:13.26%}
-.grid-12 .col-3{width:20.28%}
-.grid-12 .col-4{width:27.56%}
-.grid-12 .col-5{width:35.1%}
-.grid-12 .col-6{width:42.9%}
-.grid-12 .col-7{width:50.96%}
-.grid-12 .col-8{width:59.28%}
-.grid-12 .col-9{width:67.86%}
-.grid-12 .col-10{width:76.7%}
-.grid-12 .col-11{width:85.8%}
-.grid-12 .col-12{width:95.16%}
-.grid-4{width:540px;}
-.grid-4 [class*="col-"]{margin-left:20px}
-.grid-4 .col-1{width:120px}
-.grid-4 .col-2{width:260px}
-.grid-4 .col-3{width:400px}
-.grid-4 .col-4{width:540px}
 .notification{position:relative;background-color:#eee;border:1px solid #cacaca;text-shadow:0 1px 1px #cacaca;padding:10px 14px;margin-bottom:18px;font-weight:bold;color:#333;}
 .notification h4{color:inherit;font-size:16px;line-height:18px;font-weight:bold;margin-bottom:10px}
 .notification.success{background-color:#47a967;border:1px solid #327748;text-shadow:0 1px 1px #327748;color:#fff}

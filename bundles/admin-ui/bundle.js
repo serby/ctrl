@@ -43,11 +43,6 @@ module.exports = {
             section: 'admin-ui'
           }
         ]
-      },
-      {
-        label: 'Grid',
-        url: '#grid',
-        section: 'admin-ui'
       }
     ]
   }],
