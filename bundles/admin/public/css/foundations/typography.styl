@@ -21,16 +21,16 @@ body
   // -webkit-font-smoothing antialiased
 
 a
-  color $secondaryColor
-  text-decoration none
+  color $primaryColor
+  text-decoration underline
   // transition color 0.4s ease
   &:hover
-    color darken($secondaryColor, 30%)
-    text-decoration none
+    color #222
+    text-decoration underline
     // transition color 0.2s ease
   &:focus,
   &:active
-    color #333
+    color #222
     outline none
 
 h1, h2, h3, h4, h5, h6
