@@ -249,6 +249,46 @@ The `form-row` object is the basis of a form.
       width auto
       margin-left 30%
 
+  // Full width rows with inputs below labels
+  &.form-row-full-width
+    .form-label-text
+      float none
+      width 100%
+      margin-right 0
+      display block
+      padding-top 0
+      margin-bottom 4px
+
+    .form-field
+      width 100%
+
+    .form-row-description
+      margin-left 0
+      width 100%
+
+
+  &.form-row-date-group
+    ul.form-field
+      width 70%
+      // Really nasty hack to avoid jumping caused by 30%+70% rounding bug
+      margin-right -1px
+    li
+      float left
+      width 32%
+      margin-left 2%
+      &:first-child
+        margin-left 0
+
+      .form-label-text
+        display none
+      .form-field
+        width 100%
+
+
+
+
+
+
 
   /* Applied to a form row when an error exists in the child form field. */
   &.form-row-error
