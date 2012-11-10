@@ -6,20 +6,20 @@ block content
 
   h1 Admin Login
   form(method='post')
-    p You must login to access this part of the site
-    fieldset
-      -if (error)
-        p.error
-          strong= error
-      -if (changed)
-        p
-          strong A verification email has been sent to #{changed}
-      mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
-      mixin passwordField({ name :'password' }, { label: 'Password' })
-      .form-row
-        label.checkbox
-          input(name='rememberMe', type='checkbox')
-          span Remember me
-    fieldset.actions
-      a.password-reset(href="/admin/request-password-change") I have forgotten my password
-      input.button.primary(type='submit', value='Login')
+    p You must login to access this part of the site.
+
+    -if (error)
+      .form-copy.form-error
+        strong= error
+    -if (changed)
+      p
+        strong A verification email has been sent to #{changed}
+    mixin textField({ name :'emailAddress' }, { label: 'Email Address' })
+    mixin passwordField({ name :'password' }, { label: 'Password' })
+    .form-row.form-row-alt.form-row-checkbox
+      label
+        input.form-field(name='rememberMe', type='checkbox')
+        span.form-label-text Remember me
+    a.password-reset(href="/admin/request-password-change") I have forgotten my password
+    .form-row.form-row-actions
+      input.button.button-action(type='submit', value='Login')
