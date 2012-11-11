@@ -1,17 +1,14 @@
 .notification
   position relative
   background-color $colorNotification
-  border 1px solid darken($colorNotification, 14)
-  text-shadow 0px 1px 1px darken($colorNotification, 14)
+  border 1px solid rgba(0,0,0,.1)
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
   padding 10px 14px
   margin-bottom $baseLineHeight
   font-weight bold
-  if $baseBorderRadius != 0
-    border-radius $baseBorderRadius
-  if dark($colorNotification)
-    color #FFFFFF
-  else
-    color #333333
+  border-radius 2px
+  color #fff
 
   h4
     color inherit
@@ -23,46 +20,30 @@
 
   &.success
     background-color $colorSuccess
-    border 1px solid darken($colorSuccess, 14)
-    text-shadow 0px 1px 1px darken($colorSuccess, 14)
-    if dark($colorSuccess)
-      color #FFFFFF
-    else
-      color #333333
+    color #FFFFFF
+
   &.notice
     background-color $colorNotice
-    border 1px solid darken($colorNotice, 14)
-    text-shadow 0px 1px 1px darken($colorNotice, 14)
-    if dark($colorNotice)
-      color #FFFFFF
-    else
-      color #333333
+    color #FFFFFF
+
   &.warning
     background-color $colorWarning
-    border 1px solid darken($colorWarning, 14)
-    text-shadow 0px 1px 1px darken($colorWarning, 14)
-    if dark($colorWarning)
-      color #FFFFFF
-    else
-      color #333333
+    color #FFFFFF
+
   &.error
     background-color $colorError
-    border 1px solid darken($colorError, 14)
-    text-shadow 0px 1px 1px darken($colorError, 14)
-    if dark(darken($colorError, 7))
-      color #FFFFFF
-    else
-      color #333333
+    color #FFFFFF
 
   p
     margin 0
   .button-close
     position absolute
     right 14px
-    top 14px
+    top 50%
     display block
     width 10px
     height 11px
+    margin-top -6px
     text-indent -9999px
     overflow hidden
     background versionPath("/admin/images/content/notification-sprite.png") 0px 0px no-repeat

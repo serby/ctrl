@@ -61,7 +61,7 @@ input,select,textarea{font-size:1em}
 .main-navigation a{position:relative;display:block;padding:14px 30px;color:#222;text-decoration:none;font-family:Montserrat,'Arial Black',Arial,sans-serif;font-size:1.14em}
 .main-navigation a:hover{background-color:#aaa}
 .main-navigation .nav-active > a{background-color:#fff}
-.main-footer{clear:both;border-top:1px solid #efefef;}
+.main-footer{clear:both;border-top:1px solid #efefef;color:#999;}
 .main-footer a{color:#999;text-decoration:none;}
 .main-footer a:hover{color:#333}
 .main-footer .ctrl{font-family:Montserrat,'Arial Black',Arial,sans-serif;color:#888}

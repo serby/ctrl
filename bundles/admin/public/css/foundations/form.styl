@@ -33,9 +33,9 @@ different sorts of `input`). This saves us about 30 LOC.
 .text-input-modifiers
   /* Used for input errors. Extend where needed. */
   &.text-input-error
-    border-color $colorError
+    border-color darken($colorError, 10%)
     &:focus
-      border-color $colorError
+      border-color darken($colorError, 10%)
 
 
 
@@ -85,6 +85,9 @@ select
   border-radius 3px
   padding 10px
   color white
+  border 1px solid darken($colorError, 10%)
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
 
 
 
@@ -321,6 +324,10 @@ The `form-row` object is the basis of a form.
   padding $textInputPadding
   border-bottom-left-radius 3px
   border-bottom-right-radius 3px
+  border 1px solid darken($colorError, 10%)
+  border-top-width 0
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
 
   select + &,
   .form-row-checkbox &,
@@ -328,3 +335,4 @@ The `form-row` object is the basis of a form.
     /* Set all border radiuses */
     border-radius 3px
     margin-top 5px
+    border-top-width 1px
