@@ -1,20 +1,34 @@
 !!! 5
 html(lang='en')
   head
+
     block head
+
+      //- Standard Meta Tags
+      meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
       meta(charset='utf-8')
       meta(name='description', content=properties.description)
       meta(name='keywords', content=properties.keyWords)
-    
-      //- SITE INFORMATION
-      title=page.title
+      meta(name='author', content='ctrl')
+
+      //- Page Title
+      title=page.title + ' - ' + properties.name
+
+      link(rel='shortcut icon', href=versionPath('/main/images/structure/favicon.ico'))
+
+      script
+        // A simple Modernizr style HTML5 enabler / JS detector
+        document.getElementsByTagName('html')[0].setAttribute('class', 'js')
+        var html5Elements = [ 'article', 'aside', 'footer', 'header', 'hgroup', 'nav', 'section', 'time' ]
+        for (var i = 0; i < html5Elements.length; i++) {
+          document.createElement(html5Elements[i])
+        }
 
     block styles
       //- CSS
-      link(rel='stylesheet', type='text/css', href=versionPath('/main/css/index.css'), media='all')
+      link(rel='stylesheet', href=versionPath('/main/css/index.css'))
+      link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400|Montserrat:700')
 
-    script
-      document.getElementsByTagName('html')[0].setAttribute('class', 'js');
 
   body(class=page.section)
 
