@@ -9,22 +9,24 @@ html(lang='en')
       meta(charset='utf-8')
       meta(name='description', content=properties.description)
       meta(name='keywords', content=properties.keywords)
+      meta(name='author', content='ctrl')
 
       //- Page Title
       title=page.title + ' - ' + properties.name
 
-      link(rel='shortcut icon', type='image/x-icon', href='/admin/images/structure/favicon.ico')
+      link(rel='shortcut icon', href=versionPath('/admin/images/structure/favicon.ico'))
 
       script
-        document.getElementsByTagName('html')[0].setAttribute('class', 'js');
-
+        // A simple Modernizr style HTML5 enabler / JS detector
+        document.getElementsByTagName('html')[0].setAttribute('class', 'js')
         var html5Elements = [ 'article', 'aside', 'footer', 'header', 'hgroup', 'nav', 'section', 'time' ]
         for (var i = 0; i < html5Elements.length; i++) {
           document.createElement(html5Elements[i])
         }
 
     block styles
-      link(rel='stylesheet', type='text/css', href=versionPath('/admin/css/index.css'), media='all')
+      //- CSS
+      link(rel='stylesheet', href=versionPath('/admin/css/index.css'))
       link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400|Montserrat:700')
 
   body(class=page.section)
