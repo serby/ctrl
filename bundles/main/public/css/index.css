@@ -1,51 +1,71 @@
-::selection{color:#fff;background-color:#666;text-shadow:none}
-::-moz-selection{color:#fff;background-color:#666;text-shadow:none}
-body{height:100%;background:#fff;margin:0;padding:0}
+body{background:#efefef}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;margin:0;padding:0}
-body,dl,dt,dd,ul,ol,pre,code,form,fieldset,legend,input,button,textarea,blockquote,th,td{margin:0;padding:0}
-h1,h2,h3,h4,h5,h6,p,pre,dt,li,hr,address,table,label{margin:0 0 18px;padding:0}
-body,input,button,textarea,select{font:normal normal 13px/18px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#666}
-h1,h2,h3,h4,h5,h6{font:normal bold 30px/36px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#000}
-h1{margin-bottom:36px}
-h2{font-size:24px}
-h3{font-size:18px}
-h4{font-size:16px}
-h5{font-size:14px}
-h6{font-size:13px}
+html,body,p,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,blockquote,th,td{margin:0;padding:0}
+h1,h2,h3,h4,h5,h6{margin-bottom:1em}
+p,pre,ul,ol,dd,hr,legend,button,address,table,blockquote{margin-bottom:1.5em}
 fieldset,img{border:0}
 img,object{vertical-align:bottom}
-ol li{list-style-type:decimal}
-ul li{list-style-type:disc}
-ul ul li{list-style-type:circle}
-ol ol li{list-style-type:lower-alpha}
-nav ul,nav ul li{list-style:none;padding:0;margin:0}
-strong,em{color:#4d4d4d}
-a{color:#666;text-decoration:underline;}
-a:hover,a:focus{color:#4d4d4d;text-decoration:none}
-a:active{outline:none}
-sub{vertical-align:sub;font-size:smaller}
-sup{vertical-align:super;font-size:smaller}
+ul li{list-style-type:disc;list-style-position:inside}
+ol li{list-style-type:decimal;list-style-position:inside}
+nav ul,nav ol{margin-bottom:0;}
+nav ul li,nav ol li{list-style:none}
+sub,sup{position:relative;font-size:75%;line-height:0;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
 legend{color:#000;padding-bottom:.5em}
 table{border-collapse:collapse;border-spacing:0}
-caption{position:absolute;left:-999em}
 th{text-align:center}
 tbody th{text-align:left}
-code{color:#06f}
-code,pre{font-size:small}
 blockquote,q,em,cite,dfn,i,cite,var,address{font-style:italic}
 blockquote p:before,blockquote p:after,q:before,q:after{content:''}
 th,strong,dt,b{font-weight:bold}
 ins{text-decoration:none;border-bottom:3px double #333}
 del{text-decoration:line-through}
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
 abbr,acronym{border-bottom:1px dotted #333;font-variant:normal}
-dt{margin-bottom:4px}
-dd{padding-left:0;margin-bottom:20px}
-li{margin-left:20px}
-hr{margin-right:30px;margin-left:30px;border-style:inset;border-width:1px}
-#container{width:960px;margin:40px auto}
-.site-logo{margin-bottom:10px;}
-.site-logo a{text-decoration:none}
-#main-footer{color:#aaa}
+dt,dd{margin-top:.5em}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin-right:30px;margin-left:30px}
+blockquote{border-left:1px solid #ccc;padding:10px 20px 10px 39px;background-color:#fafafa;}
+blockquote p{margin-bottom:0}
+::-moz-selection{color:#fff;background:#4992ad;text-shadow:none}
+::selection{color:#fff;background:#4992ad;text-shadow:none}
+body{font-family:"Lato","Lucida Sans","Lucida Grande","Lucida Sans Unicode",Arial,sans-serif;font-size:90%;line-height:1.6;font-weight:400;color:#222}
+a{color:#2b6999;text-decoration:underline;}
+a:hover{color:#222;text-decoration:underline}
+a:focus,a:active{color:#222;outline:none}
+h1,h2,h3,h4,h5,h6{font-family:Montserrat,'Arial Black',Arial,sans-serif;font-weight:700;line-height:1;letter-spacing:.05em;text-transform:uppercase;text-rendering:optimizeLegibility}
+h1{font-size:2.375em}
+h2{font-size:1.6em}
+h3{font-size:1.4em}
+h4{font-size:1.2em}
+h5{font-size:1.1em}
+h6{font-size:1em}
+pre,code,kbd,style{font-family:Menlo,Monaco,"Courier New",Courier,monospace;font-size:.875em}
+pre{white-space:pre-wrap}
+pre code{font-size:1.1em;line-height:1.6em}
+blockquote{font-size:1.125em}
+input,select,textarea{font-size:1em}
+.container{width:960px;margin:30px auto;background-color:#fff;-webkit-box-shadow:0 1px 10px rgba(0,0,0,0.2);box-shadow:0 1px 10px rgba(0,0,0,0.2)}
+.layout-section{padding:30px}
+.main-content{overflow:hidden}
+.col-primary,.col-secondary{float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.col-primary{width:70%;padding-right:30px}
+.col-secondary{width:30%}
+.main-sidebar{background-color:#efefef;padding:30px}
+.main-header{background-color:#222;}
+.main-header .site-logo{margin-bottom:0;}
+.main-header .site-logo a{display:inline-block;color:#fff;text-decoration:none;}
+.main-header .site-logo a:hover{color:#ccc}
+.main-navigation{overflow:hidden;background-color:#777;}
+.main-navigation li{float:left}
+.main-navigation a{position:relative;display:block;padding:14px 30px;color:#222;text-decoration:none;font-family:Montserrat,'Arial Black',Arial,sans-serif;font-size:1.14em}
+.main-navigation a:hover{background-color:#aaa}
+.main-navigation .nav-active > a{background-color:#fff}
+.main-footer{clear:both;border-top:1px solid #efefef;}
+.main-footer a{color:#999;text-decoration:none;}
+.main-footer a:hover{color:#333}
+.main-footer .ctrl{font-family:Montserrat,'Arial Black',Arial,sans-serif;color:#888}
+.main-footer a:hover .ctrl{color:#222}
 #admin-bar{position:fixed;height:30px;width:100%;min-width:600px;background-color:#111;top:0;left:0;z-index:1000;-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);box-shadow:0 1px 3px rgba(0,0,0,0.5);opacity:.7;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);filter:alpha(opacity=70);-webkit-transition:opacity .3s ease;-moz-transition:opacity .3s ease;-o-transition:opacity .3s ease;-ms-transition:opacity .3s ease;transition:opacity .3s ease;}
 #admin-bar:hover{opacity:.9;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=90);filter:alpha(opacity=90)}
 #admin-bar ul{margin:0 0 0 0;padding:0 0 0 0;list-style:none}
@@ -64,3 +84,5 @@ hr{margin-right:30px;margin-left:30px;border-style:inset;border-width:1px}
 #admin-bar li:hover .sub-nav{display:block}
 .editable-text-content{position:relative}
 .editable-text-content-item.active:after{position:absolute;top:0;left:0;width:100%;height:100%;content:"";background-color:#0f0;z-index:100;opacity:.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);filter:alpha(opacity=50)}
+.social-buttons:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.social-buttons li{list-style:none;float:left;margin-right:10px}
