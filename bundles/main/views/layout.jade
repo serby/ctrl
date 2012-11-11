@@ -21,18 +21,18 @@ html(lang='en')
     each bodyStart in includes.bodyStart
       !=partial(bodyStart)
 
-    #container
+    .container
       block header
-        include includes/header
+        include includes/structure/main-header
 
       block nav
-        include includes/nav
-      
-      #main-content
+        include includes/structure/main-navigation
+
+      .layout-section.main-content
         block content
 
       block footer
-        include includes/footer
+        include includes/structure/main-footer
 
     block script
       script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')

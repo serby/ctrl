@@ -1,0 +1,16 @@
+mixin subItems(items)
+  if items
+    ul.sub-nav
+      each navSubItem in items
+        li
+          a(href=navSubItem.url)= navSubItem.label
+          mixin subItems(navSubItem.items)
+
+nav.main-navigation
+  ul
+    - var mainNav = bundled.get('mainNav')
+    each navItem in mainNav
+      //-li(class= page.section == navItem.section ? 'nav-active' : '')
+      li
+        a(href=navItem.url)= navItem.label
+        mixin subItems(navItem.items)
