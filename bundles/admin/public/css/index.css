@@ -190,6 +190,15 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 #ui-datepicker-div .ui-datepicker-current-day a:hover,#ui-datepicker-div .ui-datepicker-current-day span:hover{background-image:none}
 #ui-datepicker-div .ui-datepicker-other-month a,#ui-datepicker-div .ui-datepicker-other-month span{color:#555;font-weight:normal}
 #ui-datepicker-div .ui-datepicker-unselectable a,#ui-datepicker-div .ui-datepicker-unselectable span{color:#ccc;font-weight:normal}
+.list-filter-form{position:absolute;top:-6px;right:0;}
+.list-filter-form .form-row{margin-bottom:0}
+.list-filter-form label{position:relative;display:inline-block;}
+.list-filter-form label .form-label-text{display:none}
+.list-filter-form label .form-field{width:150px;border-right:0;display:inline-block}
+.list-filter-form label a.reset{position:absolute;display:block;top:50%;margin-top:-6px;right:5px;width:12px;height:12px;text-indent:-9999px;overflow:hidden;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-70px -2px;background-repeat:no-repeat;}
+.list-filter-form label a.reset:hover{background-position:-100px -2px}
+.list-filter-form input.button{padding:0;width:30px;height:30px;vertical-align:top;text-indent:-9999px;font-size:0;line-height:0;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-120px 6px;background-repeat:no-repeat;}
+.list-filter-form input.button:active{top:0;border-color:#b3b3b3;-webkit-box-shadow:none;box-shadow:none}
 .notification{position:relative;background-color:#eee;border:1px solid #cacaca;text-shadow:0 1px 1px #cacaca;padding:10px 14px;margin-bottom:18px;font-weight:bold;color:#333;}
 .notification h4{color:inherit;font-size:16px;line-height:18px;font-weight:bold;margin-bottom:10px}
 .notification.success{background-color:#47a967;border:1px solid #327748;text-shadow:0 1px 1px #327748;color:#fff}
@@ -367,17 +376,6 @@ fieldset h3,[class^="panel"] h3{position:relative;text-transform:uppercase;borde
 fieldset.actions{text-align:right;background-color:transparent;padding:0 20px;margin-bottom:18px;-webkit-box-shadow:none;box-shadow:none}
 .page-actions{position:absolute;top:44px;right:0;}
 .page-actions li{float:left;margin-left:10px}
-.filter-form{position:absolute;top:7px;right:20px;}
-.filter-form form{width:auto}
-.filter-form label{position:relative;display:inline;}
-.filter-form label strong{display:none}
-.filter-form label input{width:150px;height:26px;padding:3px 10px;padding-left:10px;border-right:0;-webkit-border-radius:30px 0 0 30px;border-radius:30px 0 0 30px;}
-.filter-form label input:hover{border-color:#b3b3b3}
-.filter-form label input:active,.filter-form label input:focus{border-color:#b3b3b3;-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(43,105,153,0.8);box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(43,105,153,0.8)}
-.filter-form label a.reset{position:absolute;display:block;top:6px;right:5px;width:12px;height:12px;text-indent:-9999px;overflow:hidden;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-70px -2px;background-repeat:no-repeat;}
-.filter-form label a.reset:hover{background-position:-100px -2px}
-.filter-form input.button{height:26px;width:28px;text-indent:-9999px;font-size:0;line-height:0;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-120px 4px;background-repeat:no-repeat;-webkit-border-radius:0 30px 30px 0;border-radius:0 30px 30px 0;}
-.filter-form input.button:active{top:0;border-color:#b3b3b3;-webkit-box-shadow:none;box-shadow:none}
 td{vertical-align:top;padding-top:10px;}
 td a{color:$globalColor;text-decoration:none;}
 td a:hover{text-decoration:underline}

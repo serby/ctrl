@@ -1,0 +1,12 @@
+.list-filter-form
+  - if (Object.keys(searchProperties).length > 0)
+    form(method='get', action='#{model.slug}')
+      .form-row
+        label
+          span.form-label-text Filter Results
+          - if (typeof url.Filter === 'undefined' || url.Filter === '')
+            input.form-field(type='text', value='', name='Filter', placeholder="Filter Results")
+          - else
+            input.form-field(type='text', value=url.Filter, name='Filter', placeholder="Filter Results")
+            a.reset(href='?Reset') Reset
+        input.button(type='submit',value='Filter')
