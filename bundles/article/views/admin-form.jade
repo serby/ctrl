@@ -5,24 +5,25 @@ block content
   include ../../admin/views/mixins/form-elements/index
   include ../../admin/views/mixins/form-elements/file
 
-  h1
-    -if (page.action == 'create')
-      | New #{model.name}
-    -else
-      | Edit #{model.name}
+  header.page-header
+    h1
+      -if (page.action == 'create')
+        | New #{model.name}
+      -else
+        | Edit #{model.name}
 
-  nav.breadcrumb
-    ul
-      li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.slug}') #{model.plural}
-      li
-        -if (page.action == 'create')
-          | New #{model.name}
-        -else
-          | Edit #{model.name}
+    nav.breadcrumb
+      ul
+        li.nav-home: a(href='/admin') Home
+        li: a(href='/admin/#{model.slug}') #{model.plural}
+        li
+          -if (page.action == 'create')
+            | New #{model.name}
+          -else
+            | Edit #{model.name}
 
-  -if (page.action == 'update')
-    include ../../admin/views/generic/includes/form-actions
+    -if (page.action == 'update')
+      include ../../admin/views/generic/includes/form-actions
 
   form(method='post', enctype='multipart/form-data')
 
@@ -50,9 +51,12 @@ block content
       h3 Details
       mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
       mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
-      mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, errors: errors, information: 'Your article won\'t be seen by the world until this is checked' })
       mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, errors: errors})
+
+    fieldset
+      h3 Publish
       mixin datepickerFieldForObject({ name: 'publishedDate' }, { label: 'Published Date', data: entity, required: true, errors: errors, information: 'This is used to order the articles' })
+      mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, errors: errors, information: 'Your article won\'t be seen by the world until this is checked' })
 
     .form-row.form-row-actions
       a.button(href='/admin/#{model.slug}') Cancel

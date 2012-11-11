@@ -5,14 +5,15 @@ block content
   include ../mixins/form-elements/file
   include ../mixins/grouped-multiselect-mixin
 
-  h1 #{model.plural}
+  header.page-header
+    h1 #{model.plural}
 
-  nav.breadcrumb
-    ul
-      li.nav-home: a(href='/admin') Home
-      li #{model.plural}
+    nav.breadcrumb
+      ul
+        li.nav-home: a(href='/admin') Home
+        li #{model.plural}
 
-  include includes/list-actions
+    include includes/list-actions
 
   .panel-list
     h3 All #{model.plural}
@@ -25,7 +26,8 @@ block content
         | No records found.
       - if (adminIsAllowed(model.name, 'create')) 
         p Would you like to 
-          a(href='/admin/#{model.slug}/new') add one?
+          a(href='/admin/#{model.slug}/new') add one
+          | ?
 
     - else
       table.highlight.sortable

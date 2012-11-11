@@ -2,12 +2,14 @@ extend ../../admin/views/layout
 
 block content
 
-  h1 Admin User Interface
+  header.page-header
 
-  nav.breadcrumb
-    ul
-      li.nav-home: a(href='/admin') Home
-      li Admin UI
+    h1 Admin User Interface
+
+    nav.breadcrumb
+      ul
+        li.nav-home: a(href='/admin') Home
+        li Admin UI
 
   section#form-elements
     include form-elements

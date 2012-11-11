@@ -197,7 +197,7 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .list-filter-form label .form-field{width:150px;border-right:0;display:inline-block}
 .list-filter-form label a.reset{position:absolute;display:block;top:50%;margin-top:-6px;right:5px;width:12px;height:12px;text-indent:-9999px;overflow:hidden;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-70px -2px;background-repeat:no-repeat;}
 .list-filter-form label a.reset:hover{background-position:-100px -2px}
-.list-filter-form input.button{padding:0;width:30px;height:30px;vertical-align:top;text-indent:-9999px;font-size:0;line-height:0;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-120px 6px;background-repeat:no-repeat;}
+.list-filter-form input.button{padding:0;width:30px;height:30px;vertical-align:top;text-indent:-9999px;font-size:0;line-height:0;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-120px 6px;background-repeat:no-repeat;border-top-left-radius:0;border-bottom-left-radius:0;}
 .list-filter-form input.button:active{top:0;border-color:#b3b3b3;-webkit-box-shadow:none;box-shadow:none}
 .notification{position:relative;background-color:#eee;border:1px solid #cacaca;text-shadow:0 1px 1px #cacaca;padding:10px 14px;margin-bottom:18px;font-weight:bold;color:#333;}
 .notification h4{color:inherit;font-size:16px;line-height:18px;font-weight:bold;margin-bottom:10px}
@@ -371,6 +371,10 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .login .main-content{padding:80px;margin:100px auto;background-color:#fff;border:1px solid #ddd;-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.1);box-shadow:0 1px 5px rgba(0,0,0,0.1);max-width:620px}
 .password-reset{float:right;margin-top:-44px}
 pre,code{font-family:'Menlo','Monaco',monospace;color:#444;border:1px solid #ccc;background-color:#fff;padding:20px;display:block}
+.page-header{position:relative;margin-bottom:3em;}
+.page-header h1{margin-bottom:.2em}
+.page-actions{position:absolute;top:0;right:0;}
+.page-actions li{float:left;margin-left:10px}
 fieldset,[class^="panel"]{position:relative;margin-bottom:36px;}
 fieldset h3,[class^="panel"] h3{position:relative;text-transform:uppercase;border-bottom:3px solid #ccc;padding-bottom:10px}
 fieldset.actions{text-align:right;background-color:transparent;padding:0 20px;margin-bottom:18px;-webkit-box-shadow:none;box-shadow:none}
