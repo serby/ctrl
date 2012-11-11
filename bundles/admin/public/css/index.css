@@ -2,7 +2,7 @@ body{background:#fff}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;margin:0;padding:0}
 html,body,p,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,blockquote,th,td{margin:0;padding:0}
 h1,h2,h3,h4,h5,h6{margin-bottom:1em}
-p,pre,dt,ul,ol,hr,legend,button,address,table,blockquote{margin-bottom:1.5em}
+p,pre,ul,ol,dd,hr,legend,button,address,table,blockquote{margin-bottom:1.5em}
 fieldset,img{border:0}
 img,object{vertical-align:bottom}
 ul li{list-style-type:disc;list-style-position:inside}
@@ -23,7 +23,7 @@ ins{text-decoration:none;border-bottom:3px double #333}
 del{text-decoration:line-through}
 mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
 abbr,acronym{border-bottom:1px dotted #333;font-variant:normal}
-dd{padding-left:20px;margin-top:.5em}
+dd{margin-top:.5em}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin-right:30px;margin-left:30px}
 blockquote{border-left:1px solid #ccc;padding:10px 20px 10px 39px;background-color:#fafafa;}
 blockquote p{margin-bottom:0}
