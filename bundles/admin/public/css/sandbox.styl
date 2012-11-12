@@ -1,0 +1,154 @@
+//
+// Nothing should ever find a home in this file
+// It is for prototyping only
+//
+
+
+// Login Page
+.login
+  background-color #efefef
+  margin 40px
+
+  .main-content
+    padding 80px
+    margin 100px auto
+    background-color #fff
+    border 1px solid #ddd
+    box-shadow 0 1px 5px rgba(0,0,0,.1)
+    max-width 620px
+
+.password-reset
+  float right
+  margin-top -44px
+
+
+/* Code snippets */
+pre
+code
+  font-family 'Menlo', 'Monaco', monospace
+  color #444
+  border 1px solid #ccc
+  background-color #fff
+  padding 20px
+  display block
+
+
+//-
+//- Page Titles
+//-
+
+.page-header
+  position relative
+  margin-bottom 3em
+
+  h1
+    margin-bottom 0.2em
+
+.page-actions
+  position absolute
+  top 0
+  right 0
+
+  li
+    float left
+    margin-left 10px
+
+
+
+
+
+
+
+
+fieldset,
+[class^="panel"]
+  position relative
+  margin-bottom $baseLineHeight * 2
+
+  h3
+    position relative
+    text-transform uppercase
+    border-bottom 3px solid #ccc
+    padding-bottom 10px
+
+
+
+
+/** TEMP table control styles **/
+td
+  vertical-align top
+  padding-top 10px
+  a
+    color $globalColor
+    text-decoration none
+    &:hover
+      text-decoration underline
+  .row-actions,
+  .row-actions-block
+    display inline
+    margin-top 4px
+    margin-left 20px
+    padding 0
+    font-size 12px
+    opacity 0
+    transition opacity 0.2s ease
+    li
+      margin 0 10px 0 0
+      padding 0
+      list-style none
+      display inline
+      a
+  .row-actions-block
+    display block
+    margin-left 0
+tr:hover td
+  .row-actions,
+  .row-actions-block
+    opacity 1
+/* Fading Inline Row Controls */
+td.title
+  strong
+    font-size 14px
+
+
+/**/
+.admin-ui
+  .main-content
+    section
+      float left
+      width 100%
+      clear left
+      padding-top 10px
+      margin-top 8px
+      h1
+        font-size 2em
+        border-bottom 2px solid #bbb
+        padding-bottom 5px
+        margin-bottom 30px
+      .breadcrumb
+        display none
+
+/**/
+
+section:target
+  margin-left -18px
+  margin-right -18px
+  padding-left 17px
+  padding-right 17px
+  border 1px solid transparent
+  border-radius 5px
+  -webkit-animation-name target-highlight
+  -webkit-animation-duration 2.5s
+  -webkit-animation-iteration-count
+  -webkit-animation-timing-function ease-in-out
+
+@-webkit-keyframes target-highlight
+  0%
+    background-color rgba($primaryColor, 0)
+    border-color rgba($primaryColor, 0)
+  20%
+    background-color rgba($primaryColor, 0.2)
+    border-color rgba($primaryColor, 0.4)
+  100%
+    background-color rgba($primaryColor, 0)
+    border-color rgba($primaryColor, 0)

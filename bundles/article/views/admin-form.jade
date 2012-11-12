@@ -2,59 +2,62 @@ extend ../../admin/views/layout
 
 block content
 
-  include ../../admin/views/mixins/form-fields
-  include ../../admin/views/mixins/file
+  include ../../admin/views/mixins/form-elements/index
+  include ../../admin/views/mixins/form-elements/file
 
-  h1
-    -if (page.action == 'create')
-      | New #{model.name}
-    -else
-      | Edit #{model.name}
+  header.page-header
+    h1
+      -if (page.action == 'create')
+        | New #{model.name}
+      -else
+        | Edit #{model.name}
 
-  nav.breadcrumb
-    ul
-      li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.slug}') #{model.plural}
-      li
-        -if (page.action == 'create')
-          | New #{model.name}
-        -else
-          | Edit #{model.name}
+    nav.breadcrumb
+      ul
+        li.nav-home: a(href='/admin') Home
+        li: a(href='/admin/#{model.slug}') #{model.plural}
+        li
+          -if (page.action == 'create')
+            | New #{model.name}
+          -else
+            | Edit #{model.name}
 
-  p Build content for your site here.
-
-  -if (page.action == 'update')
-    include ../../admin/views/generic/includes/form-actions
+    -if (page.action == 'update')
+      include ../../admin/views/generic/includes/form-actions
 
   form(method='post', enctype='multipart/form-data')
-    - if (Object.keys(errors).length > 0)
-      .notification.error
-        h4 Please check the form and try again
-        - each error in unshownErrors
-          p= errors[error]
+
+    //- Summary of errors
+    mixin formError()
+
     fieldset
-      h3 Article Details
+      h3 Title
       - if (formType === 'updateForm')
         input(type='hidden', name='_id', value=entity._id)
       mixin textFieldForObject({ name: 'title' }, { label: 'Title', data: entity, required: true, errors: errors})
-      mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
       mixin textFieldForObject({ name: 'slug' }, {label: 'Slug', data: entity, required: true, errors: errors, information: 'This will be part of the URL. Leave blank to auto-generate'})
+
+    fieldset
+      h3 Content
       mixin dropdownForObject({ name: 'type' }, { label: 'Type', data: entity, required: true, errors: errors, list: typesDropdown })
-      mixin textboxFieldForObject({ name: 'body', class: 'rich-editor tallest', placeholder: 'Write your article here...' }, { formRowClass: 'full', label: '', data: entity, required: false, errors: errors })
+      mixin textboxFieldForObject({ name: 'body', class: 'rich-editor', placeholder: 'Write your article here...' }, { formRowClass: 'form-row-full-width', label: 'Aticle Content', data: entity, required: false, rows: 25, errors: errors })
+      mixin textboxFieldForObject({ name: 'summary' }, { formRowClass: 'form-row-full-width', label: 'Article Summary', data: entity, errors: errors, information: 'If you leave this blank a first part of the main content will be used.', rows: 5 })
 
     fieldset
-      h3 Article Content
-      p This is the content for an Article
-      mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
-      mixin textboxFieldForObject({ name: 'summary', class: 'short' }, { label: 'Summary', data: entity, errors: errors, information: 'If you leave this blank a first part of the main content will be used.' })
-      mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, errors: errors, information: 'Your article won\'t be seen by the world until this is checked' })
-      mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, errors: errors})
-      mixin datepickerFieldForObject({ name: 'publishedDate' }, { label: 'Published Date', data: entity, required: true, errors: errors, information: 'This is used to order the articles' })
-
-    fieldset
-      h3 Article Images
+      h3 Images
       mixin fileFieldForObject({ name: 'images' }, { label: 'Images', data: entity, required: false, errors: errors })
 
-    fieldset.actions
+    fieldset
+      h3 Details
+      mixin dropdownForObject({ name: 'section' }, { label: 'Section', data: entity, required: true, errors: errors, list: sectionsDropdown })
+      mixin dropdownForObject({ name: 'author' }, { label: 'Author', data: (entity['author'] === null ? currentAdmin : entity), required: true, errors: errors, list: adminsDropdown })
+      mixin checkboxFieldForObject({ name: 'comments' }, { label: 'Comments', data: entity, errors: errors})
+
+    fieldset
+      h3 Publish
+      mixin datepickerFieldForObject({ name: 'publishedDate' }, { label: 'Published Date', data: entity, required: true, errors: errors, information: 'This is used to order the articles' })
+      mixin checkboxFieldForObject({ name: 'live' }, { label: 'Live', data: entity, errors: errors, information: 'Your article won\'t be seen by the world until this is checked' })
+
+    .form-row.form-row-actions
       a.button(href='/admin/#{model.slug}') Cancel
-      input.button.primary(type='submit',value='Submit')
+      input.button.button-action(type='submit',value='Submit')

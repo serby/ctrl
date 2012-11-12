@@ -1,0 +1,194 @@
+.main-navigation
+  clear left
+  position relative
+  z-index 1
+  background-color #efefef
+
+  ul
+    border-bottom 1px solid #fff
+    border-top 1px solid #ddd
+
+  li
+    border-top 1px solid #fff
+    border-bottom 1px solid #ddd
+
+  a
+    position relative
+    display block
+    padding 14px 30px
+
+    color #222
+    text-decoration none
+    font-family $headingFontFamily
+    font-size 1.14em
+
+  a:hover
+  .nav-active > a
+    padding-left 26px
+    border-left 4px solid $primaryColor
+    background-color #ddd
+    z-index 1
+
+  .nav-active
+    border-top 1px solid #ddd
+    border-bottom 1px solid #ddd
+    margin-right -1px
+    margin-top -1px
+    // margin-bottom -1px
+
+  .nav-active > a
+    background-color #fff
+    padding-top 15px
+    padding-bottom 14px
+    z-index 1
+
+
+
+
+
+
+  .sub-nav
+    display none
+    border-bottom 0
+    li
+      border 0
+      border-bottom 1px solid #eee
+    li:last-child
+      border-bottom 0
+    a
+      padding-top 4px
+      padding-bottom 4px
+      font-size 1em
+      background-color #ddd
+
+  .nav-active .sub-nav
+    display block
+
+  /* Third level navigation */
+  .sub-nav .sub-nav
+    border-top 1px solid #eee
+
+    a
+      padding-left 40px
+      &:hover
+        padding-left 36px
+
+    .js &
+      display none
+
+  .js & .nav-expandable:after
+    position absolute
+    content ""
+    display block
+    right 20px
+    top 50%
+    width 6px
+    height 8px
+    margin-top -4px
+    background-image versionPath("/admin/images/content/nav-sprite.png")
+    background-position 0 0
+    background-repeat no-repeat
+    transition all 0.4s ease
+  .js & .nav-expandable.nav-expanded:after
+    transform rotate(-90deg)
+
+
+
+
+
+
+.user-navigation
+  position relative
+  background-color #222
+  width 100%
+  height 44px
+  color #fff
+
+  .details
+    padding 10px 10px 10px 30px
+    width 156px
+    line-height 24px
+
+  .dropdown
+    position absolute
+    top 0
+    right 0
+    z-index 1
+    float right
+    width 44px
+    height 44px
+    outline 0
+    background-color #222
+    background-image versionPath("/admin/images/content/icon-settings.png")
+    background-position 50% 50%
+    background-repeat no-repeat
+    cursor pointer
+
+    ul
+      display none
+      position absolute
+      width 240px
+      right 0
+      top 44px
+
+      background-color #222
+      box-shadow 0px 2px 4px rgba(0,0,0,.4)
+      border-top 1px solid #111
+      &:before
+        position absolute
+        display block
+        content ""
+        width 160px
+        height 4px
+        top -4px
+      &:after
+        position absolute
+        display block
+        content ""
+        right 14px
+        bottom 100%
+        width 0
+        height 0
+        border-style solid
+        border-width 8px
+        border-color transparent transparent #222 transparent
+    li
+      a
+        display block
+        padding 10px 30px
+        color #fff
+        border-top 1px solid #333
+        border-bottom 1px solid #111
+        text-decoration none
+        &:hover
+          background-color #333
+          // border-top-color #2f2f2f
+          // border-bottom-color #0f0f0f
+
+    &:hover
+      background-color $primaryColor
+      ul
+        display block
+
+
+
+
+
+
+// .user-navigation
+//   margin-bottom 20px
+//   position relative
+//   float left
+//   width 100%
+
+//   .details
+//     float left
+//     margin-left 30px
+//     p
+//       margin-bottom 0
+
+//     a.logout
+//       font-size 0.8em
+//       &:hover
+//         text-decoration underline
+

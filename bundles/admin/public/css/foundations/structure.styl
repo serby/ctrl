@@ -1,0 +1,34 @@
+/*
+ * Styles which are common to all pages
+ */
+
+html, body
+  // height 100%
+
+body
+  position relative
+  background-position 0px 0px
+  background-repeat repeat
+
+.container
+  max-width 1200px
+  min-width 810px
+  margin 0 auto
+
+.main-content
+  position relative
+  width auto
+  margin-left 280px
+  margin-right 40px
+  padding-top 60px
+  padding-bottom 60px
+  &:after
+    content "."
+    display block
+    height 0
+    clear both
+    visibility hidden
+
+
+
+

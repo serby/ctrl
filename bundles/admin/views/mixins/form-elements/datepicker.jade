@@ -1,0 +1,24 @@
+//-
+//- jQuery UI Datepicker
+//-
+
+mixin datepickerField(inputParams, params)
+  .form-row(class=params.error !== undefined ? 'form-row-error' : '')
+    label
+      span.form-label-text #{params.label}
+        - if (params.required)
+          abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+      .datepicker
+        input.form-field(type='text', name='#{inputParams.name}', value='#{inputParams.value || ''}', placeholder=inputParams.placeholder, maxlength=inputParams.maxLength)
+      mixin formRowErrorText(params.error)
+    mixin formRowDescription(params.information)
+
+//- mixin datepickerField(inputParams, params)
+//-   - inputParams.type = 'text'
+//-   - inputParams.class = 'datepicker'
+//-   mixin inputField(inputParams, params)
+
+mixin datepickerFieldForObject(inputParams, params)
+  - params.error = params.errors[inputParams.name];
+  - inputParams.value = params.data[inputParams.name];
+  mixin datepickerField(inputParams, params)

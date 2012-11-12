@@ -1,0 +1,160 @@
+.notification
+  position relative
+  background-color $colorNotification
+  border 1px solid rgba(0,0,0,.1)
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
+  padding 10px 14px
+  margin-bottom $baseLineHeight
+  font-weight bold
+  border-radius 2px
+  color #fff
+
+  h4
+    color inherit
+    font-size 16px
+    line-height 18px
+    font-weight bold
+    margin-bottom 10px
+
+
+  &.success
+    background-color $colorSuccess
+    color #FFFFFF
+
+  &.notice
+    background-color $colorNotice
+    color #FFFFFF
+
+  &.warning
+    background-color $colorWarning
+    color #FFFFFF
+
+  &.error
+    background-color $colorError
+    color #FFFFFF
+
+  p
+    margin 0
+  .button-close
+    position absolute
+    right 14px
+    top 50%
+    display block
+    width 10px
+    height 11px
+    margin-top -6px
+    text-indent -9999px
+    overflow hidden
+    background versionPath("/admin/images/content/notification-sprite.png") 0px 0px no-repeat
+    &:hover
+      background-position 0px -11px
+    &:active
+      background-position 0px -22px
+
+
+/*
+ * UI-notifications
+ */
+
+#ui-notifications
+  position fixed
+  top 10px
+  right 15px
+
+#ui-notifications li
+  margin-bottom 5px
+  list-style none
+
+.ui-notification
+  position relative
+  max-width 400px
+  min-width 250px
+  z-index 1000
+  border 1px solid rgba(#000, 0.5)
+  background-color rgba(#000, 0.9)
+  border-radius 3px
+  color #ddd
+  box-shadow inset 0px 0px 0px 1px rgba(#fff, 0.1), 0px 2px 3px rgba(#000, 0.2)
+
+  &:after
+    content ''
+    position absolute
+    top 0px
+    bottom 0px
+    border-radius 3px 0px 0px 3px
+    border 2px solid $colorNotice
+
+  &.warn:after
+    border 2px solid $colorWarning
+
+  &.error:after
+    border 2px solid $colorError
+
+.ui-notification .content
+  padding 15px 20px
+
+.ui-notification h1
+  margin 0 0 5px 0
+  font-size 16px
+  font-weight normal
+
+.ui-notification p
+  margin 0
+  padding 0
+  font-size .9em
+
+.ui-notification .close
+  position absolute
+  top 5px
+  right 10px
+  text-decoration none
+  color #888
+  display none
+
+.ui-notification.closable .close
+  display block
+
+.ui-notification .close:hover
+  color #fff
+
+.ui-notification .close:active
+  margin-top 1px
+
+/* close */
+
+.ui-notification .close
+  position absolute
+  top 3px
+  right 10px
+  text-decoration none
+  color #888
+  font-size 16px
+  font-weight bold
+  display none
+
+/* slide */
+
+.ui-notification.slide
+  transition opacity 300ms, top 300ms
+
+.ui-notification.slide.hide
+  opacity 0
+  top -500px
+
+/* fade */
+
+.ui-notification.fade
+  transition opacity 300ms
+
+.ui-notification.fade.hide
+  opacity 0
+
+/* scale */
+
+.ui-notification.scale
+  transition transform 300ms
+  transform scale(1)
+
+.ui-notification.scale.hide
+  transform scale(0)

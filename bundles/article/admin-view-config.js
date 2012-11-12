@@ -4,8 +4,9 @@
 module.exports = function viewConfig(serviceLocator) {
 
   return serviceLocator.admin.viewConfig({
-    groups: [{
-      name: 'Article Details',
+    groups: [
+    {
+      name: 'Title',
       description: 'These are the details for an Article',
       properties: {
         _id: {
@@ -21,12 +22,6 @@ module.exports = function viewConfig(serviceLocator) {
           view: true,
           searchType: 'text'
         },
-        section: {
-          createForm: true,
-          updateForm: true,
-          list: false,
-          view: false
-        },
         slug: {
           createForm: true,
           updateForm: true,
@@ -40,20 +35,13 @@ module.exports = function viewConfig(serviceLocator) {
           list: true,
           view: true,
           type: 'link'
-        },
-        summary: {
-          createForm: true,
-          updateForm: true,
-          view: true,
-          searchType: 'text'
-        },
-        author: {
-          createForm: true,
-          updateForm: true,
-          list: true,
-          view: true,
-          searchType: 'text'
-        },
+        }
+      }
+    },
+    {
+      name: 'Content',
+      description: '',
+      properties: {
        type: {
          createForm: true,
          updateForm: true,
@@ -66,12 +54,42 @@ module.exports = function viewConfig(serviceLocator) {
           list: false,
           view: true
         },
-        live: {
+        summary: {
+          createForm: true,
+          updateForm: true,
+          view: true,
+          searchType: 'text'
+        }
+      }
+    },
+    {
+      name: 'Images',
+      description: 'Images for an Article',
+      properties: {
+        images: {
+          createForm: true,
+          updateForm: true,
+          view: true,
+          type: 'file'
+        }
+      }
+    },
+    {
+      name: 'Details',
+      description: '',
+      properties: {
+        section: {
+          createForm: true,
+          updateForm: true,
+          list: false,
+          view: false
+        },
+        author: {
           createForm: true,
           updateForm: true,
           list: true,
           view: true,
-          type: 'checkbox'
+          searchType: 'text'
         },
         comments: {
           createForm: true,
@@ -79,6 +97,12 @@ module.exports = function viewConfig(serviceLocator) {
           view: true,
           type: 'checkbox'
         },
+      }
+    },
+    {
+      name: 'Publish',
+      description: '',
+      properties: {
         created: {
           createForm: true,
           list: false,
@@ -92,18 +116,13 @@ module.exports = function viewConfig(serviceLocator) {
           view: true,
           edit: true,
           type: 'dateTime'
-        }
-      }
-    },
-    {
-      name: 'Article Images',
-      description: 'Images for an Article',
-      properties: {
-        images: {
+        },
+        live: {
           createForm: true,
           updateForm: true,
+          list: true,
           view: true,
-          type: 'file'
+          type: 'checkbox'
         }
       }
     }],

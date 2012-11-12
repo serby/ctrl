@@ -1,0 +1,15 @@
+.social-buttons
+
+  // overflow: hidden; clearfix will not work here as social button need to
+  // break out of their container
+  &:after
+    content "."
+    display block
+    height 0
+    clear both
+    visibility hidden
+
+  li
+    list-style none
+    float left
+    margin-right 10px

@@ -1,0 +1,73 @@
+//
+// Typographic Styles
+// ==================
+//
+
+::-moz-selection
+  color #fff
+  background #4992ad
+  text-shadow none
+::selection
+  color #fff
+  background #4992ad
+  text-shadow none
+
+body
+  font-family $baseFontFamily
+  font-size 90%
+  line-height 1.6
+  font-weight 400
+  color #222
+  // -webkit-font-smoothing antialiased
+
+a
+  color $primaryColor
+  text-decoration underline
+  // transition color 0.4s ease
+  &:hover
+    color #222
+    text-decoration underline
+    // transition color 0.2s ease
+  &:focus,
+  &:active
+    color #222
+    outline none
+
+h1, h2, h3, h4, h5, h6
+  font-family $headingFontFamily
+  font-weight 700
+  line-height 1
+
+  letter-spacing 0.05em
+  text-transform uppercase
+  text-rendering optimizeLegibility
+
+h1
+  font-size 2.375em
+h2
+  font-size 1.6em
+h3
+  font-size 1.4em
+h4
+  font-size 1.2em
+h5
+  font-size 1.1em
+h6
+  font-size 1em
+
+pre, code, kbd, style
+  font-family Menlo, Monaco, "Courier New", Courier, monospace
+  font-size .875em
+
+pre
+  white-space pre-wrap
+
+pre code
+  font-size 1.1em
+  line-height 1.6em
+
+blockquote
+  font-size 1.125em
+
+input, select, textarea
+  font-size 1em

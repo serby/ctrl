@@ -1,0 +1,338 @@
+$textInputPadding = 5px
+$colorBorder = #ccc
+$pageMarginBottom = 1.5em
+$colorMediumGrey = #777
+
+/*------------------------------------*\
+  =TEXT-INPUT
+\*------------------------------------*/
+
+.text-input
+  padding $textInputPadding
+  outline 0
+  border 1px solid $colorBorder
+  line-height $baseLineHeight
+  transition border-color 0.1s ease, box-shadow 0.2s ease
+  font-family inherit
+  font-size inherit
+  &:focus
+    border-color $primaryColor
+    box-shadow 0px 1px 5px rgba($primaryColor, 0.2) inset, 0px 0px 5px rgba($primaryColor, 0.8)
+
+
+/*----- MODIFIERS -----*/
+/*
+We have to nest our modifiers to increase their specificity. Otherwise, a class
+of `text-input-small` isn’t going to beat an attribute selector of
+input[type="text"].
+
+We use a seperate object for the modifiers, so that they can be extended by
+less rules (`input, textarea, select` instead of attribute selectors for
+different sorts of `input`). This saves us about 30 LOC.
+*/
+.text-input-modifiers
+  /* Used for input errors. Extend where needed. */
+  &.text-input-error
+    border-color darken($colorError, 10%)
+    &:focus
+      border-color darken($colorError, 10%)
+
+
+
+
+/*------------------------------------*\
+  BASE
+\*------------------------------------*/
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea,
+select
+  @extend .text-input
+
+input[type="file"]
+  font-family inherit
+  font-size inherit
+
+select
+  /* We make the select elements the same size as textual inputs */
+  height 28px
+  padding-top 2px
+  padding-bottom 2px
+
+input,
+textarea,
+select
+  @extend .text-input-modifiers
+
+
+
+
+/*----------------------------------------------------------------------------*\
+  FORMS
+\*----------------------------------------------------------------------------*/
+
+/*------------------------------------*\
+  =FORM-ERROR
+\*------------------------------------*/
+.form-error
+  margin-bottom $pageMarginBottom
+  // font-size 0.866666667em /* 15 * 0.866666667 = 13px */
+  background-color $colorError
+  border-radius 3px
+  padding 10px
+  color white
+  border 1px solid darken($colorError, 10%)
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
+
+
+
+
+/*------------------------------------*\
+  =FORM-COPY
+\*------------------------------------*/
+.form-copy
+  &,
+  p,
+  ul,
+  ol
+    /*
+    Add small leading margin - we use leading margins because we can’t
+    predict what elements will be used. We also apply the margin to the object
+    itself incase no textual elements are used within.
+    */
+    margin-top 3px
+
+  p,
+  ul,
+  ol
+    /* Remove trailing margins from allowed elements */
+    margin-bottom 0
+
+  ul
+    padding-left 10px
+
+
+
+
+/*------------------------------------*\
+  =FORM-ROW
+\*------------------------------------*/
+/*
+The `form-row` object is the basis of a form.
+*/
+.form-row
+  margin-bottom $pageMarginBottom
+
+  /*
+  We use the label to wrap the actual label text (`.form-label-text`) and the form
+  field.
+  */
+  > label
+    /* Has to be a block element to contain `.form-label-text` and the form field. */
+    display block
+
+  .form-label-text
+    float left
+    box-sizing border-box
+    width 30%
+    /* We use padding to align the text vertically with textual inputs. */
+    padding-top 4px
+    padding-right 20px
+    abbr
+      color $colorError
+      margin-left 4px
+      /* Remove browser’s default border */
+      border-bottom none
+
+  .form-field
+    box-sizing border-box
+
+  ul.form-field
+    /*
+    When a `ul` is used as the field, we need to opt-out of default `ul` styles
+    */
+    padding 0
+    margin-bottom 0
+    display inline-block
+    li
+      list-style none
+
+
+  /*
+  Specificially target the form controls that need styling. We have to be
+  strict to avoid giving styles to other controls, such as radio buttons and
+  checkboxes (the browser wouldn’t render most of them anyway, but things like
+  `display block`, it would).
+  */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select
+    display block
+    width 70%
+
+  input[type="checkbox"],
+  input[type="radio"]
+    margin-right 10px
+
+  select
+    /* The select element has no padding, so it’s width is different. */
+    // width 300px
+
+  textarea
+    resize vertical
+    // height 80px
+
+  /*
+  We do not need to vertically align the text on field groups and checkbox
+  form rows.
+  */
+  &.form-row-field-group,
+  &.form-row-checkbox,
+  &.form-row-upload
+    .form-label-text
+      padding-top 0
+
+
+
+
+
+  // ----- MODIFIERS -----
+  &.form-row-checkbox
+    .form-field
+      /* We don’t need the leading margin on field groups or checkboxes. */
+      /* Unset mobile’s leading margin */
+      margin-top 0
+
+  &.form-row-upload
+    .form-field
+      line-height 1
+
+  /* Used for rows containing buttons */
+  &.form-row-actions
+    text-align right
+
+    input,
+    button,
+    .button
+      margin-left 10px
+      &:first-child
+        margin-left 0
+
+  /*
+  Used for display the label text and field inline, when the field has to come
+  first.
+  */
+
+  // TO DO: No longer needed unless single checkbox alternate is necessary
+
+  &.form-row-alt
+    .form-label-text
+      // When the label appears after the field, we have to apply leading margin
+      // to the label instead
+      margin-top 3px
+      // Unset potential b1 and b2 styles
+      float none
+      margin-right 0
+      // width auto
+      // Force onto new line
+      // display block
+
+    .form-field
+      // Unset potential b1 and b2 styles
+      width auto
+      margin-left 30%
+
+  // Full width rows with inputs below labels
+  &.form-row-full-width
+    .form-label-text
+      float none
+      width 100%
+      margin-right 0
+      display block
+      padding-top 0
+      margin-bottom 4px
+
+    .form-field
+      width 100%
+
+    .form-row-description
+      margin-left 0
+      width 100%
+
+
+  &.form-row-date-group
+    ul.form-field
+      width 70%
+      // Really nasty hack to avoid jumping caused by 30%+70% rounding bug
+      margin-right -1px
+    li
+      float left
+      width 32%
+      margin-left 2%
+      &:first-child
+        margin-left 0
+
+      .form-label-text
+        display none
+      .form-field
+        width 100%
+
+
+
+
+
+
+
+  /* Applied to a form row when an error exists in the child form field. */
+  &.form-row-error
+    .form-field
+      @extend .text-input-modifiers.text-input-error
+      border-bottom-left-radius 0
+      border-bottom-right-radius 0
+
+
+
+
+/*------------------------------------*\
+  =FORM-ROW-DESCRIPTION
+\*------------------------------------*/
+.form-row-description
+  color $colorMediumGrey
+  font-size 0.8em
+  margin-left 30%
+  width 70%
+  display block
+  box-sizing border-box
+
+
+/*------------------------------------*\
+  =FORM-ROW-ERROR-TEXT
+\*------------------------------------*/
+.form-row-error-text
+  background-color $colorError
+  color white
+  padding $textInputPadding
+  border-bottom-left-radius 3px
+  border-bottom-right-radius 3px
+  border 1px solid darken($colorError, 10%)
+  border-top-width 0
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
+
+  select + &,
+  .form-row-checkbox &,
+  .form-row-field-group &
+    /* Set all border radiuses */
+    border-radius 3px
+    margin-top 5px
+    border-top-width 1px

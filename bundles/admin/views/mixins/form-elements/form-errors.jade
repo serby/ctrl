@@ -1,0 +1,19 @@
+//-
+//- Form Errors
+//-
+
+//- Summary appears at top of form, highlighting hidden errors
+mixin formError()
+  - if (Object.keys(errors).length > 0)
+    .form-copy.form-error
+      strong Oops! Something isn't right.
+      p Please check the form and try again
+      - if (unshownErrors.length > 0)
+        ul
+        - each error in unshownErrors
+          li= errors[error]
+
+//- Appears on each form row, giving row specific error message
+mixin formRowErrorText(error)
+  - if (error)
+    span.form-row-description.form-row-error-text #{error}
