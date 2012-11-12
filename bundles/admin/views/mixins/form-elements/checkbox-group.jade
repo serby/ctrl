@@ -1,0 +1,36 @@
+//-
+//- Grouped Checkboxes
+//-
+
+mixin checkBoxGroupForObject(inputParams, params)
+  .form-row.form-row-field-group(class=params.errors[inputParams.name] && 'form-row-error')
+    span.form-label-text #{params.label}
+    ul.form-field
+      - each option in params.list
+        li
+          label
+            input(type='checkbox', name=inputParams.name, value=option, checked=(params.data[inputParams.name] && params.data[inputParams.name].indexOf(option) !== -1))
+            span=option
+    mixin formRowErrorText(params.errors[inputParams.name])
+    mixin formRowDescription(params.information)
+
+
+// Where is this used? Would multiple single checboxes, or the above grouped
+// option be more applicable?
+mixin groupedCheckBoxGroupForObject(inputParams, params)
+  fieldset
+    h3=params.label
+    div(class=params.errors[inputParams.name] && 'form-row-error')
+    - each options in params.groups
+      .form-row.form-row-field-group
+        span.form-label-text  #{options.label}
+        -if (options.description !== undefined)
+          strong=options.description
+        ul.form-field
+          -each option in options.items
+            li
+              label
+                input(type='checkbox', name='#{inputParams.name}[#{options.value}]', value='#{option}', checked=(params.data[inputParams.name] && params.data[inputParams.name][options.value] && (params.data[inputParams.name][options.value].indexOf(option) !== -1)))
+                span=option
+        mixin formRowErrorText(params.errors[inputParams.name])
+        mixin formRowDescription(params.information)

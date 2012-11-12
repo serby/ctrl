@@ -2,18 +2,20 @@ extend ../layout
 
 block content
 
-  include ../mixins/file
+  include ../mixins/form-elements/file
   include ../mixins/grouped-multiselect-mixin
 
-  h1 View #{model.name}
+  header.page-header
 
-  nav.breadcrumb
-    ul
-      li.nav-home: a(href='/admin') Home
-      li: a(href='/admin/#{model.slug}') #{model.plural}
-      li View #{model.name}
+    h1 View #{model.name}
 
-  include includes/view-actions
+    nav.breadcrumb
+      ul
+        li.nav-home: a(href='/admin') Home
+        li: a(href='/admin/#{model.slug}') #{model.plural}
+        li View #{model.name}
+
+    include includes/view-actions
 
   //-h2 #{model.name} Details
   - each group in viewSchema.groups

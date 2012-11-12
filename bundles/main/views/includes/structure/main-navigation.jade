@@ -1,0 +1,24 @@
+nav.main-navigation
+  ul
+    li: a(href='/') Home
+    li: a(href='/blog') Blog
+    li: a(href='/style-guide') Style Guide
+
+
+//- // TODO - Make this work!
+//- mixin subItems(items)
+//-   if items
+//-     ul.sub-nav
+//-       each navSubItem in items
+//-         li
+//-           a(href=navSubItem.url)= navSubItem.label
+//-           mixin subItems(navSubItem.items)
+//-
+//- nav.main-navigation
+//-   ul
+//-     - var mainNav = bundled.get('mainNav')
+//-     each navItem in mainNav
+//-       //-li(class= page.section == navItem.section ? 'nav-active' : '')
+//-       li
+//-         a(href=navItem.url)= navItem.label
+//-         mixin subItems(navItem.items)

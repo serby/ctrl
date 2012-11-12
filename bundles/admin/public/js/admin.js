@@ -2,43 +2,43 @@ window.module('control-misc-ui', function (module) {
 
   $(function() {
 
-    // /** jQuery UI Datepicker **/
-    // $.datepicker.setDefaults({dayNamesMin: $.datepicker._defaults.dayNamesShort});
-    // $(".datepicker").datepicker(
-    //   { dateFormat: 'DD d MM, yy'
-    //   , showOtherMonths: true
-    //   , selectOtherMonths: true
-    //   , minDate: 0
-    //   , firstDay: 1
-    //   , beforeShow : function (input, picker) {
-    //       picker.dpDiv
-    //         .removeClass('above')
-    //         .removeClass('below');
-    //       setTimeout(function () {
-    //         var dppos = $(picker.dpDiv).offset().top
-    //          , inputpos = $(input).offset().top;
-    //         if (dppos < inputpos) {
-    //           picker.dpDiv.addClass('above');
-    //         } else {
-    //           picker.dpDiv.addClass('below');
-    //         }
-    //       });
-    //     }
-    //   });
+    /** jQuery UI Datepicker **/
+    $.datepicker.setDefaults({dayNamesMin: $.datepicker._defaults.dayNamesShort});
+    $('.datepicker input').datepicker(
+      { dateFormat: 'DD d MM, yy'
+      , showOtherMonths: true
+      , selectOtherMonths: true
+      , minDate: 0
+      , firstDay: 1
+      , beforeShow : function (input, picker) {
+          picker.dpDiv
+            .removeClass('above')
+            .removeClass('below');
+          setTimeout(function () {
+            var dppos = $(picker.dpDiv).offset().top
+             , inputpos = $(input).offset().top;
+            if (dppos < inputpos) {
+              picker.dpDiv.addClass('above');
+            } else {
+              picker.dpDiv.addClass('below');
+            }
+          });
+        }
+      });
 
     /** Chosen Select Boxes **/
-    $(".chzn-select").chosen({
+    $('.chzn-select').chosen({
         allow_single_deselect: true
       , disable_search_threshold: 10
     });
 
-    // var availableTags = ["ActionScript","AppleScript","Asp","BASIC","C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran","Groovy","Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme"];
-    // $( ".autocomplete" ).autocomplete({
-    //   source: availableTags
-    // });
+    var availableTags = ['ActionScript','AppleScript','Asp','BASIC','C','C++','Clojure','COBOL','ColdFusion','Erlang','Fortran','Groovy','Haskell','Java','JavaScript','Lisp','Perl','PHP','Python','Ruby','Scala','Scheme']
+    $('.autocomplete').autocomplete({
+      source: availableTags
+    })
 
     /** Fancybox **/
-    $(".fancybox, [rel='fancybox-group']").fancybox(
+    $('.fancybox, [rel="fancybox-group"]').fancybox(
       { padding: 0
       , prevEffect: 'fade'
       , nextEffect: 'fade'
@@ -54,11 +54,15 @@ window.module('control-misc-ui', function (module) {
 
     /* Check nav height */
     function staticNav() {
-      var sidenavHeight = $("#main-header").outerHeight() + $("#main-footer").outerHeight();
-      var winHeight = $(window).height();
-      $("#main-header").css('position', 'fixed');
-      if (sidenavHeight > winHeight) {
-        $("#main-header").css('position', 'absolute');
+      var mainHeader = $('.main-header')
+        , winHeight = $(window).height()
+        , sidebarHeight = $('.user-navigation').outerHeight(true) +
+                          $('.site-logo').outerHeight(true) +
+                          $('.main-navigation').outerHeight(true) +
+                          $('.main-footer').outerHeight(true)
+
+      if (sidebarHeight > winHeight) {
+        mainHeader.css('position', 'absolute')
       }
     }
 

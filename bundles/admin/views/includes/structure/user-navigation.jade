@@ -1,0 +1,7 @@
+.user-navigation
+  .details
+    span Hi, #{session.admin.firstName}
+  nav.dropdown
+    ul
+      li: a(href='/') View Site
+      li: a.logout(href='/admin/logout') Logout

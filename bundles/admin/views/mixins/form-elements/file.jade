@@ -1,0 +1,54 @@
+//-
+//- Form Row Description
+//-
+
+mixin fileField(inputParams, params)
+  .form-row.form-row-upload(class=params.error !== undefined ? 'error ' : '')
+    label
+      span.form-label-text #{params.label}
+        - if (params.required)
+          abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+      input.form-field(type='file', class=inputParams.class, name='#{inputParams.name}', multiple=params.multiple ? 'multiple' : '', value='#{inputParams.value || ''}')
+
+      mixin formRowErrorText(params.error)
+    mixin formRowDescription(params.information)
+
+    mixin downloadLink(inputParams.value, true)
+    - if (inputParams.value)
+      input(type='hidden', name='current-#{inputParams.name}', value=typeof inputParams.value === 'object' ? JSON.stringify(inputParams.value) : inputParams.value)
+
+
+mixin fileFieldForObject(inputParams, params)
+  - params.error = params.errors[inputParams.name];
+  - inputParams.value = params.data[inputParams.name];
+  mixin fileField(inputParams, params)
+
+//-
+//- File Previews
+//-
+
+mixin downloadLink(files, removeLink)
+  - if (files && files.length > 0)
+    table.image-summary.highlight
+      thead
+        tr
+          th Preview
+          th Image
+          - if (removeLink)
+            th.remove Remove
+      tbody
+        - each file in files
+          tr
+            td.thumbnail
+              mixin displayImage('100', '100', file, '', 'crop')
+            td
+              .file-summary
+                a.file-preview(rel='fancybox-group', href='/binary/#{file.path + file.basename}') #{file.basename}
+                p (#{file.size} bytes) - #{file.type}
+            - if (removeLink)
+              td.checkbox
+                input(name='removeImage[]', type='checkbox', value='#{file.path}')
+
+mixin displayImage(width, height, file, alt, process)
+  - var size = width + 'x' + height
+  img(src=properties.binaryCachePath + '#{process}/#{file.path}' + '#{size}/' + '#{file.basename}', width='#{width}', height='#{height}', alt='#{alt}')

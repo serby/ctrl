@@ -5,7 +5,7 @@ html(lang='en')
       meta(charset='utf-8')
       meta(name='description', content=properties.description)
       meta(name='keywords', content=properties.keyWords)
-    
+
       //- SITE INFORMATION
       title Error #{status}
 
@@ -17,11 +17,11 @@ html(lang='en')
 
     #container
       block header
-        include includes/header
+        include includes/structure/main-header
 
       block nav
-        include includes/nav
-      
+        include includes/structure/main-navigation
+
       #main-content
         h2 Error #{status}
         - if (status === 404)
@@ -34,9 +34,9 @@ html(lang='en')
          - else
           p
             | Oops, something went wrong at this end. You can try heading
-            | back to the  
+            | back to the 
             a(href='/') homepage
             |  to see if that works. Otherwise check back later.
 
       block footer
-        include includes/footer
+        include includes/structure/main-footer

@@ -1,0 +1,22 @@
+//-
+//- Single Checkbox
+//-
+
+mixin booleanField(inputParams, params)
+  .form-row(class=params.error !== undefined ? 'form-row-error' : '')
+    label
+      span.form-label-text #{params.label}
+        - if (params.required)
+          abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+      input.form-field(type=inputParams.type, name=inputParams.name, value='on', checked=(inputParams.checked ? 'checked' : null))
+      mixin formRowErrorText(params.error)
+    mixin formRowDescription(params.information)
+
+mixin checkboxField(inputParams, params)
+  - inputParams.type = inputParams.class = 'checkbox';
+  mixin booleanField(inputParams, params)
+
+mixin checkboxFieldForObject(inputParams, params)
+  - params.error = params.errors[inputParams.name];
+  - inputParams.checked = params.data[inputParams.name] === true;
+  mixin checkboxField(inputParams, params)

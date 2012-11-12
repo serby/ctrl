@@ -1,0 +1,90 @@
+// TODO - Check against new structure
+
+#fileupload
+	label.fileinput-button
+		width 106px
+		height 21px
+		margin 0
+		padding 0
+		display block
+		overflow hidden
+		background versionPath("/admin/images/sprite.png") 0px -54px no-repeat
+		&:hover
+			background-position -110px -54px
+
+		span
+			display none
+
+		input
+			position relative
+			height 21px
+			width auto
+			opacity 0
+			padding 0
+			margin 0
+
+	.ui-button-text
+		display block
+		margin-bottom 10px
+
+	.fileupload-content
+		margin-top 20px
+
+	.dropzone-container div
+		text-align center
+		border 1px solid #ccc
+		background-color #eee
+		padding 10px
+		border-radius 6px
+		font-size 14px
+		font-weight bold
+		margin-bottom 20px
+		color #333 !important
+	.dropzone-container div.ui-state-active
+		padding 20px 10px
+		background-color lightgreen
+	.dropzone-container div.ui-state-highlight
+		background-color auto
+
+
+
+	/* Table of previews */
+table.files
+	margin-bottom 0
+	.template-upload,
+	.template-download
+		width 228px
+		td
+			padding-top 6px
+			line-height 16px
+			font-size 11px
+			word-break break-all
+			a
+				color #333
+				&:hover
+					text-decoration none
+					cursor default
+			&.preview
+				width 60px
+				padding 6px
+				overflow hidden
+				img
+					width 60px
+					height 60px
+			button.remove,
+			button.cancel
+				display block
+				padding 0
+				margin 6px 0 0
+				height 21px
+				text-indent -9999px
+				width 82px
+				background versionPath("/images/content/button-sprite.png") -208px -111px no-repeat
+				border none
+				&:hover
+					background-position -208px -135px
+			button.cancel
+				width 84px
+				background versionPath("/admin/images/sprite.png") -220px -54px no-repeat
+				&:hover
+					background-position -308px -54px

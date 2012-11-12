@@ -1,0 +1,19 @@
+//-
+//- Textarea
+//-
+
+mixin textboxField(inputParams, params)
+  .form-row(
+    class=(params.error !== undefined ? 'form-row-error ' : '') + (params.formRowClass !== undefined ? params.formRowClass : ''))
+    label
+      span.form-label-text #{params.label}
+        - if (params.required)
+          abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
+      textarea.form-field(name=inputParams.name, placeholder=inputParams.placeholder, class=inputParams.class, rows=(params.rows !== undefined ? params.rows : 4))=inputParams.value
+      mixin formRowErrorText(params.error)
+    mixin formRowDescription(params.information)
+
+mixin textboxFieldForObject(inputParams, params)
+  - params.error = params.errors[inputParams.name];
+  - inputParams.value = params.data[inputParams.name];
+  mixin textboxField(inputParams, params)
