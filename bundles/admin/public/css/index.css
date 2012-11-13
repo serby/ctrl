@@ -381,7 +381,10 @@ td{vertical-align:top;padding-top:10px;}
 td a{color:$globalColor;text-decoration:none;}
 td a:hover{text-decoration:underline}
 td .row-actions,td .row-actions-block{display:inline;margin-top:4px;margin-left:20px;padding:0;font-size:12px;opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-webkit-transition:opacity .2s ease;-moz-transition:opacity .2s ease;-o-transition:opacity .2s ease;-ms-transition:opacity .2s ease;transition:opacity .2s ease;}
-td .row-actions li,td .row-actions-block li{margin:0 10px 0 0;padding:0;list-style:none;display:inline;a}
+td .row-actions li,td .row-actions-block li{margin:0 10px 0 0;padding:0;list-style:none;display:inline}
+td .row-actions .form-delete-button,td .row-actions-block .form-delete-button{display:inline;}
+td .row-actions .form-delete-button .button-delete,td .row-actions-block .form-delete-button .button-delete{background-color:transparent;border:0;color:#30678f;-webkit-box-shadow:none;box-shadow:none;text-shadow:none;font-weight:normal;padding:0;}
+td .row-actions .form-delete-button .button-delete:hover,td .row-actions-block .form-delete-button .button-delete:hover{color:#222;text-decoration:underline}
 td .row-actions-block{display:block;margin-left:0}
 tr:hover td .row-actions,tr:hover td .row-actions-block{opacity:1;-ms-filter:none;filter:none}
 td.title strong{font-size:14px}
