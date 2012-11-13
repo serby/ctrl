@@ -94,12 +94,17 @@ table th,table td{padding:8px}
 table th{text-align:left;font-weight:bold;border-bottom:2px solid #666;color:#555;}
 table td{border-bottom:1px solid #999}
 table.highlight tbody tr:hover{background-color:#a9cae2}
-table.sortable th a{padding-right:14px;text-decoration:none;color:#333;background:url("/admin/images/content/v0.1.0/table-sortable.png") 100% 40px no-repeat;}
-table.sortable th a:hover{color:#000}
-table.sortable th.sort-asc a{background-position:100% 7px;}
-table.sortable th.sort-asc a:hover{background-position:100% -33px}
-table.sortable th.sort-desc a{background-position:100% -73px;}
-table.sortable th.sort-desc a:hover{background-position:100% -113px}
+table.sortable th a{position:relative;text-decoration:none;color:#333;padding-right:14px;}
+table.sortable th a:hover{text-decoration:underline}
+table.sortable th.sort-asc a:after,table.sortable th.sort-desc a:after{content:"";position:absolute;top:50%;margin-top:-2px;right:0;width:8px;height:5px;background-position:100% 100%;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg table.sortable th.sort-asc a:after,.svg table.sortable th.sort-desc a:after{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+table.sortable th.sort-asc a:after{background-position:-112px 0}
+table.sortable th.sort-asc a:hover:after{background-position:-112px -5px}
+table.sortable th.sort-desc a:after{background-position:-112px -10px}
+table.sortable th.sort-desc a:hover:after{background-position:-112px -15px}
+.icon-reset{display:inline-block;width:8px;height:8px;background-position:-53px -25px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .icon-reset{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.button-reset:hover .icon-reset{background-position:-61px -25px}
 .main-header{position:absolute;width:240px;top:0;left:0;bottom:0;background-color:#efefef;border-right:1px solid #ddd;z-index:1;}
 .js .main-header{position:fixed}
 .main-header:after{content:"";position:absolute;top:0;right:0;display:block;height:100%;width:10px;pointer-events:none;rgba(0,0,0,0.025)}
@@ -121,11 +126,14 @@ table.sortable th.sort-desc a:hover{background-position:100% -113px}
 .main-navigation .sub-nav .sub-nav a{padding-left:40px;}
 .main-navigation .sub-nav .sub-nav a:hover{padding-left:36px}
 .js .main-navigation .sub-nav .sub-nav{display:none}
-.js .main-navigation .nav-expandable:after{position:absolute;content:"";display:block;right:20px;top:50%;width:6px;height:8px;margin-top:-4px;background-image:url("/admin/images/content/v0.1.0/nav-sprite.png");background-position:0 0;background-repeat:no-repeat;-webkit-transition:all .4s ease;-moz-transition:all .4s ease;-o-transition:all .4s ease;-ms-transition:all .4s ease;transition:all .4s ease}
+.js .main-navigation .nav-expandable:after{position:absolute;content:"";display:block;right:20px;top:50%;width:6px;height:8px;margin-top:-4px;-webkit-transition:all .4s ease;-moz-transition:all .4s ease;-o-transition:all .4s ease;-ms-transition:all .4s ease;transition:all .4s ease;background-repeat:no-repeat;background-position:-23px -30px;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg.js .main-navigation .nav-expandable:after{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .js .main-navigation .nav-expandable.nav-expanded:after{-webkit-transform:rotate(-90deg);-moz-transform:rotate(-90deg);-o-transform:rotate(-90deg);-ms-transform:rotate(-90deg);transform:rotate(-90deg)}
 .user-navigation{position:relative;background-color:#222;width:100%;height:44px;color:#fff;}
 .user-navigation .details{padding:10px 10px 10px 30px;width:156px;line-height:24px}
-.user-navigation .dropdown{position:absolute;top:0;right:0;z-index:1;float:right;width:44px;height:44px;outline:0;background-color:#222;background-image:url("/admin/images/content/v0.1.0/icon-settings.png");background-position:50% 50%;background-repeat:no-repeat;cursor:pointer;}
+.user-navigation .dropdown{position:absolute;top:0;right:0;z-index:1;float:right;width:44px;height:44px;outline:0;cursor:pointer;}
+.user-navigation .dropdown .icon-settings{position:absolute;top:50%;left:50%;margin-top:-8px;margin-left:-8px;width:16px;height:16px;text-indent:-9999px;overflow:hidden;background-position:-95px 0;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .user-navigation .dropdown .icon-settings{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .user-navigation .dropdown ul{display:none;position:absolute;width:240px;right:0;top:44px;background-color:#222;-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.4);box-shadow:0 2px 4px rgba(0,0,0,0.4);border-top:1px solid #111;}
 .user-navigation .dropdown ul:before{position:absolute;display:block;content:"";width:160px;height:4px;top:-4px}
 .user-navigation .dropdown ul:after{position:absolute;display:block;content:"";right:14px;bottom:100%;width:0;height:0;border-style:solid;border-width:8px;border-color:transparent transparent #222 transparent}
@@ -169,15 +177,22 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .ui-menu-item a{border:1px solid transparent;display:block;padding:3px 7px 4px;color:#333;text-decoration:none;}
 .ui-menu-item a:hover,.ui-menu-item a.ui-state-hover{text-shadow:0 1px 1px #285678;background-color:#30678f;border:1px solid #285678;-webkit-box-shadow:0 0 0 1px #3675a2 inset;box-shadow:0 0 0 1px #3675a2 inset;color:#fff;}
 .datepicker{position:relative;}
-.datepicker:after{content:"";display:block;position:absolute;top:7px;right:7px;width:16px;height:16px;background-image:url("/admin/images/content/v0.1.0/datepicker-icon.png");background-repeat:no-repeat;background-color:transparent;background-position:0 0;pointer-events:none}
-#ui-datepicker-div{position:absolute;left:-9999px;background-color:#fff;padding:10px;border:1px solid #b3b3b3;-webkit-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);}
+.datepicker:after{content:"";display:block;position:absolute;top:7px;right:7px;width:17px;height:16px;pointer-events:none;background-repeat:no-repeat;background-color:transparent;background-position:-78px 0;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .datepicker:after{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+#ui-datepicker-div{position:absolute;left:-9999px;background-color:#fff;padding:10px;border:1px solid #ccc;-webkit-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);}
 #ui-datepicker-div.below{margin-top:10px;}
-#ui-datepicker-div.below:before{content:"";position:absolute;top:-12px;left:10px;width:25px;height:12px;background:url("/admin/images/content/v0.1.0/datepicker-sprite.png") 0 -61px no-repeat}
+#ui-datepicker-div.below:before{content:"";position:absolute;top:-12px;left:10px;width:24px;height:12px;background-position:-53px 0;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg #ui-datepicker-div.below:before{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 #ui-datepicker-div.above{margin-top:-10px;}
-#ui-datepicker-div.above:before{content:"";position:absolute;bottom:-12px;left:10px;width:25px;height:12px;background:url("/admin/images/content/v0.1.0/datepicker-sprite.png") 0 -73px no-repeat}
+#ui-datepicker-div.above:before{content:"";position:absolute;bottom:-12px;left:10px;width:24px;height:12px;background-position:-53px -13px}
 #ui-datepicker-div .ui-datepicker-title{padding-bottom:6px;border-bottom:1px solid #ccc;margin-bottom:5px;font-weight:bold;color:#333;}
-#ui-datepicker-div .ui-datepicker-next,#ui-datepicker-div .ui-datepicker-prev{position:absolute;top:14px;right:10px;display:block;width:15px;height:11px;margin-left:5px;margin-bottom:0;overflow:hidden;text-indent:-9999px;background-image:url("/admin/images/content/v0.1.0/datepicker-sprite.png");background-repeat:no-repeat;background-position:-15px -88px;cursor:pointer}
-#ui-datepicker-div .ui-datepicker-prev{right:28px;background-position:0 -88px}
+#ui-datepicker-div .ui-datepicker-next,#ui-datepicker-div .ui-datepicker-prev{position:absolute;top:14px;right:10px;margin-left:5px;margin-bottom:0;overflow:hidden;text-indent:-9999px;cursor:pointer;padding:3px;}
+#ui-datepicker-div .ui-datepicker-next span,#ui-datepicker-div .ui-datepicker-prev span{display:block;width:8px;height:9px;background-repeat:no-repeat;background-position:-9px -48px;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg #ui-datepicker-div .ui-datepicker-next span,.svg #ui-datepicker-div .ui-datepicker-prev span{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+#ui-datepicker-div .ui-datepicker-next:hover span,#ui-datepicker-div .ui-datepicker-prev:hover span{background-position:-9px -38px}
+#ui-datepicker-div .ui-datepicker-prev{right:28px;}
+#ui-datepicker-div .ui-datepicker-prev span{background-position:0 -48px}
+#ui-datepicker-div .ui-datepicker-prev:hover span{background-position:0 -38px}
 #ui-datepicker-div table{width:auto;margin-bottom:0;margin-right:1px;}
 #ui-datepicker-div th,#ui-datepicker-div td{padding:0}
 #ui-datepicker-div th{font-size:10px;text-transform:uppercase;border:none;text-align:center}
@@ -186,7 +201,8 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 #ui-datepicker-div td a:hover,#ui-datepicker-div td a:active,#ui-datepicker-div td a:focus{background-color:#30678f;color:#fff}
 #ui-datepicker-div td span{cursor:default}
 #ui-datepicker-div .ui-datepicker-today a{font-weight:bold;background-color:#f7f7f7;-webkit-box-shadow:0 1px 4px rgba(0,0,0,0.2) inset;box-shadow:0 1px 4px rgba(0,0,0,0.2) inset}
-#ui-datepicker-div .ui-datepicker-current-day a,#ui-datepicker-div .ui-datepicker-current-day span{background:url("/admin/images/content/v0.1.0/datepicker-sprite.png") 0 0 no-repeat #30678f;}
+#ui-datepicker-div .ui-datepicker-current-day a,#ui-datepicker-div .ui-datepicker-current-day span{background-position:-23px 0;background-repeat:no-repeat;background-color:#30678f;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg #ui-datepicker-div .ui-datepicker-current-day a,.svg #ui-datepicker-div .ui-datepicker-current-day span{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 #ui-datepicker-div .ui-datepicker-current-day a:hover,#ui-datepicker-div .ui-datepicker-current-day span:hover{background-image:none}
 #ui-datepicker-div .ui-datepicker-other-month a,#ui-datepicker-div .ui-datepicker-other-month span{color:#555;font-weight:normal}
 #ui-datepicker-div .ui-datepicker-unselectable a,#ui-datepicker-div .ui-datepicker-unselectable span{color:#ccc;font-weight:normal}
@@ -195,10 +211,10 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .list-filter-form label{position:relative;display:inline-block;}
 .list-filter-form label .form-label-text{display:none}
 .list-filter-form label .form-field{width:150px;border-right:0;display:inline-block}
-.list-filter-form label a.reset{position:absolute;display:block;top:50%;margin-top:-6px;right:5px;width:12px;height:12px;text-indent:-9999px;overflow:hidden;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-70px -2px;background-repeat:no-repeat;}
-.list-filter-form label a.reset:hover{background-position:-100px -2px}
-.list-filter-form input.button{padding:0;width:30px;height:30px;vertical-align:top;text-indent:-9999px;font-size:0;line-height:0;background-image:url("/admin/images/content/v0.1.0/ui-sprite.png");background-position:-120px 6px;background-repeat:no-repeat;border-top-left-radius:0;border-bottom-left-radius:0;}
-.list-filter-form input.button:active{top:0;border-color:#b3b3b3;-webkit-box-shadow:none;box-shadow:none}
+.list-filter-form label .button-reset{position:absolute;top:50%;margin-top:-9px;right:5px;padding:5px;line-height:0;}
+.list-filter-form label .button-reset:hover{background-position:-100px -2px}
+.list-filter-form input.button{padding:0;width:30px;height:30px;vertical-align:top;text-indent:-9999px;font-size:0;line-height:0;border-top-left-radius:0;border-bottom-left-radius:0;background-position:-82px -18px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .list-filter-form input.button{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .notification{position:relative;background-color:#bbb;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);padding:10px 14px;margin-bottom:18px;font-weight:bold;-webkit-border-radius:2px;border-radius:2px;color:#fff;}
 .notification h4{color:inherit;font-size:16px;line-height:18px;font-weight:bold;margin-bottom:10px}
 .notification.success{background-color:#47a967;color:#fff}
@@ -206,9 +222,9 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .notification.warning{background-color:#dc7f2a;color:#fff}
 .notification.error{background-color:#ca4427;color:#fff}
 .notification p{margin:0}
-.notification .button-close{position:absolute;right:14px;top:50%;display:block;width:10px;height:11px;margin-top:-6px;text-indent:-9999px;overflow:hidden;background:url("/admin/images/content/v0.1.0/notification-sprite.png") 0 0 no-repeat;}
-.notification .button-close:hover{background-position:0 -11px}
-.notification .button-close:active{background-position:0 -22px}
+.notification .button-close{position:absolute;right:14px;top:50%;display:block;width:10px;height:11px;margin-top:-6px;text-indent:-9999px;overflow:hidden;background-position:0 -16px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .notification .button-close{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.notification .button-close:hover{background-position:-10px -16px}
 #ui-notifications{position:fixed;top:10px;right:15px}
 #ui-notifications li{margin-bottom:5px;list-style:none}
 .ui-notification{position:relative;max-width:400px;min-width:250px;z-index:1000;border:1px solid rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.9);-webkit-border-radius:3px;border-radius:3px;color:#ddd;-webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1),0 2px 3px rgba(0,0,0,0.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1),0 2px 3px rgba(0,0,0,0.2);}
@@ -229,8 +245,8 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .ui-notification.fade.hide{opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0)}
 .ui-notification.scale{-webkit-transition:-webkit-transform 300ms;-moz-transition:-moz-transform 300ms;-o-transition:-o-transform 300ms;-ms-transition:-ms-transform 300ms;transition:transform 300ms;-webkit-transform:scale(1);-moz-transform:scale(1);-o-transform:scale(1);-ms-transform:scale(1);transform:scale(1)}
 .ui-notification.scale.hide{-webkit-transform:scale(0);-moz-transform:scale(0);-o-transform:scale(0);-ms-transform:scale(0);transform:scale(0)}
-[data-tooltip]{border-bottom:1px dotted #30678f;position:relative;cursor:pointer;font-size:12px;font-weight:normal;line-height:18px;z-index:999;}
-[data-tooltip]:before,[data-tooltip]:after{position:absolute;display:block;left:-9999px;opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-webkit-transition:opacity .1s ease;-moz-transition:opacity .1s ease;-o-transition:opacity .1s ease;-ms-transition:opacity .1s ease;transition:opacity .1s ease}
+[data-tooltip]{border-bottom:1px dotted #30678f;position:relative;cursor:pointer;font-weight:normal;line-height:18px;z-index:999;}
+[data-tooltip]:before,[data-tooltip]:after{font-size:12px;position:absolute;display:block;left:-9999px;opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-webkit-transition:opacity .1s ease;-moz-transition:opacity .1s ease;-o-transition:opacity .1s ease;-ms-transition:opacity .1s ease;transition:opacity .1s ease}
 [data-tooltip]:before{content:attr(data-tooltip);top:-30px;background:#111;border-top:1px solid #222;border-bottom:1px solid #000;color:#fff;padding:3px 8px;white-space:nowrap;-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);box-shadow:0 1px 3px rgba(0,0,0,0.5);}
 [data-tooltip]:after{content:"";top:-4px;width:0;height:0;border-style:solid;border-width:4px;border-color:#000 transparent transparent transparent}
 [data-tooltip]:hover:before{left:-8px;opacity:1;-ms-filter:none;filter:none}
@@ -242,16 +258,17 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 [data-tooltip].right:after{top:50%;margin-left:-2px;margin-top:-4px;border-color:transparent #000 transparent transparent}
 [data-tooltip].right:hover:before,[data-tooltip].right:hover:after{left:100%}
 [data-tooltip][href*="github.com"]:before{background-image:url("/admin/images/content/v0.1.0/tooltip-sprite.png");background-position:5px 4px;background-repeat:no-repeat;padding-left:25px}
-#pagination{text-align:center;}
-#pagination a,#pagination span{text-decoration:none;padding:0 5px 1px;margin:0 3px}
-#pagination span{color:#aaa}
-#pagination .first::before{content:"\00ab\00a0"}
-#pagination .prev::before{content:"\2039\00a0"}
-#pagination .next::after{content:"\00a0\203A"}
-#pagination .last::after{content:"\00a0\00bb"}
-#pagination .current-page{position:relative;display:inline-block;width:auto;font-weight:bold;background-color:#30678f;border:1px solid #285678;text-decoration:none;outline:0;cursor:pointer;-webkit-box-shadow:0 0 0 1px #3675a2 inset;box-shadow:0 0 0 1px #3675a2 inset;text-shadow:0 1px 1px #285678;color:#fff;-webkit-transition:border .1s ease, background-color .1s ease;-moz-transition:border .1s ease, background-color .1s ease;-o-transition:border .1s ease, background-color .1s ease;-ms-transition:border .1s ease, background-color .1s ease;transition:border .1s ease,background-color .1s ease;}
-#pagination .current-page:hover{color:#fff;background-color:#346f9a}
-#pagination .current-page:active,#pagination .current-page:focus{background-color:#2c5f84}
+.pagination{text-align:center;}
+.pagination li{list-style:none;display:inline-block}
+.pagination a,.pagination span{text-decoration:none;padding:3px 5px 3px;margin:0 3px}
+.pagination span{color:#aaa;cursor:default}
+.pagination .first a:before,.pagination .first span:before{content:"\00ab\00a0"}
+.pagination .previous a:before,.pagination .previous span:before{content:"\2039\00a0"}
+.pagination .next a:after,.pagination .next span:after{content:"\00a0\203A"}
+.pagination .last a:after,.pagination .last span:after{content:"\00a0\00bb"}
+.pagination .pagination-current-page{width:auto;font-weight:bold;background-color:#30678f;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);outline:0;cursor:pointer;color:#fff;-webkit-border-radius:2px;border-radius:2px;}
+.pagination .pagination-current-page:hover{background-color:#224864}
+.pagination .pagination-current-page:active,.pagination .pagination-current-page:focus{background-color:#29587a}
 .markItUp *{margin:0;padding:0;outline:none}
 .markItUp a link,.markItUp a visited{color:#000;text-decoration:none}
 .markItUp{width:880px;margin:5px 0 5px 0;border:5px solid #f5f5f5}
@@ -328,12 +345,12 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .chzn-container .chzn-drop{background:#fff;border:1px solid #ccc;border-top:0;position:absolute;top:29px;left:0;z-index:999;}
 .chzn-container-single .chzn-single{background-color:#fff;border:1px solid #ccc;display:block;overflow:hidden;white-space:nowrap;position:relative;padding:5px;color:#333;text-decoration:none;}
 .chzn-container-single .chzn-single span{margin-right:30px;display:block;overflow:hidden;white-space:nowrap;-o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis}
-.chzn-container-single .chzn-single abbr{display:block;position:absolute;right:32px;top:8px;width:12px;height:12px;font-size:1px;background:url("/admin/images/content/v0.1.0/ui-sprite.png") -69px 50% no-repeat;border-bottom:0}
+.chzn-container-single .chzn-single abbr{display:block;position:absolute;right:32px;top:8px;width:12px;height:12px;font-size:1px;background:url("/admin/images/content/v0.1.0/chosen-sprite.png") -69px 50% no-repeat;border-bottom:0}
 .chzn-container-single .chzn-single abbr:hover{background-position:-99px 50%}
 .chzn-container-single .chzn-single div{background:#eee;border-left:1px solid #ccc;position:absolute;right:0;top:0;display:block;height:100%;width:24px;}
-.chzn-container-single .chzn-single div b{background:url("/admin/images/content/v0.1.0/ui-sprite.png") -3px 50% no-repeat;display:block;width:100%;height:100%;}
+.chzn-container-single .chzn-single div b{background:url("/admin/images/content/v0.1.0/chosen-sprite.png") -3px 50% no-repeat;display:block;width:100%;height:100%;}
 .chzn-container-single .chzn-search{padding:3px 3px;position:relative;margin:0;white-space:nowrap;z-index:1010}
-.chzn-container-single .chzn-search input{background:url("/admin/images/content/v0.1.0/ui-sprite.png") -120px 50% no-repeat;margin:1px 0;padding-left:25px;outline:0;border-color:#30678f;-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(48,103,143,0.8);box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(48,103,143,0.8)}
+.chzn-container-single .chzn-search input{background:url("/admin/images/content/v0.1.0/chosen-sprite.png") -120px 50% no-repeat;margin:1px 0;padding-left:25px;outline:0;border-color:#30678f;-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(48,103,143,0.8);box-shadow:0 1px 5px rgba(0,0,0,0.2) inset,0 0 5px rgba(48,103,143,0.8)}
 .chzn-container-single-nosearch .chzn-search input{position:absolute;left:-9000px}
 .chzn-container-multi .chzn-choices{background-color:#fff;border:1px solid #ccc;margin:0;padding:0;cursor:text;overflow:hidden;height:auto !important;height:1%;position:relative;}
 .chzn-container-multi .chzn-choices li{float:left;list-style:none}
@@ -344,7 +361,7 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .chzn-container-multi .chzn-choices .search-choice:hover{background-color:#e5e5e5}
 .chzn-container-multi .chzn-choices .search-choice:active,.chzn-container-multi .chzn-choices .search-choice:focus{background-color:#d5d5d5}
 .chzn-container-multi .chzn-choices .search-choice span{cursor:default}
-.chzn-container-multi .chzn-choices .search-choice .search-choice-close{display:block;position:absolute;right:3px;top:4px;width:12px;height:13px;font-size:1px;background:url("/admin/images/content/v0.1.0/ui-sprite.png") -69px 50% no-repeat}
+.chzn-container-multi .chzn-choices .search-choice .search-choice-close{display:block;position:absolute;right:3px;top:4px;width:12px;height:13px;font-size:1px;background:url("/admin/images/content/v0.1.0/chosen-sprite.png") -69px 50% no-repeat}
 .chzn-container-multi .chzn-choices .search-choice .search-choice-close:hover{background-position:-99px 50%}
 .chzn-container-multi .chzn-choices .search-choice-focus .search-choice-close{background-position:right -11px}
 .chzn-container .chzn-results{margin:0 3px 3px 0;max-height:190px;padding:0 0 0 3px;position:relative;overflow-x:hidden;overflow-y:auto}
@@ -381,7 +398,10 @@ td{vertical-align:top;padding-top:10px;}
 td a{color:$globalColor;text-decoration:none;}
 td a:hover{text-decoration:underline}
 td .row-actions,td .row-actions-block{display:inline;margin-top:4px;margin-left:20px;padding:0;font-size:12px;opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-webkit-transition:opacity .2s ease;-moz-transition:opacity .2s ease;-o-transition:opacity .2s ease;-ms-transition:opacity .2s ease;transition:opacity .2s ease;}
-td .row-actions li,td .row-actions-block li{margin:0 10px 0 0;padding:0;list-style:none;display:inline;a}
+td .row-actions li,td .row-actions-block li{margin:0 10px 0 0;padding:0;list-style:none;display:inline}
+td .row-actions .form-delete-button,td .row-actions-block .form-delete-button{display:inline;}
+td .row-actions .form-delete-button .button-delete,td .row-actions-block .form-delete-button .button-delete{background-color:transparent;border:0;color:#30678f;-webkit-box-shadow:none;box-shadow:none;text-shadow:none;font-weight:normal;padding:0;}
+td .row-actions .form-delete-button .button-delete:hover,td .row-actions-block .form-delete-button .button-delete:hover{color:#222;text-decoration:underline}
 td .row-actions-block{display:block;margin-left:0}
 tr:hover td .row-actions,tr:hover td .row-actions-block{opacity:1;-ms-filter:none;filter:none}
 td.title strong{font-size:14px}

@@ -8,5 +8,6 @@
             input.form-field(type='text', value='', name='Filter', placeholder="Filter Results")
           - else
             input.form-field(type='text', value=url.Filter, name='Filter', placeholder="Filter Results")
-            a.reset(href='?Reset') Reset
+            a.button-reset(href='?Reset', title='Reset Filter')
+              i.icon-reset
         input.button(type='submit',value='Filter')

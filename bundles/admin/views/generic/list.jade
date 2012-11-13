@@ -58,7 +58,8 @@ block content
                         ul.row-actions
                           - if (adminIsAllowed(model.name, 'update')) 
                             li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/edit') Edit
-                          include includes/delete-button
+                            li
+                              include includes/delete-button
                     - else
                       - if (propertyMeta.type === 'checkbox')
                         td=booleanFormatter(entity[key])

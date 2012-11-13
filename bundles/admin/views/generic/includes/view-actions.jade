@@ -2,4 +2,5 @@ nav.page-actions.view-actions
   ul.actions
     - if (adminIsAllowed(model.name, 'update')) 
       li: a.button.primary(href='/admin/#{model.slug}/#{entity[model.idProperty]}/edit') Edit
-    include delete-button
+    li
+      include delete-button
