@@ -58,8 +58,6 @@ block content
                         ul.row-actions
                           - if (adminIsAllowed(model.name, 'update')) 
                             li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/edit') Edit
-                          - if (adminIsAllowed(model.name, 'delete')) 
-                            li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/delete').delete Delete
                           include includes/delete-button
                     - else
                       - if (propertyMeta.type === 'checkbox')
