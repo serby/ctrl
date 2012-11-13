@@ -301,12 +301,12 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     }
   )
 
-  serviceLocator.router.get(
-    options.adminRoute + model.slug + '/:id/delete',
+  serviceLocator.router.post(
+    options.adminRoute + model.slug + '/delete',
     accessCheck('delete'),
     middleware.delete,
     function(req, res) {
-      model['delete'](req.params.id, function(error) {
+      model['delete'](req.body[model.idProperty], function(error) {
         if (error !== undefined) {
           res.send(404)
         } else {

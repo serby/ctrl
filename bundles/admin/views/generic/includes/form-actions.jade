@@ -1,5 +1,4 @@
 nav.page-actions.view-actions
   ul.actions
     li: a.button.primary(href='/admin/#{model.slug}/#{entity[model.idProperty]}') View
-    - if (adminIsAllowed(model.name, 'delete')) 
-      li: a.button.delete(href='/admin/#{model.slug}/#{entity[model.idProperty]}/delete') Delete
+    include delete-button

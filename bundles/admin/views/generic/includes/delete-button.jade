@@ -1,0 +1,4 @@
+- if (adminIsAllowed(model.name, 'delete')) 
+  form(action='/admin/#{model.slug}/delete', method='post').delete-button
+    input(type='hidden', name='#{model.idProperty}', value='#{entity[model.idProperty]}')
+    input(type='submit', value='Delete').delete
