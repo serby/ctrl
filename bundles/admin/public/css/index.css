@@ -132,7 +132,7 @@ table.sortable th.sort-desc a:hover:after{background-position:-112px -15px}
 .user-navigation{position:relative;background-color:#222;width:100%;height:44px;color:#fff;}
 .user-navigation .details{padding:10px 10px 10px 30px;width:156px;line-height:24px}
 .user-navigation .dropdown{position:absolute;top:0;right:0;z-index:1;float:right;width:44px;height:44px;outline:0;cursor:pointer;}
-.user-navigation .dropdown .icon-settings{position:absolute;top:50%;left:50%;margin-top:-8px;margin-left:-8px;width:16px;height:16px;text-indent:-9999px;overflow:hidden;background-color:#222;background-position:-95px 0;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.user-navigation .dropdown .icon-settings{position:absolute;top:50%;left:50%;margin-top:-8px;margin-left:-8px;width:16px;height:16px;text-indent:-9999px;overflow:hidden;background-position:-95px 0;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .user-navigation .dropdown .icon-settings{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .user-navigation .dropdown ul{display:none;position:absolute;width:240px;right:0;top:44px;background-color:#222;-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.4);box-shadow:0 2px 4px rgba(0,0,0,0.4);border-top:1px solid #111;}
 .user-navigation .dropdown ul:before{position:absolute;display:block;content:"";width:160px;height:4px;top:-4px}
@@ -222,9 +222,9 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .notification.warning{background-color:#dc7f2a;color:#fff}
 .notification.error{background-color:#ca4427;color:#fff}
 .notification p{margin:0}
-.notification .button-close{position:absolute;right:14px;top:50%;display:block;width:10px;height:11px;margin-top:-6px;text-indent:-9999px;overflow:hidden;background:url("/admin/images/content/v0.1.0/notification-sprite.png") 0 0 no-repeat;}
-.notification .button-close:hover{background-position:0 -11px}
-.notification .button-close:active{background-position:0 -22px}
+.notification .button-close{position:absolute;right:14px;top:50%;display:block;width:10px;height:11px;margin-top:-6px;text-indent:-9999px;overflow:hidden;background-position:0 -16px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .notification .button-close{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.notification .button-close:hover{background-position:-10px -16px}
 #ui-notifications{position:fixed;top:10px;right:15px}
 #ui-notifications li{margin-bottom:5px;list-style:none}
 .ui-notification{position:relative;max-width:400px;min-width:250px;z-index:1000;border:1px solid rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.9);-webkit-border-radius:3px;border-radius:3px;color:#ddd;-webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1),0 2px 3px rgba(0,0,0,0.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1),0 2px 3px rgba(0,0,0,0.2);}

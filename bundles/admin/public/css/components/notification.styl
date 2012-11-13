@@ -46,11 +46,13 @@
     margin-top -6px
     text-indent -9999px
     overflow hidden
-    background versionPath("/admin/images/content/notification-sprite.png") 0px 0px no-repeat
+    background-position 0 -16px
+    background-repeat no-repeat
+    background-image versionPath("/admin/images/content/sprite.png")
+    .svg &
+      background-image versionPath("/admin/images/content/sprite.svg")
     &:hover
-      background-position 0px -11px
-    &:active
-      background-position 0px -22px
+      background-position -10px -16px
 
 
 /*
