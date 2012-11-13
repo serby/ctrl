@@ -7,127 +7,151 @@
     position absolute
     top 7px
     right 7px
-    width 16px
+    width 17px
     height 16px
-    // background-position -104px -134px
-    background-image versionPath("/admin/images/content/datepicker-icon.png")
+    pointer-events none
     background-repeat no-repeat
     background-color transparent
-    background-position 0 0
-    pointer-events none
+    background-position -78px 0
+    background-image versionPath("/admin/images/content/sprite.png")
+    .svg &
+      background-image versionPath("/admin/images/content/sprite.svg")
 
 #ui-datepicker-div
- position absolute
- left -9999px
- background-color #FFF
- padding 10px
- border 1px solid darken($baseBorderColor, 10)
- if $baseBorderRadius != 0
-   border-radius $baseBorderRadius
- box-shadow 0px 2px 8px -4px rgba(0,0,0,.5)
- &.below
-   margin-top 10px
-   &:before
-     content ""
-     position absolute
-     top -12px
-     left 10px
-     width 25px
-     height 12px
-     background versionPath("/admin/images/content/datepicker-sprite.png") 0px -61px no-repeat
- &.above
-   margin-top -10px
-   &:before
-     content ""
-     position absolute
-     bottom -12px
-     left 10px
-     width 25px
-     height 12px
-     background versionPath("/admin/images/content/datepicker-sprite.png") 0px -73px no-repeat
+  position absolute
+  left -9999px
+  background-color #FFF
+  padding 10px
+  border 1px solid #ccc
+  box-shadow 0px 2px 8px -4px rgba(0,0,0,.5)
+  &.below
+    margin-top 10px
+    &:before
+      content ""
+      position absolute
+      top -12px
+      left 10px
+      width 24px
+      height 12px
+      background-position -53px 0
+      background-repeat no-repeat
+      background-image versionPath("/admin/images/content/sprite.png")
+      .svg &
+        background-image versionPath("/admin/images/content/sprite.svg")
+  &.above
+    margin-top -10px
+    &:before
+      content ""
+      position absolute
+      bottom -12px
+      left 10px
+      width 24px
+      height 12px
+      background-position -53px -13px
 
- .ui-datepicker-title
-   padding-bottom 6px
-   border-bottom 1px solid $baseBorderColor
-   margin-bottom 5px
-   font-weight bold
-   color #333333 /* TODO - Set with variable? */
+  .ui-datepicker-title
+    padding-bottom 6px
+    border-bottom 1px solid $baseBorderColor
+    margin-bottom 5px
+    font-weight bold
+    color #333333 /* TODO - Set with variable? */
 
- .ui-datepicker-next,
- .ui-datepicker-prev
-   position absolute
-   top 14px
-   right 10px
-   display block
-   width 15px
-   height 11px
-   margin-left 5px
-   margin-bottom 0
-   overflow hidden
-   text-indent -9999px
-   background-image versionPath("/admin/images/content/datepicker-sprite.png")
-   background-repeat no-repeat
-   background-position -15px -88px
-   cursor pointer
+  .ui-datepicker-next,
+  .ui-datepicker-prev
+    position absolute
+    top 14px
+    right 10px
+    margin-left 5px
+    margin-bottom 0
+    overflow hidden
+    text-indent -9999px
+    cursor pointer
+    padding 3px
 
- .ui-datepicker-prev
-   right 28px
-   background-position 0px -88px
+    span
+      display block
+      width 8px
+      height 9px
+      background-repeat no-repeat
+      background-position -9px -48px
+      background-image versionPath("/admin/images/content/sprite.png")
+      .svg &
+        background-image versionPath("/admin/images/content/sprite.svg")
+    &:hover
+      span
+        background-position -9px -38px
 
- table
-   width auto
-   margin-bottom 0
-   margin-right 1px /* Rectifies border collapse causing a padding mismatch */
- th,
- td
-   padding 0
- th
-   font-size 10px
-   text-transform uppercase
-   border none
-   text-align center
- td
-   border 1px solid $baseBorderColor
-   text-align center
-   a,
-   span
-     display block
-     width 30px
-     height 30px
-     line-height 30px
-     text-decoration none
-     font-weight bold
-     color #333333 /* TODO - convert to variable */
-   a
-     &:hover,
-     &:active,
-     &:focus
-       background-color $primaryColor
-       if dark($primaryColor)
-         color #FFFFFF
-       else
-         color #555555
-   span
-     cursor default
+  .ui-datepicker-prev
+    right 28px
 
- .ui-datepicker-today
-   a
-     font-weight bold
-     background-color #F7F7F7
-     box-shadow 0px 1px 4px rgba(0,0,0,.2) inset
- .ui-datepicker-current-day
-   a,
-   span
-     background versionPath("/admin/images/content/datepicker-sprite.png") 0 0 no-repeat $primaryColor
-     &:hover
-       background-image none
- .ui-datepicker-other-month
-   a,
-   span
-     color #555555
-     font-weight normal
- .ui-datepicker-unselectable
-   a,
-   span
-     color #CCCCCC
-     font-weight normal
+    span
+      background-position 0 -48px
+    &:hover
+      span
+        background-position 0 -38px
+
+  table
+    width auto
+    margin-bottom 0
+    margin-right 1px /* Rectifies border collapse causing a padding mismatch */
+  th,
+  td
+    padding 0
+  th
+    font-size 10px
+    text-transform uppercase
+    border none
+    text-align center
+  td
+    border 1px solid $baseBorderColor
+    text-align center
+    a,
+    span
+      display block
+      width 30px
+      height 30px
+      line-height 30px
+      text-decoration none
+      font-weight bold
+      color #333333 /* TODO - convert to variable */
+    a
+      &:hover,
+      &:active,
+      &:focus
+        background-color $primaryColor
+        if dark($primaryColor)
+          color #FFFFFF
+        else
+          color #555555
+    span
+      cursor default
+
+  .ui-datepicker-today
+    a
+      font-weight bold
+      background-color #F7F7F7
+      box-shadow 0px 1px 4px rgba(0,0,0,.2) inset
+
+  .ui-datepicker-current-day
+    a,
+    span
+      background-position -23px 0
+      background-repeat no-repeat
+      background-color $primaryColor
+      background-image versionPath("/admin/images/content/sprite.png")
+      .svg &
+        background-image versionPath("/admin/images/content/sprite.svg")
+      &:hover
+        background-image none
+
+  .ui-datepicker-other-month
+    a,
+    span
+      color #555555
+      font-weight normal
+
+  .ui-datepicker-unselectable
+    a,
+    span
+      color #CCCCCC
+      font-weight normal
