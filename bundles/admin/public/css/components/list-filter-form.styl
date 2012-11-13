@@ -18,19 +18,14 @@
       border-right 0
       display inline-block
 
-    a.reset
+    .button-reset
       position absolute
-      display block
       top 50%
-      margin-top -6px
+      margin-top -9px
       right 5px
-      width 12px
-      height 12px
-      text-indent -9999px
-      overflow hidden
-      background-image versionPath("/admin/images/content/ui-sprite.png")
-      background-position -70px -2px
-      background-repeat no-repeat
+      padding 5px
+      line-height 0
+
       &:hover
         background-position -100px -2px
 
@@ -43,13 +38,10 @@
     text-indent -9999px
     font-size 0px
     line-height 0px
-    background-image versionPath("/admin/images/content/ui-sprite.png")
-    background-position -120px 6px
-    background-repeat no-repeat
     border-top-left-radius 0
     border-bottom-left-radius 0
-
-    &:active
-      top 0
-      border-color darken($baseBorderColor, 10)
-      box-shadow none
+    background-position -82px -18px
+    background-repeat no-repeat
+    background-image versionPath("/admin/images/content/sprite.png")
+    .svg &
+      background-image versionPath("/admin/images/content/sprite.svg")

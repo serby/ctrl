@@ -1,40 +1,63 @@
 table
-	width 100%
+  width 100%
 
-	th,
-	td
-		padding 8px
-	th
-		text-align left
-		font-weight bold
-		border-bottom 2px solid #666666
-		color #555555 /* TODO - Convert to variable */
+  th,
+  td
+    padding 8px
+  th
+    text-align left
+    font-weight bold
+    border-bottom 2px solid #666666
+    color #555555 /* TODO - Convert to variable */
 
-	td
-		border-bottom 1px solid #999999
+  td
+    border-bottom 1px solid #999999
 
-	&.highlight
-		tbody
-			tr:hover
-				background-color lighten($primaryColor, 40)
+  &.highlight
+    tbody
+      tr:hover
+        background-color lighten($primaryColor, 40)
 
-	&.sortable
-		th
-			a
-				padding-right 14px
-				text-decoration none
-				color #333333 /* TODO - Convert to variable */
-				background versionPath("/admin/images/content/table-sortable.png") 100% 40px no-repeat /* Position sprite offscreen as default */
-				&:hover
-					color #000000
-			&.sort-asc
-				a
-					background-position 100% 7px
-					&:hover
-						background-position 100% -33px
-			&.sort-desc
-				a
-					background-position 100% -73px
-					&:hover
-						background-position 100% -113px
+  &.sortable
+    th
+      a
+        position relative
+        text-decoration none
+        color #333333 /* TODO - Convert to variable */
+        padding-right 14px
+        &:hover
+          text-decoration underline
 
+      &.sort-asc
+      &.sort-desc
+        a
+          &:after
+            content ""
+            position absolute
+            top 50%
+            margin-top -2px
+            right 0
+            width 8px
+            height 5px
+            background-position 100% 100% /* Position sprite offscreen as default */
+            background-repeat no-repeat
+            background-image versionPath("/admin/images/content/sprite.png")
+            .svg &
+              background-image versionPath("/admin/images/content/sprite.svg")
+
+      &.sort-asc
+        a
+          &:after
+            background-position -112px 0
+
+          &:hover
+            &:after
+              background-position -112px -5px
+
+      &.sort-desc
+        a
+          &:after
+            background-position -112px -10px
+          &:hover
+            &:after
+              background-position -112px -15px

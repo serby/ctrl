@@ -85,10 +85,12 @@
     width 6px
     height 8px
     margin-top -4px
-    background-image versionPath("/admin/images/content/nav-sprite.png")
-    background-position 0 0
-    background-repeat no-repeat
     transition all 0.4s ease
+    background-repeat no-repeat
+    background-position -23px -30px
+    background-image versionPath("/admin/images/content/sprite.png")
+    .svg&
+      background-image versionPath("/admin/images/content/sprite.svg")
   .js & .nav-expandable.nav-expanded:after
     transform rotate(-90deg)
 
@@ -118,11 +120,24 @@
     width 44px
     height 44px
     outline 0
-    background-color #222
-    background-image versionPath("/admin/images/content/icon-settings.png")
-    background-position 50% 50%
-    background-repeat no-repeat
     cursor pointer
+
+    .icon-settings
+      position absolute
+      top 50%
+      left 50%
+      margin-top -8px
+      margin-left -8px
+      width 16px
+      height 16px
+      text-indent -9999px
+      overflow hidden
+      background-color #222
+      background-position -95px 0
+      background-repeat no-repeat
+      background-image versionPath("/admin/images/content/sprite.png")
+      .svg &
+        background-image versionPath("/admin/images/content/sprite.svg")
 
     ul
       display none
