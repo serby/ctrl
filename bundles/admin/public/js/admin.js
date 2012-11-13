@@ -183,11 +183,12 @@ window.module('control-misc-ui', function (module) {
 
   // Intercept all clicks on links with class
   // 'delete' and get the user to confirm first...
-  $('a.button.delete').on('click', function (e) {
+  $('.delete-button').submit(function () {
+    var deleteForm = this;
     window.confirmDialog({
       message: 'Are you sure you want to delete this?',
       confirm: function () {
-        document.location.href = $(e.target).attr('href');
+        deleteForm.submit();
       },
       confirmVerb: 'Delete',
       denyVerb: 'Don\'t delete'
