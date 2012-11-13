@@ -16,13 +16,7 @@ html(lang='en')
 
       link(rel='shortcut icon', href=versionPath('/admin/images/structure/favicon.ico'))
 
-      script
-        // A simple Modernizr style HTML5 enabler / JS detector
-        document.getElementsByTagName('html')[0].setAttribute('class', 'js')
-        var html5Elements = [ 'article', 'aside', 'footer', 'header', 'hgroup', 'nav', 'section', 'time' ]
-        for (var i = 0; i < html5Elements.length; i++) {
-          document.createElement(html5Elements[i])
-        }
+      script(src=versionPath('/admin/js/lib/modernizr.custom.54727.js'))
 
     block styles
       //- CSS
