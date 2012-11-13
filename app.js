@@ -19,7 +19,7 @@ function log() {
 // bundles need all of these.
 serviceLocator
   .register('properties', properties)
-  .register('logger', { info: log, debug: log, warn: log, error: log })
+  .register('logger', { info: log, debug: log, warn: log, error: log, verbose: log })
   .register('mailer', nodemailer.createTransport('sendmail'))
   .register('saveFactory', {})
 
