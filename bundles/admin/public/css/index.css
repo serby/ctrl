@@ -94,10 +94,6 @@ table th,table td{padding:8px}
 table th{text-align:left;font-weight:bold;border-bottom:2px solid #666;color:#555;}
 table td{border-bottom:1px solid #999}
 table.highlight tbody tr:hover{background-color:#a9cae2}
-table.sortable th a:hover{color:#000}
-table.sortable th.sort-asc a{background-position:100% 7px;}
-table.sortable th.sort-asc a:hover{background-position:100% -33px}
-table.sortable th.sort-desc a{background-position:100% -73px;}
 table.sortable th a{position:relative;text-decoration:none;color:#333;padding-right:14px;}
 table.sortable th a:hover{text-decoration:underline}
 table.sortable th.sort-asc a:after,table.sortable th.sort-desc a:after{content:"";position:absolute;top:50%;margin-top:-2px;right:0;width:8px;height:5px;background-position:100% 100%;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
@@ -262,16 +258,17 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 [data-tooltip].right:after{top:50%;margin-left:-2px;margin-top:-4px;border-color:transparent #000 transparent transparent}
 [data-tooltip].right:hover:before,[data-tooltip].right:hover:after{left:100%}
 [data-tooltip][href*="github.com"]:before{background-image:url("/admin/images/content/v0.1.0/tooltip-sprite.png");background-position:5px 4px;background-repeat:no-repeat;padding-left:25px}
-#pagination{text-align:center;}
-#pagination a,#pagination span{text-decoration:none;padding:0 5px 1px;margin:0 3px}
-#pagination span{color:#aaa}
-#pagination .first::before{content:"\00ab\00a0"}
-#pagination .prev::before{content:"\2039\00a0"}
-#pagination .next::after{content:"\00a0\203A"}
-#pagination .last::after{content:"\00a0\00bb"}
-#pagination .current-page{position:relative;display:inline-block;width:auto;font-weight:bold;background-color:#30678f;border:1px solid #285678;text-decoration:none;outline:0;cursor:pointer;-webkit-box-shadow:0 0 0 1px #3675a2 inset;box-shadow:0 0 0 1px #3675a2 inset;text-shadow:0 1px 1px #285678;color:#fff;-webkit-transition:border .1s ease, background-color .1s ease;-moz-transition:border .1s ease, background-color .1s ease;-o-transition:border .1s ease, background-color .1s ease;-ms-transition:border .1s ease, background-color .1s ease;transition:border .1s ease,background-color .1s ease;}
-#pagination .current-page:hover{color:#fff;background-color:#346f9a}
-#pagination .current-page:active,#pagination .current-page:focus{background-color:#2c5f84}
+.pagination{text-align:center;}
+.pagination li{list-style:none;display:inline-block}
+.pagination a,.pagination span{text-decoration:none;padding:3px 5px 3px;margin:0 3px}
+.pagination span{color:#aaa;cursor:default}
+.pagination .first a:before,.pagination .first span:before{content:"\00ab\00a0"}
+.pagination .previous a:before,.pagination .previous span:before{content:"\2039\00a0"}
+.pagination .next a:after,.pagination .next span:after{content:"\00a0\203A"}
+.pagination .last a:after,.pagination .last span:after{content:"\00a0\00bb"}
+.pagination .pagination-current-page{width:auto;font-weight:bold;background-color:#30678f;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);outline:0;cursor:pointer;color:#fff;-webkit-border-radius:2px;border-radius:2px;}
+.pagination .pagination-current-page:hover{background-color:#224864}
+.pagination .pagination-current-page:active,.pagination .pagination-current-page:focus{background-color:#29587a}
 .markItUp *{margin:0;padding:0;outline:none}
 .markItUp a link,.markItUp a visited{color:#000;text-decoration:none}
 .markItUp{width:880px;margin:5px 0 5px 0;border:5px solid #f5f5f5}
