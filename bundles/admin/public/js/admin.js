@@ -39,7 +39,7 @@ window.module('control-misc-ui', function (module) {
 
     /** Fancybox **/
     $('.fancybox, [rel="fancybox-group"]').fancybox(
-      { padding: 0
+      { padding: 2
       , prevEffect: 'fade'
       , nextEffect: 'fade'
       }
