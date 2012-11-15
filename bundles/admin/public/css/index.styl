@@ -1,42 +1,76 @@
 //
-// Import framework stylesheets
+// INDEX STYLESHEET
+// ================
+// All Stylus imports should live in here.
+//
+
+
+//
+// SETUP
 //
 
 @import 'nib'
+@import 'settings' // Review all variable implementations
 
-@import 'settings'
+
+//
+// FOUNDATIONS
+// Base HTML and generic site-wide elements
+//
 
 @import 'foundations/base'
 @import 'foundations/typography'
 @import 'foundations/structure'
 @import 'foundations/form'
 @import 'foundations/table'
-@import 'foundations/icons'
+@import 'foundations/icons' // Move file? Look at :hover issue in file.
+
+
+//
+// LAYOUT SECTIONS
+//
 
 @import 'layout/main-header'
 @import 'layout/main-navigation'
+@import 'layout/user-navigation'
+@import 'layout/main-content'
 @import 'layout/main-footer'
+
+
+//
+// GENERIC COMPONENTS
+//
 
 @import 'components/buttons'
 @import 'components/breadcrumb'
-
-// Form Components
-@import 'components/autocomplete'
-@import 'components/datepicker'
-
-@import 'components/list-filter-form'
-
-@import 'components/custom.fancybox'
-
-// TODO - move / refactor these
+// Unsorted
 @import 'components/notification'
 @import 'components/tooltips'
 @import 'components/pagination'
+
+
+//
+// SPECIALISED COMPONENTS
+//
+
+@import 'components/list-filter-form'
+@import 'components/custom.fancybox'
+// Unsorted
 @import 'components/markitup'
 @import 'components/dialogs'
+
+
+//
+// FORM COMPONENTS
+//
+
+@import 'components/autocomplete' // Remove
+@import 'components/datepicker'
+// Unsorted
 @import 'components/custom.chosen'
 
 
-
-
+//
+// EXTRAS
+//
 @import 'sandbox'
