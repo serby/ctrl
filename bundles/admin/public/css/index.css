@@ -228,11 +228,11 @@ td{border-bottom:1px solid #999}
 .ui-notification.scale.hide{-webkit-transform:scale(0);-moz-transform:scale(0);-o-transform:scale(0);-ms-transform:scale(0);transform:scale(0)}
 .list-filter-form{position:absolute;top:-6px;right:0;}
 .list-filter-form .form-row{margin-bottom:0}
-.list-filter-form label{position:relative;display:inline-block;}
-.list-filter-form label .form-label-text{display:none}
-.list-filter-form label .form-field{width:150px;border-right:0;display:inline-block}
-.list-filter-form label .button-reset{position:absolute;top:50%;margin-top:-9px;right:5px;padding:5px;line-height:0;}
-.list-filter-form label .button-reset:hover{background-position:-100px -2px}
+.list-filter-form label{position:relative;display:inline-block}
+.list-filter-form .form-label-text{display:none}
+.list-filter-form .form-field{width:150px;border-right:0;display:inline-block;padding-top:3px;padding-bottom:3px}
+.list-filter-form .button-reset{position:absolute;top:50%;margin-top:-9px;right:5px;padding:5px;line-height:0;}
+.list-filter-form .button-reset:hover{background-position:-100px -2px}
 .list-filter-form input.button{padding:0;width:30px;height:30px;vertical-align:top;text-indent:-9999px;font-size:0;line-height:0;border-top-left-radius:0;border-bottom-left-radius:0;background-position:-82px -18px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .list-filter-form input.button{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .fancybox-wrap,.fancybox-skin,.fancybox-outer,.fancybox-inner,.fancybox-image,.fancybox-wrap iframe,.fancybox-wrap object,.fancybox-nav,.fancybox-nav span,.fancybox-tmp{padding:0;margin:0;border:0;outline:none;vertical-align:top}
