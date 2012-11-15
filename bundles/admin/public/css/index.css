@@ -281,62 +281,6 @@ td{border-bottom:1px solid #999}
 .fancybox-overlay{position:absolute;top:0;left:0;overflow:hidden;display:none;z-index:8010;background:url('/admin/images/content/fancybox/v0.1.0/fancybox-overlay.png')}
 .fancybox-overlay-fixed{position:fixed;bottom:0;right:0}
 .fancybox-lock .fancybox-overlay{overflow:auto;overflow-y:scroll}
-.markItUp *{margin:0;padding:0;outline:none}
-.markItUp a link,.markItUp a visited{color:#000;text-decoration:none}
-.markItUp{width:880px;margin:5px 0 5px 0;border:5px solid #f5f5f5}
-.markItUpContainer{border:1px solid #3c769d;background:#fff url("/admin/images/content/markitup/v0.1.0/bg-container.png") repeat-x top left;padding:5px 5px 2px 5px;font:11px Verdana,Arial,Helvetica,sans-serif}
-.markItUpEditor{font:12px 'Courier New',Courier,monospace;padding:5px 5px 5px 35px;border:3px solid #3c769d;width:100%;height:320px;background:#fff url("/admin/images/content/markitup/v0.1.0/bg-editor.png") no-repeat;clear:both;line-height:18px;overflow:auto}
-.markItUpPreviewFrame{overflow:auto;background-color:#fff;border:1px solid #3c769d;width:99.9%;height:300px;margin:5px 0}
-.markItUpFooter{width:100%;cursor:n-resize}
-.markItUpResizeHandle{overflow:hidden;width:22px;height:5px;margin-left:auto;margin-right:auto;background-image:url("/admin/images/content/markitup/v0.1.0/handle.png");cursor:n-resize}
-.markItUpHeader ul li{list-style:none;float:left;position:relative}
-.markItUpHeader ul li ul{display:none}
-.markItUpHeader ul li hover > ul{display:block}
-.markItUpHeader ul .markItUpDropMenu{background:transparent url("/admin/images/content/markitup/v0.1.0/menu.png") no-repeat 115% 50%;margin-right:5px;}
-.markItUpHeader ul .markItUpDropMenu li{margin-right:0}
-.markItUpHeader ul .markItUpSeparator{margin:0 10px;width:1px;height:16px;overflow:hidden;background-color:#ccc}
-.markItUpHeader ul ul .markItUpSeparator{width:auto;height:1px;margin:0}
-.markItUpHeader ul ul{display:none;position:absolute;top:18px;left:0;background:#f5f5f5;border:1px solid #3c769d;height:inherit}
-.markItUpHeader ul ul li{float:none;border-bottom:1px solid #3c769d}
-.markItUpHeader ul ul .markItUpDropMenu{background:#f5f5f5 url("/admin/images/content/markitup/v0.1.0/submenu.png") no-repeat 100% 50%}
-.markItUpHeader ul ul ul{position:absolute;top:-1px;left:150px}
-.markItUpHeader ul ul ul li{float:none}
-.markItUpHeader ul a{display:block;width:16px;height:16px;text-indent:-10000px;background-repeat:no-repeat;padding:3px;margin:0}
-.markItUpHeader ul ul a{display:block;padding-left:0;text-indent:0;width:120px;padding:5px 5px 5px 25px;background-position:2px 50%}
-.markItUpHeader ul ul a hover{color:#fff;background-color:#3c769d}
-.html .markItUpEditor{background-image:url("/admin/images/content/markitup/v0.1.0/bg-editor-html.png")}
-.html .markItUpButton1 a{background-image:url("/admin/images/content/markitup/v0.1.0/h1.png")}
-.html .markItUpButton2 a{background-image:url("/admin/images/content/markitup/v0.1.0/h2.png")}
-.html .markItUpButton3 a{background-image:url("/admin/images/content/markitup/v0.1.0/h3.png")}
-.html .markItUpButton4 a{background-image:url("/admin/images/content/markitup/v0.1.0/h4.png")}
-.html .markItUpButton5 a{background-image:url("/admin/images/content/markitup/v0.1.0/h5.png")}
-.html .markItUpButton6 a{background-image:url("/admin/images/content/markitup/v0.1.0/h6.png")}
-.html .markItUpButton7 a{background-image:url("/admin/images/content/markitup/v0.1.0/paragraph.png")}
-.html .markItUpButton8 a{background-image:url("/admin/images/content/markitup/v0.1.0/bold.png")}
-.html .markItUpButton9 a{background-image:url("/admin/images/content/markitup/v0.1.0/italic.png")}
-.html .markItUpButton10 a{background-image:url("/admin/images/content/markitup/v0.1.0/stroke.png")}
-.html .markItUpButton11 a{background-image:url("/admin/images/content/markitup/v0.1.0/list-bullet.png")}
-.html .markItUpButton12 a{background-image:url("/admin/images/content/markitup/v0.1.0/list-numeric.png")}
-.html .markItUpButton13 a{background-image:url("/admin/images/content/markitup/v0.1.0/list-item.png")}
-.html .markItUpButton14 a{background-image:url("/admin/images/content/markitup/v0.1.0/picture.png")}
-.html .markItUpButton15 a{background-image:url("/admin/images/content/markitup/v0.1.0/link.png")}
-.html .markItUpButton16 a{background-image:url("/admin/images/content/markitup/v0.1.0/clean.png")}
-.markdown .markItUpEditor{background-image:url("/admin/images/content/markitup/v0.1.0/bg-editor-markdown.png")}
-.markdown .markItUpButton1 a{background-image:url("/admin/images/content/markitup/v0.1.0/h1.png")}
-.markdown .markItUpButton2 a{background-image:url("/admin/images/content/markitup/v0.1.0/h2.png")}
-.markdown .markItUpButton3 a{background-image:url("/admin/images/content/markitup/v0.1.0/h3.png")}
-.markdown .markItUpButton4 a{background-image:url("/admin/images/content/markitup/v0.1.0/h4.png")}
-.markdown .markItUpButton5 a{background-image:url("/admin/images/content/markitup/v0.1.0/h5.png")}
-.markdown .markItUpButton6 a{background-image:url("/admin/images/content/markitup/v0.1.0/h6.png")}
-.markdown .markItUpButton7 a{background-image:url("/admin/images/content/markitup/v0.1.0/bold.png")}
-.markdown .markItUpButton8 a{background-image:url("/admin/images/content/markitup/v0.1.0/italic.png")}
-.markdown .markItUpButton9 a{background-image:url("/admin/images/content/markitup/v0.1.0/list-bullet.png")}
-.markdown .markItUpButton10 a{background-image:url("/admin/images/content/markitup/v0.1.0/list-numeric.png")}
-.markdown .markItUpButton11 a{background-image:url("/admin/images/content/markitup/v0.1.0/picture.png")}
-.markdown .markItUpButton12 a{background-image:url("/admin/images/content/markitup/v0.1.0/link.png")}
-.markdown .markItUpButton13 a{background-image:url("/admin/images/content/markitup/v0.1.0/quotes.png")}
-.markdown .markItUpButton14 a{background-image:url("/admin/images/content/markitup/v0.1.0/code.png")}
-.markItUp .preview a{background-image:url("/admin/images/content/markitup/v0.1.0/preview.png")}
 .ui-autocomplete{position:absolute;cursor:default}
 .ui-menu{float:left;display:block;list-style:none;margin:0 3px 3px 0;max-height:190px;padding:3px;position:relative;overflow-x:hidden;overflow-y:auto;border:1px solid #ccc;background-color:$inputBackground;-webkit-transition:border .2s ease, box-shadow .2s ease;-moz-transition:border .2s ease, box-shadow .2s ease;-o-transition:border .2s ease, box-shadow .2s ease;-ms-transition:border .2s ease, box-shadow .2s ease;transition:border .2s ease,box-shadow .2s ease}
 .ui-menu-item{clear:left;float:left;list-style:none;width:100%;margin:0;}
