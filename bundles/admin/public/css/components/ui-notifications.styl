@@ -1,6 +1,12 @@
-/*
- * UI-notifications
- */
+//
+// GENERIC COMPONENTS
+// ==================
+//
+
+
+//
+// Containing element where notifications appear
+//
 
 #ui-notifications
   position fixed
@@ -10,6 +16,11 @@
 #ui-notifications li
   margin-bottom 5px
   list-style none
+
+
+//
+// Individual Notifications
+//
 
 .ui-notification
   position relative
@@ -36,70 +47,75 @@
   &.error:after
     border 2px solid $colorError
 
-.ui-notification .content
-  padding 15px 20px
+  .content
+    padding 15px 20px
 
-.ui-notification h1
-  margin 0 0 5px 0
-  font-size 16px
-  font-weight normal
+  h1
+    margin 0 0 5px 0
+    font-size 16px
+    font-weight normal
 
-.ui-notification p
-  margin 0
-  padding 0
-  font-size .9em
+  p
+    margin 0
+    padding 0
+    font-size .9em
 
-.ui-notification .close
-  position absolute
-  top 5px
-  right 10px
-  text-decoration none
-  color #888
-  display none
+  .close
+    position absolute
+    top 5px
+    right 10px
+    text-decoration none
+    color #888
+    display none
 
-.ui-notification.closable .close
-  display block
+  &.closable .close
+    display block
 
-.ui-notification .close:hover
-  color #fff
+  .close:hover
+    color #fff
 
-.ui-notification .close:active
-  margin-top 1px
+  .close:active
+    margin-top 1px
 
-/* close */
+  //
+  // CLOSE EFFECTS
+  //
 
-.ui-notification .close
-  position absolute
-  top 3px
-  right 10px
-  text-decoration none
-  color #888
-  font-size 16px
-  font-weight bold
-  display none
 
-/* slide */
+  /* close */
 
-.ui-notification.slide
-  transition opacity 300ms, top 300ms
+  .close
+    position absolute
+    top 3px
+    right 10px
+    text-decoration none
+    color #888
+    font-size 16px
+    font-weight bold
+    display none
 
-.ui-notification.slide.hide
-  opacity 0
-  top -500px
+  /* slide */
 
-/* fade */
+  &.slide
+    transition opacity 300ms, top 300ms
 
-.ui-notification.fade
-  transition opacity 300ms
+    &.hide
+      opacity 0
+      top -500px
 
-.ui-notification.fade.hide
-  opacity 0
+  /* fade */
 
-/* scale */
+  &.fade
+    transition opacity 300ms
 
-.ui-notification.scale
-  transition transform 300ms
-  transform scale(1)
+    &.hide
+      opacity 0
 
-.ui-notification.scale.hide
-  transform scale(0)
+  /* scale */
+
+  &.scale
+    transition transform 300ms
+    transform scale(1)
+
+    &.hide
+      transform scale(0)
