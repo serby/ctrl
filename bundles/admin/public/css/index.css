@@ -167,7 +167,8 @@ td{border-bottom:1px solid #999}
 .breadcrumb li:before{content:" / "}
 .breadcrumb li:first-child:before{content:""}
 .breadcrumb li,.breadcrumb li a{font-size:12px;color:#919191}
-.breadcrumb li a{text-decoration:underline}
+.breadcrumb li a{text-decoration:underline;}
+.breadcrumb li a:hover{color:#30678f}
 .notification{position:relative;padding:10px 14px;margin-bottom:20px;color:#fff;font-weight:bold;background-color:#bbb;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
 .notification .button-close{position:absolute;right:15px;top:15px;display:block;width:10px;height:11px;text-indent:-9999px;overflow:hidden;background-position:0 -16px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .notification .button-close{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
