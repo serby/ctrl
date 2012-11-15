@@ -206,6 +206,21 @@ td{border-bottom:1px solid #999}
 .pagination-list .pagination-current-page{width:auto;font-weight:bold;background-color:#30678f;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);outline:0;cursor:pointer;color:#fff;-webkit-border-radius:2px;border-radius:2px;}
 .pagination-list .pagination-current-page:hover{background-color:#224864}
 .pagination-list .pagination-current-page:active,.pagination-list .pagination-current-page:focus{background-color:#29587a}
+.dialog-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);z-index:1}
+.dialog-confirm{position:fixed;top:40%;width:400px;margin-left:-200px;left:50%;background-color:#fff;-webkit-border-radius:3px;border-radius:3px;border:1px solid #777;-webkit-box-shadow:0 0 0 3px rgba(255,255,255,0.1);box-shadow:0 0 0 3px rgba(255,255,255,0.1);z-index:2;}
+.dialog-confirm p{padding:30px 20px 12px}
+.dialog-confirm .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
+.dialog-confirm .controls button{float:right;margin-left:10px;margin-bottom:0}
+.dialog-custom{position:fixed;top:20%;width:700px;margin-left:-350px;left:50%;background-color:#fff;-webkit-border-radius:3px;border-radius:3px;border:1px solid #777;-webkit-box-shadow:0 0 0 3px rgba(255,255,255,0.1);box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
+.dialog-custom .custom-content{max-height:300px;overflow-y:scroll;}
+.dialog-custom .custom-content .empty{text-align:center;margin:25px 0}
+.dialog-custom .custom-content .asset-list{width:175px;float:left}
+.dialog-custom .asset-browser-item{list-style:none;width:100%;padding:10px;float:left;clear:both;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0;text-align:center;}
+.dialog-custom .asset-browser-item img{max-width:100%;border:3px solid #ddd;cursor:pointer;}
+.dialog-custom .asset-browser-item img:hover{border-color:#bbb}
+.dialog-custom .asset-browser-item img.selected{border-color:#30678f}
+.dialog-custom .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;clear:left;}
+.dialog-custom .controls button{float:right;margin-left:10px}
 #ui-notifications{position:fixed;top:10px;right:15px}
 #ui-notifications li{margin-bottom:5px;list-style:none}
 .ui-notification{position:relative;max-width:400px;min-width:250px;z-index:1000;border:1px solid rgba(0,0,0,0.5);background-color:rgba(0,0,0,0.9);-webkit-border-radius:3px;border-radius:3px;color:#ddd;-webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1),0 2px 3px rgba(0,0,0,0.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1),0 2px 3px rgba(0,0,0,0.2);}
@@ -329,21 +344,6 @@ td{border-bottom:1px solid #999}
 .markdown .markItUpButton13 a{background-image:url("/admin/images/content/markitup/v0.1.0/quotes.png")}
 .markdown .markItUpButton14 a{background-image:url("/admin/images/content/markitup/v0.1.0/code.png")}
 .markItUp .preview a{background-image:url("/admin/images/content/markitup/v0.1.0/preview.png")}
-.dialog-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);z-index:1}
-.dialog-confirm{position:fixed;top:40%;width:400px;margin-left:-200px;left:50%;background-color:#fff;-webkit-border-radius:3px;border-radius:3px;border:1px solid #777;-webkit-box-shadow:0 0 0 3px rgba(255,255,255,0.1);box-shadow:0 0 0 3px rgba(255,255,255,0.1);z-index:2;}
-.dialog-confirm p{padding:30px 20px 12px}
-.dialog-confirm .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
-.dialog-confirm .controls button{float:right;margin-left:10px;margin-bottom:0}
-.dialog-custom{position:fixed;top:20%;width:700px;margin-left:-350px;left:50%;background-color:#fff;-webkit-border-radius:3px;border-radius:3px;border:1px solid #777;-webkit-box-shadow:0 0 0 3px rgba(255,255,255,0.1);box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
-.dialog-custom .custom-content{max-height:300px;overflow-y:scroll;}
-.dialog-custom .custom-content .empty{text-align:center;margin:25px 0}
-.dialog-custom .custom-content .asset-list{width:175px;float:left}
-.dialog-custom .asset-browser-item{list-style:none;width:100%;padding:10px;float:left;clear:both;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0;text-align:center;}
-.dialog-custom .asset-browser-item img{max-width:100%;border:3px solid #ddd;cursor:pointer;}
-.dialog-custom .asset-browser-item img:hover{border-color:#bbb}
-.dialog-custom .asset-browser-item img.selected{border-color:#30678f}
-.dialog-custom .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;clear:left;}
-.dialog-custom .controls button{float:right;margin-left:10px}
 .ui-autocomplete{position:absolute;cursor:default}
 .ui-menu{float:left;display:block;list-style:none;margin:0 3px 3px 0;max-height:190px;padding:3px;position:relative;overflow-x:hidden;overflow-y:auto;border:1px solid #ccc;background-color:$inputBackground;-webkit-transition:border .2s ease, box-shadow .2s ease;-moz-transition:border .2s ease, box-shadow .2s ease;-o-transition:border .2s ease, box-shadow .2s ease;-ms-transition:border .2s ease, box-shadow .2s ease;transition:border .2s ease,box-shadow .2s ease}
 .ui-menu-item{clear:left;float:left;list-style:none;width:100%;margin:0;}
