@@ -1,6 +1,10 @@
 //
-// Typographic Styles
+// TYPOGRAPHIC STYLES
 // ==================
+//
+
+//
+// SELECTED TEXT
 //
 
 ::-moz-selection
@@ -12,28 +16,27 @@
   background #4992ad
   text-shadow none
 
+
+//
+// BASE STYLES
+//
+
 body
   font-family $baseFontFamily
-  font-size 90%
-  line-height 1.6
-  font-weight 400
+  font-size $baseFontSize
+  line-height $baseLineHeight
+  font-weight normal
   color #222
-  // -webkit-font-smoothing antialiased
 
-a
-  color $primaryColor
-  text-decoration underline
-  // transition color 0.4s ease
-  &:hover
-    color #222
-    text-decoration underline
-    // transition color 0.2s ease
-  &:focus,
-  &:active
-    color #222
-    outline none
 
-h1, h2, h3, h4, h5, h6
+//
+// HEADINGS
+// Uses a Double-stranded heading hierarchy to preserve the document outline.
+// http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/
+//
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6
   font-family $headingFontFamily
   font-weight 700
   line-height 1
@@ -42,32 +45,112 @@ h1, h2, h3, h4, h5, h6
   text-transform uppercase
   text-rendering optimizeLegibility
 
-h1
+h1, .h1
   font-size 2.375em
-h2
+h2, .h2
   font-size 1.6em
-h3
+h3, .h3
   font-size 1.4em
-h4
+h4, .h4
   font-size 1.2em
-h5
+h5, .h5
   font-size 1.1em
-h6
+h6, .h6
   font-size 1em
 
-pre, code, kbd, style
-  font-family Menlo, Monaco, "Courier New", Courier, monospace
-  font-size .875em
 
-pre
-  white-space pre-wrap
+//
+// LINKS
+//
 
-pre code
-  font-size 1.1em
-  line-height 1.6em
+a
+  color $colorPrimary
+  text-decoration none
+
+  &:focus,
+  &:hover
+    color #222
+    text-decoration underline
+
+  &:active
+    color #222
+
+
+//
+// EMPHASIS
+//
+
+blockquote, q, em, cite, dfn, i, cite, var
+  font-style italic
+
+th, strong, dt, b
+  font-weight bold
+
+
+//
+// FORMS
+//
+
+legend
+  padding-bottom .5em
+
+input, select, textarea
+  font-size 1em
+
+
+//
+// QUOTES
+//
+
+blockquote p:before, blockquote p:after, q:before, q:after
+  content ''
 
 blockquote
   font-size 1.125em
 
-input, select, textarea
-  font-size 1em
+blockquote
+  p
+    margin-bottom 0
+
+
+//
+// TEXT MARKING
+//
+
+ins
+  text-decoration none
+  border-bottom 3px double #333
+
+del
+  text-decoration line-through
+
+mark
+  background-color #dee154
+  color #222
+  font-weight bold
+
+
+//
+// MISC PRESONTATIONAL ELEMENTS
+//
+
+abbr
+  border-bottom 1px dotted #333
+  font-variant normal
+
+small
+  font-size 0.8em
+
+sub,
+sup
+  position relative
+  font-size 75%
+  line-height 0
+  vertical-align baseline
+
+sup
+  top -0.5em
+
+sub
+  bottom -0.25em
+
