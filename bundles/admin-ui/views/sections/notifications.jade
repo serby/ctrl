@@ -1,0 +1,41 @@
+h2 Notifications
+
+p Colours are defined as Stylus variables. An optional CSS class of 'close' allows the notification to be dismissed.
+
+.notification.close
+  p.notification-content Default message with close button
+
+.notification.notification-primary.close
+  p.notification-content Primary message with close button
+
+.notification.notification-success.close
+  p.notification-content Success message with close button
+
+.notification.notification-notice.close
+  p.notification-content Notice message with close button
+
+.notification.notification-warning
+  p.notification-content Warning message
+
+.notification.notification-error
+  p.notification-content Error message
+
+p Extended examples
+
+.notification
+  h2.notification-title Title Goes here
+  p.notification-content Content of the notification is written here.
+
+.notification.notification-notice.close
+  p.notification-content Content of the notification is written here and is intentionally long to check that it doesn't conflict with the close button which should be positioned to the right of this notification.
+
+.notification.notification-success.close
+  h4.notification-title Success message with close button
+
+.notification.notification-error
+  h4.notification-title Error Message
+  .notification-content
+    p This is an example of a notification with extra content
+    ul
+      li It can contain lists
+      li Extra classes have been added to format the content

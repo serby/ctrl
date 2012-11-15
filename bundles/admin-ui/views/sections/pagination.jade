@@ -1,0 +1,46 @@
+h2 Pagination
+
+.pagination
+
+  //- If used with search results, include a summary to give indication of the total amount of results
+  p.pagination-summary Showing 
+    strong 1
+    |  to 
+    strong 10
+    |  of 
+    strong 60
+    |  results.
+
+  ul.pagination-list
+
+    li.first
+      a(href='#', title='Go to the first page') First
+    li.previous
+      a(href='#', title='Go to the previous page') Previous
+    li
+      a(href='#', title='Go to page 1') 1
+    li
+      a(href='#', title='Go to page 2') 2
+    li
+      a.pagination-current-page(href='#', title='Go to page 3') 3
+    li
+      a(href='#', title='Go to page 4') 4
+    li
+      a(href='#', title='Go to page 5') 5
+    li.next
+      a(href='#', title='Go to the next page') Next
+    li.last
+      a(href='#', title='Go to the last page') Last
+
+  ul.pagination-list
+
+    li.first.disabled
+      span First
+    li.previous.disabled
+      span Previous
+    li.disabled
+      span 1
+    li.next.disabled
+      span Next
+    li.last.disabled
+      span Last
