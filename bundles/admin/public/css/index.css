@@ -281,13 +281,6 @@ td{border-bottom:1px solid #999}
 .fancybox-overlay{position:absolute;top:0;left:0;overflow:hidden;display:none;z-index:8010;background:url('/admin/images/content/fancybox/v0.1.0/fancybox-overlay.png')}
 .fancybox-overlay-fixed{position:fixed;bottom:0;right:0}
 .fancybox-lock .fancybox-overlay{overflow:auto;overflow-y:scroll}
-.fancybox-title{visibility:hidden;position:relative;text-shadow:none;z-index:8050}
-.fancybox-opened .fancybox-title{visibility:visible}
-.fancybox-title-float-wrap{position:absolute;bottom:0;right:50%;margin-bottom:-35px;z-index:8050;text-align:center}
-.fancybox-title-float-wrap .child{display:inline-block;margin-right:-100%;padding:2px 20px;background:transparent;background:rgba(0,0,0,0.8);-webkit-border-radius:15px;border-radius:15px;text-shadow:0 1px 2px #222;color:#fff;font-weight:bold;line-height:24px;white-space:nowrap}
-.fancybox-title-outside-wrap{position:relative;margin-top:10px;color:#fff}
-.fancybox-title-inside-wrap{padding-top:10px}
-.fancybox-title-over-wrap{position:absolute;bottom:0;left:0;color:#fff;padding:10px;background:#000;background:rgba(0,0,0,0.8)}
 .markItUp *{margin:0;padding:0;outline:none}
 .markItUp a link,.markItUp a visited{color:#000;text-decoration:none}
 .markItUp{width:880px;margin:5px 0 5px 0;border:5px solid #f5f5f5}
