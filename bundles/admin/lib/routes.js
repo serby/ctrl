@@ -310,7 +310,11 @@ module.exports = function routes(serviceLocator, schema, model, options) {
         if (error !== undefined) {
           res.send(404)
         } else {
-          res.redirect(options.adminRoute + model.slug)
+          var redirectUrl = req.headers.referer
+          if (redirectUrl.indexOf(options.adminRoute + model.slug + '/' + req.body[model.idProperty]) > -1) {
+            redirectUrl = options.adminRoute + model.slug
+          }
+          res.redirect(redirectUrl);
         }
       })
     }
