@@ -1,63 +1,81 @@
+//
+// TABLE STYLES
+// ============
+//
+
 table
   width 100%
+  border-spacing 0
+  border-collapse collapse
 
-  th,
-  td
-    padding 8px
+th,
+td
+  padding 8px
+
+th
+  text-align left
+  border-bottom 2px solid #666
+
+td
+  border-bottom 1px solid #999
+
+
+//
+// HIGHLIGHT ROWS
+// Adds a hover state to table rows.
+//
+
+.table-highlight
+  tbody
+    tr:hover
+      background-color lighten($colorPrimary, 40)
+
+
+//
+// SORTABLE TABLES
+// Clickable table headers allow columns to be sorted
+//
+
+.table-sortable
   th
-    text-align left
-    font-weight bold
-    border-bottom 2px solid #666666
-    color #555555 /* TODO - Convert to variable */
+    a
+      position relative
+      text-decoration none
+      color #333333 /* TODO - Convert to variable */
+      padding-right 14px
+      &:hover
+        text-decoration underline
 
-  td
-    border-bottom 1px solid #999999
+  .sort-asc
+  .sort-desc
+    a
+      &:after
+        content ""
+        position absolute
+        top 50%
+        margin-top -2px
+        right 0
+        width 8px
+        height 5px
+        background-position -100% -100% // Position sprite offscreen as default
+        background-repeat no-repeat
+        background-image versionPath("/admin/images/content/sprite.png")
+        .svg &
+          background-image versionPath("/admin/images/content/sprite.svg")
 
-  &.highlight
-    tbody
-      tr:hover
-        background-color lighten($primaryColor, 40)
+  .sort-asc
+    a
+      &:after
+        background-position -112px 0
 
-  &.sortable
-    th
-      a
-        position relative
-        text-decoration none
-        color #333333 /* TODO - Convert to variable */
-        padding-right 14px
-        &:hover
-          text-decoration underline
+      &:hover
+        &:after
+          background-position -112px -5px
 
-      &.sort-asc
-      &.sort-desc
-        a
-          &:after
-            content ""
-            position absolute
-            top 50%
-            margin-top -2px
-            right 0
-            width 8px
-            height 5px
-            background-position 100% 100% /* Position sprite offscreen as default */
-            background-repeat no-repeat
-            background-image versionPath("/admin/images/content/sprite.png")
-            .svg &
-              background-image versionPath("/admin/images/content/sprite.svg")
-
-      &.sort-asc
-        a
-          &:after
-            background-position -112px 0
-
-          &:hover
-            &:after
-              background-position -112px -5px
-
-      &.sort-desc
-        a
-          &:after
-            background-position -112px -10px
-          &:hover
-            &:after
-              background-position -112px -15px
+  .sort-desc
+    a
+      &:after
+        background-position -112px -10px
+      &:hover
+        &:after
+          background-position -112px -15px
