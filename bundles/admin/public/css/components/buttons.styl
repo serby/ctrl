@@ -11,7 +11,7 @@ button,
   font-size 1em
   line-height 1.2
   font-weight bold
-  // background-color $buttonColor
+  // background-color $colorBase
   background-color #bbb
   text-decoration none
   outline 0 /* Be sure to set a focus style if using this */
@@ -33,13 +33,13 @@ button,
 
   &.primary
   &.button-action
-    background-color $primaryColor
+    background-color $colorPrimary
     color #fff
     &:hover
-      background-color darken($primaryColor, 30%)
+      background-color darken($colorPrimary, 30%)
     &:active,
     &:focus
-      background-color darken($primaryColor, 15%)
+      background-color darken($colorPrimary, 15%)
 
   &.success
     color #fff
