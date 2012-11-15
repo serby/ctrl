@@ -2,4 +2,4 @@
 nav.page-actions.list-actions
   ul.actions
     - if (adminIsAllowed(model.name, 'create'))
-      li: a.button.primary(href='/admin/#{model.slug}/new') Add
+      li: a.button.button-primary(href='/admin/#{model.slug}/new') Add

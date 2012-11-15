@@ -1,9 +1,13 @@
-/** Buttons **/
+//
+// BUTTONS
+// =======
+//
 
-button
-  box-sizing border-box
 
-button,
+//
+// BASE BUTTON STYLE
+//
+
 .button
   display inline-block
   width auto
@@ -11,68 +15,69 @@ button,
   font-size 1em
   line-height 1.2
   font-weight bold
-  // background-color $colorBase
-  background-color #bbb
+  background-color $colorBase
   text-decoration none
-  outline 0 /* Be sure to set a focus style if using this */
+  color #fff
   cursor pointer
   border 1px solid rgba(0,0,0,.1)
   box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
   text-shadow 0 -1px 0 rgba(0,0,0,.2)
-  // background-image linear-gradient(top, rgba(255,255,255,.1) 0%, rgba(0,0,0,.1) 100%)
   border-radius 2px
-  color #fff
-
+  &:focus,
   &:hover
     color #fff
     background-color darken(#bbb, 30%)
     text-decoration none
-  &:active,
-  &:focus
+  &:active
     background-color darken(#bbb, 15%)
+    outline 0
 
-  &.primary
-  &.button-action
-    background-color $colorPrimary
-    color #fff
-    &:hover
-      background-color darken($colorPrimary, 30%)
-    &:active,
-    &:focus
-      background-color darken($colorPrimary, 15%)
 
-  &.success
-    color #fff
-    background-color $colorSuccess
-    &:hover
-      background-color darken($colorSuccess, 30%)
-    &:active,
-    &:focus
-      background-color darken($colorSuccess, 15%)
+//
+// BUTTON COLOUR MODIFIERS
+//
 
-  &.notice
-    background-color $colorNotice
-    color #fff
-    &:hover
-      background-color lighten($colorNotice, 30%)
-    &:active,
-    &:focus
-      background-color darken($colorNotice, 15%)
+.button-primary
+  background-color $colorPrimary
+  color #fff
+  &:focus,
+  &:hover
+    background-color darken($colorPrimary, 30%)
+  &:active
+    background-color darken($colorPrimary, 15%)
 
-  &.warning
-    color #fff
-    background-color $colorWarning
-    &:hover
-      background-color darken($colorWarning, 30%)
-    &:active,
-    &:focus
-      background-color darken($colorWarning, 15%)
+.button-success
+  color #fff
+  background-color $colorSuccess
+  &:focus,
+  &:hover
+    background-color darken($colorSuccess, 30%)
+  &:active
+    background-color darken($colorSuccess, 15%)
 
-  &.error
-    color #fff
-    background-color $colorError
-    &:hover
-      background-color darken($colorError, 30%)
-    &:active,
-    &:focus
-      background-color darken($colorError, 15%)
+.button-notice
+  background-color $colorNotice
+  color #fff
+  &:focus,
+  &:hover
+    background-color lighten($colorNotice, 30%)
+  &:active
+    background-color darken($colorNotice, 15%)
+
+.button-warning
+  color #fff
+  background-color $colorWarning
+  &:focus,
+  &:hover
+    background-color darken($colorWarning, 30%)
+  &:active
+    background-color darken($colorWarning, 15%)
+
+.button-error
+  color #fff
+  background-color $colorError
+  &:focus,
+  &:hover
+    background-color darken($colorError, 30%)
+  &:active
+    background-color darken($colorError, 15%)

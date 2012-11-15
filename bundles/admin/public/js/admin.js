@@ -155,7 +155,8 @@ window.module('control-misc-ui', function (module) {
 
     controls.append(
       $('<button/>').text(settings.confirmVerb)
-        .addClass(settings.danger ? 'danger' : 'primary')
+        .addClass('button')
+        .addClass(settings.danger ? 'button-error' : 'button-primary')
         .bind('click', function (e) {
           e.preventDefault();
           remove();
@@ -165,6 +166,7 @@ window.module('control-misc-ui', function (module) {
 
     controls.append(
       $('<button/>').text(settings.denyVerb)
+        .addClass('button')
         .bind('click', function (e) {
           e.preventDefault();
           remove();
