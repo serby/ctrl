@@ -420,17 +420,16 @@ button.error:active,.button.error:active,button.error:focus,.button.error:focus{
 .chzn-disabled{cursor:default;opacity:.5 !important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50) !important;filter:alpha(opacity=50) !important}
 .chzn-disabled .chzn-single{cursor:default}
 .chzn-disabled .chzn-choices .search-choice .search-choice-close{cursor:default}
-.login{background-color:#efefef;margin:40px;}
-.login .main-content{padding:80px;margin:100px auto;background-color:#fff;border:1px solid #ddd;-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.1);box-shadow:0 1px 5px rgba(0,0,0,0.1);max-width:620px}
+.login{background-color:#efefef;margin:40px}
 .password-reset{float:right;margin-top:-44px}
 pre,code{font-family:'Menlo','Monaco',monospace;color:#444;border:1px solid #ccc;background-color:#fff;padding:20px;display:block}
 .page-header{position:relative;margin-bottom:3em;}
 .page-header h1{margin-bottom:.2em}
 .page-actions{position:absolute;top:0;right:0;}
 .page-actions li{float:left;margin-left:10px}
-fieldset,[class^="panel"]{position:relative;margin-bottom:36px;}
+fieldset,[class^="panel"]{position:relative;margin-bottom:3em;}
 fieldset h3,[class^="panel"] h3{position:relative;text-transform:uppercase;border-bottom:3px solid #ccc;padding-bottom:10px}
-td{vertical-align:top;padding-top:10px;}
+td{vertical-align:top;}
 td a{color:$globalColor;text-decoration:none;}
 td a:hover{text-decoration:underline}
 td .row-actions,td .row-actions-block{display:inline;margin-top:4px;margin-left:20px;padding:0;font-size:12px;opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-webkit-transition:opacity .2s ease;-moz-transition:opacity .2s ease;-o-transition:opacity .2s ease;-ms-transition:opacity .2s ease;transition:opacity .2s ease;}
