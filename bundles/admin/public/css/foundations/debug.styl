@@ -1,0 +1,140 @@
+//
+// DEBUG MODE
+// ==========
+// Based on the lovely idea implemented in inuit.css
+// https://github.com/csswizardry/inuit.css
+//
+
+//
+// Enable this stylesheet to visually detect any improperly nested or
+// potentially invalid markup, or any potentially inaccessible code.
+//
+// Red          ==      definite error
+// Orange       ==      double-check
+// Blue         ==      should be fine but check anyway
+//
+// Please note that this method of checking markup quality should not be relied
+// upon entirely. Validate your markup!
+//
+
+
+//
+// SETUP DEBUG STYLES
+//
+
+debugError(message = false)
+  if $debugLevel == 'error' || $debugLevel == 'warning' || $debugLevel == 'all'
+    debugStyle(message, 6px, $colorError)
+
+debugWarning(message = false)
+  if $debugLevel == 'warning' || $debugLevel == 'all'
+    debugStyle(message, 4px, $colorWarning)
+
+debugNotice(message = false)
+  if $debugLevel == 'notice' || $debugLevel == 'all'
+    debugStyle(message, 2px, $colorNotice)
+
+debugStyle(message, outlineWidth, outlineColor)
+  outline outlineWidth solid outlineColor
+  outline-offset (outlineWidth / -2)
+  if message
+    content message
+
+
+//
+// GENERAL BUGS
+//
+
+// Are there any empty elements in your page?
+// Avoid special case where images report as being empty
+:not(img):not(input):empty
+  debugWarning('Element is empty')
+
+// Avoid inline styles where possible.
+[style]
+  debugWarning('Avoid inline styles wherever possible')
+
+// You should avoid using IDs for CSS, is this doing any styling?
+[id]
+  debugNotice('Avoid using IDs for CSS, is this doing any styling?')
+
+
+//
+// IMAGES
+//
+
+// Images require `alt` attributes, empty `alt`s are fine but should be
+// double-checked, no `alt` is bad and is flagged red.
+img:not([alt])
+  debugError()
+img[alt=""]
+  debugWarning()
+
+
+//
+// LINKS
+//
+
+// Links sometimes, though not always, benefit from `title` attributes. Links
+// without are never invalid but it’s a good idea to check.
+a:not([title])
+  debugNotice('Link missing title attribute')
+a[title=""]
+  debugNotice('Link has an empty title attribute')
+
+// Double-check any links whose `href` is something questionable.
+a[href="#"],
+a[href*="javascript"]
+  debugWarning('Questionable href attribute')
+
+// The `target` attribute ain’t too nice...
+a[target]
+  debugWarning('Is the target attribute needed?')
+
+
+//
+// LISTS
+//
+
+// Ensure any lists only contain `li`s as children.
+ul,
+ol
+  & > *:not(li)
+    debugError('Only li elements are are allowed as list children')
+
+
+//
+// TABLES
+//
+
+// It’s always nice to give `th`s `scope` attributes.
+th:not([scope])
+  debugNotice('th element should have a scope attribute')
+
+// `tr`s as children of `table`s ain’t great, did you need a `thead`/`tbody`?
+// Browsers automatically insert missing `thead`/`tbody` elements so this test always passes.
+table > tr
+  debugNotice('Add a thead or tbody to this table')
+
+// `tfoot` needs to come *before* `tbody`.
+tbody + tfoot
+  debugNotice('tfoot should appear before tbody')
+
+
+//
+// FORMS
+//
+
+// Forms require `action` attributes
+form:not([action])
+  debugError('Forms require `action` attributes')
+
+// Various form-field types have required attributes. `input`s need `type`
+// attributes, `textarea`s need `rows` and `cols` attributes and submit buttons
+// need a `value` attribute.
+input:not([type])
+  debugError('Inputs should have a type attribute')
+textarea:not([rows][cols])
+  debugError('Textareas require cols and rows attributes')
+input[type=submit]:not([value])
+  debugError('Submit button needs a vlaue attribute')
