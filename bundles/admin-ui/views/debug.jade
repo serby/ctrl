@@ -1,0 +1,192 @@
+extend ../../admin/views/layout
+
+block content
+
+  //-
+  //- PAGE HEADER
+  //-
+  header.page-header
+
+    h1 Debug Mode
+
+    nav.breadcrumb
+      ul
+        li.nav-home: a(href='/admin') Home
+        li Admin UI
+
+    .notification.notification-error.debug-message-error
+      .notification-content
+        p You don't have debug mode enabled. Enable it in settings.styl to see the test results here.
+
+    .notification.notification-notice.debug-message
+      .notification-content
+        p.debug-error You have debug mode set to the 'error' level. You will only see the most important bugs.
+        p.debug-warning You have debug mode set to the 'warning' level. You will see all high and medium priority bugs.
+        p.debug-all You have debug mode set to the 'all' level. You will see all bugs and general tips / suggestions.
+
+    p Enable debug mode to visually detect any improperly nested or potentially invalid markup, or any potentially inaccessible code.
+      | It can be enabled via a variable in the admin bundle settings.styl file.
+    p
+      em Please note that this method of checking markup quality should not be relied upon entirely. Validate your markup!
+
+    section
+      h2 General Bugs
+
+      p Are there any empty elements in your page?
+
+      ul.inline-list.empty-elements
+        li: a(href='#dummy', title='Link Title') Content In Here
+        li: a(href='#dummy', title='Link Title')
+
+      p Avoid inline styles where possible.
+
+      p
+        a(href='#dummy', title='Link Title', style='color: #bada55; background-color: #444; padding: 5px 10px; display: inline-block;') I've got inline styles
+
+      p You should avoid using IDs for CSS, is this doing any styling?
+
+      a#link(href='#dummy', title='Link Title',) I've got an ID attribute
+
+
+    section
+      h2 Images
+
+      p Images require `alt` attributes, empty `alt`s are fine but should be double-checked, no `alt` is bad and is flagged red.
+
+      p
+        em As images do not accept the content property, no debug message will appear in the inspector.
+
+      ul.inline-list
+        li: img(src='http://dummyimage.com/150x80.png?text=Good alt attribute', alt='Alt text')
+        li: img(src='http://dummyimage.com/150x80.png?text=Empty alt attribute', alt='')
+        li: img(src='http://dummyimage.com/150x80.png?text=No alt attribute')
+
+    section
+      h2 Links
+
+      p Links sometimes, though not always, benefit from `title` attributes. Links without are never invalid but it’s a good idea to check.
+
+      ul.inline-list
+        li: a(href='#dummy', title='Link Title') Good title attribute
+        li: a(href='#dummy') Missing title attribute
+        li: a(href='#dummy', title='') Empty title attribute
+
+
+      p Double-check any links whose `href` is something questionable.
+
+      ul.inline-list
+        li: a(href='http://google.com', title='Link Title') Good href attribute
+        li: a(href='#', title='Link Title') Linking to #
+        li: a(href='javascript:void(0)') JavaScript in the href attribute
+
+      p The `target` attribute ain’t too nice...
+      ul.inline-list
+        li: a(href='http://google.com', title='Link Title') No target attribute
+        li: a(href='http://google.com', title='Link Title', target='_blank') Opens in new window
+
+
+    section
+      h2 Lists
+
+      p Ensure any lists only contain `li`s as children.
+
+      ul.inline-list
+        li
+          ul
+            li Good List
+            li Item 2
+            li Item 3
+            li Item 4
+            li Item 5
+        li
+          ul
+            li Bad List
+            li Item 2
+            li Item 3
+            a(href='http://google.com', title='Link Title') Link outside of an li
+            li Item 5
+
+
+    section
+      h2 Tables
+      p It’s always nice to give `th`s `scope` attributes.
+
+      table
+        thead
+          tr
+            th(scope='col') Heading
+            th(scope='col') Heading
+            th Heading (No Scope)
+            th(scope='col') Heading
+        tbody
+          tr
+            td Content
+            td Content
+            td Content
+            td Content
+          tr
+            td Content
+            td Content
+            td Content
+            td Content
+
+      p `tfoot` needs to come *before* `tbody`.
+
+      table
+        thead
+          tr
+            th(scope='col') Heading
+            th(scope='col') Heading
+            th(scope='col') Heading
+            th(scope='col') Heading
+        tbody
+          tr
+            td Content
+            td Content
+            td Content
+            td Content
+          tr
+            td Content
+            td Content
+            td Content
+            td Content
+        tfoot
+          tr
+            td Footer Content
+            td Footer Content
+            td Footer Content
+            td Footer Content
+
+
+    section
+      h2 Forms
+
+      p Forms require `action` attributes.
+
+      form(method='_POST')
+        .form-row
+          label
+            span.form-label-text Title
+            select
+              option Mr
+              option Miss
+              option Ms
+              option Mrs
+        .form-row.form-row-actions
+          input.button(type='reset', value='Clear')
+          input.button.button-primary(type='submit', value='Submit')
+
+      p Various form-field types have required attributes. `input`s need `type` attributes, `textarea`s need `rows` and `cols` attributes and submit buttons need a `value` attribute.
+
+      form(action='#', method='_POST')
+        .form-row
+          label
+            span.form-label-text Name
+            input.form-field(name='name')
+        .form-row
+          label
+            span.form-label-text Message
+            textarea.form-field
+        .form-row.form-row-actions
+          input.button(type='reset', value='Clear')
+          input.button.button-primary(type='submit')

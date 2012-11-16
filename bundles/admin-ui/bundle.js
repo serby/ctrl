@@ -9,50 +9,55 @@ module.exports = {
     items: [
       {
         label: 'Form Elements',
-        url: '#form-elements',
+        url: '/admin/ui#form-elements',
         section: 'admin-ui'
       },
       {
         label: 'Tables',
-        url: '#tables',
+        url: '/admin/ui#tables',
         section: 'admin-ui'
       },
       {
         label: 'Buttons',
-        url: '#buttons',
+        url: '/admin/ui#buttons',
         section: 'admin-ui'
       },
       {
         label: 'Notifications',
-        url: '#notifications',
+        url: '/admin/ui#notifications',
         section: 'admin-ui'
       },
       {
         label: 'Misc UI',
-        url: '#misc-ui',
+        url: '/admin/ui#misc-ui',
         section: 'admin-ui',
         items: [
           {
             label: 'Tooltips',
-            url: '#tooltips',
+            url: '/admin/ui#tooltips',
             section: 'admin-ui'
           },
           {
             label: 'Dialogs',
-            url: '#dialogs',
+            url: '/admin/ui#dialogs',
             section: 'admin-ui'
           },
           {
             label: 'Overlays',
-            url: '#overlays',
+            url: '/admin/ui#overlays',
             section: 'admin-ui'
           },
           {
             label: 'Pagination',
-            url: '#pagination',
+            url: '/admin/ui#pagination',
             section: 'admin-ui'
           }
         ]
+      },
+      {
+        label: 'Debug Mode',
+        url: '/admin/ui/debug',
+        section: 'admin-ui'
       }
     ]
   }],

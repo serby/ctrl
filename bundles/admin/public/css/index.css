@@ -379,6 +379,10 @@ tr:hover .table-row-actions{opacity:1;-ms-filter:none;filter:none}
 .admin-ui section > h2{border-bottom:3px solid #bbb;padding-bottom:5px;margin-bottom:30px}
 .admin-ui section:target{margin-left:-18px;margin-right:-18px;padding-left:17px;padding-right:17px;border:1px solid transparent;-webkit-border-radius:5px;border-radius:5px;-webkit-animation-name:target-highlight;-moz-animation-name:target-highlight;-o-animation-name:target-highlight;-ms-animation-name:target-highlight;animation-name:target-highlight;-webkit-animation-duration:2s;-moz-animation-duration:2s;-o-animation-duration:2s;-ms-animation-duration:2s;animation-duration:2s;-webkit-animation-timing-function:ease-in-out;-moz-animation-timing-function:ease-in-out;-o-animation-timing-function:ease-in-out;-ms-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out}
 .admin-ui #overlays a[rel='fancybox-group']{margin-right:10px;padding:2px;-webkit-box-shadow:0 1px 4px rgba(0,0,0,0.4);box-shadow:0 1px 4px rgba(0,0,0,0.4);display:inline-block}
+.admin-ui .inline-list > li{display:inline-block;margin-right:30px;vertical-align:top;list-style:none}
+.admin-ui .empty-elements a{display:block;width:120px;height:40px;line-height:40px;background-color:#ccc;text-align:center}
+.admin-ui .debug-message,.admin-ui .debug-message-error{display:none}
+.admin-ui .debug-message-error{display:block}
 @-moz-keyframes target-highlight{0%{background-color:rgba(48,103,143,0);border-color:rgba(48,103,143,0)}
 20%{background-color:rgba(48,103,143,0.2);border-color:rgba(48,103,143,0.4)}
 100%{background-color:rgba(48,103,143,0);border-color:rgba(48,103,143,0)}
