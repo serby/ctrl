@@ -1,0 +1,68 @@
+//
+// ADMIN UI BUNDLE
+// ===============
+// These styles are specific to the admin-ui bundle.
+// Eventually, they will be refactored away from ctrl core.
+//
+
+.admin-ui
+
+
+  //
+  // GENERIC SECTIONS
+  //
+
+  section
+    padding-top 20px
+    margin-bottom 40px
+
+    & > h2
+      border-bottom 3px solid #bbb
+      padding-bottom 5px
+      margin-bottom 30px
+
+  //
+  // SECTION TARGETS
+  // When a 'same-page' anchor link is clicked, highlight the targe section.
+  //
+
+  section:target
+    margin-left -18px
+    margin-right -18px
+    padding-left 17px
+    padding-right 17px
+    border 1px solid transparent
+    border-radius 5px
+    animation-name target-highlight
+    animation-duration 2s
+    animation-iteration-count
+    animation-timing-function ease-in-out
+
+
+  //
+  // SECTION SPECIFIC STYLES
+  //
+
+  // Overlay Section
+  #overlays
+    a[rel='fancybox-group']
+      margin-right 10px
+      padding 2px
+      box-shadow 0px 1px 4px rgba(0,0,0,.4)
+      display inline-block
+
+
+//
+// ANIMATIONS
+//
+
+@keyframes target-highlight
+  0%
+    background-color rgba($colorPrimary, 0)
+    border-color rgba($colorPrimary, 0)
+  20%
+    background-color rgba($colorPrimary, 0.2)
+    border-color rgba($colorPrimary, 0.4)
+  100%
+    background-color rgba($colorPrimary, 0)
+    border-color rgba($colorPrimary, 0)

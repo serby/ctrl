@@ -30,7 +30,7 @@ block content
           | ?
 
     - else
-      table.highlight.sortable
+      table.table-highlight.table-sortable
         thead
           tr
             - each group in viewSchema.groups
@@ -55,8 +55,8 @@ block content
                     - if (viewSchema.title === key)
                       td.title
                         strong: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}')=propertyMeta.format(entityName)
-                        ul.row-actions
-                          - if (adminIsAllowed(model.name, 'update')) 
+                        - if (adminIsAllowed(model.name, 'update')) 
+                          ul.table-row-actions
                             li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/edit') Edit
                             li
                               include includes/delete-button

@@ -1,3 +1,8 @@
+//
+// THIS STYLESHEET WILL BE REMOVED SOON
+//
+
+
 /** Autocomplete **/
 
 .ui-autocomplete
@@ -16,7 +21,7 @@
   overflow-x hidden
   overflow-y auto
 
-  border 1px solid $baseBorderColor
+  border 1px solid $colorBorder
   background-color $inputBackground
   if $baseBorderRadius != 0
    border-radius 0 0 $baseBorderRadius $baseBorderRadius
@@ -34,16 +39,15 @@
      border 1px solid transparent
      display block
      padding 3px 7px 4px
-     color $inputFontColor
      text-decoration none
 
      &:hover
      &.ui-state-hover
-       text-shadow 0px 1px 1px darken($primaryColor, 6)
-       background-color $primaryColor
-       border 1px solid darken($primaryColor, 6)
-       box-shadow 0px 0px 0px 1px lighten($primaryColor, 5) inset
-       if dark($primaryColor)
+       text-shadow 0px 1px 1px darken($colorPrimary, 6)
+       background-color $colorPrimary
+       border 1px solid darken($colorPrimary, 6)
+       box-shadow 0px 0px 0px 1px lighten($colorPrimary, 5) inset
+       if dark($colorPrimary)
          color #FFFFFF /* TODO - move to variable */
        else
          color #333333 /* TODO - move to variable */

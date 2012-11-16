@@ -1,0 +1,85 @@
+//
+// USER NAVIGATION
+// ===============
+// Contains welcome message, profile, main site and logout links etc.
+//
+
+.user-navigation
+  position relative
+  background-color #222
+  width 100%
+  height 44px
+  color #fff
+
+  // Welcome Message
+  .user-welcome
+    padding 10px 10px 10px 30px
+    width 156px
+    line-height 24px
+
+
+// Wrapping element which triggers dropdown menu when hovered
+.dropdown-container
+  position absolute
+  top 0
+  right 0
+  z-index 1
+  float right
+  width 44px
+  height 44px
+  outline 0
+  cursor pointer
+  &:hover
+    background-color $colorPrimary
+    .dropdown-menu
+      display block
+
+  // Position the settings icon.
+  // Presentational icon styles are in the icon stylesheet.
+  .icon-settings
+    position absolute
+    top 50%
+    left 50%
+    margin-top -8px
+    margin-left -8px
+
+
+.dropdown-menu
+  display none
+  position absolute
+  width 240px
+  right 0
+  top 44px
+  background-color #222
+  box-shadow 0px 2px 4px rgba(0,0,0,.4)
+  border-top 1px solid #111
+
+  &:before
+    position absolute
+    display block
+    content ""
+    width 160px
+    height 4px
+    top -4px
+  &:after
+    position absolute
+    display block
+    content ""
+    right 14px
+    bottom 100%
+    width 0
+    height 0
+    border-style solid
+    border-width 8px
+    border-color transparent transparent #222 transparent
+
+  li
+    a
+      display block
+      padding 10px 30px
+      color #fff
+      border-top 1px solid #333
+      border-bottom 1px solid #111
+      text-decoration none
+      &:hover
+        background-color #333

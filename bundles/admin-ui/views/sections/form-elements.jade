@@ -1,10 +1,4 @@
-h1 Form Elements
-
-nav.breadcrumb
-  ul
-    li.nav-home: a(href='/admin') Home
-    li: a(href='/admin/ui') Admin UI
-    li Form Elements
+h2 Form Elements
 
 p Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim eleifend nibh porttitor.
 
@@ -41,6 +35,7 @@ form(action='#', method='post', enctype='multipart/form-data')
         ul
           li Detailed instruction 1
           li Detailed instruction 2
+
 
     //-
     //- Textarea - Full Width
@@ -267,6 +262,7 @@ form(action='#', method='post', enctype='multipart/form-data')
             input(type='radio', name='name')
             span Option 4
 
+
     //-
     //- File Upload
     //-
@@ -285,12 +281,11 @@ form(action='#', method='post', enctype='multipart/form-data')
 
   .form-row.form-row-actions
     input.button(type='reset', value='Clear')
-    input.button.button-action(type='submit', value='Submit')
+    input.button.button-primary(type='submit', value='Submit')
 
 
 
 form(action='#', method='post', enctype='multipart/form-data')
-
 
   fieldset
     h3 Form Errors
@@ -389,9 +384,7 @@ form(action='#', method='post', enctype='multipart/form-data')
 
   .form-row.form-row-actions
     input.button(type='reset', value='Clear')
-    input.button.button-action(type='submit', value='Submit')
-
-
+    input.button.button-primary(type='submit', value='Submit')
 
 
 form(action='#', method='post', enctype='multipart/form-data')
@@ -413,6 +406,7 @@ form(action='#', method='post', enctype='multipart/form-data')
         input.form-field.autocomplete(type='text', name='name')
       .form-row-description.form-copy
         p Start typing, e.g. as…
+
 
     //-
     //- jQuery UI Datepicker
@@ -471,4 +465,4 @@ form(action='#', method='post', enctype='multipart/form-data')
 
   .form-row.form-row-actions
     input.button(type='reset', value='Clear')
-    input.button.button-action(type='submit', value='Submit')
+    input.button.button-primary(type='submit', value='Submit')

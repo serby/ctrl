@@ -1,0 +1,60 @@
+//
+// TABLE ROW ACTIONS
+// =================
+// Appears on the list page. When a table row is hovered, this appears to
+// supply the user with a list of actions.
+//
+
+
+.table-row-actions
+  display inline
+  margin-top 4px
+  margin-left 20px
+  margin-bottom 0
+  padding 0
+  opacity 0
+  font-size 0.9em
+  transition opacity 0.2s ease
+
+  li
+    margin 0 10px 0 0
+    padding 0
+    list-style none
+    display inline
+
+  .form-delete-button
+    display inline
+
+  // Unset base .button-delete styles
+  .button-delete
+    padding 0
+    color $colorPrimary
+    font-weight normal
+    background-color transparent
+    border 0
+    text-shadow none
+    box-shadow none
+
+    &:hover
+      color #222
+      text-decoration underline
+
+  // Show actions when table row is hovered
+  tr:hover &
+    opacity 1
+
+
+//
+// TABLE ROW ACTION MODIFIERS
+// These modifier classes should be used in addition to the default class:
+// <ul class="table-row-actions table-row-actions-block">…</ul>
+//
+
+// Force actions below table cell text.
+.table-row-actions-block
+  display block
+  margin-left 0
+
+// Ensure the actions are always visible
+.table-row-actions-visible
+  opacity 1

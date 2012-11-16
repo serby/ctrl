@@ -1,0 +1,36 @@
+h2 Asset Browser
+
+p
+ | The following button is hooked up to an asset browser overlay, which can be included
+ | on a page with the compact namespace 'admin-asset-browser'. (Obviously for this to
+ | work, the asset bundle must be available).
+
+pre: code
+  | // Usage:
+  | 
+  | // Require the browser
+  | var browser = require('assetBrowser');
+  | 
+  | // Trigger the overlay with regex to use
+  | // on the assets' mime type, and a function
+  | // to callback with the file path
+  | browser(/^image\//, function (err, path) {
+  | 
+  |   // `err` is an error, or null
+  |   if (err) throw err;
+  | 
+  |   // `path` is the path fragment to the selected asset
+  |   console.log(path)
+  |   //-> 4ffd60ee60f8c80000000001/image.png
+  | 
+  |   // If the file type is image, you can get a thumbnail at:
+  |   // '/asset/thumb/' + path
+  | 
+  |   // The full asset is available at:
+  |   // '/asset/' + path
+  | 
+  | })
+
+button.button.button-primary.asset-browser Open Asset Browser
+
+div(style='border: 1px dashed #ccc; width: 100px; min-height: 50px; margin: 10px 0px; padding: 5px')
