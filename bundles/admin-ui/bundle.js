@@ -18,6 +18,16 @@ module.exports = {
         section: 'admin-ui'
       },
       {
+        label: 'Buttons',
+        url: '#buttons',
+        section: 'admin-ui'
+      },
+      {
+        label: 'Notifications',
+        url: '#notifications',
+        section: 'admin-ui'
+      },
+      {
         label: 'Misc UI',
         url: '#misc-ui',
         section: 'admin-ui',
@@ -28,18 +38,18 @@ module.exports = {
             section: 'admin-ui'
           },
           {
-            label: 'Notifications',
-            url: '#notifications',
-            section: 'admin-ui'
-          },
-          {
-            label: 'Buttons',
-            url: '#buttons',
+            label: 'Dialogs',
+            url: '#dialogs',
             section: 'admin-ui'
           },
           {
             label: 'Overlays',
             url: '#overlays',
+            section: 'admin-ui'
+          },
+          {
+            label: 'Pagination',
+            url: '#pagination',
             section: 'admin-ui'
           }
         ]

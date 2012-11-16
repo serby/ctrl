@@ -1,21 +1,30 @@
-/** Tooltips **/
+//
+// TOOLTIPS
+// ========
+// Adding a data-tooltip attribute to an element will create a tooltip on hover.
+// The content of the attribute will be used as the tooltip text.
+//
+
+
+//
+// BASE STYLES
+// By default, tooltips appear above their trigger content.
+//
+
 [data-tooltip]
-	border-bottom 1px dotted $primaryColor
+	border-bottom 1px dotted $colorPrimary
 	position relative
 	cursor pointer
-
-	font-weight normal
-	line-height 18px
 	z-index 999
+
 	&:before,
 	&:after
-		font-size 12px
 		position absolute
 		display block
 		left -9999px
 		opacity 0
-		if $baseTransitionDuration != 0
-			transition opacity $baseTransitionDuration $baseTransitionEasing
+
+	// The main toolip element
 	&:before
 		content attr(data-tooltip)
 		top -30px
@@ -23,11 +32,16 @@
 		border-top 1px solid #222
 		border-bottom 1px solid #000
 		color #fff
+		font-weight normal
+		line-height 18px
+		font-size 12px
 		padding 3px 8px
 		white-space nowrap
 		box-shadow 0px 1px 3px rgba(0,0,0,.5)
 		if $baseBorderRadius != 0
 			border-radius $baseBorderRadius
+
+	// A decorational arrow
 	&:after
 		content ""
 		top -4px
@@ -36,13 +50,20 @@
 		border-style solid
 		border-width 4px
 		border-color #000 transparent transparent transparent
+
+	// Show the tooltip on hover
 	&:hover
 		&:before
 			left -8px
 			opacity 1
 		&:after
-			opacity 1
 			left 0
+			opacity 1
+
+
+//
+// ALTERNATE POSITIONS
+//
 
 [data-tooltip].left
 	&:before
@@ -74,11 +95,3 @@
 		&:before
 		&:after
 			left 100%
-
-/** Site specific tooltips **/
-[data-tooltip][href*="github.com"]:before {
-	background-image versionPath("/admin/images/content/tooltip-sprite.png")
-	background-position 5px 4px
-	background-repeat no-repeat
-	padding-left 25px
-}

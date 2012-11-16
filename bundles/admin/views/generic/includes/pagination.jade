@@ -1,72 +1,73 @@
 - if (typeof pagination !== 'undefined')
-.pagination
 
-  //-
-  //- Simple Summary
-  //- ==============
-  //- Example: There are a total of 15 items.
-  //-
+  .pagination
 
-  //- - if (pagination.collectionLength === 1)
-  //-   p.pagination-summary There is a total of 
-  //-     strong #{pagination.collectionLength}
-  //-     |  item.
-  //- - else
-  //-   p.pagination-summary There are a total of 
-  //-     strong #{pagination.collectionLength}
-  //-     |  items.
+    //-
+    //- Simple Summary
+    //- ==============
+    //- Example: There are a total of 15 items.
+    //-
 
-
-  //-
-  //- Verbose Summary
-  //- ===============
-  //- Example: Showing items 1 to 10 of 15.
-  //-
-
-  - if (pagination.firstPageResult === pagination.lastPageResult)
-    p.pagination-summary Showing item 
-      strong #{pagination.firstPageResult}
-      |  of 
-      strong #{pagination.collectionLength}
-      | .
-  - else
-    p.pagination-summary Showing items 
-      strong #{pagination.firstPageResult}
-      |  to 
-      strong #{pagination.lastPageResult}
-      |  of 
-      strong #{pagination.collectionLength}
-      | .
+    //- - if (pagination.collectionLength === 1)
+    //-   p.pagination-summary There is a total of 
+    //-     strong #{pagination.collectionLength}
+    //-     |  item.
+    //- - else
+    //-   p.pagination-summary There are a total of 
+    //-     strong #{pagination.collectionLength}
+    //-     |  items.
 
 
-  //-
-  //- Numbered Links
-  //- ==============
-  //-
+    //-
+    //- Verbose Summary
+    //- ===============
+    //- Example: Showing items 1 to 10 of 15.
+    //-
 
-  - if (pagination.collectionLength > pagination.pageLength)
-    - if (+pagination.page === 1)
-      li.first.disabled
-        span First
-      li.previous.disabled
-        span Previous
+    - if (pagination.firstPageResult === pagination.lastPageResult)
+      p.pagination-summary Showing item 
+        strong #{pagination.firstPageResult}
+        |  of 
+        strong #{pagination.collectionLength}
+        | .
     - else
-      li.first
-        a(href=querystring.getFirst(url), title='Go to the first page') First
-      li.previous
-        a(href=querystring.getPrevious(url), title='Go to the previous page') Previous
+      p.pagination-summary Showing items 
+        strong #{pagination.firstPageResult}
+        |  to 
+        strong #{pagination.lastPageResult}
+        |  of 
+        strong #{pagination.collectionLength}
+        | .
 
-    - for (var i = pagination.start; i <= pagination.end; i++)
-      li
-        a(class=( i === +pagination.page ? 'pagination-current-page' : null ), href=querystring.getPage(url, i), title='Go to page ' + i)=i
 
-    - if (+pagination.page === (i - 1))
-      li.next.disabled
-        span Next
-      li.last.disabled
-        span Last
-    - else
-      li.next
-        a(href=querystring.getNext(url), title='Go to the next page') Next
-      li.last
-        a(href=querystring.getLast(url, pagination.lastPage), title='Go to the last page') Last
+    //-
+    //- Numbered Links
+    //- ==============
+    //-
+    - if (pagination.collectionLength > pagination.pageLength)
+      ul.pagination-list
+        - if (+pagination.page === 1)
+          li.first.disabled
+            span First
+          li.previous.disabled
+            span Previous
+        - else
+          li.first
+            a(href=querystring.getFirst(url), title='Go to the first page') First
+          li.previous
+            a(href=querystring.getPrevious(url), title='Go to the previous page') Previous
+
+        - for (var i = pagination.start; i <= pagination.end; i++)
+          li
+            a(class=( i === +pagination.page ? 'pagination-current-page' : null ), href=querystring.getPage(url, i), title='Go to page ' + i)=i
+
+        - if (+pagination.page === (i - 1))
+          li.next.disabled
+            span Next
+          li.last.disabled
+            span Last
+        - else
+          li.next
+            a(href=querystring.getNext(url), title='Go to the next page') Next
+          li.last
+            a(href=querystring.getLast(url, pagination.lastPage), title='Go to the last page') Last

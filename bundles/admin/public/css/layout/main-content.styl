@@ -1,0 +1,41 @@
+//
+// MAIN CONTENT
+// ============
+//
+
+//
+// PRIMARY LAYOUT VERSION
+// Is flexible with maximum and minimum widths.
+// Has large left spacing to allow for the sidebar.
+//
+
+.main-content
+  position relative
+  width auto
+  margin-left 280px
+  margin-right 40px
+  padding-top 60px
+  padding-bottom 60px
+
+  &:after
+    content "."
+    display block
+    height 0
+    clear both
+    visibility hidden
+
+
+//
+// MINIMAL LAYOUT VERSION
+// Forms a modal window style box, centered on the page.
+// Mainly used for login / registration journey pages.
+//
+
+.login
+  .main-content
+    padding 80px
+    margin 100px auto
+    background-color #fff
+    border 1px solid #ddd
+    box-shadow 0 1px 5px rgba(0,0,0,.1)
+    max-width 620px
