@@ -9,11 +9,20 @@ mixin selectField(inputParams, params)
         - if (params.required)
           abbr(title='#{ (params.required == true ? 'This field is required' : params.required) }') *
       - if (Array.isArray(params.list))
-        select.form-field(class=inputParams.class,name='#{inputParams.name}', multiple=(params.multiple ? 'multiple' : null ))
+
+        select.form-field(
+          class=(inputParams.class !== undefined ? inputParams.class : ''),
+          name='#{inputParams.name}',
+          multiple=(params.multiple ? 'multiple' : null ))
           - each option in params.list
             option(selected=(option == inputParams.value) ? 'selected' : null)=option
+
       - else
-        select.form-field(class=inputParams.class,name='#{inputParams.name}')
+
+        select.form-field(
+          class=(inputParams.class !== undefined ? inputParams.class : ''),
+          name='#{inputParams.name}')
+
           - each option, text in params.list
             option(selected=(option == inputParams.value) ? 'selected' : null, value=option)=text
 

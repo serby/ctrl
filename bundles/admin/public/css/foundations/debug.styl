@@ -31,8 +31,12 @@ debugWarning(message = false)
     debugStyle(message, 4px, $colorWarning)
 
 debugNotice(message = false)
-  if $debugLevel == 'notice' || $debugLevel == 'all'
+  if $debugLevel == 'all'
     debugStyle(message, 2px, $colorNotice)
+
+debugAdditional(message = false)
+  if $debugLevel == 'error' || $debugLevel == 'warning' || $debugLevel == 'all'
+    debugStyle(message, 6px, purple)
 
 debugStyle(message, outlineWidth, outlineColor)
   outline outlineWidth solid outlineColor
@@ -47,7 +51,7 @@ debugStyle(message, outlineWidth, outlineColor)
 
 // Are there any empty elements in your page?
 // Avoid special case where images report as being empty
-:not(img):not(input):empty
+:not(img):not(input):not(textarea):empty
   debugWarning('Element is empty')
 
 // Avoid inline styles where possible.
@@ -77,10 +81,10 @@ img[alt=""]
 
 // Links sometimes, though not always, benefit from `title` attributes. Links
 // without are never invalid but it’s a good idea to check.
-a:not([title])
-  debugNotice('Link missing title attribute')
-a[title=""]
-  debugNotice('Link has an empty title attribute')
+// a:not([title])
+//   debugNotice('Link missing title attribute')
+// a[title=""]
+//   debugNotice('Link has an empty title attribute')
 
 // Double-check any links whose `href` is something questionable.
 a[href="#"],
@@ -134,7 +138,18 @@ form:not([action])
 // need a `value` attribute.
 input:not([type])
   debugError('Inputs should have a type attribute')
-textarea:not([rows][cols])
+textarea:not([rows])
+textarea:not([cols])
   debugError('Textareas require cols and rows attributes')
 input[type=submit]:not([value])
+input[type=submit][value=""]
   debugError('Submit button needs a vlaue attribute')
+
+
+//
+// ADDITIONAL CHECKS
+//
+
+// Check for variable misuse resulting in undefined classes
+[class*="undefined"]
+  debugAdditional('Class name of "undefined"')

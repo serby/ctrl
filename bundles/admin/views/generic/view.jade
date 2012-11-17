@@ -22,7 +22,7 @@ block content
     .panel-group
       - if (typeof group.name !== 'undefined')
         h3=group.name
-      - if (typeof group.description !== 'undefined')
+      - if (typeof group.description !== 'undefined' && group.description !== '')
         p.group-description=group.description
       dl
         - each propertyMeta, key in group.properties

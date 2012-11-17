@@ -101,6 +101,7 @@ td.title strong{font-size:1.05em}
 .table-sortable .sort-desc a:hover:after{background-position:-112px -15px}
 .icon-basic,.icon-reset,.icon-settings{display:inline-block;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .icon-basic,.svg .icon-reset,.svg .icon-settings{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.icon-text-indent,.icon-reset{text-indent:100%;white-space:nowrap;overflow:hidden}
 .icon-reset{width:8px;height:8px;background-position:-53px -25px}
 .button-reset:hover .icon-reset{background-position:-61px -25px}
 .icon-settings{position:absolute;top:50%;left:50%;margin-top:-8px;margin-left:-8px;width:16px;height:16px;text-indent:-9999px;overflow:hidden;background-position:-95px 0}
@@ -211,7 +212,7 @@ td.title strong{font-size:1.05em}
 .dialog-custom .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;clear:left;}
 .dialog-custom .controls button{float:right;margin-left:10px}
 .notification{position:relative;padding:10px 14px;margin-bottom:20px;color:#fff;font-weight:bold;background-color:#bbb;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
-.notification .button-close{position:absolute;right:15px;top:15px;display:block;width:10px;height:11px;text-indent:-9999px;overflow:hidden;background-position:0 -16px;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.notification .button-close{position:absolute;right:15px;top:15px;display:block;width:10px;height:11px;text-indent:-9999px;overflow:hidden;background-position:0 -16px;background-repeat:no-repeat;background-color:transparent;border:0;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .notification .button-close{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .notification .button-close:hover{background-position:-10px -16px}
 .notification-title{color:inherit;line-height:1.2;margin-bottom:0;}
