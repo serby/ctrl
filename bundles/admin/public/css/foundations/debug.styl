@@ -6,15 +6,10 @@
 //
 
 //
-// Enable this stylesheet to visually detect any improperly nested or
-// potentially invalid markup, or any potentially inaccessible code.
+// Enabling debug mode will load an additional stylesheet built to highlight
+// HTML errors / semantic improvements.
 //
-// Red          ==      definite error
-// Orange       ==      double-check
-// Blue         ==      should be fine but check anyway
-//
-// Please note that this method of checking markup quality should not be relied
-// upon entirely. Validate your markup!
+// Debug Mode can be enabled via a variable in the admin bundle settings.styl.
 //
 
 
@@ -49,26 +44,28 @@ debugStyle(message, outlineWidth, outlineColor)
 // GENERAL BUGS
 //
 
-// Are there any empty elements in your page?
-// Avoid special case where images report as being empty
+// Check for empty elements.
+// Avoid special case where images report as being empty.
 :not(img):not(input):not(textarea):empty
   debugWarning('Element is empty')
 
-// Avoid inline styles where possible.
+// Avoid using inline styles.
 [style]
-  debugWarning('Avoid inline styles wherever possible')
+  debugWarning('Avoid using inline styles')
 
-// You should avoid using IDs for CSS, is this doing any styling?
+// ID attributes should only be used for anchor tags to target, or for
+// JavaScript functionality.
 [id]
-  debugNotice('Avoid using IDs for CSS, is this doing any styling?')
+  debugNotice('Avoid using IDs for styling')
 
 
 //
 // IMAGES
 //
 
-// Images require `alt` attributes, empty `alt`s are fine but should be
-// double-checked, no `alt` is bad and is flagged red.
+// Images should all make use of the 'alt' attribute. If there is a reason to
+// omit alt text for an image, still supply an empty alt='' attribute.
+// Images do not accept the content property, so don't pass a message variable.
 img:not([alt])
   debugError()
 img[alt=""]
@@ -79,71 +76,74 @@ img[alt=""]
 // LINKS
 //
 
-// Links sometimes, though not always, benefit from `title` attributes. Links
-// without are never invalid but it’s a good idea to check.
-// a:not([title])
-//   debugNotice('Link missing title attribute')
-// a[title=""]
-//   debugNotice('Link has an empty title attribute')
-
-// Double-check any links whose `href` is something questionable.
-a[href="#"],
+// Check for links with empty, '#', or 'javascript' href attributes.
+// Also check for the obsolete 'name' attribute.
+a[href=""]
+  debugError('Empty href attribute')
+a[href="#"]
+  debugWarning('# as href attribute')
 a[href*="javascript"]
-  debugWarning('Questionable href attribute')
+  debugWarning('href contains javascript')
+a[name]
+  debugError('"Name" attribute is obsolete in HTML5')
 
-// The `target` attribute ain’t too nice...
+// Links shouldn't force new windows / tabs to open. Let the user decide.
 a[target]
-  debugWarning('Is the target attribute needed?')
+  debugWarning('Do not force links to open in new tabs/windows')
 
 
 //
 // LISTS
 //
 
-// Ensure any lists only contain `li`s as children.
+// Lists should only contain 'li' elements as direct children.
 ul,
 ol
   & > *:not(li)
-    debugError('Only li elements are are allowed as list children')
+    debugError('Lists should only contain "li" elements as direct children')
 
 
 //
 // TABLES
 //
 
-// It’s always nice to give `th`s `scope` attributes.
+// Ensure every table heading has the correct 'scope' attribute.
 th:not([scope])
-  debugNotice('th element should have a scope attribute')
+  debugNotice('table heading needs a "scope" attribute')
 
-// `tr`s as children of `table`s ain’t great, did you need a `thead`/`tbody`?
-// Browsers automatically insert missing `thead`/`tbody` elements so this test always passes.
-table > tr
-  debugNotice('Add a thead or tbody to this table')
+// Add thead or tbody elements where needed.
+// Browsers automatically insert missing 'thead' / 'tbody' elements so this test always passes.
+// table > tr
+//   debugNotice('Add a thead or tbody to this table')
 
-// `tfoot` needs to come *before* `tbody`.
+// When using a 'tfoot' element, place it before the 'tbody' element.
 tbody + tfoot
-  debugNotice('tfoot should appear before tbody')
+  debugNotice('Place the "tfoot" element before the "tbody"')
 
 
 //
 // FORMS
 //
 
-// Forms require `action` attributes
+// All forms should have an 'action' attribute, which should not be left blank.
 form:not([action])
-  debugError('Forms require `action` attributes')
+  debugError('All forms require an "action" attributes')
+form[action='']
+  debugError('The "action" attribute should not be blank')
 
-// Various form-field types have required attributes. `input`s need `type`
-// attributes, `textarea`s need `rows` and `cols` attributes and submit buttons
-// need a `value` attribute.
+// Input elements should always have 'type' attributes.
 input:not([type])
-  debugError('Inputs should have a type attribute')
+  debugError('Inputs should have a "type" attribute')
+
+// Textareas should have 'rows' and 'cols' attributes
 textarea:not([rows])
 textarea:not([cols])
-  debugError('Textareas require cols and rows attributes')
+  debugWarning('Textareas require "cols" and "rows" attributes')
+
+// Submit inputs should always have a 'value' attribute.
 input[type=submit]:not([value])
 input[type=submit][value=""]
-  debugError('Submit button needs a vlaue attribute')
+  debugError('Submit button needs a "value" attribute')
 
 
 //

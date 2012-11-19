@@ -24,26 +24,27 @@ block content
         p.debug-warning You have debug mode set to the 'warning' level. You will see all high and medium priority bugs.
         p.debug-all You have debug mode set to the 'all' level. You will see all bugs and general tips / suggestions.
 
-    p Enable debug mode to visually detect any improperly nested or potentially invalid markup, or any potentially inaccessible code.
+    p Enabling debug mode will load an additional stylesheet built to highlight HTML errors / semantic improvements.
       | It can be enabled via a variable in the admin bundle settings.styl file.
-    p
-      em Please note that this method of checking markup quality should not be relied upon entirely. Validate your markup!
+
+    p When enabled, the stylesheet will add a 'content' property to any highlighted element (excluding images) which is viewable in inspector / firebug. 
+      | This will give you a description of the highlighted error.
 
     section
       h2 General Bugs
 
-      p Are there any empty elements in your page?
+      p Check for empty elements.
 
       ul.inline-list.empty-elements
         li: a(href='#dummy', title='Link Title') Content In Here
         li: a(href='#dummy', title='Link Title')
 
-      p Avoid inline styles where possible.
+      p Avoid using inline styles.
 
       p
         a(href='#dummy', title='Link Title', style='color: #bada55; background-color: #444; padding: 5px 10px; display: inline-block;') I've got inline styles
 
-      p You should avoid using IDs for CSS, is this doing any styling?
+      p ID attributes should only be used for anchor tags to target, or for JavaScript functionality.
 
       a#link(href='#dummy', title='Link Title',) I've got an ID attribute
 
@@ -51,7 +52,7 @@ block content
     section
       h2 Images
 
-      p Images require `alt` attributes, empty `alt`s are fine but should be double-checked, no `alt` is bad and is flagged red.
+      p Images should all make use of the 'alt' attribute. If there is a reason to omit alt text for an image, still supply an empty alt='' attribute.
 
       p
         em As images do not accept the content property, no debug message will appear in the inspector.
@@ -64,22 +65,16 @@ block content
     section
       h2 Links
 
-      //- p Links sometimes, though not always, benefit from `title` attributes. Links without are never invalid but it’s a good idea to check.
-
-      //- ul.inline-list
-      //-   li: a(href='#dummy', title='Link Title') Good title attribute
-      //-   li: a(href='#dummy') Missing title attribute
-      //-   li: a(href='#dummy', title='') Empty title attribute
-
-
-      p Double-check any links whose `href` is something questionable.
+      p Check for links with empty, '#', or 'javascript' href attributes. Also check for the obsolete 'name' attribute.
 
       ul.inline-list
         li: a(href='http://google.com', title='Link Title') Good href attribute
+        li: a(href='', title='Link Title') Empty href attribute
         li: a(href='#', title='Link Title') Linking to #
         li: a(href='javascript:void(0)') JavaScript in the href attribute
+        li: a(href='http://google.com', name='name') Obsolete name attribute
 
-      p The `target` attribute ain’t too nice...
+      p Links shouldn't force new windows / tabs to open. Let the user decide.
       ul.inline-list
         li: a(href='http://google.com', title='Link Title') No target attribute
         li: a(href='http://google.com', title='Link Title', target='_blank') Opens in new window
@@ -88,7 +83,7 @@ block content
     section
       h2 Lists
 
-      p Ensure any lists only contain `li`s as children.
+      p Lists should only contain 'li' elements as direct children.
 
       ul.inline-list
         li
@@ -109,7 +104,7 @@ block content
 
     section
       h2 Tables
-      p It’s always nice to give `th`s `scope` attributes.
+      p Ensure every table heading has the correct 'scope' attribute.
 
       table
         thead
@@ -130,7 +125,7 @@ block content
             td Content
             td Content
 
-      p `tfoot` needs to come *before* `tbody`.
+      p When using a 'tfoot' element, place it before the 'tbody' element.
 
       table
         thead
@@ -161,7 +156,7 @@ block content
     section
       h2 Forms
 
-      p Forms require `action` attributes.
+      p All forms should have an 'action' attribute, which should not be left blank.
 
       form(method='_POST')
         .form-row
@@ -176,7 +171,7 @@ block content
           input.button(type='reset', value='Clear')
           input.button.button-primary(type='submit', value='Submit')
 
-      p Various form-field types have required attributes. `input`s need `type` attributes, `textarea`s need `rows` and `cols` attributes and submit buttons need a `value` attribute.
+      p Input elements should always have 'type' attributes, textareas should have 'rows' and 'cols' attributes and submit inputs should always have a 'value' attribute.
 
       form(action='#', method='_POST')
         .form-row
