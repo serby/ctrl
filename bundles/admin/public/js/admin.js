@@ -46,7 +46,8 @@ window.module('control-misc-ui', function (module) {
     );
 
     /** Notification Bars **/
-    $('.notification.close').append('<a class="button-close" href="#" />');
+    var notificationClose = $('<button />').addClass('button-close').text('Close')
+    $('.notification.close').append(notificationClose)
     $('.notification .button-close').click(function(e){
       $(this).parent('.notification').fadeTo(300, 0).slideUp(300);
       e.preventDefault();
