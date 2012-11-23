@@ -1,11 +1,30 @@
-/*
- * Pagination Styles
- */
+//
+// PAGINATION
+// ==========
+//
 
 
+//
+// PAGINATION CONTAINER
+//
 
 .pagination
   text-align center
+
+
+//
+// PAGINATION SUMMARY TEXT
+//
+
+.pagination-summary
+  // Currently needs no extra styles
+
+
+//
+// NUMBERED PAGINATION LIST
+//
+
+.pagination-list
 
   li
     list-style none
@@ -39,7 +58,7 @@
   .pagination-current-page
     width auto
     font-weight bold
-    background-color $primaryColor
+    background-color $colorPrimary
     border 1px solid rgba(0,0,0,.1)
     box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
     text-shadow 0 -1px 0 rgba(0,0,0,.2)
@@ -49,7 +68,7 @@
     border-radius 2px
 
     &:hover
-      background-color darken($primaryColor, 30%)
+      background-color darken($colorPrimary, 30%)
     &:active,
     &:focus
-      background-color darken($primaryColor, 15%)
+      background-color darken($colorPrimary, 15%)

@@ -24,13 +24,13 @@ block content
     - if (dataSet.length === 0)
       p
         | No records found.
-      - if (adminIsAllowed(model.name, 'create')) 
+      - if (adminIsAllowed(model.name, 'create'))
         p Would you like to 
           a(href='/admin/#{model.slug}/new') add one
           | ?
 
     - else
-      table.highlight.sortable
+      table.table-highlight.table-sortable
         thead
           tr
             - each group in viewSchema.groups
@@ -43,7 +43,7 @@ block content
                       - directionClass = 'sort-asc'
                     - else if (url.Direction === 'desc')
                       - directionClass = 'sort-desc'
-                  th(class=directionClass)
+                  th(class=directionClass, scope='col')
                     a(href=querystring.getSort(url, key))=property
         tbody
           - each entity in dataSet
@@ -55,8 +55,8 @@ block content
                     - if (viewSchema.title === key)
                       td.title
                         strong: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}')=propertyMeta.format(entityName)
-                        ul.row-actions
-                          - if (adminIsAllowed(model.name, 'update')) 
+                        - if (adminIsAllowed(model.name, 'update'))
+                          ul.table-row-actions
                             li: a(href='/admin/#{model.slug}/#{entity[model.idProperty]}/edit') Edit
                             li
                               include includes/delete-button
@@ -69,7 +69,7 @@ block content
                             mixin displayImage(100, 100, entity[key][0], model.name + ' - ' + entityName, 'crop')
                       - else if (propertyMeta.type === 'link')
                         td
-                          a(href=entity[key], target='_blank')=entity[key]
+                          a(href=entity[key])=entity[key]
                       - else if (propertyMeta.type === 'dateTime')
                         td=dateTime(propertyMeta.format(entity[key]))
                       - else if (propertyMeta.type === 'groupedMultiselect')

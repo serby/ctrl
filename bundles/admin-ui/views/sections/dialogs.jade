@@ -1,0 +1,32 @@
+h2 Dialogs
+
+p
+  button.button.button-primary(
+    onclick='window.confirmDialog({ message: "Are you sure that’s what you want to do?", confirm: function () { alert("You confirmed"); }})'
+  ) Action!
+
+h3 Usage:
+
+pre: code
+  | window.confirmDialog({
+  | 
+  |   // The message to display
+  |   message: 'Are you sure?',
+  | 
+  |   // The function to execute if the user presses the confirm button
+  |   confirm: function () {},
+  | 
+  |   // The function to execute if the user presses the deny button
+  |   deny: function () {},
+  | 
+  |   // The text to display in the confirm button. Optional, default is `Confirm`
+  |   confirmVerb: 'Confirm',
+  | 
+  |   // The text to display in the confirm button. Optional, default is `Confirm`
+  |   denyVerb: 'Cancel',
+  | 
+  |   // If `true`, the button uses the `$errorColour` (which is probably red).
+  |   // Optional, and the default is `false`, in which case it uses `$primaryColour`
+  |   danger: false
+  | 
+  | })

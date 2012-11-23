@@ -2,6 +2,11 @@ extend ../../admin/views/layout
 
 block content
 
+
+  //-
+  //- PAGE HEADER
+  //-
+
   header.page-header
 
     h1 Admin User Interface
@@ -11,11 +16,34 @@ block content
         li.nav-home: a(href='/admin') Home
         li Admin UI
 
+
+  //-
+  //- EXAMPLE SECTIONS
+  //-
+
   section#form-elements
-    include form-elements
+    include sections/form-elements
 
   section#tables
-    include tables
+    include sections/tables
 
-  section#misc-ui
-    include misc-ui
+  section#buttons
+    include sections/buttons
+
+  section#tooltips
+    include sections/tooltips
+
+  section#notifications
+    include sections/notifications
+
+  section#dialogs
+    include sections/dialogs
+
+  section#overlays
+    include sections/overlays
+
+  section#pagination
+    include sections/pagination
+
+  section#asset-browser
+    include sections/asset-browser
