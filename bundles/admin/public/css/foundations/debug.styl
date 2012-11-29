@@ -1,0 +1,155 @@
+//
+// DEBUG MODE
+// ==========
+// Based on the lovely idea implemented in inuit.css
+// https://github.com/csswizardry/inuit.css
+//
+
+//
+// Enabling debug mode will load an additional stylesheet built to highlight
+// HTML errors / semantic improvements.
+//
+// Debug Mode can be enabled via a variable in the admin bundle settings.styl.
+//
+
+
+//
+// SETUP DEBUG STYLES
+//
+
+debugError(message = false)
+  if $debugLevel == 'error' || $debugLevel == 'warning' || $debugLevel == 'all'
+    debugStyle(message, 6px, $colorError)
+
+debugWarning(message = false)
+  if $debugLevel == 'warning' || $debugLevel == 'all'
+    debugStyle(message, 4px, $colorWarning)
+
+debugNotice(message = false)
+  if $debugLevel == 'all'
+    debugStyle(message, 2px, $colorNotice)
+
+debugAdditional(message = false)
+  if $debugLevel == 'error' || $debugLevel == 'warning' || $debugLevel == 'all'
+    debugStyle(message, 6px, purple)
+
+debugStyle(message, outlineWidth, outlineColor)
+  outline outlineWidth solid outlineColor
+  outline-offset (outlineWidth / -2)
+  if message
+    content message
+
+
+//
+// GENERAL BUGS
+//
+
+// Check for empty elements.
+// Avoid special case where images report as being empty.
+:not(img):not(input):not(textarea):empty
+  debugWarning('Element is empty')
+
+// Avoid using inline styles.
+[style]
+  debugWarning('Avoid using inline styles')
+
+// ID attributes should only be used for anchor tags to target, or for
+// JavaScript functionality.
+[id]
+  debugNotice('Avoid using IDs for styling')
+
+
+//
+// IMAGES
+//
+
+// Images should all make use of the 'alt' attribute. If there is a reason to
+// omit alt text for an image, still supply an empty alt='' attribute.
+// Images do not accept the content property, so don't pass a message variable.
+img:not([alt])
+  debugError()
+img[alt=""]
+  debugWarning()
+
+
+//
+// LINKS
+//
+
+// Check for links with empty, '#', or 'javascript' href attributes.
+// Also check for the obsolete 'name' attribute.
+a[href=""]
+  debugError('Empty href attribute')
+a[href="#"]
+  debugWarning('# as href attribute')
+a[href*="javascript"]
+  debugWarning('href contains javascript')
+a[name]
+  debugError('"Name" attribute is obsolete in HTML5')
+
+// Links shouldn't force new windows / tabs to open. Let the user decide.
+a[target]
+  debugWarning('Do not force links to open in new tabs/windows')
+
+
+//
+// LISTS
+//
+
+// Lists should only contain 'li' elements as direct children.
+ul,
+ol
+  & > *:not(li)
+    debugError('Lists should only contain "li" elements as direct children')
+
+
+//
+// TABLES
+//
+
+// Ensure every table heading has the correct 'scope' attribute.
+th:not([scope])
+  debugNotice('table heading needs a "scope" attribute')
+
+// Add thead or tbody elements where needed.
+// Browsers automatically insert missing 'thead' / 'tbody' elements so this test always passes.
+// table > tr
+//   debugNotice('Add a thead or tbody to this table')
+
+// When using a 'tfoot' element, place it before the 'tbody' element.
+tbody + tfoot
+  debugNotice('Place the "tfoot" element before the "tbody"')
+
+
+//
+// FORMS
+//
+
+// All forms should have an 'action' attribute, which should not be left blank.
+form:not([action])
+  debugError('All forms require an "action" attributes')
+form[action='']
+  debugError('The "action" attribute should not be blank')
+
+// Input elements should always have 'type' attributes.
+input:not([type])
+  debugError('Inputs should have a "type" attribute')
+
+// Textareas should have 'rows' and 'cols' attributes
+textarea:not([rows])
+textarea:not([cols])
+  debugWarning('Textareas require "cols" and "rows" attributes')
+
+// Submit inputs should always have a 'value' attribute.
+input[type=submit]:not([value])
+input[type=submit][value=""]
+  debugError('Submit button needs a "value" attribute')
+
+
+//
+// ADDITIONAL CHECKS
+//
+
+// Check for variable misuse resulting in undefined classes
+[class*="undefined"]
+  debugAdditional('Class name of "undefined"')

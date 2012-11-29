@@ -1,0 +1,116 @@
+//
+// ADMIN UI BUNDLE
+// ===============
+// These styles are specific to the admin-ui bundle.
+// Eventually, they will be refactored away from ctrl core.
+//
+
+.admin-ui
+
+  //
+  // GENERIC SECTIONS
+  //
+
+  section
+    padding-top 20px
+    margin-bottom 40px
+
+    & > h2
+      border-bottom 3px solid #bbb
+      padding-bottom 5px
+      margin-bottom 30px
+
+  //
+  // SECTION TARGETS
+  // When a 'same-page' anchor link is clicked, highlight the targe section.
+  //
+
+  section:target
+    margin-left -18px
+    margin-right -18px
+    padding-left 17px
+    padding-right 17px
+    border 1px solid transparent
+    border-radius 5px
+    animation-name target-highlight
+    animation-duration 2s
+    animation-iteration-count
+    animation-timing-function ease-in-out
+
+
+  //
+  // SECTION SPECIFIC STYLES
+  //
+
+  // Overlay Section
+  #overlays
+    a[rel='fancybox-group']
+      margin-right 10px
+      padding 2px
+      box-shadow 0px 1px 4px rgba(0,0,0,.4)
+      display inline-block
+
+
+  //
+  // DEBUG PAGE
+  //
+
+  .inline-list
+    & > li
+      display inline-block
+      margin-right 30px
+      vertical-align top
+      list-style none
+
+  .empty-elements
+    a
+      display block
+      width 120px
+      height 40px
+      line-height 40px
+      background-color #CCC
+      text-align center
+
+
+  //
+  // DEBUG PAGE INTRO MESSAGE
+  //
+
+  .debug-message
+  .debug-message-error
+    display none
+
+  if $debugMode == false
+    .debug-message-error
+      display block
+  else
+    .debug-message
+      display block
+      p
+        display none
+
+      if $debugLevel == 'error'
+        .debug-error
+          display block
+      else if $debugLevel == 'warning'
+        .debug-warning
+          display block
+      else if $debugLevel == 'all'
+        .debug-all
+          display block
+
+
+//
+// ANIMATIONS
+//
+
+@keyframes target-highlight
+  0%
+    background-color rgba($colorPrimary, 0)
+    border-color rgba($colorPrimary, 0)
+  20%
+    background-color rgba($colorPrimary, 0.2)
+    border-color rgba($colorPrimary, 0.4)
+  100%
+    background-color rgba($colorPrimary, 0)
+    border-color rgba($colorPrimary, 0)

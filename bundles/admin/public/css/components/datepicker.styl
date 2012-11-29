@@ -51,7 +51,7 @@
 
   .ui-datepicker-title
     padding-bottom 6px
-    border-bottom 1px solid $baseBorderColor
+    border-bottom 1px solid $colorBorder
     margin-bottom 5px
     font-weight bold
     color #333333 /* TODO - Set with variable? */
@@ -103,7 +103,7 @@
     border none
     text-align center
   td
-    border 1px solid $baseBorderColor
+    border 1px solid $colorBorder
     text-align center
     a,
     span
@@ -118,8 +118,8 @@
       &:hover,
       &:active,
       &:focus
-        background-color $primaryColor
-        if dark($primaryColor)
+        background-color $colorPrimary
+        if dark($colorPrimary)
           color #FFFFFF
         else
           color #555555
@@ -137,7 +137,7 @@
     span
       background-position -23px 0
       background-repeat no-repeat
-      background-color $primaryColor
+      background-color $colorPrimary
       background-image versionPath("/admin/images/content/sprite.png")
       .svg &
         background-image versionPath("/admin/images/content/sprite.svg")

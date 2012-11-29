@@ -1,8 +1,8 @@
 .user-navigation
-  .details
+  .user-welcome
     span Hi, #{session.admin.firstName}
-  nav.dropdown
+  nav.dropdown-container
     i.icon-settings Settings
-    ul
+    ul.dropdown-menu
       li: a(href='/') View Site
       li: a.logout(href='/admin/logout') Logout

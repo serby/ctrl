@@ -1,13 +1,54 @@
-.icon-reset
+//
+// ICONS
+// =====
+//
+
+//
+// BASE STYLES
+// Some simple styles for other icons to extend and customise
+//
+
+.icon-basic
   display inline-block
-  width 8px
-  height 8px
-  background-position -53px -25px
   background-repeat no-repeat
   background-image versionPath("/admin/images/content/sprite.png")
   .svg &
     background-image versionPath("/admin/images/content/sprite.svg")
 
+.icon-text-indent
+  text-indent 100%
+  white-space nowrap
+  overflow hidden
+
+//
+// STANDARD ICON SET
+//
+
+.icon-reset
+  @extend .icon-basic
+  @extend .icon-text-indent
+  width 8px
+  height 8px
+  background-position -53px -25px
+
 .button-reset:hover
   .icon-reset
     background-position -61px -25px
+
+
+//
+// REVERSED COLOUR ICON SET
+//
+
+.icon-settings
+  @extend .icon-basic
+  position absolute
+  top 50%
+  left 50%
+  margin-top -8px
+  margin-left -8px
+  width 16px
+  height 16px
+  text-indent -9999px
+  overflow hidden
+  background-position -95px 0
