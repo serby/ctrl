@@ -442,6 +442,8 @@ form(action='#', method='post', enctype='multipart/form-data')
             option(value='Theta') Theta
             option(value='Iota') Iota
             option(value='Kappa') Kappa
+      .form-row-description.form-copy
+        p Single choice, with optional search and 'clear' button
 
     .form-row
       label
@@ -458,6 +460,9 @@ form(action='#', method='post', enctype='multipart/form-data')
           option(value='Theta') Theta
           option(value='Iota') Iota
           option(value='Kappa') Kappa
+      .form-row-description.form-copy
+        p Multiple choice, with a fixed list of options.
+
 
     .form-row
       label
@@ -469,7 +474,9 @@ form(action='#', method='post', enctype='multipart/form-data')
           li: a.select2-tag(href='#', data-value='Beta') Beta
           li: a.select2-tag(href='#', data-value='Theta') Theta
           li: a.select2-tag(href='#', data-value='Gamma') Gamma
-
+      .form-row-description.form-copy.form-row-tags
+        p Multiple choice, with a list of suggested options. Users are free to
+          |  add custom tags.
 
 
 
