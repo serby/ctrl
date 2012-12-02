@@ -1,0 +1,558 @@
+//
+// SELECT2 STYLES
+// ==============
+//
+// 1. Base Styles
+// 2.Single Select Element
+//    2.1 Single Select Element Modifiers
+// 3. Multiple Select Element
+//    3.1 Tags
+//    3.2 Multiple Select Element Modifiers
+// 4. Results List Dropdown
+//    4.1 Results List Search
+//    4.2 Results List Choices
+// 5. Shared Styles
+// 6. Custom Functionality Styling
+//
+
+
+//
+// 1. BASE STYLES
+//
+
+// Set up image classes to be extended elsewhere
+.select2-sprite
+  background-image versionPath('/admin/images/content/select2/select2.png')
+  .svg &
+    background-image versionPath('/admin/images/content/select2/select2.svg')
+
+.select2-spinner
+  background versionPath('/admin/images/content/select2/spinner.gif')
+  background-position 99% 50%
+  background-repeat no-repeat
+
+//
+// BASE CONTAINER SETUP
+//
+
+.select2
+  width 70% !important // Enables the JS to apply a responsive width
+.select2-container-multi
+  margin-right -1px // Resolve 30% / 70% rounding error
+
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input
+  box-sizing border-box
+
+.select2-container
+  position relative
+  vertical-align top
+  display inline-block
+  /* inline-block for ie7 */
+  zoom 1
+  *display inline
+
+.select2-offscreen
+  position absolute
+  left -10000px
+
+
+//
+// 2. SINGLE SELECT ELEMENT
+// ========================
+//
+
+// Single select element base / closed styles
+.select2-choice
+  position relative
+  display block
+  height 32px
+  line-height 32px
+  padding 0 0 0 8px
+  white-space nowrap
+  text-decoration none
+  background-color $inputBackgroundColor
+  border 1px solid $colorBorder
+  transition box-shadow 0.2s ease
+  color $baseFontColor
+  text-decoration none
+  if $baseBorderRadius
+    border-radius $baseBorderRadius
+
+  &:hover
+  &:focus
+    text-decoration none
+    outline none
+
+  // Text which appears within single select element
+  span
+    margin-right 60px // Reserve space for dropdown and clear buttons
+    display block
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  // Dropdown Button
+  div
+    position absolute
+    top -1px
+    right -1px
+    height 100%
+    width 30px
+    buttonStyle($colorBase)
+    box-shadow 0 1px 1px rgba(#fff, 0.3) inset
+    if $baseBorderRadius
+      border-radius 0 $baseBorderRadius $baseBorderRadius 0
+    else
+      border-radius 0
+
+    // Arrow icon within dropdown button - normal state
+    b
+      position absolute
+      top 50%
+      left 50%
+      margin-left -4px
+      margin-top -3px
+      width 8px
+      height 6px
+      @extend .select2-sprite
+      background-position -20px -24px
+      background-repeat no-repeat
+
+
+  //
+  // 2.1 SINGLE SELECT ELEMENT MODIFIERS
+  //
+
+  // Single select element when active / focussed
+  .select2-container-active &
+    border 1px solid $colorPrimary
+    box-shadow 0px 0px 5px rgba($colorPrimary, 0.8)
+    outline none
+    text-decoration none
+
+    div
+      background-color $colorPrimary
+
+  // Single select element when results are open
+  .select2-dropdown-open &
+    border 1px solid $colorPrimary
+    if $baseBorderRadius
+      border-bottom-left-radius 0
+      border-bottom-right-radius 0
+
+    div
+      background-color $colorPrimary
+      if $baseBorderRadius
+        border-bottom-right-radius 0
+
+      b
+        background-position -20px -32px
+
+  // Single select element when dropdown is visible above element
+  .select2-drop-above &
+    border-bottom-color $colorBorder
+    if $baseBorderRadius
+      border-radius 0 0 $baseBorderRadius $baseBorderRadius
+
+    div
+      if $baseBorderRadius
+        border-bottom-right-radius $baseBorderRadius
+        border-top-right-radius 0
+
+  // When element is disabled
+  .select2-container-disabled &
+    background-color #f4f4f4
+    background-image none
+    border 1px solid #ddd
+    cursor default
+
+    div
+      background-color #f4f4f4
+      background-image none
+      border-left 0
+      box-shadow none
+
+
+//
+// 3. MULTIPLE SELECT ELEMENT
+// ==========================
+//
+
+
+// Container for Multiple select element
+.select2-container-multi
+  // currently needs no bespoke styles
+
+// Multiple select element base / closed styles
+// A `<ul>` element with tags in each `<li>`
+// The final `<li>` contains a text input for the user to type new tags.
+.select2-choices
+  position relative
+  background-color $inputBackgroundColor
+  border 1px solid $colorBorder
+  margin 0
+  padding 0
+  min-height 32px
+  line-height 32px
+  cursor text
+  overflow hidden
+  transition box-shadow 0.2s ease
+  background-clip border-box
+  if $baseBorderRadius
+    border-radius $baseBorderRadius
+
+  // Tags appear in individual `<li>` elements
+  li
+    float left
+    list-style none
+
+  // The final `<li>` which contains a text input
+  .select2-search-field
+    white-space nowrap
+    margin 0
+    padding 0
+
+    // Unstyle so the input blends with background
+    input
+      color #666
+      background-color transparent
+      outline 0
+      border 0 !important
+      box-shadow none !important
+
+      &.select2-active
+        @extend .select2-spinner
+
+  //
+  // 3.1 TAGS
+  //
+
+  .select2-search-choice
+    buttonStyle($colorPrimary)
+    line-height 14px
+    padding 4px 5px 4px 18px
+    margin 4px 0 0 4px
+    position relative
+    cursor default
+    border-radius 3px
+    if $baseBorderRadius
+      border-radius $baseBorderRadius * 0.666
+
+    span
+      cursor default
+
+  // .select2-search-choice-focus
+  //   background #d4d4d4
+  //   .select2-search-choice-close
+  //     background-position 2px -34px
+
+
+
+  //
+  // 3.2 MULTIPLE SELECT ELEMENT MODIFIERS
+  //
+
+  // When the element is active
+  .select2-container-active &
+    border 1px solid $colorPrimary
+    box-shadow 0px 0px 5px rgba($colorPrimary, 0.8)
+    outline none
+    text-decoration none
+
+  // When the dropdown is open
+  .select2-dropdown-open &
+    if $baseBorderRadius
+      border-radius $baseBorderRadius $baseBorderRadius 0 0
+
+  // When the dropdown appeards above the element
+  .select2-drop-above &
+    if $baseBorderRadius
+      border-radius 0 0 $baseBorderRadius $baseBorderRadius
+
+  // When element is disabled
+  .select2-container-disabled &
+    background-color #f4f4f4
+    background-image none
+    border 1px solid #ddd
+    cursor default
+
+    .select2-search-choice
+      background-image none
+      background-color #f4f4f4
+      border 1px solid #ddd
+      padding-left 5px
+      color #999
+      font-weight normal
+      text-shadow none
+
+      .select2-search-choice-close
+        display none
+
+
+//
+// 4. RESULTS LIST DROPDOWN
+// ========================
+//
+
+// Base styles for dropdown container
+.select2-drop
+  position absolute
+  top 100%
+  width 100%
+  background-color $inputBackgroundColor
+  border 1px solid $colorBorder
+  border-top-width 0
+  z-index 9999
+  if $baseBorderRadius
+    border-radius 0 0 $baseBorderRadius $baseBorderRadius
+
+  // Additional styles when dropdown appears above select element
+  &.select2-drop-above
+    // margin-top 1px
+    border-top 1px solid $colorBorder
+    border-bottom-width 0
+    // box-shadow 0 -4px 5px rgba(0, 0, 0, .15)
+    if $baseBorderRadius
+      border-radius $baseBorderRadius $baseBorderRadius 0 0
+
+
+//
+// 4.1 RESULTS LIST SEARCH
+//
+
+// Container for search input
+.select2-search
+  width 100%
+  padding-left 4px
+  padding-right 4px
+  padding-top 4px
+
+  // When dropdown list appears above single select element
+  .select2-drop.select2-drop-above &
+    padding-top 4px
+
+  // Search Input
+  input
+    @extend .select2-sprite
+    background-repeat no-repeat
+    background-position 100% 6px
+    padding-right 30px
+    padding-top 3px
+    padding-bottom 3px
+    width 100%
+
+    &:focus
+      box-shadow none
+      border-color $colorBorder
+
+    &.select2-active
+      @extend .select2-spinner
+
+
+// Hide container for search when needed
+.select2-search-hidden
+  position absolute
+  left -9999px
+
+
+//
+// 4.2 RESULTS LIST CHOICES
+//
+
+.select2-results
+  li em
+    background #feffde
+    font-style normal
+  .select2-highlighted em
+    background transparent
+
+// Scrollable results list container.
+// A `<ul>` element with results in each `<li>`.
+.select2-results
+  margin 4px
+  position relative
+  overflow-x hidden
+  overflow-y auto
+  max-height 200px
+
+  li
+    list-style none
+    display list-item
+
+  // Individual Results
+  .select2-result-label
+    padding 3px 6px
+    border 1px solid transparent
+    margin 0
+    cursor pointer
+
+  //
+  // Disabled look for already selected choices in the results dropdown (tagging)
+  // If you un-comment this, be sure to remove the following `display: none`.
+  //
+
+  // .select2-disabled
+  // .select2-disabled.select2-highlighted
+  //   .select2-result-label
+  //     color #aaa
+  //     background #fff
+  //     display list-item
+  //     cursor default
+  //     text-shadow none
+  //     box-shadow none
+  //     border-color transparent
+  //     font-weight normal
+
+  .select2-disabled
+    display none
+
+
+// Hovered / Highlighted options
+.select2-highlighted
+  .select2-result-label
+    buttonStyle($colorPrimary)
+    if $baseBorderRadius
+      border-radius $baseBorderRadius * 0.666
+
+
+// Nested `<ul>` elements within the main results list.
+// May appear when `<option>` elements are nested within `<optgroup>` elements.
+.select2-result-sub
+  margin 0
+
+  // Further nested lists
+  > li .select2-result-label
+    padding-left 20px
+  .select2-result-sub
+    > li .select2-result-label
+      padding-left 40px
+    .select2-result-sub
+      > li .select2-result-label
+        padding-left 60px
+      .select2-result-sub
+        > li .select2-result-label
+          padding-left 80px
+        .select2-result-sub
+          > li .select2-result-label
+            padding-left 100px
+
+//
+// Group titles - probably `<optgroup>` labels
+//
+
+.select2-result-with-children
+  > .select2-result-label
+    font-weight bold
+    cursor default
+
+
+//
+// Results List Messages
+//
+
+.select2-no-results,
+.select2-searching,
+.select2-selection-limit
+  background #eee
+  display list-item
+  padding 2px 6px
+  border 1px solid #ddd
+  if $baseBorderRadius
+    border-bottom-left-radius $baseBorderRadius * 0.666
+    border-bottom-right-radius $baseBorderRadius * 0.666
+
+
+//
+// Infinite scrolling message
+//
+
+.select2-more-results
+  background #fff
+  display list-item
+
+  &.select2-active
+    @extend .select2-spinner
+
+
+//
+// 5. SHARED STYLES
+//
+
+
+//
+// Close / Cancel Icons
+//
+
+// Generic close button styles
+.select2-search-choice-close
+  display block
+  position absolute
+  width 12px
+  height 12px
+  font-size 1px
+  border 0
+  cursor pointer
+  @extend .select2-sprite
+  background-position 2px -23px
+  background-repeat no-repeat
+
+// When in a single select element (clear choice)
+.select2-choice
+  .select2-search-choice-close
+    right 40px
+    top 10px
+    &:hover
+      background-position 2px -34px
+      cursor pointer
+
+// When in a multiple select element (remove tag)
+.select2-choices
+  .select2-search-choice-close
+    left 3px
+    top 5px
+    background-position -8px -22px
+    &:hover
+      background-position -8px -33px
+
+
+//
+// Placeholder Text
+//
+
+.select2-default
+  color #999 !important
+
+
+//
+// Matched text style when searching
+//
+
+.select2-result-selectable
+  .select2-match
+    &
+    .select2-result-unselectable &
+      text-decoration underline
+// Don't match on non-selectable options
+.select2-result-unselectable .select2-match
+  text-decoration none
+
+
+//
+// 6. CUSTOM FUNCTIONALITY STYLING
+// ===============================
+// These styles are specific to the ctrl implementation of Select2
+//
+
+.form-row-tags
+  p
+    display inline-block
+    margin-right 10px
+  .select2-tags
+    display inline-block
+    padding-left 0
+    li
+      display inline-block
+      margin-right 10px
