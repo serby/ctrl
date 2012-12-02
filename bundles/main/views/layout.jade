@@ -32,9 +32,6 @@ html(lang='en')
 
   body(class=page.section)
 
-    each bodyStart in includes.bodyStart
-      !=partial(bodyStart)
-
     .container
       block header
         include includes/structure/main-header
