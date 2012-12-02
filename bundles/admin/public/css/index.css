@@ -148,7 +148,7 @@ td.title strong{font-size:1.05em}
 .main-footer a:hover{color:#333}
 .main-footer .ctrl{font-family:Montserrat,'Arial Black',Arial,sans-serif;color:#888}
 .main-footer a:hover .ctrl{color:#222}
-.button{display:inline-block;width:auto;padding:8px 16px;margin-bottom:0;font-size:1em;line-height:1.2;font-weight:bold;background-color:#bbb;text-decoration:none;color:#fff;cursor:pointer;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
+.button{display:inline-block;width:auto;padding:8px 16px;margin-bottom:0;font-size:1em;line-height:1.2;cursor:pointer;text-decoration:none;color:#fff;background-color:#222;font-weight:bold;background-color:#bbb;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
 .button:focus,.button:hover{color:#fff;background-color:#838383;text-decoration:none}
 .button:active{background-color:#9f9f9f;outline:0}
 .button-primary{background-color:#30678f;}
@@ -181,7 +181,7 @@ td.title strong{font-size:1.05em}
 .pagination-list .previous a:before,.pagination-list .previous span:before{content:"\2039\00a0"}
 .pagination-list .next a:after,.pagination-list .next span:after{content:"\00a0\203A"}
 .pagination-list .last a:after,.pagination-list .last span:after{content:"\00a0\00bb"}
-.pagination-list .pagination-current-page{width:auto;font-weight:bold;background-color:#30678f;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);outline:0;cursor:pointer;color:#fff;-webkit-border-radius:2px;border-radius:2px;}
+.pagination-list .pagination-current-page{width:auto;outline:0;cursor:pointer;color:#fff;background-color:#222;font-weight:bold;background-color:#30678f;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
 .pagination-list .pagination-current-page:hover{background-color:#224864}
 .pagination-list .pagination-current-page:active,.pagination-list .pagination-current-page:focus{background-color:#29587a}
 [data-tooltip]{border-bottom:1px dotted #30678f;position:relative;cursor:pointer;z-index:999;}
@@ -211,7 +211,7 @@ td.title strong{font-size:1.05em}
 .dialog-custom .asset-browser-item img.selected{border-color:#30678f}
 .dialog-custom .controls{border-top:1px solid #ccc;padding:10px 10px;overflow:hidden;background-color:#fafafa;-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.1);box-shadow:0 3px 3px rgba(0,0,0,0.1);-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;clear:left;}
 .dialog-custom .controls button{float:right;margin-left:10px}
-.notification{position:relative;padding:10px 14px;margin-bottom:20px;color:#fff;font-weight:bold;background-color:#bbb;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
+.notification{position:relative;padding:10px 14px;margin-bottom:20px;color:#fff;background-color:#222;font-weight:bold;background-color:#bbb;border:1px solid rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(255,255,255,0.3) inset,0 1px 3px rgba(0,0,0,0.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);-webkit-border-radius:2px;border-radius:2px;}
 .notification .button-close{position:absolute;right:15px;top:15px;display:block;width:10px;height:11px;text-indent:-9999px;overflow:hidden;background-position:0 -16px;background-repeat:no-repeat;background-color:transparent;border:0;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .notification .button-close{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
 .notification .button-close:hover{background-position:-10px -16px}

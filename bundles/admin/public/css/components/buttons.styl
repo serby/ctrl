@@ -15,22 +15,17 @@
   margin-bottom 0
   font-size 1em
   line-height 1.2
-  font-weight bold
-  background-color $colorBase
-  text-decoration none
-  color #fff
   cursor pointer
-  border 1px solid rgba(0,0,0,.1)
-  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
-  text-shadow 0 -1px 0 rgba(0,0,0,.2)
-  border-radius 2px
+  text-decoration none
+  buttonStyle($colorBase)
+
   &:focus,
   &:hover
     color #fff
-    background-color darken(#bbb, 30%)
+    background-color darken($colorBase, 30%)
     text-decoration none
   &:active
-    background-color darken(#bbb, 15%)
+    background-color darken($colorBase, 15%)
     outline 0
 
 
