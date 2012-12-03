@@ -77,3 +77,23 @@ $baseBoxShadow = 0px 1px 4px rgba(69, 85, 93, 0.4) // Set to none to disable
 
 $baseTransitionDuration = 0.2s // Set to 0s to disable transitions // Remove?
 $baseTransitionEasing = ease // Remove?
+
+
+//
+// MIXINS
+// ======
+//
+
+//
+// BUTTON STYLE
+//
+
+buttonStyle(color)
+  color #fff
+  background-color #222
+  font-weight bold
+  background-color color
+  border 1px solid rgba(0,0,0,.1)
+  box-shadow 0 1px 1px rgba(#fff, 0.3) inset, 0 1px 3px rgba(#000, 0.1)
+  text-shadow 0 -1px 0 rgba(0,0,0,.2)
+  border-radius 2px

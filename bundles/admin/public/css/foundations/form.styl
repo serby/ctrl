@@ -26,6 +26,7 @@
 
 .text-input
   padding $textInputPadding
+  background-color $inputBackgroundColor
   border 1px solid $colorBorder
   line-height $baseLineHeight
   transition border-color 0.1s ease, box-shadow 0.2s ease
@@ -33,7 +34,7 @@
   font-size inherit
   &:focus
     border-color $colorPrimary
-    box-shadow 0px 1px 5px rgba($colorPrimary, 0.2) inset, 0px 0px 5px rgba($colorPrimary, 0.8)
+    box-shadow 0px 0px 5px rgba($colorPrimary, 0.8)
     outline 0
 
 
@@ -113,6 +114,14 @@ input[type="file"]
   select
     display block
     width 70%
+
+  select[multiple]
+    display inline-block
+    height auto
+    padding $textInputPadding
+    // Unfortunate hack to avoid jumping caused by 30%+70% rounding bug
+    margin-right -1px
+
 
   input[type="checkbox"],
   input[type="radio"]
