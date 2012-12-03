@@ -1,67 +1,18 @@
-!!! 5
-html(lang='en')
-  head
+extend layout
 
-    block head
+block content
 
-      //- Standard Meta Tags
-      meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-      meta(charset='utf-8')
-      meta(name='description', content=properties.description)
-      meta(name='keywords', content=properties.keyWords)
-      meta(name='author', content='ctrl')
+  h1 Error #{page.title}
+  if (page.title === 404)
+    p
+      | The item you requested could not be found. Maybe the link
+      | you clicked was incorrect or out of date. Head back to the 
+      a(href='/') homepage
+      |  and see if you can find what you're looking for.
 
-      //- Page Title
-      title= status + ' - ' + properties.name
-
-      link(rel='shortcut icon', href=versionPath('/main/images/structure/favicon.ico'))
-
-      script
-        // A simple Modernizr style HTML5 enabler / JS detector
-        document.getElementsByTagName('html')[0].setAttribute('class', 'js')
-        var html5Elements = [ 'article', 'aside', 'footer', 'header', 'hgroup', 'nav', 'section', 'time' ]
-        for (var i = 0; i < html5Elements.length; i++) {
-          document.createElement(html5Elements[i])
-        }
-
-    block styles
-      //- CSS
-      link(rel='stylesheet', href=versionPath('/main/css/index.css'))
-      link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400|Montserrat:700')
-
-  body.error(class='error#{status}')
-
-    .container
-      block header
-        include includes/structure/main-header
-
-      block nav
-        include includes/structure/main-navigation
-
-      .layout-section.main-content
-        h1 Error #{status}
-        if (status === 404)
-          p
-            | The item you requested could not be found. Maybe the link
-            | you clicked was incorrect or out of date. Head back to the 
-            a(href='/') homepage
-            |  and see if you can find what you're looking for.
-
-        else
-          p
-            | Oops, something went wrong at this end. You can try heading
-            | back to the 
-            a(href='/') homepage
-            |  to see if that works. Otherwise check back later.
-
-      block footer
-        include includes/structure/main-footer
-
-    block script
-      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-      script
-        if (typeof jQuery === 'undefined') {
-          document.write('<script src="/js/jquery-1.7.2.min.js" />');
-        }
-      - if (typeof compactJsHtml !== 'undefined')
-          !=compactJsHtml()
+  else
+    p
+      | Oops, something went wrong at this end. You can try heading
+      | back to the 
+      a(href='/') homepage
+      |  to see if that works. Otherwise check back later.
