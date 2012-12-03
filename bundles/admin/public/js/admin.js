@@ -39,14 +39,15 @@ window.module('control-misc-ui', function (module) {
 
     /** Fancybox **/
     $('.fancybox, [rel="fancybox-group"]').fancybox(
-      { padding: 0
+      { padding: 2
       , prevEffect: 'fade'
       , nextEffect: 'fade'
       }
     );
 
     /** Notification Bars **/
-    $('.notification.close').append('<a class="button-close" href="#" />');
+    var notificationClose = $('<button />').addClass('button-close').text('Close')
+    $('.notification.close').append(notificationClose)
     $('.notification .button-close').click(function(e){
       $(this).parent('.notification').fadeTo(300, 0).slideUp(300);
       e.preventDefault();
@@ -155,7 +156,8 @@ window.module('control-misc-ui', function (module) {
 
     controls.append(
       $('<button/>').text(settings.confirmVerb)
-        .addClass(settings.danger ? 'danger' : 'primary')
+        .addClass('button')
+        .addClass(settings.danger ? 'button-error' : 'button-primary')
         .bind('click', function (e) {
           e.preventDefault();
           remove();
@@ -165,6 +167,7 @@ window.module('control-misc-ui', function (module) {
 
     controls.append(
       $('<button/>').text(settings.denyVerb)
+        .addClass('button')
         .bind('click', function (e) {
           e.preventDefault();
           remove();

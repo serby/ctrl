@@ -1,5 +1,5 @@
-.list-filter-form
-  - if (Object.keys(searchProperties).length > 0)
+- if (Object.keys(searchProperties).length > 0)
+  .list-filter-form
     form(method='get', action='#{model.slug}')
       .form-row
         label
@@ -9,5 +9,5 @@
           - else
             input.form-field(type='text', value=url.Filter, name='Filter', placeholder="Filter Results")
             a.button-reset(href='?Reset', title='Reset Filter')
-              i.icon-reset
+              i.icon-reset Reset Filter
         input.button(type='submit',value='Filter')
