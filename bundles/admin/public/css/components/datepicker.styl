@@ -1,157 +1,217 @@
-/** Datepicker **/
+//-
+//- Datepicker Input
+//-
+
 .datepicker
   position relative
+
+  //- Datepicker icon positioned over input
   &:after
     content ""
     display block
     position absolute
-    top 7px
-    right 7px
+    top 9px
+    right 9px
     width 17px
     height 16px
     pointer-events none
     background-repeat no-repeat
-    background-color transparent
+    background-color $inputBackgroundColor
     background-position -78px 0
     background-image versionPath("/admin/images/content/sprite.png")
     .svg &
       background-image versionPath("/admin/images/content/sprite.svg")
 
-#ui-datepicker-div
-  position absolute
-  left -9999px
-  background-color #FFF
+  input
+    padding-right 34px
+
+//-
+//- Datepicker Dropdown
+//-
+
+.pika-single
+  z-index 9999
+  display block
+  position relative
   padding 10px
+  background #fff
   border 1px solid #ccc
-  box-shadow 0px 2px 8px -4px rgba(0,0,0,.5)
-  &.below
-    margin-top 10px
-    &:before
-      content ""
-      position absolute
-      top -12px
-      left 10px
-      width 24px
-      height 12px
-      background-position -53px 0
-      background-repeat no-repeat
-      background-image versionPath("/admin/images/content/sprite.png")
-      .svg &
-        background-image versionPath("/admin/images/content/sprite.svg")
-  &.above
-    margin-top -10px
-    &:before
-      content ""
-      position absolute
-      bottom -12px
-      left 10px
-      width 24px
-      height 12px
-      background-position -53px -13px
-
-  .ui-datepicker-title
-    padding-bottom 6px
-    border-bottom 1px solid $colorBorder
-    margin-bottom 5px
-    font-weight bold
-    color #333333 /* TODO - Set with variable? */
-
-  .ui-datepicker-next,
-  .ui-datepicker-prev
+  margin-top 10px
+  &:before
+    content ""
     position absolute
-    top 14px
-    right 10px
-    margin-left 5px
-    margin-bottom 0
-    overflow hidden
-    text-indent -9999px
-    cursor pointer
-    padding 3px
+    top -12px
+    left 10px
+    width 24px
+    height 12px
+    background-position -53px 0
+    background-repeat no-repeat
+    background-image versionPath("/admin/images/content/sprite.png")
+    .svg &
+      background-image versionPath("/admin/images/content/sprite.svg")
 
-    span
-      display block
-      width 8px
-      height 9px
-      background-repeat no-repeat
-      background-position -9px -48px
-      background-image versionPath("/admin/images/content/sprite.png")
-      .svg &
-        background-image versionPath("/admin/images/content/sprite.svg")
-    &:hover
-      span
-        background-position -9px -38px
+  &.is-hidden
+    display none
 
-  .ui-datepicker-prev
-    right 28px
+  &.is-bound
+    position absolute
+    box-shadow 0px 2px 8px -4px rgba(0,0,0,.5)
 
-    span
-      background-position 0 -48px
-    &:hover
-      span
-        background-position 0 -38px
 
-  table
-    width auto
-    margin-bottom 0
-    margin-right 1px /* Rectifies border collapse causing a padding mismatch */
+//-
+//- Title / Select Dropdowns
+//-
+
+.pika-title
+  position relative
+  text-align left
+  border-bottom 1px solid $colorBorder
+  margin-bottom 5px
+
+.pika-label
+  display inline-block
+  *display inline
+  position relative
+  z-index 9999
+  overflow hidden
+  margin 0
+  padding 0 5px 5px 0
+  font-weight bold
+  background-color #fff
+
+.pika-select
+  cursor pointer
+  position absolute
+  z-index 9998
+  margin 0
+  left 0
+  top 0
+  opacity 0
+  padding 0
+  height auto
+
+
+//-
+//- Next / Prev Month Buttons
+//-
+
+.pika-prev,
+.pika-next
+  position absolute
+  top 6px
+  right 0
+  text-indent -9999px
+  cursor pointer
+  margin-bottom 0
+  background-color transparent
+  border 0
+  width 8px
+  height 9px
+  background-repeat no-repeat
+  background-position -9px -48px
+  background-image versionPath("/admin/images/content/sprite.png")
+  .svg &
+    background-image versionPath("/admin/images/content/sprite.svg")
+
+  // Add an invisible larger pseudo element to increase hit-area
+  &:before
+    content ""
+    position absolute
+    top -4px
+    left -4px
+    width 16px
+    height 17px
+
+  &:hover
+    background-position -9px -38px
+
+.pika-prev
+  right 16px
+  background-position 0 -48px
+
+  &:hover
+    background-position 0 -38px
+
+.pika-prev.is-disabled,
+.pika-next.is-disabled
+  cursor default
+  opacity .2
+
+
+//-
+//- Table of Days
+//-
+
+.pika-table
+  width auto
+  margin-bottom 0
+  margin-right 1px /* Rectifies border collapse causing a padding mismatch */
+
   th,
   td
     padding 0
+    text-align center
+
   th
     font-size 10px
     text-transform uppercase
     border none
-    text-align center
+    padding-bottom 6px
+
+    abbr
+      border-bottom 0
+
   td
     border 1px solid $colorBorder
-    text-align center
-    a,
-    span
-      display block
-      width 30px
-      height 30px
-      line-height 30px
-      text-decoration none
-      font-weight bold
-      color #333333 /* TODO - convert to variable */
-    a
-      &:hover,
-      &:active,
-      &:focus
-        background-color $colorPrimary
-        if dark($colorPrimary)
-          color #FFFFFF
-        else
-          color #555555
-    span
-      cursor default
 
-  .ui-datepicker-today
-    a
-      font-weight bold
-      background-color #F7F7F7
-      box-shadow 0px 1px 4px rgba(0,0,0,.2) inset
+    &.is-empty
+      border 0
 
-  .ui-datepicker-current-day
-    a,
-    span
-      background-position -23px 0
-      background-repeat no-repeat
-      background-color $colorPrimary
-      background-image versionPath("/admin/images/content/sprite.png")
-      .svg &
-        background-image versionPath("/admin/images/content/sprite.svg")
-      &:hover
-        background-image none
 
-  .ui-datepicker-other-month
-    a,
-    span
-      color #555555
-      font-weight normal
+//-
+//- Individual Day Buttons
+//-
 
-  .ui-datepicker-unselectable
-    a,
-    span
-      color #CCCCCC
-      font-weight normal
+.pika-button
+  display block
+  width 30px
+  height 30px
+  line-height 30px
+  cursor pointer
+  outline none
+  border 0
+  padding 0
+  margin 0
+  background-color #fff
+  font-family $baseFontFamily
+  font-size 0.9em
+  text-decoration none
+  font-weight bold
+
+  &:hover
+    color #fff
+    background $colorPrimary
+    box-shadow none
+
+  .is-today &
+    box-shadow 0px 1px 4px rgba(0,0,0,.2) inset
+    background-color #f9f9f9
+    &:hover
+      background $colorPrimary
+      box-shadow none
+
+  .is-selected &
+    background-position -23px 0
+    background-repeat no-repeat
+    background-color $colorPrimary
+    background-image versionPath("/admin/images/content/sprite.png")
+    .svg &
+      background-image versionPath("/admin/images/content/sprite.svg")
+    &:hover
+      background-image none
+
+  .is-disabled &
+    pointer-events none
+    cursor default
+    color #999
+    opacity .3

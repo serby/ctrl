@@ -39,12 +39,7 @@ html(lang='en')
       script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
       script
         if (typeof jQuery === 'undefined') {
-          document.write('<script src="/js/jquery-1.7.2.min.js" />');
-        }
-      script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
-      script
-        if (typeof jQuery.ui === 'undefined') {
-          document.write('<script src="/js/jquery-ui-1.8.16.min.js" />');
+          document.write('<script src="/admin/js/lib/jquery-1.7.2.min.js" />');
         }
 
       - if (typeof compactJsHtml !== 'undefined')
