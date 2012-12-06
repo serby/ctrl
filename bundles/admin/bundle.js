@@ -70,6 +70,7 @@ module.exports = {
       compact.addNamespace('admin', __dirname + '/public')
         .addJs('/js/lib/select2.min.js')
         .addJs('/js/lib/jquery.fancybox.pack.js')
+        .addJs('/js/lib/pikaday.min.js')
         .addJs('/js/admin.js')
 
 

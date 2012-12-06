@@ -299,35 +299,38 @@ tr:hover .table-row-actions{opacity:1;-ms-filter:none;filter:none}
 .fancybox-overlay-fixed{position:fixed;bottom:0;right:0}
 .fancybox-lock .fancybox-overlay{overflow:auto;overflow-y:scroll}
 .datepicker{position:relative;}
-.datepicker:after{content:"";display:block;position:absolute;top:7px;right:7px;width:17px;height:16px;pointer-events:none;background-repeat:no-repeat;background-color:transparent;background-position:-78px 0;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.datepicker:after{content:"";display:block;position:absolute;top:9px;right:9px;width:17px;height:16px;pointer-events:none;background-repeat:no-repeat;background-color:#fff;background-position:-78px 0;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
 .svg .datepicker:after{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
-#ui-datepicker-div{position:absolute;left:-9999px;background-color:#fff;padding:10px;border:1px solid #ccc;-webkit-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);}
-#ui-datepicker-div.below{margin-top:10px;}
-#ui-datepicker-div.below:before{content:"";position:absolute;top:-12px;left:10px;width:24px;height:12px;background-position:-53px 0;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
-.svg #ui-datepicker-div.below:before{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
-#ui-datepicker-div.above{margin-top:-10px;}
-#ui-datepicker-div.above:before{content:"";position:absolute;bottom:-12px;left:10px;width:24px;height:12px;background-position:-53px -13px}
-#ui-datepicker-div .ui-datepicker-title{padding-bottom:6px;border-bottom:1px solid #ccc;margin-bottom:5px;font-weight:bold;color:#333;}
-#ui-datepicker-div .ui-datepicker-next,#ui-datepicker-div .ui-datepicker-prev{position:absolute;top:14px;right:10px;margin-left:5px;margin-bottom:0;overflow:hidden;text-indent:-9999px;cursor:pointer;padding:3px;}
-#ui-datepicker-div .ui-datepicker-next span,#ui-datepicker-div .ui-datepicker-prev span{display:block;width:8px;height:9px;background-repeat:no-repeat;background-position:-9px -48px;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
-.svg #ui-datepicker-div .ui-datepicker-next span,.svg #ui-datepicker-div .ui-datepicker-prev span{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
-#ui-datepicker-div .ui-datepicker-next:hover span,#ui-datepicker-div .ui-datepicker-prev:hover span{background-position:-9px -38px}
-#ui-datepicker-div .ui-datepicker-prev{right:28px;}
-#ui-datepicker-div .ui-datepicker-prev span{background-position:0 -48px}
-#ui-datepicker-div .ui-datepicker-prev:hover span{background-position:0 -38px}
-#ui-datepicker-div table{width:auto;margin-bottom:0;margin-right:1px;}
-#ui-datepicker-div th,#ui-datepicker-div td{padding:0}
-#ui-datepicker-div th{font-size:10px;text-transform:uppercase;border:none;text-align:center}
-#ui-datepicker-div td{border:1px solid #ccc;text-align:center;}
-#ui-datepicker-div td a,#ui-datepicker-div td span{display:block;width:30px;height:30px;line-height:30px;text-decoration:none;font-weight:bold;color:#333;}
-#ui-datepicker-div td a:hover,#ui-datepicker-div td a:active,#ui-datepicker-div td a:focus{background-color:#30678f;color:#fff}
-#ui-datepicker-div td span{cursor:default}
-#ui-datepicker-div .ui-datepicker-today a{font-weight:bold;background-color:#f7f7f7;-webkit-box-shadow:0 1px 4px rgba(0,0,0,0.2) inset;box-shadow:0 1px 4px rgba(0,0,0,0.2) inset}
-#ui-datepicker-div .ui-datepicker-current-day a,#ui-datepicker-div .ui-datepicker-current-day span{background-position:-23px 0;background-repeat:no-repeat;background-color:#30678f;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
-.svg #ui-datepicker-div .ui-datepicker-current-day a,.svg #ui-datepicker-div .ui-datepicker-current-day span{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
-#ui-datepicker-div .ui-datepicker-current-day a:hover,#ui-datepicker-div .ui-datepicker-current-day span:hover{background-image:none}
-#ui-datepicker-div .ui-datepicker-other-month a,#ui-datepicker-div .ui-datepicker-other-month span{color:#555;font-weight:normal}
-#ui-datepicker-div .ui-datepicker-unselectable a,#ui-datepicker-div .ui-datepicker-unselectable span{color:#ccc;font-weight:normal}
+.datepicker input{padding-right:34px}
+.pika-single{z-index:9999;display:block;position:relative;padding:10px;background:#fff;border:1px solid #ccc;margin-top:10px;}
+.pika-single:before{content:"";position:absolute;top:-12px;left:10px;width:24px;height:12px;background-position:-53px 0;background-repeat:no-repeat;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .pika-single:before{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.pika-single.is-hidden{display:none}
+.pika-single.is-bound{position:absolute;-webkit-box-shadow:0 2px 8px -4px rgba(0,0,0,0.5);box-shadow:0 2px 8px -4px rgba(0,0,0,0.5)}
+.pika-title{position:relative;text-align:left;border-bottom:1px solid #ccc;margin-bottom:5px}
+.pika-label{display:inline-block;*display:inline;position:relative;z-index:9999;overflow:hidden;margin:0;padding:0 5px 5px 0;font-weight:bold;background-color:#fff}
+.pika-select{cursor:pointer;position:absolute;z-index:9998;margin:0;left:0;top:0;opacity:0;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);padding:0;height:auto}
+.pika-prev,.pika-next{position:absolute;top:6px;right:0;text-indent:-9999px;cursor:pointer;margin-bottom:0;background-color:transparent;border:0;width:8px;height:9px;background-repeat:no-repeat;background-position:-9px -48px;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .pika-prev,.svg .pika-next{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.pika-prev:before,.pika-next:before{content:"";position:absolute;top:-4px;left:-4px;width:16px;height:17px}
+.pika-prev:hover,.pika-next:hover{background-position:-9px -38px}
+.pika-prev{right:16px;background-position:0 -48px;}
+.pika-prev:hover{background-position:0 -38px}
+.pika-prev.is-disabled,.pika-next.is-disabled{cursor:default;opacity:.2;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=20);filter:alpha(opacity=20)}
+.pika-table{width:auto;margin-bottom:0;margin-right:1px;}
+.pika-table th,.pika-table td{padding:0;text-align:center}
+.pika-table th{font-size:10px;text-transform:uppercase;border:none;padding-bottom:6px;}
+.pika-table th abbr{border-bottom:0}
+.pika-table td{border:1px solid #ccc;}
+.pika-table td.is-empty{border:0}
+.pika-button{display:block;width:30px;height:30px;line-height:30px;cursor:pointer;outline:none;border:0;padding:0;margin:0;background-color:#fff;font-family:'Lato','Lucida Sans','Lucida Grande','Lucida Sans Unicode',Arial,sans-serif;font-size:.9em;text-decoration:none;font-weight:bold;}
+.pika-button:hover{color:#fff;background:#30678f;-webkit-box-shadow:none;box-shadow:none}
+.is-today .pika-button{-webkit-box-shadow:0 1px 4px rgba(0,0,0,0.2) inset;box-shadow:0 1px 4px rgba(0,0,0,0.2) inset;background-color:#f9f9f9;}
+.is-today .pika-button:hover{background:#30678f;-webkit-box-shadow:none;box-shadow:none}
+.is-selected .pika-button{background-position:-23px 0;background-repeat:no-repeat;background-color:#30678f;background-image:url("/admin/images/content/v0.1.0/sprite.png");}
+.svg .is-selected .pika-button{background-image:url("/admin/images/content/v0.1.0/sprite.svg")}
+.is-selected .pika-button:hover{background-image:none}
+.is-disabled .pika-button{pointer-events:none;cursor:default;color:#999;opacity:.3;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=30);filter:alpha(opacity=30)}
 .ui-autocomplete{position:absolute;cursor:default}
 .ui-menu{float:left;display:block;list-style:none;margin:0 3px 3px 0;max-height:190px;padding:3px;position:relative;overflow-x:hidden;overflow-y:auto;border:1px solid #ccc;background-color:$inputBackground;-webkit-transition:border .2s ease, box-shadow .2s ease;-moz-transition:border .2s ease, box-shadow .2s ease;-o-transition:border .2s ease, box-shadow .2s ease;-ms-transition:border .2s ease, box-shadow .2s ease;transition:border .2s ease,box-shadow .2s ease}
 .ui-menu-item{clear:left;float:left;list-style:none;width:100%;margin:0;}

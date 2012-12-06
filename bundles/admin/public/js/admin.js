@@ -74,36 +74,20 @@ window.module('control-misc-ui', function (module) {
 
 
 
+    //
+    // PIKADAY DATEPICKER
+    //
 
-
-    /** jQuery UI Datepicker **/
-    $.datepicker.setDefaults({dayNamesMin: $.datepicker._defaults.dayNamesShort});
-    $('.datepicker input').datepicker(
-      { dateFormat: 'DD d MM, yy'
-      , showOtherMonths: true
-      , selectOtherMonths: true
-      , minDate: 0
-      , firstDay: 1
-      , beforeShow : function (input, picker) {
-          picker.dpDiv
-            .removeClass('above')
-            .removeClass('below');
-          setTimeout(function () {
-            var dppos = $(picker.dpDiv).offset().top
-             , inputpos = $(input).offset().top;
-            if (dppos < inputpos) {
-              picker.dpDiv.addClass('above');
-            } else {
-              picker.dpDiv.addClass('below');
-            }
-          });
-        }
-      });
-
-    var availableTags = ['ActionScript','AppleScript','Asp','BASIC','C','C++','Clojure','COBOL','ColdFusion','Erlang','Fortran','Groovy','Haskell','Java','JavaScript','Lisp','Perl','PHP','Python','Ruby','Scala','Scheme']
-    $('.autocomplete').autocomplete({
-      source: availableTags
+    $('.datepicker input').each(function(){
+      var picker = new Pikaday({
+          field: this
+        , firstDay: 1
+      })
     })
+
+
+
+
 
     /** Fancybox **/
     $('.fancybox, [rel="fancybox-group"]').fancybox(
