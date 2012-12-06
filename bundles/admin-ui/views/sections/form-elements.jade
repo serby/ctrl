@@ -390,33 +390,16 @@ form(action='#', method='post', enctype='multipart/form-data')
 form(action='#', method='post', enctype='multipart/form-data')
 
   fieldset
-    h3 jQuery UI Elements
-    p These inputs make use of 
-      a(href='http://jqueryui.com/') jQuery UI
+    h3 JavaScript Embellished Elements
+    p The Datepicker inputs makes use of 
+      a(href='https://github.com/dbushell/Pikaday/') Pikaday
       | .
-
-
-    //-
-    //- jQuery UI Autocomplete
-    //-
-
-    .form-row
-      label
-        span.form-label-text Autocomplete Input
-        input.form-field.autocomplete(type='text', name='name')
-      .form-row-description.form-copy
-        p Start typing, e.g. as…
-
-
-    //-
-    //- jQuery UI Datepicker
-    //-
 
     .form-row
       label
         span.form-label-text Date Input
         .datepicker
-          input.form-field(type='text', name='name')
+          input.form-field(type='text', name='datepicker')
 
 
   fieldset
