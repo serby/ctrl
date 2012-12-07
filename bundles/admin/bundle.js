@@ -68,8 +68,9 @@ module.exports = {
       var compact = serviceLocator.compact
 
       compact.addNamespace('admin', __dirname + '/public')
-        .addJs('/js/lib/chosen/chosen.jquery.js')
+        .addJs('/js/lib/select2.min.js')
         .addJs('/js/lib/jquery.fancybox.pack.js')
+        .addJs('/js/lib/pikaday.min.js')
         .addJs('/js/admin.js')
 
 

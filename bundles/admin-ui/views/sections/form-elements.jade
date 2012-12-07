@@ -390,73 +390,77 @@ form(action='#', method='post', enctype='multipart/form-data')
 form(action='#', method='post', enctype='multipart/form-data')
 
   fieldset
-    h3 jQuery UI Elements
-    p These inputs make use of 
-      a(href='http://jqueryui.com/') jQuery UI
+    h3 JavaScript Embellished Elements
+    p The Datepicker inputs makes use of 
+      a(href='https://github.com/dbushell/Pikaday/') Pikaday
       | .
-
-
-    //-
-    //- jQuery UI Autocomplete
-    //-
-
-    .form-row
-      label
-        span.form-label-text Autocomplete Input
-        input.form-field.autocomplete(type='text', name='name')
-      .form-row-description.form-copy
-        p Start typing, e.g. as…
-
-
-    //-
-    //- jQuery UI Datepicker
-    //-
 
     .form-row
       label
         span.form-label-text Date Input
         .datepicker
-          input.form-field(type='text', name='name')
+          input.form-field(type='text', name='datepicker')
 
 
   fieldset
-    h3 Chosen Select Elements
+    h3 Select2 Select Elements
     p.group-description These inputs use the 
-      a(href='http://harvesthq.github.com/chosen') Chosen
-      |  JavaScript plugin. They do not currently have responsive width but 
-      a(href='https://github.com/harvesthq/chosen/pull/407') a fix
-      |  has been pushed to GitHub.
+      a(href='https://github.com/ivaynberg/select2') Select2
+      |  JavaScript plugin.
 
     .form-row
       label
-        span.form-label-text Chosen Select
-        select.form-field.chzn-select(data-placeholder='Choose An Option')
+        span.form-label-text Single Select
+        select.form-field.select2(data-placeholder='Choose An Option')
           option(value='')
-          option(value='') Option 1
-          option(value='') Option 2
-          option(value='') Option 3
-          option(value='') Option 4
-          option(value='') Option 5
-          option(value='') Option 6
-          option(value='') Option 7
-          option(value='') Option 8
-          option(value='') Option 9
-          option(value='') Option 10
+          optgroup(label='Group 1')
+            option(value='Alpha') Alpha
+            option(value='Beta') Beta
+            option(value='Gamma') Gamma
+            option(value='Delta') Delta
+            option(value='Epsilon') Epsilon
+          optgroup(label='Group 2')
+            option(value='Zeta') Zeta
+            option(value='Eta') Eta
+            option(value='Theta') Theta
+            option(value='Iota') Iota
+            option(value='Kappa') Kappa
+      .form-row-description.form-copy
+        p Single choice, with optional search and 'clear' button
 
     .form-row
       label
-        span.form-label-text Chosen Multiple Select
-        select.form-field.chzn-select(multiple)
-          option(value='') Option 1
-          option(value='') Option 2
-          option(value='') Option 3
-          option(value='') Option 4
-          option(value='') Option 5
-          option(value='') Option 6
-          option(value='') Option 7
-          option(value='') Option 8
-          option(value='') Option 9
-          option(value='') Option 10
+        span.form-label-text Multiple Select
+        select.form-field.select2(multiple, data-placeholder='Choose An Option')
+          option(value='')
+          option(value='Alpha') Alpha
+          option(value='Beta') Beta
+          option(value='Gamma') Gamma
+          option(value='Delta') Delta
+          option(value='Epsilon') Epsilon
+          option(value='Zeta') Zeta
+          option(value='Eta') Eta
+          option(value='Theta') Theta
+          option(value='Iota') Iota
+          option(value='Kappa') Kappa
+      .form-row-description.form-copy
+        p Multiple choice, with a fixed list of options.
+
+
+    .form-row
+      label
+        span.form-label-text Free / Suggested Tagging
+        input.form-field.select2(type='hidden', style='width: 200px;', data-placeholder='Choose An Option')
+      .form-row-description.form-copy.form-row-tags
+        p Popular Tags:
+        ul.select2-tags
+          li: a.select2-tag(href='#', data-value='Beta') Beta
+          li: a.select2-tag(href='#', data-value='Theta') Theta
+          li: a.select2-tag(href='#', data-value='Gamma') Gamma
+      .form-row-description.form-copy.form-row-tags
+        p Multiple choice, with a list of suggested options. Users are free to
+          |  add custom tags.
+
 
 
   //-

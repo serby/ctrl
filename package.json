@@ -29,7 +29,7 @@
     "save-mongodb": "~0.0",
     "schemata": "~0.0",
     "service-locator": "~0.0",
-    "st": "~0",
+    "st": "~0.1",
     "stylus": "~0.30",
     "trunky": "~0.2",
     "validity": "~0.0",
