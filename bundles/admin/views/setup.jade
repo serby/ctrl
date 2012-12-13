@@ -17,9 +17,9 @@ block content
           - each error in errors
             li= error
 
-      mixin textField({ name :'emailAddress' }, { label: 'Email Address', required: true })
-      mixin textField({ name :'firstName' }, { label: 'First Name', required: true })
-      mixin textField({ name :'lastName' }, { label: 'Last Name', required: true })
-      mixin passwordField({ name :'password' }, { label: 'Password', required: true })
+      mixin textField({ name: 'emailAddress', value: admin.emailAddress }, { label: 'Email Address', required: true })
+      mixin textField({ name: 'firstName', value: admin.firstName }, { label: 'First Name', required: true })
+      mixin textField({ name: 'lastName', value: admin.lastName }, { label: 'Last Name', required: true })
+      mixin passwordField({ name :'password', value: admin.password }, { label: 'Password', required: true })
     .form-row.form-row-actions
       input.button.button-primary(name='Submit', type='submit', value='Create now')
