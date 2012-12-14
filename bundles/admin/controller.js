@@ -10,7 +10,8 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
         title: 'Setup / Admin / ' + serviceLocator.properties.name,
         section: 'admin'
       },
-      errors: errors
+      errors: errors,
+      admin: req.body
     })
   }
 
