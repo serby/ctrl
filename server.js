@@ -18,7 +18,6 @@ module.exports = function createServer(serviceLocator) {
     .register('viewHelpers', {})
     .register('versionator', versionator)
 
-
   serviceLocator.logger.info('Starting \'' + properties.name + '\'')
 
   bundled.addBundles(__dirname + '/bundles/',
