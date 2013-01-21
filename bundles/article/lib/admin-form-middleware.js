@@ -9,31 +9,31 @@ module.exports = function createAdminFormMiddleware(serviceLocator) {
     }})
 
     async.parallel({
-      sections: function(callback) {
-        serviceLocator.sectionModel.find({}, {}, function(error, sections) {
+      sections: function (callback) {
+        serviceLocator.sectionModel.find({}, {}, function (error, sections) {
           var sectionsDropdownObject = {}
           sectionsDropdownObject[''] = ''
-          sections.forEach(function(section) {
+          sections.forEach(function (section) {
             sectionsDropdownObject[section.name] = section.slug
           })
           res.locals({ sectionsDropdown: sectionsDropdownObject })
           callback()
         })
       },
-      authors: function(callback) {
+      authors: function (callback) {
         serviceLocator.administratorModel.find({}, { sort: { lastName: 1 } },
-          function(error, admins) {
+          function (error, admins) {
 
           var adminsDropdown = []
           adminsDropdown.push('')
-          admins.forEach(function(admin) {
+          admins.forEach(function (admin) {
             adminsDropdown.push(admin.firstName + ' ' + admin.lastName)
           })
           res.locals({ adminsDropdown: adminsDropdown })
           callback()
         })
       }
-    }, function() {
+    }, function () {
       next()
     })
   }

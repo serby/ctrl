@@ -7,10 +7,9 @@
 , "devel": true
 , "eqeqeq": true
 , "eqnull": true
-, "es5": false
+, "es5": true
 , "evil": false
 , "immed": false
-, "indent": 2
 , "jquery": true
 , "latedef": false
 , "laxbreak": true
@@ -22,6 +21,13 @@
 , "node": true
 , "noempty": false
 , "nonew": true
+, "predef":
+  [ "it"
+  , "describe"
+  , "before"
+  , "after"
+  , "afterEach"
+  ]
 , "quotmark": "single"
 , "smarttabs": true
 , "strict": false

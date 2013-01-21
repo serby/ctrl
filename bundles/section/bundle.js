@@ -55,8 +55,8 @@ module.exports = {
       // mongodb connnect. Then connect to the collection 'section' and
       // create a new save instance for sections using that collection in the
       // save-mongodb engine.
-      serviceLocator.databaseConnections.main.collection('section', function(error, collection) {
-        serviceLocator.saveFactory.section = function() {
+      serviceLocator.databaseConnections.main.collection('section', function (error, collection) {
+        serviceLocator.saveFactory.section = function () {
           return save('section', { logger: serviceLocator.logger,
             engine: saveMongodb(collection)});
         };

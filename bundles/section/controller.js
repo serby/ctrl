@@ -19,10 +19,10 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
 
   // ### Custom Routes
   // Catch all route for matching to sections in the system.
-  serviceLocator.router.get('/:section', function(req, res, next) {
+  serviceLocator.router.get('/:section', function (req, res, next) {
 
     // Does the section match any of the slugs?
-    serviceLocator.sectionModel.findOne( { slug: req.params.section}, function(error, section) {
+    serviceLocator.sectionModel.findOne( { slug: req.params.section}, function (error, section) {
       if (error) {
         next(error)
       }

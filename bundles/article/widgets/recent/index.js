@@ -6,21 +6,21 @@ var _ = require('lodash')
       latest: jade.compile(__dirname + '/latest.jade')
     };
 
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
   var data = serviceLocator.app._locals;
 
   return widget({
     name: 'recent',
     namespace: 'article',
-    render: function(layout) {
+    render: function (layout) {
       if (!layout) {
         layout = 'recent';
       }
       return fn[layout](data);
     },
-    load: function(req, res, next) {
+    load: function (req, res, next) {
       serviceLocator.articleModel.findLive({},
-        { limit: 5, sort: { publishedDate: -1} }, function(error, dataSet) {
+        { limit: 5, sort: { publishedDate: -1} }, function (error, dataSet) {
 
         if (!error && dataSet.length !== 0) {
           data = _.extend({}, data, {

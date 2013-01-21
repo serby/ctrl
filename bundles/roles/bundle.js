@@ -26,16 +26,16 @@ module.exports = {
     ]
   }],
   initialize: [
-    function(serviceLocator, done) {
-      serviceLocator.databaseConnections.main.collection('role', function(error, collection) {
-        serviceLocator.saveFactory.role = function() {
+    function (serviceLocator, done) {
+      serviceLocator.databaseConnections.main.collection('role', function (error, collection) {
+        serviceLocator.saveFactory.role = function () {
           return save('role', { logger: serviceLocator.logger,
             engine: saveMongodb(collection)});
         };
         done();
       });
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
       // Register the bundles models
       serviceLocator.register('roleModel',
         require('./lib/model')(serviceLocator));
@@ -44,7 +44,7 @@ module.exports = {
       serviceLocator.adminAccessControlList.addResource('Role');
       done();
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       //TODO: This all could be considered business logic and therefore should
       // possibly go in the model. Also maybe admin, administrator and roles
@@ -57,7 +57,7 @@ module.exports = {
       }
 
       // The main admin account needs this role to have ultimate power.
-      serviceLocator.roleModel.ensureRootRoleExists(function(error, role) {
+      serviceLocator.roleModel.ensureRootRoleExists(function (error, role) {
 
         if (error) {
           return done(new Error('Unable to create root role'));
@@ -71,7 +71,7 @@ module.exports = {
         // Create controllers
         require('./controller')(serviceLocator, __dirname + '/views');
 
-        reloadAcl(function(error) {
+        reloadAcl(function (error) {
           if (error) {
             return done(error);
           }

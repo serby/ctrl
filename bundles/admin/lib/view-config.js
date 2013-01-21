@@ -1,10 +1,10 @@
-module.exports = function(config) {
+module.exports = function (config) {
 
   // Ensure all properties has a format function
-  config.groups.forEach(function(group) {
-    Object.keys(group.properties).forEach(function(key) {
+  config.groups.forEach(function (group) {
+    Object.keys(group.properties).forEach(function (key) {
       if (group.properties[key].format === undefined) {
-        group.properties[key].format = function(value) { return value }
+        group.properties[key].format = function (value) { return value }
       }
     })
   })

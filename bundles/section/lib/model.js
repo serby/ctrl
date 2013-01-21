@@ -11,7 +11,7 @@ var validity = require('validity')
 // easier. Anything we do need should come through
 // [serviceLocator](https://github.com/serby/service-locator) so we can easily
 // mock it out.
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
 
   // Buy default our persistence in ctrl is via the
   // [save](https://github.com/serby/save) module.
@@ -44,7 +44,7 @@ module.exports = function(serviceLocator) {
     , created:
     // *schemata* will use this value or call this function when
     // schema.makeDefault is called.
-      { defaultValue: function() { return new Date() }
+      { defaultValue: function () { return new Date() }
       }
   })
 
@@ -58,7 +58,7 @@ module.exports = function(serviceLocator) {
   // properties we pass the entity through schema.makeDefault() which adds all
   // missing properties and set the default values. In this instance sets
   // created to now.
-  model.pre('createValidate', function(entity, callback) {
+  model.pre('createValidate', function (entity, callback) {
     callback(null, schema.makeDefault(entity))
   })
 

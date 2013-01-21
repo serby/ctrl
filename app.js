@@ -30,12 +30,12 @@ if ((properties.env !== 'development') && (cluster.isMaster)) {
     ' cluster process, one per CPU')
 
   // Create one instance of the app (i.e. one process) per CPU
-  cpus.map(function() {
+  cpus.map(function () {
     cluster.fork()
   })
 
   // Report child process death
-  cluster.on('death', function(worker) {
+  cluster.on('death', function (worker) {
 
     serviceLocator.logger.error('Worker ' + worker.pid + ' died', worker)
 

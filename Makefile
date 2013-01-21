@@ -7,7 +7,7 @@ watch-test:
 	@./node_modules/.bin/mocha -r should -R spec -w --recursive test bundles/**/test/*
 
 lint:
-	@jshint `find . -name '*.js' -and -not -regex '.*/public/.*' -and -not -regex '.*/node_modules/.*'`
+	@jshint `find . -name '*.js' -and -not -regex '.*/database/.*' -and -not -regex '.*/public/.*' -and -not -regex '.*/node_modules/.*'`
 
 lint-changed:
 	@jshint `git status --porcelain | sed -e "s/^...//g"`

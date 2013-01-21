@@ -30,7 +30,7 @@ module.exports = function createServer(serviceLocator) {
   serviceLocator.register('app', app)
   serviceLocator.register('router', app)
 
-  databaseAdaptor.createConnection(function(error, connection) {
+  databaseAdaptor.createConnection(function (error, connection) {
 
     if (error) {
       // Die the database can't be connected to
@@ -42,7 +42,7 @@ module.exports = function createServer(serviceLocator) {
         main: connection
     })
 
-    bundled.initialize(function() {
+    bundled.initialize(function () {
 
       // Make the bundle manager available to views
       app.locals(

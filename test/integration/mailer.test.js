@@ -8,7 +8,7 @@ mailer.sendMail(
     , subject: 'Email Integration Test'
     , text: 'Congratulations you received an email'
   }
-  , function(error, responseStatus) {
+  , function (error, responseStatus) {
     assert(responseStatus)
   }
 )

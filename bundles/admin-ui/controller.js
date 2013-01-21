@@ -12,7 +12,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
       ['global'],
       ['admin']
     ),
-    function(req, res) {
+    function (req, res) {
       viewRender(req, res, 'index', {
         page: {
           title: 'Admin UI / ' + serviceLocator.properties.name,
@@ -25,7 +25,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   serviceLocator.router.get('/admin/ui/debug',
     serviceLocator.adminAccessControl.requiredAccess('Admin UI', 'read'),
     serviceLocator.compact.js(['global'], ['admin']),
-    function(req, res) {
+    function (req, res) {
       viewRender(req, res, 'debug', {
         page: {
           title: 'Debug Mode / Admin UI / ' + serviceLocator.properties.name,

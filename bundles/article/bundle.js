@@ -29,7 +29,7 @@ module.exports = {
     }
   ],
   initialize: [
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       // Add some JavaScript to be compacted
       serviceLocator.compact
@@ -37,8 +37,8 @@ module.exports = {
         .addJs('/js/comments.js')
         .addJs('/js/social.js')
 
-      serviceLocator.databaseConnections.main.collection('article', function(error, collection) {
-        serviceLocator.saveFactory.article = function() {
+      serviceLocator.databaseConnections.main.collection('article', function (error, collection) {
+        serviceLocator.saveFactory.article = function () {
           return save('article', { logger: serviceLocator.logger,
             engine: saveMongodb(collection)})
         }
@@ -46,10 +46,10 @@ module.exports = {
         done()
       })
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
       done()
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       // register the model for global usage.
       serviceLocator.register('articleModel',
@@ -68,7 +68,7 @@ module.exports = {
 
       serviceLocator.viewHelpers.truncateWithEllipsis = trunky.truncateWithEllipsis
 
-      serviceLocator.viewHelpers.articleSummary = function(article, length) {
+      serviceLocator.viewHelpers.articleSummary = function (article, length) {
         if (article.summary) {
           return article.summary
         }

@@ -2,7 +2,7 @@ var validity = require('validity')
   , schemata = require('schemata')
   , crudModel = require('crud-model')
 
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
 
   var save = serviceLocator.saveFactory.role()
     , schema = schemata({
@@ -19,7 +19,7 @@ module.exports = function(serviceLocator) {
           }
         },
         created: {
-          defaultValue: function() { return new Date() }
+          defaultValue: function () { return new Date() }
         }
       })
     , model = crudModel('Role', save, schema)
@@ -29,7 +29,7 @@ module.exports = function(serviceLocator) {
   }
 
   function ensureRootRoleExists(callback) {
-    save.find({ name: 'root'}, {}, function(error, role) {
+    save.find({ name: 'root'}, {}, function (error, role) {
       if (error) {
         return callback(error)
       }
@@ -44,15 +44,15 @@ module.exports = function(serviceLocator) {
   function loadAcl(acl, callback) {
 
     function addRoleToAcl(role) {
-      Object.keys(role.grants).forEach(function(resource) {
-        role.grants[resource].forEach(function(action) {
+      Object.keys(role.grants).forEach(function (resource) {
+        role.grants[resource].forEach(function (action) {
           serviceLocator.logger.debug('Adding grant \'' + role.name + '\\' +  resource  + '\\' + action + '\' to ACL')
           acl.grant(role.name, resource, action)
         })
       })
     }
 
-    save.find({}, {}, function(error, roles) {
+    save.find({}, {}, function (error, roles) {
       if (error) {
         return callback(error)
       }

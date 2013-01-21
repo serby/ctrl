@@ -1,7 +1,7 @@
 // Define the how the model properties will be viewed via the generic admin
 // interface.
 
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
 
   return serviceLocator.admin.viewConfig({
     // Properties can be grouped into sections.
@@ -49,7 +49,7 @@ module.exports = function(serviceLocator) {
     }],
     // The generic admin route will process the for data through this function
     // Before passing it to the model.
-    formPostHelper: function(req, res, next) {
+    formPostHelper: function (req, res, next) {
       next();
     }
   });

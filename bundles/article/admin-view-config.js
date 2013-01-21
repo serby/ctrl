@@ -126,7 +126,7 @@ module.exports = function viewConfig(serviceLocator) {
         }
       }
     }],
-    formPostHelper: function(req, res, next) {
+    formPostHelper: function (req, res, next) {
 
       var proc = serviceLocator.admin.formHelper
 

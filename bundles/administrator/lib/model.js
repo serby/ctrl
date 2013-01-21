@@ -4,13 +4,13 @@ var bcrypt = require('bcrypt')
   , schemata = require('schemata')
   , crudModel = require('crud-model')
 
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
 
   var save = serviceLocator.saveFactory.administrator()
     , properties = serviceLocator.properties
 
   function duplicateEmailValidator(key, errorProperty, object, callback) {
-    save.findOne({ emailAddress: object.emailAddress }, function(error, found) {
+    save.findOne({ emailAddress: object.emailAddress }, function (error, found) {
       if (error) {
         return callback(error)
       }
@@ -52,7 +52,7 @@ module.exports = function(serviceLocator) {
       tag: ['update']
     },
     created: {
-      defaultValue: function() { return new Date() }
+      defaultValue: function () { return new Date() }
     }
   })
 
@@ -70,7 +70,7 @@ module.exports = function(serviceLocator) {
 
   function passwordHasher(entity, callback) {
     if (entity.password) {
-      bcryptHash(entity.password, function(err, hash) {
+      bcryptHash(entity.password, function (err, hash) {
         if (err) {
           callback(err)
         } else {
@@ -84,7 +84,7 @@ module.exports = function(serviceLocator) {
   }
 
   function authenticate(credentials, callback) {
-    save.findOne({ emailAddress: credentials.emailAddress }, function(err, entity) {
+    save.findOne({ emailAddress: credentials.emailAddress }, function (err, entity) {
       if (err) {
         return callback(err, credentials)
       } else if (!entity) {
@@ -93,7 +93,7 @@ module.exports = function(serviceLocator) {
       if (!entity.password) {
         return callback(new Error('No password for user. Reset required.'), credentials)
       }
-      bcrypt.compare(credentials.password, entity.password, function(err, match) {
+      bcrypt.compare(credentials.password, entity.password, function (err, match) {
         if (err) {
           return callback(err, credentials)
         } else if (!match) {
@@ -134,14 +134,14 @@ module.exports = function(serviceLocator) {
   }
 
   function findByHash(hash, callback) {
-    save.find({}, {}, function(err, admins) {
+    save.find({}, {}, function (err, admins) {
       if (err) {
         return callback(err)
       }
 
       var match = null
 
-      admins.every(function(admin) {
+      admins.every(function (admin) {
         if (hashAdminState(admin) === hash) {
           match = admin
         }
@@ -165,7 +165,7 @@ module.exports = function(serviceLocator) {
     model.create(administratorDetails, {}, callback)
   }
 
-  model.pre('createValidate', function(entity, callback) {
+  model.pre('createValidate', function (entity, callback) {
     callback(null, schema.makeDefault(entity))
   })
 
