@@ -16,7 +16,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   }
 
   function ensureSetup(req, res, next) {
-    serviceLocator.administratorModel.count({}, function(error, count) {
+    serviceLocator.administratorModel.count({}, function (error, count) {
       if (error) {
         return next(error)
       }
@@ -27,11 +27,11 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     })
   }
 
-  serviceLocator.router.post('/admin/setup', function(req, res, next) {
-    serviceLocator.administratorModel.count({}, function(error, count) {
+  serviceLocator.router.post('/admin/setup', function (req, res, next) {
+    serviceLocator.administratorModel.count({}, function (error, count) {
       if (count === 0) {
         serviceLocator.administratorModel.createWithFullAccess(req.body,
-          function(error) {
+          function (error) {
 
           if (error) {
             return renderSetup(res, req, error.errors)
@@ -51,7 +51,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.adminAccessControl.requiredAccess('Admin', 'read',
       serviceLocator.properties.siteUrl + '/admin/login'),
 
-    function(req, res) {
+    function (req, res) {
       viewRender(req, res, 'index', {
         page: {
           title: 'Admin / ' + serviceLocator.properties.name,
@@ -77,9 +77,9 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   )
 
-  serviceLocator.router.post('/admin/login', function(req, res) {
+  serviceLocator.router.post('/admin/login', function (req, res) {
     serviceLocator.adminAccessControl.authenticate(req, res, req.body,
-      function(error) {
+      function (error) {
 
       if (error === null) {
         res.redirect('/admin')
@@ -113,7 +113,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   )
 
   serviceLocator.router.post('/admin/request-password-change', ensureSetup,
-    function(req, res, next) {
+    function (req, res, next) {
       var email = req.body.emailAddress
 
       function renderFailure(error) {
@@ -130,14 +130,14 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
       if (email) {
         serviceLocator.administratorModel.findOne({ emailAddress: email },
-          function(err, admin) {
+          function (err, admin) {
 
           if (!admin) {
             return renderFailure(new Error('Unknown email address'))
           }
 
           serviceLocator.administratorModel.requestPasswordChange(admin,
-            function(err) {
+            function (err) {
 
             if (err) {
               return next(err)
@@ -154,9 +154,9 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.get('/admin/change-password', ensureSetup,
     compact.js(['global'], ['admin']),
-    function(req, res, next) {
+    function (req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token,
-        function(err, entity) {
+        function (err, entity) {
 
         if (err) {
           return next(err)
@@ -177,9 +177,9 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.post('/admin/change-password', ensureSetup,
     compact.js(['global'], ['admin']),
-    function(req, res, next) {
+    function (req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token,
-        function(err, entity) {
+        function (err, entity) {
 
         if (err) {
           return next(err)
@@ -205,7 +205,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
         serviceLocator.administratorModel.update(entity._id.toString(),
           { password: password }, { tag: 'password' },
-          function(err) {
+          function (err) {
             if (err) {
               return next(err)
             }
@@ -217,7 +217,7 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     }
   )
 
-  serviceLocator.router.get('/admin/logout', function(req, res) {
+  serviceLocator.router.get('/admin/logout', function (req, res) {
     serviceLocator.adminAccessControl.destroy(req, res)
     res.redirect('/admin/login')
   })

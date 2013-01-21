@@ -27,10 +27,10 @@ module.exports = {
     }
   ],
   initialize: [
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
-      serviceLocator.databaseConnections.main.collection('administrator', function(error, collection) {
-        serviceLocator.saveFactory.administrator = function() {
+      serviceLocator.databaseConnections.main.collection('administrator', function (error, collection) {
+        serviceLocator.saveFactory.administrator = function () {
           return save('administrator', { logger: serviceLocator.logger,
             engine: saveMongodb(collection)})
         }
@@ -38,7 +38,7 @@ module.exports = {
       })
 
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       // Register the bundles models
       serviceLocator.register('administratorModel',
@@ -48,7 +48,7 @@ module.exports = {
       serviceLocator.adminAccessControlList.addResource('Administrator')
       done()
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
       // Create controllers
       require('./controller')(serviceLocator, __dirname + '/views')
 

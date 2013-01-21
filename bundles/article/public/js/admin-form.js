@@ -1,4 +1,4 @@
-$(function($) {
+$(function ($) {
 
   var $titleControl = $('input[name=title]')
     , $slugControl = $('input[name=slug]')
@@ -42,7 +42,7 @@ $(function($) {
       break;
   }
 
-  $typeControl.on('change', function() {
+  $typeControl.on('change', function () {
     var body = $bodyControl.val();
 
     switch ($(this).val()) {

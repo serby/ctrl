@@ -1,7 +1,7 @@
 var _ = require('lodash')
 
 
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
   return serviceLocator.admin.viewConfig({
     groups: [{
       name: 'Administrator Details',
@@ -48,8 +48,8 @@ module.exports = function(serviceLocator) {
           createForm: true,
           updateForm: true,
           type: 'multiselect',
-          createOptions: function(callback) {
-            serviceLocator.roleModel.find({}, {}, function(error, roles) {
+          createOptions: function (callback) {
+            serviceLocator.roleModel.find({}, {}, function (error, roles) {
               if (error) {
                 return callback(error)
               } else {
@@ -66,7 +66,7 @@ module.exports = function(serviceLocator) {
         }
       }
     }],
-    formPostHelper: function(req, res, next) {
+    formPostHelper: function (req, res, next) {
       next()
     }
   })

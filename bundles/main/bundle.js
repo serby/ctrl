@@ -4,7 +4,7 @@ module.exports = {
   version: '0.0.1',
   publicRoute: '/main',
 
-  initialize: function(serviceLocator, done) {
+  initialize: function (serviceLocator, done) {
 
     var compact = require('compact').createCompact({
       srcPath: __dirname + '/public/',
@@ -28,7 +28,7 @@ module.exports = {
     var w = serviceLocator.stylusWatch(__dirname + '/public/css/index.styl',
       { compile: serviceLocator.stylusCompile });
 
-    w.on('compile', function(filename) {
+    w.on('compile', function (filename) {
       serviceLocator.logger.debug('Compiling ' + filename);
     });
 

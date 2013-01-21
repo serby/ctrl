@@ -70,7 +70,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   */
   function listUnshownErrors(errors, formType) {
 
-    return Object.keys(errors).filter(function(property) {
+    return Object.keys(errors).filter(function (property) {
       for (var i = 0; i < schema.groups.length; i++) {
         if ((schema.groups[i].properties[property] === undefined) || (!schema.groups[i].properties[property][formType])) {
           return true
@@ -122,13 +122,13 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   // Allows for options to be defined in the view schema as an array or a
   // function and then use in the presentation of the form.
   function schemaHelper(schema) {
-    return function(req, res, next) {
+    return function (req, res, next) {
       var fn = []
-      schema.groups.forEach(function(group) {
-        Object.keys(group.properties).forEach(function(key) {
+      schema.groups.forEach(function (group) {
+        Object.keys(group.properties).forEach(function (key) {
           if (typeof group.properties[key].createOptions === 'function') {
-            fn.push(function(callback) {
-              group.properties[key].createOptions(function(error, options) {
+            fn.push(function (callback) {
+              group.properties[key].createOptions(function (error, options) {
                 if (error) {
                   return callback(error)
                 }
@@ -139,7 +139,7 @@ module.exports = function routes(serviceLocator, schema, model, options) {
           }
         })
       })
-      async.parallel(fn, function(error) {
+      async.parallel(fn, function (error) {
         next(error)
       })
     }
@@ -305,8 +305,8 @@ module.exports = function routes(serviceLocator, schema, model, options) {
     options.adminRoute + model.slug + '/delete',
     accessCheck('delete'),
     middleware.delete,
-    function(req, res) {
-      model['delete'](req.body[model.idProperty], function(error) {
+    function (req, res) {
+      model['delete'](req.body[model.idProperty], function (error) {
         if (error !== undefined) {
           res.send(404)
         } else {

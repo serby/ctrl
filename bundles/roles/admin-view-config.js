@@ -1,4 +1,4 @@
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
 
   return serviceLocator.admin.viewConfig({
     groups: [{
@@ -23,9 +23,9 @@ module.exports = function(serviceLocator) {
           createForm: true,
           updateForm: true,
           type: 'groupedMultiselect',
-          createOptions: function(callback) {
+          createOptions: function (callback) {
             var options = []
-            Object.keys(serviceLocator.adminAccessControlList.acl).forEach(function(value) {
+            Object.keys(serviceLocator.adminAccessControlList.acl).forEach(function (value) {
               var aclItem = serviceLocator.adminAccessControlList.acl[value]
               var option = {
                 label: value,
@@ -45,11 +45,11 @@ module.exports = function(serviceLocator) {
         }
       }
     }],
-    formPostHelper: function(req, res, next) {
+    formPostHelper: function (req, res, next) {
       var newGrants = {}
 
       if (typeof req.body.grants !== 'undefined' && Object.keys(req.body.grants).length !== 0) {
-        Object.keys(req.body.grants).forEach(function(grant) {
+        Object.keys(req.body.grants).forEach(function (grant) {
           newGrants[grant] = Array.isArray(req.body.grants[grant]) ? req.body.grants[grant] : [req.body.grants[grant]]
         })
         req.body.grants = newGrants

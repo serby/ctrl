@@ -3,7 +3,7 @@ var url = require('url')
 
 module.exports = function pagination(count, pageLength) {
 
-  return function(req, res, next) {
+  return function (req, res, next) {
 
     var urlObj = url.parse(req.url, true).query
       , options = {}
@@ -18,7 +18,7 @@ module.exports = function pagination(count, pageLength) {
       options.limit = pageLength
     }
 
-    count(req.searchQuery, function(error, count) {
+    count(req.searchQuery, function (error, count) {
       var start = Math.max(urlObj.Page - 3, 1)
         , end = Math.min(start + 6, Math.ceil(count / pageLength))
         , firstPageResult = pageLength * (urlObj.Page - 1) + 1

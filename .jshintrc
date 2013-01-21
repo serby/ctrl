@@ -1,48 +1,37 @@
-{
-  "asi": true,
-  "boss": true,
-  "browser": true,
-  "curly": true,
-  "devel": true,
-  "maxdepth": 4,
-  "maxstatements": 25,
-  "maxcomplexity": 5,
-  "eqeqeq": true,
-  "eqnull": true,
-  "es5": true,
-  "evil": false,
-  "immed": false,
-  "jquery": true,
-  "latedef": false,
-  "laxcomma": true,
-  "laxbreak": true,
-  "newcap": true,
-  "node": true,
-  "noempty": true,
-  "nonew": true,
-  "predef":
-  [
-    "async",
-    "Firmin",
-    "after",
-    "afterEach",
-    "before",
-    "beforeEach",
-    "db",
-    "describe",
-    "Ext",
-    "io",
-    "it",
-    "unescape",
-    "Munchkin",
-    "mktoMunchkinFunction",
-    "_",
-    "emit"
-  ],
-  "quotmark": "single",
-  "smarttabs": true,
-  "strict": false,
-  "trailing": false,
-  "undef": true,
-  "unused": true
+{ "asi": true
+, "boss": true
+, "browser": true
+, "camelcase": true
+, "curly": false
+, "devel": false
+, "devel": true
+, "eqeqeq": true
+, "eqnull": true
+, "es5": true
+, "evil": false
+, "immed": false
+, "jquery": true
+, "latedef": false
+, "laxbreak": true
+, "laxcomma": true
+, "maxcomplexity": 6
+, "maxdepth": 4
+, "maxstatements": 25
+, "newcap": true
+, "node": true
+, "noempty": false
+, "nonew": true
+, "predef":
+  [ "it"
+  , "describe"
+  , "before"
+  , "after"
+  , "afterEach"
+  ]
+, "quotmark": "single"
+, "smarttabs": true
+, "strict": false
+, "trailing": false
+, "undef": true
+, "unused": true
 }

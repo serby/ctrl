@@ -4,18 +4,18 @@ var _ = require('lodash')
   , fn = jade.compile(__dirname + '/latest.jade')
   ;
 
-module.exports = function(serviceLocator) {
+module.exports = function (serviceLocator) {
   var data = serviceLocator.app._locals;
 
   return widget({
     name: 'latest',
     namespace: 'article',
-    render: function() {
+    render: function () {
       return fn(data);
     },
-    load: function(req, res, next) {
+    load: function (req, res, next) {
       serviceLocator.articleModel.findLive({},
-        { limit: 1, sort: { publishedDate: -1} }, function(error, dataSet) {
+        { limit: 1, sort: { publishedDate: -1} }, function (error, dataSet) {
 
         if (!error && dataSet.length !== 0) {
           data = _.extend({}, data, {

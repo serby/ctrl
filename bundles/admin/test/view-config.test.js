@@ -13,7 +13,7 @@ describe('genericViewConfig', function () {
         }]
       }
 
-      ;(function(){
+      ;(function (){
         genericViewConfig(schema)
       }).should.throw()
     })
@@ -29,7 +29,7 @@ describe('genericViewConfig', function () {
         }]
       }
 
-      ;(function(){
+      ;(function (){
         genericViewConfig(schema)
       }).should.throw()
     })
@@ -45,7 +45,7 @@ describe('genericViewConfig', function () {
         }]
       }
 
-      ;(function(){
+      ;(function (){
         genericViewConfig(schema)
       }).should.throw()
     })

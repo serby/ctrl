@@ -6,8 +6,8 @@ module.exports = {
   description: 'Admin section for the site',
   publicRoute: '/admin',
   middleware: [
-    function(serviceLocator) {
-      return function(req, res, next) {
+    function (serviceLocator) {
+      return function (req, res, next) {
 
         res.locals.adminIsAllowed = function (resource, action) {
           return serviceLocator.adminAccessControl.isAllowed(req, resource, action)
@@ -22,7 +22,7 @@ module.exports = {
   ],
   initialize: [
 
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       // Register the admin view helpers for global use.
       serviceLocator.viewHelpers.querystring = require('./lib/pagination-helpers')
@@ -45,7 +45,7 @@ module.exports = {
         require('secure/access-control-list')(serviceLocator.logger))
       done()
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       // The resource you need access of see the admin bundles
       serviceLocator.adminAccessControlList.addResource('Admin')
@@ -57,13 +57,13 @@ module.exports = {
           serviceLocator.administratorModel.authenticate,
           serviceLocator.adminAccessControlList,
           {}, 'admin', serviceLocator.logger,
-          function(req, res) {
+          function (req, res) {
             // If session hasn't got authorization to view route show login
             res.redirect('/admin/login')
           }))
       done()
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       var compact = serviceLocator.compact
 
@@ -78,7 +78,7 @@ module.exports = {
       require('./controller')(serviceLocator, join(__dirname, '/views'))
       done()
     },
-    function(serviceLocator, done) {
+    function (serviceLocator, done) {
 
       // This is watch recompiles your stylus. Any that you need to compile to
       // CSS need to be defined here. This is quicker than the standard
@@ -86,7 +86,7 @@ module.exports = {
       var w = serviceLocator.stylusWatch(__dirname + '/public/css/index.styl',
         { compile: serviceLocator.stylusCompile })
 
-      w.on('compile', function(filename) {
+      w.on('compile', function (filename) {
         serviceLocator.logger.debug('Compiling ' + filename)
       })
 

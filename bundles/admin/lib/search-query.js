@@ -1,7 +1,7 @@
 var url = require('url')
 
 
-module.exports = function(searchProperties, logger, serviceName) {
+module.exports = function (searchProperties, logger, serviceName) {
 
   return function buildSearchQuery(req, res, next) {
     var urlObj = url.parse(req.url, true).query
@@ -17,7 +17,7 @@ module.exports = function(searchProperties, logger, serviceName) {
     }
 
     if (filter) {
-      Object.keys(searchProperties).forEach(function(type) {
+      Object.keys(searchProperties).forEach(function (type) {
         queryItem = {}
         switch (searchProperties[type]) {
           case 'number':
@@ -51,11 +51,11 @@ module.exports = function(searchProperties, logger, serviceName) {
 * Creates an object of the searchable fields in the schema. Used by the mongo query builder later on.
 * Iterates through each group and the properties of that group to get the searchType if present
 */
-module.exports.createSearchProperties = function(viewSchemaGroups) {
+module.exports.createSearchProperties = function (viewSchemaGroups) {
   var searchProperties = {}
 
-  Object.keys(viewSchemaGroups).forEach(function(group) {
-    Object.keys(viewSchemaGroups[group].properties).forEach(function(property) {
+  Object.keys(viewSchemaGroups).forEach(function (group) {
+    Object.keys(viewSchemaGroups[group].properties).forEach(function (property) {
       if (viewSchemaGroups[group].properties[property].searchType) {
         searchProperties[property] = viewSchemaGroups[group].properties[property].searchType
       }
