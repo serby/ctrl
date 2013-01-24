@@ -2,7 +2,7 @@
 /data
 /cache
 
-bundles/main/public/js/compact
+build
 
 # Windows
 Thumbs.db
