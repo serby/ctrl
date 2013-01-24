@@ -1,8 +1,6 @@
 module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   var viewRender = serviceLocator.viewRender(bundleViewPath)
-    , compact = serviceLocator.compact
-
 
   function renderSetup(res, req, errors) {
     viewRender(req, res, 'setup', {
@@ -47,7 +45,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   serviceLocator.router.get(
     '/admin',
     ensureSetup,
-    compact.js(['global'], ['admin']),
     serviceLocator.adminAccessControl.requiredAccess('Admin', 'read',
       serviceLocator.properties.siteUrl + '/admin/login'),
 
@@ -63,7 +60,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
 
   serviceLocator.router.get(
     '/admin/login',
-    compact.js(['global'], ['admin']),
     ensureSetup,
     function (req, res) {
       viewRender(req, res, 'login', {
@@ -98,8 +94,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   })
 
   serviceLocator.router.get('/admin/request-password-change',
-    compact.js(['global'], ['admin']), ensureSetup,
-
     function (req, res) {
       viewRender(req, res, 'request-password-change', {
         page: {
@@ -153,7 +147,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   )
 
   serviceLocator.router.get('/admin/change-password', ensureSetup,
-    compact.js(['global'], ['admin']),
     function (req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token,
         function (err, entity) {
@@ -176,7 +169,6 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
   )
 
   serviceLocator.router.post('/admin/change-password', ensureSetup,
-    compact.js(['global'], ['admin']),
     function (req, res, next) {
       serviceLocator.administratorModel.findByHash(req.query.token,
         function (err, entity) {
@@ -221,5 +213,4 @@ module.exports = function createRoutes (serviceLocator, bundleViewPath) {
     serviceLocator.adminAccessControl.destroy(req, res)
     res.redirect('/admin/login')
   })
-
 }

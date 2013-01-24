@@ -39,10 +39,16 @@ module.exports = function(pliers) {
 
   pliers('mon', function() {
     pliers.logger.info('Restart app on code change')
+
     pliers.watch(pliers.filesets.appJs, function(fsWatcher, filename) {
       pliers.logger.info('Change in ' + filename)
       pliers.run('start')
     })
+
+    pliers.logger.info('Recompile CSS on change')
+    pliers.run('watchCss')
+
+    pliers.logger.info('Starting app')
     pliers.run('start')
   })
 

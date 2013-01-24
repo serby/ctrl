@@ -31,12 +31,6 @@ module.exports = {
   initialize: [
     function (serviceLocator, done) {
 
-      // Add some JavaScript to be compacted
-      serviceLocator.compact
-        .addNamespace('article', __dirname + '/public/')
-        .addJs('/js/comments.js')
-        .addJs('/js/social.js')
-
       serviceLocator.databaseConnections.main.collection('article', function (error, collection) {
         serviceLocator.saveFactory.article = function () {
           return save('article', { logger: serviceLocator.logger,

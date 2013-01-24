@@ -39,21 +39,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
   _.extend(middleware, options.middleware)
 
   /*
-   * Adds the common JavaScript
-   * required for admin section
-   */
-  function compactMiddleware(view) {
-    if (options.scripts[view]) {
-      return serviceLocator.compact.js(
-        ['global'], ['admin'],
-        options.scripts[view]
-      )
-    } else {
-      return serviceLocator.compact.js(['global'], ['admin'])
-    }
-  }
-
-  /*
    * Returns an access checking middleware
    * based on the required access and the action.
    */
@@ -90,7 +75,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
 
   serviceLocator.router.get(
     options.adminRoute + model.slug,
-    compactMiddleware('view'),
     buildSearchQuery,
     sortOptions,
     paginate,
@@ -147,7 +131,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
 
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/new',
-    compactMiddleware('form'),
     accessCheck('create'),
     schemaHelper(schema),
     middleware.create,
@@ -171,7 +154,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
 
   serviceLocator.router.post(
     options.adminRoute + model.slug + '/new',
-    compactMiddleware('form'),
     accessCheck('create'),
     serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
@@ -211,7 +193,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
 
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id',
-    compactMiddleware('view'),
     accessCheck('read'),
     middleware.read,
     function (req, res, next) {
@@ -237,7 +218,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
 
   serviceLocator.router.get(
     options.adminRoute + model.slug + '/:id/edit',
-    compactMiddleware('form'),
     schemaHelper(schema),
     accessCheck('update'),
     middleware.update,
@@ -266,7 +246,6 @@ module.exports = function routes(serviceLocator, schema, model, options) {
 
   serviceLocator.router.post(
     options.adminRoute + model.slug + '/:id/edit',
-    compactMiddleware('form'),
     serviceLocator.uploadDelegate.middleware,
     schema.formPostHelper,
     accessCheck('update'),

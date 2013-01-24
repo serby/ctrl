@@ -9,9 +9,6 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
     , articleModel = serviceLocator.articleModel
     , formMiddleware = createAdminFormMiddleware(serviceLocator)
 
-  serviceLocator.compact.addNamespace('article-admin', join(__dirname, 'public'))
-    .addJs('/js/admin-form.js')
-
   // The admin bundle provides a crud based generic route controller that can
   // take a model and a view-schema.
   serviceLocator.admin.routes(
@@ -91,7 +88,6 @@ module.exports = function createRoutes (serviceLocator, viewPath) {
     // serviceLocator.widgetManager.load([
     //   'article::recent', 'article::categories', 'article::postsByAuthor'
     // ]),
-    serviceLocator.compact.js([['global'], ['article']]),
     function (req, res, next) {
       if (!res.article) {
         return next()

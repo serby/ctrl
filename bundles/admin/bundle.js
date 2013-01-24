@@ -64,32 +64,8 @@ module.exports = {
       done()
     },
     function (serviceLocator, done) {
-
-      var compact = serviceLocator.compact
-
-      compact.addNamespace('admin', __dirname + '/public')
-        .addJs('/js/lib/select2.min.js')
-        .addJs('/js/lib/jquery.fancybox.pack.js')
-        .addJs('/js/lib/pikaday.min.js')
-        .addJs('/js/admin.js')
-
-
       // Define the routes
       require('./controller')(serviceLocator, join(__dirname, '/views'))
-      done()
-    },
-    function (serviceLocator, done) {
-
-      // This is watch recompiles your stylus. Any that you need to compile to
-      // CSS need to be defined here. This is quicker than the standard
-      // middleware.
-      var w = serviceLocator.stylusWatch(__dirname + '/public/css/index.styl',
-        { compile: serviceLocator.stylusCompile })
-
-      w.on('compile', function (filename) {
-        serviceLocator.logger.debug('Compiling ' + filename)
-      })
-
       done()
     }
   ]
