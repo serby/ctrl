@@ -1,4 +1,5 @@
 var join = require('path').join
+  , buildJS = require('../../lib/pliers-helpers/build-js')
   , compileStylus = require('../../lib/pliers-helpers/compile-stylus')
 
 module.exports = function(pliers) {
@@ -6,10 +7,12 @@ module.exports = function(pliers) {
   pliers.filesets('js', ['*.js', 'test/*.js'])
 
   pliers('test', function(done) {
-    pliers.exec('./node_modules/.bin/mocha -r should -R spec', done)
+    pliers.exec('mocha -r should -R spec', done)
   })
 
-  pliers('lint', { description: 'Run jshint all on project JavaScript' }, function(done) {
+  pliers('lint', { description: 'Run jshint all on project JavaScript' },
+    function(done) {
+
     pliers.exec('jshint lib test', done)
   })
 
@@ -21,7 +24,24 @@ module.exports = function(pliers) {
       pliers.tasks.lint)
   })
 
-  pliers.filesets('stylus', join(__dirname, 'public', 'css', '**/*.styl'))
+
+  pliers.filesets('globalBrowserJs', join(__dirname, 'public/js/app/lib',
+    '**/*.js'))
+
+  pliers('buildGlobalBrowserJs', function () {
+    var root = join(__dirname, 'public', 'js')
+    pliers.exec('browserify ' + root + '/app/lib/admin.js -o ' + root +
+      '/build/global.js')
+  })
+
+  pliers('watchBrowserJs', function(done) {
+    pliers.watch(pliers.filesets.globalBrowserJs, function() {
+      pliers.run('buildGlobalBrowserJs')
+    })
+    done()
+  })
+
+  pliers.filesets('stylus', join(__dirname, 'public/css', '**/*.styl'))
 
   pliers('buildCss', function (done) {
     var files = join(__dirname, 'public', 'css', 'index.styl')

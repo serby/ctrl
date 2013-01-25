@@ -4,8 +4,9 @@ module.exports = function(pliers) {
 
   pliers.load('./bundles/admin')
 
-  pliers.filesets('js', ['*.js', 'lib/**/*.js', 'test/*.js'])
-  pliers.filesets('appJs', ['*.js', 'lib/**/*.js', 'bundles/**/*.js'])
+  pliers.filesets('js', ['*.js', 'lib/**/*.js', 'test/*.js', 'bundles/**/*.js'])
+  pliers.filesets('appJs', ['*.js', 'lib/**/*.js', 'bundles/**/*.js'],
+    ['bundles/**/public/**/*.js', '**/pliers.js'])
 
   pliers('test', function(done) {
     pliers.exec('./node_modules/.bin/mocha -r should -R spec', done)
@@ -38,6 +39,7 @@ module.exports = function(pliers) {
   })
 
   pliers('mon', function() {
+    console.log(1, pliers.filesets.appJs)
     pliers.logger.info('Restart app on code change')
 
     pliers.watch(pliers.filesets.appJs, function(fsWatcher, filename) {

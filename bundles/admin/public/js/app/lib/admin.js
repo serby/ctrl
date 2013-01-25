@@ -1,0 +1,5 @@
+require('./fancybox')()
+require('./scroll-to-anchors')()
+require('./confirmation')()
+require('./custom-selects')()
+require('./scroll-to-anchors')()
